@@ -17,7 +17,7 @@
 		D3E293061C1B7DFC00925EAC /* LandingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E293051C1B7DFC00925EAC /* LandingController.swift */; };
 		D3E2930A1C1B888400925EAC /* Bariol_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3E293081C1B888400925EAC /* Bariol_Bold.ttf */; };
 		D3E2930B1C1B888400925EAC /* Bariol_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3E293091C1B888400925EAC /* Bariol_Regular.ttf */; };
-		D3E2930F1C1B8D5200925EAC /* Sunset.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D3E2930E1C1B8D5200925EAC /* Sunset.mp4 */; };
+		D3E2930F1C1B8D5200925EAC /* VideoBackground.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D3E2930E1C1B8D5200925EAC /* VideoBackground.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +56,7 @@
 		D3E293051C1B7DFC00925EAC /* LandingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingController.swift; sourceTree = "<group>"; };
 		D3E293081C1B888400925EAC /* Bariol_Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Bariol_Bold.ttf; path = Fonts/Bariol_Bold.ttf; sourceTree = "<group>"; };
 		D3E293091C1B888400925EAC /* Bariol_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Bariol_Regular.ttf; path = Fonts/Bariol_Regular.ttf; sourceTree = "<group>"; };
-		D3E2930E1C1B8D5200925EAC /* Sunset.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sunset.mp4; sourceTree = "<group>"; };
+		D3E2930E1C1B8D5200925EAC /* VideoBackground.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = VideoBackground.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,7 +165,7 @@
 		D3E293011C1B7C1D00925EAC /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				D3E2930E1C1B8D5200925EAC /* Sunset.mp4 */,
+				D3E2930E1C1B8D5200925EAC /* VideoBackground.mp4 */,
 				D3E293081C1B888400925EAC /* Bariol_Bold.ttf */,
 				D3E293091C1B888400925EAC /* Bariol_Regular.ttf */,
 				D3224A701C1AADA3009DFA85 /* Assets.xcassets */,
@@ -309,7 +309,7 @@
 				D3E2930A1C1B888400925EAC /* Bariol_Bold.ttf in Resources */,
 				D3224A741C1AADA3009DFA85 /* LaunchScreen.storyboard in Resources */,
 				D3224A711C1AADA3009DFA85 /* Assets.xcassets in Resources */,
-				D3E2930F1C1B8D5200925EAC /* Sunset.mp4 in Resources */,
+				D3E2930F1C1B8D5200925EAC /* VideoBackground.mp4 in Resources */,
 				D3224A6F1C1AADA3009DFA85 /* Main.storyboard in Resources */,
 				D3E2930B1C1B888400925EAC /* Bariol_Regular.ttf in Resources */,
 			);

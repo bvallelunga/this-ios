@@ -33,7 +33,7 @@ class LandingController: UIViewController {
         self.button.layer.shadowOpacity = 0.5
         
         // Setup Movie
-        let videoURL = NSBundle.mainBundle().URLForResource("Sunset", withExtension: "mp4")
+        let videoURL = NSBundle.mainBundle().URLForResource("VideoBackground", withExtension: "mp4")
         let playerItem = AVPlayerItem(asset: AVAsset(URL: videoURL!))
         self.player = AVPlayer(playerItem: playerItem)
         let playerLayer = AVPlayerLayer(player: self.player)
