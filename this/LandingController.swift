@@ -20,9 +20,6 @@ class LandingController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Setup Navigation Bar
-        self.navigationController?.navigationBarHidden = true
 
         // Setup Logo
         self.logoLabel.shadowColor = UIColor(white: 0, alpha: 0.2)
@@ -51,6 +48,7 @@ class LandingController: UIViewController {
         
         self.view.layer.insertSublayer(playerLayer, atIndex: 0)
         self.player.actionAtItemEnd = .None
+        self.player.volume = 0
         
         // Enable Movie Looping
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerRestart:"), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil)
