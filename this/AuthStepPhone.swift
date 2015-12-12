@@ -8,12 +8,12 @@
 
 import UIKit
 import SHSPhoneComponent
-import PhoneNumberKit
+import libPhoneNumber_iOS
 
 class AuthStepPhone: AuthStep {
     
     let formatter = SHSPhoneNumberFormatter()
-    let logic = SHSPhoneLogic()
+    let phoneUtil = NBPhoneNumberUtil()
     
     override init() {
         super.init()
@@ -26,7 +26,11 @@ class AuthStepPhone: AuthStep {
         self.background = Colors.offBlue
         self.percent = 0.25
         self.placeholder = "+1"
+        
         self.formatter.setDefaultOutputPattern("+# (###) ###-####")
+        self.formatter.addOutputPattern("+# (###) ###-##-##", forRegExp: "^7[0-689]\\d*$")
+        self.formatter.addOutputPattern("+## (###) ########", forRegExp: "^49\\d*$")
+        self.formatter.addOutputPattern("+### (##) ###-###", forRegExp: "^374\\d*$")
     }
     
     override func formatValue(input: String) -> String {
@@ -39,16 +43,21 @@ class AuthStepPhone: AuthStep {
     
     override func isValid(input: String) -> Bool {
         do {
-            try PhoneNumber(rawNumber: input)
-        } catch {
+            let number = try phoneUtil.parseWithPhoneCarrierRegion(input)
+            return phoneUtil.isValidNumber(number)
+        } catch  {
             return false
         }
-        
-        return true
     }
     
     override func next(callback: (segue: Bool) -> Void) {
-        callback(segue: false)
+        do {
+            let number = try phoneUtil.parseWithPhoneCarrierRegion(self.value)
+            try self.parentController.phoneNumber = phoneUtil.format(number, numberFormat: .E164)
+            callback(segue: false)
+        } catch let error as NSError  {
+            print(error.description)
+        }
     }
 
 }

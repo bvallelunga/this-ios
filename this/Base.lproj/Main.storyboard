@@ -95,11 +95,12 @@ and Privacy Policy.</string>
                         <outlet property="button" destination="RKo-3T-eRM" id="0rU-8N-WcE"/>
                         <outlet property="legalLabel" destination="r00-y0-EKo" id="ZwU-VF-AaG"/>
                         <outlet property="logoLabel" destination="EMN-3T-g8x" id="2TV-FT-MNz"/>
+                        <segue destination="bn8-b4-WMi" kind="show" identifier="nextSegue" animates="NO" id="88W-UX-gWv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="364" y="381"/>
+            <point key="canvasLocation" x="276" y="381"/>
         </scene>
         <!--Auth Controller-->
         <scene sceneID="Dle-NL-40C">
@@ -173,6 +174,7 @@ and Privacy Policy.</string>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="textFieldChanged:" destination="ARe-ja-kvx" eventType="editingChanged" id="CGD-bs-HzU"/>
+                                    <segue destination="bn8-b4-WMi" kind="show" identifier="nextSegue" id="ql1-d6-Iav"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -209,7 +211,15 @@ and Privacy Policy.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYW-kk-cdq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1090" y="-287"/>
+            <point key="canvasLocation" x="1006" y="-383"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="Uv6-x6-18v">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="bn8-b4-WMi" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NiU-A7-RW5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1006" y="381"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Qvs-PR-BzN">
@@ -231,4 +241,7 @@ and Privacy Policy.</string>
             <point key="canvasLocation" x="-448" y="381"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="88W-UX-gWv"/>
+    </inferredMetricsTieBreakers>
 </document>

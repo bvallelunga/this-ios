@@ -30,10 +30,12 @@ class AuthController: UIViewController, UITextFieldDelegate {
         
         self.stepLabel.textColor = UIColor(white: 0, alpha: 0.5)
         self.headerLabel.textColor = UIColor.whiteColor()
-        self.headerLabel.shadowColor = UIColor(white: 0, alpha: 0.1)
-        self.headerLabel.shadowOffset = CGSizeMake(0, 1)
 
         self.textField.tintColor = UIColor(white: 0, alpha: 0.25)
+        self.textField.layer.shadowColor = UIColor(white: 0, alpha: 0.1).CGColor
+        self.textField.layer.shadowOffset = CGSizeMake(0, 2)
+        self.textField.layer.shadowOpacity = 1
+        self.textField.layer.shadowRadius = 0
         self.textField.delegate = self
         self.textField.becomeFirstResponder()
         
@@ -100,7 +102,7 @@ class AuthController: UIViewController, UITextFieldDelegate {
     @IBAction func nextTriggered(sender: AnyObject) {
         self.step.next { (segue) -> Void in
             if segue {
-                
+                self.performSegueWithIdentifier("nextSegue", sender: self)
             } else {
                 self.nextStep()
             }

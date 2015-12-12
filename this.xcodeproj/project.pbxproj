@@ -27,6 +27,7 @@
 		D3E293201C1C097B00925EAC /* AuthStepVerify.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E2931F1C1C097B00925EAC /* AuthStepVerify.swift */; };
 		D3E293221C1C16EA00925EAC /* AuthStepUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E293211C1C16EA00925EAC /* AuthStepUsername.swift */; };
 		D3E293251C1C180C00925EAC /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E293241C1C180C00925EAC /* String+Subscript.swift */; };
+		D3E293271C1C1E4500925EAC /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E293261C1C1E4500925EAC /* CoreTelephony.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		D3E2931F1C1C097B00925EAC /* AuthStepVerify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthStepVerify.swift; sourceTree = "<group>"; };
 		D3E293211C1C16EA00925EAC /* AuthStepUsername.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthStepUsername.swift; sourceTree = "<group>"; };
 		D3E293241C1C180C00925EAC /* String+Subscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Subscript.swift"; sourceTree = "<group>"; };
+		D3E293261C1C1E4500925EAC /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3E293271C1C1E4500925EAC /* CoreTelephony.framework in Frameworks */,
 				0AC07085569F9C8AC6BF50EA /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -115,6 +118,7 @@
 		B25F2289CF72B2B2672A40E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3E293261C1C1E4500925EAC /* CoreTelephony.framework */,
 				5448DE4E9A1C6AF9F42A087F /* Pods.framework */,
 			);
 			name = Frameworks;

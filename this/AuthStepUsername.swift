@@ -16,6 +16,7 @@ class AuthStepUsername: AuthStep {
         self.value = ""
         self.placeholder = "@username"
         self.title = "USERNAME"
+        self.nextText = "SIGN UP"
         self.header = "Chill. What\nshould I call you?"
         self.showBack = true
         self.keyboard = .Twitter
@@ -23,7 +24,7 @@ class AuthStepUsername: AuthStep {
         self.percent = 0.75
     }
     
-    override func formatValue(var input: String) -> String {
+    override func formatValue(input: String) -> String {
         self.value = input
         
         if self.value.isEmpty {
@@ -42,7 +43,7 @@ class AuthStepUsername: AuthStep {
     }
     
     override func next(callback: (segue: Bool) -> Void) {
-        callback(segue: false)
+        callback(segue: true)
     }
 
 }
