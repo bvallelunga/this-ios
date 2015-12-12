@@ -28,6 +28,8 @@
 		D3E293221C1C16EA00925EAC /* AuthStepUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E293211C1C16EA00925EAC /* AuthStepUsername.swift */; };
 		D3E293251C1C180C00925EAC /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E293241C1C180C00925EAC /* String+Subscript.swift */; };
 		D3E293271C1C1E4500925EAC /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E293261C1C1E4500925EAC /* CoreTelephony.framework */; };
+		D3E2932A1C1C277600925EAC /* PagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E293291C1C277600925EAC /* PagesController.swift */; };
+		D3E2932C1C1C279B00925EAC /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E2932B1C1C279B00925EAC /* PageController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 		D3E293211C1C16EA00925EAC /* AuthStepUsername.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthStepUsername.swift; sourceTree = "<group>"; };
 		D3E293241C1C180C00925EAC /* String+Subscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Subscript.swift"; sourceTree = "<group>"; };
 		D3E293261C1C1E4500925EAC /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		D3E293291C1C277600925EAC /* PagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesController.swift; sourceTree = "<group>"; };
+		D3E2932B1C1C279B00925EAC /* PageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +208,7 @@
 			children = (
 				D3E293041C1B7DEF00925EAC /* Landing */,
 				D3E293131C1BA5E100925EAC /* Authentication */,
+				D3E293281C1C276400925EAC /* Pages */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -251,6 +256,15 @@
 				D3E293241C1C180C00925EAC /* String+Subscript.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		D3E293281C1C276400925EAC /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				D3E293291C1C277600925EAC /* PagesController.swift */,
+				D3E2932B1C1C279B00925EAC /* PageController.swift */,
+			);
+			name = Pages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -444,9 +458,11 @@
 				D3E293181C1BA92900925EAC /* ProgressBar.swift in Sources */,
 				D3E293221C1C16EA00925EAC /* AuthStepUsername.swift in Sources */,
 				D3E2931A1C1BB66D00925EAC /* Globals.swift in Sources */,
+				D3E2932C1C1C279B00925EAC /* PageController.swift in Sources */,
 				D3E293151C1BA61400925EAC /* AuthController.swift in Sources */,
 				D3E293121C1BA4FE00925EAC /* Colors.swift in Sources */,
 				D3E293061C1B7DFC00925EAC /* LandingController.swift in Sources */,
+				D3E2932A1C1C277600925EAC /* PagesController.swift in Sources */,
 				D3E2931E1C1BBE3000925EAC /* AuthStepPhone.swift in Sources */,
 				D3E293251C1C180C00925EAC /* String+Subscript.swift in Sources */,
 				D3E2931C1C1BBB0500925EAC /* AuthStep.swift in Sources */,

@@ -56,17 +56,14 @@ class AuthController: UIViewController, UITextFieldDelegate {
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: Selector("keyboardDidShow:"),
             name:UIKeyboardWillShowNotification, object: nil)
-        notificationCenter.addObserver(self, selector: Selector("keyboardDidHide"),
-            name:UIKeyboardWillHideNotification, object: nil)
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
         
         // Unregister for keyboard notifications
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.removeObserver(self, name:UIKeyboardWillShowNotification, object: nil)
-        notificationCenter.removeObserver(self, name:UIKeyboardWillHideNotification, object: nil)
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -83,14 +80,6 @@ class AuthController: UIViewController, UITextFieldDelegate {
             self.view.layoutIfNeeded()
         }
     }
-    
-    func keyboardDidHide() {
-        self.progressBarBottom.constant = 0
-        
-        UIView.animateWithDuration(0.1) { () -> Void in
-            self.view.layoutIfNeeded()
-        }
-    }
 
     @IBAction func backTriggered(sender: AnyObject) {
         if --self.stepIndex > -1 {
@@ -102,7 +91,7 @@ class AuthController: UIViewController, UITextFieldDelegate {
     @IBAction func nextTriggered(sender: AnyObject) {
         self.step.next { (segue) -> Void in
             if segue {
-                self.performSegueWithIdentifier("nextSegue", sender: self)
+                self.performSegueWithIdentifier("next", sender: self)
             } else {
                 self.nextStep()
             }

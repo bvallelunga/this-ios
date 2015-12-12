@@ -95,7 +95,7 @@ and Privacy Policy.</string>
                         <outlet property="button" destination="RKo-3T-eRM" id="0rU-8N-WcE"/>
                         <outlet property="legalLabel" destination="r00-y0-EKo" id="ZwU-VF-AaG"/>
                         <outlet property="logoLabel" destination="EMN-3T-g8x" id="2TV-FT-MNz"/>
-                        <segue destination="bn8-b4-WMi" kind="show" identifier="nextSegue" animates="NO" id="88W-UX-gWv"/>
+                        <segue destination="bn8-b4-WMi" kind="show" identifier="next" animates="NO" id="88W-UX-gWv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -171,10 +171,9 @@ and Privacy Policy.</string>
                                 <rect key="frame" x="20" y="235" width="560" height="285"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="40"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" returnKeyType="next"/>
                                 <connections>
                                     <action selector="textFieldChanged:" destination="ARe-ja-kvx" eventType="editingChanged" id="CGD-bs-HzU"/>
-                                    <segue destination="bn8-b4-WMi" kind="show" identifier="nextSegue" id="ql1-d6-Iav"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -207,19 +206,57 @@ and Privacy Policy.</string>
                         <outlet property="progressBarBottom" destination="b7Z-GI-hK8" id="2GE-oQ-nsE"/>
                         <outlet property="stepLabel" destination="9wW-Cp-8IS" id="XOY-te-RQf"/>
                         <outlet property="textField" destination="1EW-bS-usn" id="iIR-Dx-c4I"/>
+                        <segue destination="bn8-b4-WMi" kind="show" identifier="next" animates="NO" id="ClI-Kb-hWa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYW-kk-cdq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1006" y="-383"/>
         </scene>
-        <!--Page View Controller-->
+        <!--Pages Controller-->
         <scene sceneID="Uv6-x6-18v">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="bn8-b4-WMi" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NiU-A7-RW5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="2" navigationOrientation="horizontal" spineLocation="mid" doubleSided="YES" id="bn8-b4-WMi" customClass="PagesController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="RTr-4U-aBK"/>
+                </pageViewController>
             </objects>
             <point key="canvasLocation" x="1006" y="381"/>
+        </scene>
+        <!--Page Controller-->
+        <scene sceneID="xfD-kz-sVd">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sul-gx-xCQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController storyboardIdentifier="SelectionController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2fc-Np-xhJ" customClass="PageController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="so9-qf-3AR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="0NK-UK-KdJ" kind="relationship" relationship="rootViewController" id="Eob-no-YDf"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="1760" y="381"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="cwL-wq-XUK">
+            <objects>
+                <viewController id="0NK-UK-KdJ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4fx-0Q-Eec"/>
+                        <viewControllerLayoutGuide type="bottom" id="Cli-Zy-cp8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wuW-dW-W6j">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="LG0-0k-nhD"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s4m-Ko-oqn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2500" y="381"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Qvs-PR-BzN">

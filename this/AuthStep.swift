@@ -38,6 +38,6 @@ class AuthStep: NSObject {
     }
     
     func next(callback: (segue: Bool) -> Void) {
-        callback(segue: false)
+        
     }
 }
