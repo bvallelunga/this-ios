@@ -12,10 +12,10 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
     
     // MARK: Instance Variables
     var controllers = Dictionary<Int, PageController>()
-    var currentPage = 0
+    var currentPage = 1
     //private var user = User.current()
     //private var settings: Settings!
-    private let pages = 2
+    private let pages = 3
     private var storyBoard = UIStoryboard(name: "Main", bundle: nil)
     private var scrollView: UIScrollView!
     //private var notification: CWStatusBarNotification!
@@ -58,8 +58,9 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
             var page: PageController!
             
             switch(index) {
-                //case 0: page = self.storyBoard.instantiateViewControllerWithIdentifier("SelectionController") as? PageController
-                default: page = self.storyBoard.instantiateViewControllerWithIdentifier("SelectionController") as? PageController
+                case 0: page = self.storyBoard.instantiateViewControllerWithIdentifier("SettingsController") as? PageController
+                case 1: page = self.storyBoard.instantiateViewControllerWithIdentifier("SelectionController") as? PageController
+                default: page = self.storyBoard.instantiateViewControllerWithIdentifier("TagsController") as? PageController
             }
             
             page?.view.frame = self.view.frame
