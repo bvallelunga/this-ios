@@ -9,7 +9,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>PhoneNumberKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SHSPhoneComponent.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,12 +32,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>78BA479E8B78F46F3244B03D205B992A</key>
+		<key>1DDE8F828FD1BFA2A8F6472B988C3B04</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A832181DA25D876F9727B62C30E28012</key>
+		<key>26F3D6A0008A5832F28E9B48CECBDEF5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>83FDD4D0813E6EDA49B31D0AA42CAE17</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BE7C28FB58A941B5F59BC95528325F2D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

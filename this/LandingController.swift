@@ -12,15 +12,23 @@ import AVKit
 
 class LandingController: UIViewController {
     
+    @IBOutlet weak var logoLabel: UILabel!
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var legalLabel: UILabel!
     
-    var player: AVPlayer!
+    private var player: AVPlayer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Setup Navigation Bar
+        self.navigationController?.navigationBarHidden = true
 
-        // Setup Label
+        // Setup Logo
+        self.logoLabel.shadowColor = UIColor(white: 0, alpha: 0.2)
+        self.logoLabel.shadowOffset = CGSizeMake(0, 2)
+        
+        // Setup Legal
         self.legalLabel.alpha = 0.8
         
         // Setup Button
@@ -29,8 +37,8 @@ class LandingController: UIViewController {
         self.button.layer.cornerRadius = 30
         self.button.layer.shadowColor = UIColor.blackColor().CGColor
         self.button.layer.shadowOffset = CGSizeMake(0, 3)
-        self.button.layer.shadowRadius = 5
-        self.button.layer.shadowOpacity = 0.5
+        self.button.layer.shadowRadius = 3
+        self.button.layer.shadowOpacity = 0.3
         
         // Setup Movie
         let videoURL = NSBundle.mainBundle().URLForResource("VideoBackground", withExtension: "mp4")
@@ -42,9 +50,9 @@ class LandingController: UIViewController {
         playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         
         self.view.layer.insertSublayer(playerLayer, atIndex: 0)
-        self.player.play()
         self.player.actionAtItemEnd = .None
         
+        // Enable Movie Looping
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerRestart:"), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil)
     }
     
@@ -55,15 +63,17 @@ class LandingController: UIViewController {
     func playerRestart(notification: NSNotification) {
         self.player.currentItem?.seekToTime(kCMTimeZero)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.player.play()
     }
-    */
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.player.pause()
+    }
 
 }

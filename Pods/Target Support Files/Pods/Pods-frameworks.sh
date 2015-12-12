@@ -85,9 +85,13 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/Mixpanel.framework"
+  install_framework "Pods/PhoneNumberKit.framework"
+  install_framework "Pods/SHSPhoneComponent.framework"
   install_framework "Pods/SVProgressHUD.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/Mixpanel.framework"
+  install_framework "Pods/PhoneNumberKit.framework"
+  install_framework "Pods/SHSPhoneComponent.framework"
   install_framework "Pods/SVProgressHUD.framework"
 fi
