@@ -135,7 +135,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEE-QU-oI6">
                         <rect key="frame" x="0.0" y="95" width="436" height="270"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="aHu-8U-EaD">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" indicatorStyle="black" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="aHu-8U-EaD">
                                 <rect key="frame" x="20" y="35" width="396" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="z5b-xh-fg9"/>

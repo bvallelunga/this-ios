@@ -103,6 +103,7 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.backgroundColor = UIColor.clearColor()
+        self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         self.collectionView.registerClass(SelectionPhotoCell.self, forCellWithReuseIdentifier: "cell")
         
         self.imagesSelected([])
@@ -154,6 +155,7 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
         self.placeholderLabel.hidden = !images.isEmpty
         self.placeholderView.hidden = !images.isEmpty
         self.enableArrow(!images.isEmpty)
+        self.collectionView.flashScrollIndicators()
     }
     
     func enableArrow(enabled: Bool) {
@@ -184,7 +186,7 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let size = self.collectionView.frame.size.height/2 - 5
+        let size = self.collectionView.frame.size.width/2 - 10
         return CGSize(width: size, height: size)
     }
     
@@ -193,18 +195,16 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        let item = self.collectionView.frame.size.height/2 - 5
-        
-        return (self.collectionView.frame.width - (item * 3))/2
+        return 20
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! SelectionPhotoCell
         
         cell.imageView.image = self.images[indexPath.row]
-        cell.layer.cornerRadius = 3
-        cell.layer.borderWidth = 2
-        cell.layer.borderColor = UIColor(white: 0, alpha: 0.2).CGColor
+        cell.layer.cornerRadius = 4
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor(white: 0, alpha: 1).CGColor
         
         return cell
     }
