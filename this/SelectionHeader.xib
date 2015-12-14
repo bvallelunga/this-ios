@@ -71,7 +71,7 @@
                             <action selector="goToFollowing:" destination="OVO-P5-zWt" eventType="touchUpInside" id="mcS-8z-0k4"/>
                         </connections>
                     </button>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="#blackcat15" placeholder="#this" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tBc-If-Uhi">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#this" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tBc-If-Uhi">
                         <rect key="frame" x="63" y="35" width="310" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="EMu-kb-UaD"/>

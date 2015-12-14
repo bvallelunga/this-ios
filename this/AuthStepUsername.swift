@@ -25,7 +25,8 @@ class AuthStepUsername: AuthStep {
     }
     
     override func formatValue(input: String) -> String {
-        self.value = input
+        self.value = input.stringByReplacingOccurrencesOfString(" ", withString: "",
+            options: NSStringCompareOptions.LiteralSearch, range: nil)
         
         if self.value.isEmpty {
             return ""

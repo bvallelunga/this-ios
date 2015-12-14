@@ -31,6 +31,7 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
     @IBOutlet weak var timerPicker: AKPickerView!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    private var hashtag: String = "#hashtag"
     private var arrowAnimation = CABasicAnimation(keyPath: "transform")
     private var timer: SelectionTimer!
     private var timers: [SelectionTimer] = [
@@ -74,12 +75,12 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
         self.tagField.font = UIFont(name: "Bariol-Bold", size: 36)
         self.tagField.addTarget(self.tagField, action: Selector("resignFirstResponder"),
             forControlEvents: .EditingDidEndOnExit)
+        self.tagField.text = self.hashtag
         
         self.arrowButton.layer.shadowColor = UIColor.blackColor().CGColor
         self.arrowButton.layer.shadowOffset = CGSizeMake(-1, 2)
         self.arrowButton.layer.shadowOpacity = 0.1
         self.arrowButton.layer.shadowRadius = 0
-        self.enableArrow(false)
         
         let transform = CATransform3DMakeScale(1.1, 1.1, 1)
         
@@ -129,15 +130,16 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
     
     @IBAction func tagChanged(sender: AnyObject) {
         if var text = self.tagField.text {
-            guard !text.isEmpty else {
-                return
-            }
+            text = text.stringByReplacingOccurrencesOfString(" ", withString: "",
+                options: NSStringCompareOptions.LiteralSearch, range: nil)
             
-            if text[0] != "#" {
+            if !text.isEmpty && text[0] != "#" {
                 text = "#" + text
             }
             
             self.tagField.text = text
+            self.hashtag = text
+            self.checkArrow()
         }
     }
 
@@ -164,11 +166,13 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
         self.collectionView.hidden = images.isEmpty
         self.placeholderLabel.hidden = !images.isEmpty
         self.placeholderView.hidden = !images.isEmpty
-        self.enableArrow(!images.isEmpty)
+        self.checkArrow()
         self.collectionView.flashScrollIndicators()
     }
     
-    func enableArrow(enabled: Bool) {
+    func checkArrow() {
+        let enabled = !images.isEmpty && !self.hashtag.isEmpty
+        
         if enabled != self.arrowButton.enabled {
             self.arrowButton.enabled = enabled
             self.arrowButton.layer.removeAnimationForKey("scaleAnimation")
