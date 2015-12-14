@@ -42,12 +42,8 @@ class AuthStepPhone: AuthStep {
     }
     
     override func isValid(input: String) -> Bool {
-        do {
-            let number = try phoneUtil.parseWithPhoneCarrierRegion(input)
-            return phoneUtil.isValidNumber(number)
-        } catch  {
-            return false
-        }
+        let number = try? phoneUtil.parseWithPhoneCarrierRegion(input)
+        return phoneUtil.isValidNumber(number)
     }
     
     override func next(callback: (segue: Bool) -> Void) {

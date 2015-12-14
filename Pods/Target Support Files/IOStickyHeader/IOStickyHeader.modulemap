@@ -1,0 +1,6 @@
+framework module IOStickyHeader {
+  umbrella header "IOStickyHeader-umbrella.h"
+
+  export *
+  module * { export * }
+}

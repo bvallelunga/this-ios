@@ -10,6 +10,10 @@ import UIKit
 
 class Globals: NSObject {
     
+    static var landingController: LandingController!
+    static var pagesController: PagesController!
+    static var selectionController: SelectionController!
+    
     class func delay(delay:Double, closure:()->()) {
         dispatch_after(
             dispatch_time(

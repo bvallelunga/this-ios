@@ -37,6 +37,7 @@ class AuthController: UIViewController, UITextFieldDelegate {
         self.textField.layer.shadowOpacity = 1
         self.textField.layer.shadowRadius = 0
         self.textField.delegate = self
+        self.textField.font = UIFont(name: "Bariol-Bold", size: 40)
         self.textField.becomeFirstResponder()
         
         self.steps = [
@@ -88,7 +89,7 @@ class AuthController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func nextTriggered(sender: AnyObject) {
+    @IBAction func nextTriggered(sender: AnyObject) {        
         self.step.next { (segue) -> Void in
             if segue {
                 self.performSegueWithIdentifier("next", sender: self)

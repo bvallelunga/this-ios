@@ -25,7 +25,7 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
         super.viewDidLoad()
         
         // Set Global
-        //Global.pagesController = self
+        Globals.pagesController = self
         
         // Create Notification
 //        self.notification = CWStatusBarNotification()
@@ -89,6 +89,10 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
         
         // Set Start Page
         self.setActiveChildController(self.currentPage, animated: false, gotToRoot: true, direction: .Forward)
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
     }
     
     // MARK: Instance Methods

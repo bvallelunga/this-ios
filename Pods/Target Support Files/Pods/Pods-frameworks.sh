@@ -84,12 +84,18 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods/Gifu.framework"
+  install_framework "Pods/IOStickyHeader.framework"
+  install_framework "Pods/LLSimpleCamera.framework"
   install_framework "Pods/Mixpanel.framework"
   install_framework "Pods/SHSPhoneComponent.framework"
   install_framework "Pods/SVProgressHUD.framework"
   install_framework "Pods/libPhoneNumber_iOS.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods/Gifu.framework"
+  install_framework "Pods/IOStickyHeader.framework"
+  install_framework "Pods/LLSimpleCamera.framework"
   install_framework "Pods/Mixpanel.framework"
   install_framework "Pods/SHSPhoneComponent.framework"
   install_framework "Pods/SVProgressHUD.framework"

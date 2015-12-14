@@ -16,10 +16,12 @@ class LandingController: UIViewController {
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var legalLabel: UILabel!
     
-    private var player: AVPlayer!
+    var player: AVPlayer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Globals.landingController = self
 
         // Setup Logo
         self.logoLabel.shadowColor = UIColor(white: 0, alpha: 0.2)
@@ -49,9 +51,12 @@ class LandingController: UIViewController {
         self.view.layer.insertSublayer(playerLayer, atIndex: 0)
         self.player.actionAtItemEnd = .None
         self.player.volume = 0
+        self.player.play()
         
         // Enable Movie Looping
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerRestart:"), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+        
+        self.performSegueWithIdentifier("next", sender: self)
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -60,12 +65,6 @@ class LandingController: UIViewController {
     
     func playerRestart(notification: NSNotification) {
         self.player.currentItem?.seekToTime(kCMTimeZero)
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.player.play()
     }
     
     override func viewDidDisappear(animated: Bool) {

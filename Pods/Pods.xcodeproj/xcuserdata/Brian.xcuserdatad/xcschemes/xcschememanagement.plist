@@ -4,6 +4,21 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Gifu.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>IOStickyHeader.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>LLSimpleCamera.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Mixpanel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,27 +47,42 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>029A9C2D3F5D5857CC666B52F27BD32C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>230F06C649365BFB9A3B54AAE6CD35CE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2B7838955ED06010F782756564897D78</key>
+		<key>43AA1C9C3ED53F0B559A69FD76CFE5ED</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6CB5812E49878DDBC23AE16F492977E1</key>
+		<key>9FF55981150D833CB42894BD151A8248</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AEA56EBE1B518C71721209FB26701898</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B7E6FC3F7BD4E7296010469FA6023E8A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE0CC7E2B5B550BC4172F6FF9CC5D50A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>D306E1A19F57F62CC2320ED0D34FE3F8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F1856956B2B0F929BE41B4D8A5E82CF2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
