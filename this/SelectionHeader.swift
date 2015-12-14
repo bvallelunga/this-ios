@@ -20,7 +20,8 @@ struct SelectionTimer {
     var timer: Int!
 }
 
-class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerViewDelegate {
+class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerViewDelegate,
+    UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var placeholderView: AnimatableImageView!
     @IBOutlet weak var placeholderLabel: UILabel!
@@ -28,6 +29,7 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var arrowButton: UIButton!
     @IBOutlet weak var timerPicker: AKPickerView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     private var arrowAnimation = CABasicAnimation(keyPath: "transform")
     private var timer: SelectionTimer!
@@ -40,6 +42,7 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
     ]
     
     var delegate: SelectionHeaderDelegate!
+    var images: [UIImage] = []
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -74,9 +77,9 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
         self.arrowButton.layer.shadowOffset = CGSizeMake(-1, 2)
         self.arrowButton.layer.shadowOpacity = 0.1
         self.arrowButton.layer.shadowRadius = 0
-        self.deactivateArrow()
+        self.enableArrow(false)
         
-        let transform = CATransform3DMakeScale(1.15, 1.15, 1)
+        let transform = CATransform3DMakeScale(1.1, 1.1, 1)
         
         self.arrowAnimation.fromValue = NSValue(CATransform3D: CATransform3DIdentity)
         self.arrowAnimation.toValue = NSValue(CATransform3D: transform)
@@ -96,6 +99,13 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
         self.timerPicker.interitemSpacing = 15
         self.timerPicker.selectItem(2)
         self.timerPicker.reloadData()
+        
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        self.collectionView.backgroundColor = UIColor.clearColor()
+        self.collectionView.registerClass(SelectionPhotoCell.self, forCellWithReuseIdentifier: "cell")
+        
+        self.imagesSelected([])
     }
     
     override func layoutSubviews() {
@@ -107,28 +117,7 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
         self.placeholderView.alpha = newAlpha
         self.arrowButton.alpha = newAlpha
         self.timerPicker.alpha = newAlpha
-    }
-    
-    func activateArrow() {
-        self.arrowButton.enabled = true
-        self.arrowButton.layer.addAnimation(self.arrowAnimation, forKey: "scaleAnimation")
-    }
-    
-    func deactivateArrow() {
-        self.arrowButton.enabled = false
-        self.arrowButton.layer.removeAnimationForKey("scaleAnimation")
-    }
-    
-    func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
-        return self.timers.count
-    }
-    
-    func pickerView(pickerView: AKPickerView, titleForItem item: Int) -> String {
-        return self.timers[item].title
-    }
-    
-    func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
-        self.timer = self.timers[item]
+        self.collectionView.alpha = newAlpha
     }
     
     @IBAction func tagChanged(sender: AnyObject) {
@@ -155,5 +144,68 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
 
     @IBAction func goToSettings(sender: AnyObject) {
         Globals.pagesController.setActiveChildController(0, animated: true,  direction: .Reverse)
+    }
+    
+    func imagesSelected(images: [UIImage]) {
+        self.images = images
+        self.collectionView.reloadData()
+        
+        self.collectionView.hidden = images.isEmpty
+        self.placeholderLabel.hidden = !images.isEmpty
+        self.placeholderView.hidden = !images.isEmpty
+        self.enableArrow(!images.isEmpty)
+    }
+    
+    func enableArrow(enabled: Bool) {
+        if enabled != self.arrowButton.enabled {
+            self.arrowButton.enabled = enabled
+            self.arrowButton.layer.removeAnimationForKey("scaleAnimation")
+            
+            if enabled {
+                self.arrowButton.layer.addAnimation(self.arrowAnimation, forKey: "scaleAnimation")
+            }
+        }
+    }
+    
+    func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
+        return self.timers.count
+    }
+    
+    func pickerView(pickerView: AKPickerView, titleForItem item: Int) -> String {
+        return self.timers[item].title
+    }
+    
+    func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
+        self.timer = self.timers[item]
+    }
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let size = self.collectionView.frame.size.height/2 - 10
+        return CGSize(width: size, height: size)
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.images.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        let item = self.collectionView.frame.size.height/2 - 10
+        
+        return (self.collectionView.frame.width - (item * 3))/2
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! SelectionPhotoCell
+        
+        cell.imageView.image = self.images[indexPath.row]
+        cell.layer.cornerRadius = 3
+        cell.layer.borderWidth = 2
+        cell.layer.borderColor = UIColor(white: 0, alpha: 0.2).CGColor
+        
+        return cell
     }
 }

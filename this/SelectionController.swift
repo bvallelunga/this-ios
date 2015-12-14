@@ -18,7 +18,8 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     
     private let manager = PHCachingImageManager()
     private var assets: [PHAsset] = []
-    private var images: NSMutableArray!
+    private var selected: [Int: UIImage] = [:]
+    private var shift: Int = 0
     private var header: SelectionHeader!
     
     override func viewDidLoad() {
@@ -68,6 +69,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         ]
         
         let results = PHAsset.fetchAssetsWithMediaType(.Image, options: options)
+        let currentCount = self.assets.count
         
         self.assets.removeAll()
 
@@ -82,6 +84,12 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
             contentMode: .AspectFill,
             options: nil
         )
+        
+        if currentCount > 0 {
+            self.shift = self.assets.count - currentCount
+            
+            print(self.assets.count, currentCount, self.shift)
+        }
         
         self.collectionView?.reloadData()
     }
@@ -102,10 +110,13 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
             let asset = self.assets[indexPath.row-1]
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(photoIdentifier,
                 forIndexPath: indexPath) as! SelectionPhotoCell
-            
             let options = PHImageRequestOptions()
             
             options.deliveryMode = .Opportunistic
+            
+            cell.upload = self.selected[indexPath.row + self.shift] != nil
+            cell.layer.borderColor = Colors.green.CGColor
+            cell.layer.borderWidth = cell.upload ? 2 : 0
             
             cell.tag = Int(self.manager.requestImageForAsset(asset,
                 targetSize: cell.frame.size,
@@ -136,7 +147,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
             assert(false, "Unexpected element kind")
         }
     }
-
+    
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 0 {
             let imagePicker = UIImagePickerController()
@@ -144,8 +155,29 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
             imagePicker.sourceType = .Camera
             imagePicker.mediaTypes = ["public.image"]
             self.presentViewController(imagePicker, animated: true, completion: nil)
+            return
         }
-
+        
+        let asset = self.assets[indexPath.row-1]
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! SelectionPhotoCell
+        let options = PHImageRequestOptions()
+        
+        options.deliveryMode = .HighQualityFormat
+        
+        cell.upload = !cell.upload
+        cell.layer.borderWidth = cell.upload ? 2 : 0
+        
+        self.manager.requestImageDataForAsset(asset, options: options) { (imageData, dataUTI, orientation, info) -> Void in
+            if let image = UIImage(data: imageData!) {
+                if cell.upload {
+                    self.selected[indexPath.row + self.shift] = image
+                } else {
+                    self.selected.removeValueForKey(indexPath.row + self.shift)
+                }
+                
+                self.header.imagesSelected(Array(self.selected.values))
+            }
+        }
     }
     
     func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {

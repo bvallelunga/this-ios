@@ -10,6 +10,7 @@ import UIKit
 
 class SelectionPhotoCell: UICollectionViewCell {
     
+    var upload: Bool = false
     var imageView = UIImageView()
     
     override init(frame: CGRect) {
@@ -26,11 +27,12 @@ class SelectionPhotoCell: UICollectionViewCell {
     
     func setup() {
         self.backgroundColor = Colors.darkGrey
+        self.clipsToBounds = true
+        self.layer.masksToBounds = true
         
         self.imageView.frame = self.bounds
         self.imageView.contentMode = .ScaleAspectFill
         self.imageView.backgroundColor = UIColor.clearColor()
-        self.imageView.clipsToBounds = true
         self.addSubview(self.imageView)
     }
 }

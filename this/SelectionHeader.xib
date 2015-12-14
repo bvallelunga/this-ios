@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Bariol_Bold.ttf">
@@ -26,7 +27,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap to change" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uv0-dZ-e3e">
                         <rect key="frame" x="8" y="75" width="420" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="JIt-mM-IxK"/>
+                            <constraint firstAttribute="height" constant="30" id="JIt-mM-IxK"/>
                             <constraint firstAttribute="height" constant="30" id="pra-xo-F5L"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="16"/>
@@ -82,30 +83,6 @@
                             <action selector="tagChanged:" destination="OVO-P5-zWt" eventType="editingChanged" id="dnO-ym-FIU"/>
                         </connections>
                     </textField>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xYA-3x-S0m" customClass="AnimatableImageView" customModule="Gifu">
-                        <rect key="frame" x="148" y="147" width="140" height="126"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="126" id="UFo-m4-b4c"/>
-                            <constraint firstAttribute="width" constant="140" id="xT7-ln-ABw"/>
-                        </constraints>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PICS OR IT DIDN'T HAPPEN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2tu-ng-h4x">
-                        <rect key="frame" x="8" y="273" width="420" height="50"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="50" id="1yN-yk-e5K"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="20"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qUN-NT-BA9" customClass="AKPickerView" customModule="AKPickerView_Swift">
-                        <rect key="frame" x="20" y="360" width="150" height="35"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="150" id="WxV-DM-9f6"/>
-                            <constraint firstAttribute="height" constant="35" id="fuw-Ga-Yl2"/>
-                        </constraints>
-                    </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1i5-Lz-ZAT">
                         <rect key="frame" x="381" y="360" width="35" height="35"/>
                         <constraints>
@@ -126,6 +103,63 @@
                             <action selector="uploadTags:" destination="OVO-P5-zWt" eventType="touchUpInside" id="LQx-vn-Hkm"/>
                         </connections>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qUN-NT-BA9" customClass="AKPickerView" customModule="AKPickerView_Swift">
+                        <rect key="frame" x="20" y="360" width="198" height="35"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="150" id="WxV-DM-9f6"/>
+                            <constraint firstAttribute="height" constant="35" id="fuw-Ga-Yl2"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="WxV-DM-9f6"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xYA-3x-S0m" customClass="AnimatableImageView" customModule="Gifu">
+                        <rect key="frame" x="148" y="147" width="140" height="126"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="126" id="UFo-m4-b4c"/>
+                            <constraint firstAttribute="width" constant="140" id="xT7-ln-ABw"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PICS OR IT DIDN'T HAPPEN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2tu-ng-h4x">
+                        <rect key="frame" x="8" y="273" width="420" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="1yN-yk-e5K"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="20"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEE-QU-oI6">
+                        <rect key="frame" x="0.0" y="105" width="436" height="255"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="aHu-8U-EaD">
+                                <rect key="frame" x="20" y="27.5" width="396" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="z5b-xh-fg9"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BKf-ec-iJi">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                            </collectionView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="aHu-8U-EaD" secondAttribute="trailing" constant="20" id="KoH-No-azt"/>
+                            <constraint firstItem="aHu-8U-EaD" firstAttribute="centerY" secondItem="sEE-QU-oI6" secondAttribute="centerY" id="jZY-gB-76k"/>
+                            <constraint firstItem="aHu-8U-EaD" firstAttribute="centerX" secondItem="sEE-QU-oI6" secondAttribute="centerX" id="uVN-hF-fMY"/>
+                            <constraint firstItem="aHu-8U-EaD" firstAttribute="leading" secondItem="sEE-QU-oI6" secondAttribute="leading" constant="20" id="yVe-nT-GxZ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="uVN-hF-fMY"/>
+                            </mask>
+                        </variation>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -133,41 +167,51 @@
             <constraints>
                 <constraint firstItem="0c0-RK-aHc" firstAttribute="centerY" secondItem="EcJ-03-fEE" secondAttribute="centerY" id="6gj-Zn-dMu"/>
                 <constraint firstItem="qUN-NT-BA9" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" constant="20" id="6qp-3N-Ts2"/>
+                <constraint firstItem="qUN-NT-BA9" firstAttribute="top" secondItem="sEE-QU-oI6" secondAttribute="bottom" id="77V-at-F6I"/>
                 <constraint firstItem="tBc-If-Uhi" firstAttribute="centerY" secondItem="EcJ-03-fEE" secondAttribute="centerY" id="88B-Ik-9IM"/>
                 <constraint firstItem="0c0-RK-aHc" firstAttribute="centerY" secondItem="EcJ-03-fEE" secondAttribute="centerY" id="Csf-PF-edq"/>
+                <constraint firstItem="sEE-QU-oI6" firstAttribute="centerY" secondItem="OVO-P5-zWt" secondAttribute="centerY" id="Hdj-ca-ntX"/>
                 <constraint firstAttribute="trailing" secondItem="1i5-Lz-ZAT" secondAttribute="trailing" constant="20" id="OdC-R6-pep"/>
+                <constraint firstItem="sEE-QU-oI6" firstAttribute="top" secondItem="uv0-dZ-e3e" secondAttribute="bottom" id="Q0X-TJ-0wJ"/>
                 <constraint firstAttribute="trailing" secondItem="uv0-dZ-e3e" secondAttribute="trailing" constant="8" id="QEu-XV-Ndb"/>
                 <constraint firstAttribute="trailing" secondItem="0c0-RK-aHc" secondAttribute="trailing" constant="20" id="SPF-wl-kTJ"/>
                 <constraint firstItem="2tu-ng-h4x" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" constant="8" id="SQU-qW-YSf"/>
-                <constraint firstItem="tBc-If-Uhi" firstAttribute="top" secondItem="OVO-P5-zWt" secondAttribute="top" constant="15" id="VPL-bK-xqa"/>
+                <constraint firstItem="tBc-If-Uhi" firstAttribute="top" secondItem="OVO-P5-zWt" secondAttribute="top" constant="35" id="VPL-bK-xqa"/>
                 <constraint firstAttribute="bottom" secondItem="1i5-Lz-ZAT" secondAttribute="bottom" constant="25" id="Z9n-fg-id5"/>
                 <constraint firstItem="EcJ-03-fEE" firstAttribute="top" secondItem="OVO-P5-zWt" secondAttribute="top" constant="35" id="Zs5-bI-RwL"/>
                 <constraint firstAttribute="trailing" secondItem="2tu-ng-h4x" secondAttribute="trailing" constant="8" id="a73-CW-lT3"/>
                 <constraint firstItem="xYA-3x-S0m" firstAttribute="centerY" secondItem="OVO-P5-zWt" secondAttribute="centerY" id="ba2-kf-215"/>
                 <constraint firstItem="0c0-RK-aHc" firstAttribute="leading" secondItem="tBc-If-Uhi" secondAttribute="trailing" constant="8" id="cBi-3U-CsA"/>
                 <constraint firstItem="tBc-If-Uhi" firstAttribute="centerY" secondItem="EcJ-03-fEE" secondAttribute="centerY" id="cHK-Ge-LIn"/>
+                <constraint firstAttribute="trailing" secondItem="qUN-NT-BA9" secondAttribute="trailing" multiplier="2" id="fY3-6i-6UR"/>
                 <constraint firstItem="tBc-If-Uhi" firstAttribute="leading" secondItem="EcJ-03-fEE" secondAttribute="trailing" constant="8" id="ftK-l5-wVZ"/>
                 <constraint firstItem="tBc-If-Uhi" firstAttribute="top" secondItem="OVO-P5-zWt" secondAttribute="top" constant="35" id="gKK-jl-j97"/>
                 <constraint firstAttribute="bottom" secondItem="qUN-NT-BA9" secondAttribute="bottom" constant="25" id="j6m-qE-YbI"/>
                 <constraint firstItem="2tu-ng-h4x" firstAttribute="top" secondItem="xYA-3x-S0m" secondAttribute="bottom" id="kFf-bv-gIh"/>
+                <constraint firstItem="sEE-QU-oI6" firstAttribute="centerX" secondItem="OVO-P5-zWt" secondAttribute="centerX" id="oee-Au-BAy"/>
+                <constraint firstItem="sEE-QU-oI6" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" id="okf-gN-HUU"/>
                 <constraint firstItem="uv0-dZ-e3e" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" constant="8" id="q44-zN-zJQ"/>
                 <constraint firstItem="EcJ-03-fEE" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" constant="20" id="rSW-dp-cCj"/>
                 <constraint firstItem="0c0-RK-aHc" firstAttribute="top" secondItem="OVO-P5-zWt" secondAttribute="top" constant="35" id="v51-CV-nio"/>
                 <constraint firstItem="uv0-dZ-e3e" firstAttribute="top" secondItem="tBc-If-Uhi" secondAttribute="bottom" id="vpq-51-0zH"/>
                 <constraint firstItem="xYA-3x-S0m" firstAttribute="centerX" secondItem="OVO-P5-zWt" secondAttribute="centerX" id="zab-iE-YJN"/>
+                <constraint firstAttribute="trailing" secondItem="sEE-QU-oI6" secondAttribute="trailing" id="zsM-La-lJ9"/>
             </constraints>
             <size key="customSize" width="345" height="313"/>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="Zs5-bI-RwL"/>
-                    <exclude reference="VPL-bK-xqa"/>
                     <exclude reference="cHK-Ge-LIn"/>
+                    <exclude reference="gKK-jl-j97"/>
+                    <exclude reference="Hdj-ca-ntX"/>
+                    <exclude reference="oee-Au-BAy"/>
                     <exclude reference="6gj-Zn-dMu"/>
                     <exclude reference="v51-CV-nio"/>
                 </mask>
             </variation>
             <connections>
                 <outlet property="arrowButton" destination="1i5-Lz-ZAT" id="Pa4-c1-6vL"/>
+                <outlet property="collectionView" destination="aHu-8U-EaD" id="TC9-Eb-JJ9"/>
                 <outlet property="placeholderLabel" destination="2tu-ng-h4x" id="ChE-sz-o9S"/>
                 <outlet property="placeholderView" destination="xYA-3x-S0m" id="aH8-cs-zAf"/>
                 <outlet property="tagField" destination="tBc-If-Uhi" id="Zbz-2d-qc2"/>
