@@ -149,7 +149,6 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     }
     
     func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
-        print(123)
         self.getAssests()
     }
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AuthController: UIViewController, UITextFieldDelegate {
+class AuthController: UIViewController {
 
     @IBOutlet weak var stepLabel: UILabel!
     @IBOutlet weak var headerLabel: UILabel!
@@ -36,7 +36,6 @@ class AuthController: UIViewController, UITextFieldDelegate {
         self.textField.layer.shadowOffset = CGSizeMake(0, 2)
         self.textField.layer.shadowOpacity = 1
         self.textField.layer.shadowRadius = 0
-        self.textField.delegate = self
         self.textField.font = UIFont(name: "Bariol-Bold", size: 40)
         self.textField.becomeFirstResponder()
         

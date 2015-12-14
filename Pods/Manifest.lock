@@ -1,4 +1,6 @@
 PODS:
+  - ActionSheetPicker-3.0 (2.0.4)
+  - AKPickerView-Swift (1.0.0)
   - Gifu (1.0.0)
   - IOStickyHeader (0.2.4)
   - libPhoneNumber-iOS (0.8.10)
@@ -10,6 +12,8 @@ PODS:
   - SVProgressHUD (1.1.3)
 
 DEPENDENCIES:
+  - ActionSheetPicker-3.0 (~> 2.0)
+  - AKPickerView-Swift (~> 1.0)
   - Gifu
   - IOStickyHeader
   - libPhoneNumber-iOS (~> 0.8)
@@ -19,6 +23,8 @@ DEPENDENCIES:
   - SVProgressHUD (~> 1.1)
 
 SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: 860466cb4a66854e6acb590071ecee404b48f49d
+  AKPickerView-Swift: 933897031753447302cf3167a0a5c738a58b219c
   Gifu: dcb0d05caa83be1f7e51bdb033318f64a93527b0
   IOStickyHeader: 128bab4da4ee6e32766ee85503b0a58b48f111b4
   libPhoneNumber-iOS: 7bfd00f843fdcd82b5182b463e8eb3b27579f41d

@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AKPickerView-Swift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ActionSheetPicker-3.0.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Gifu.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,12 +62,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>43AA1C9C3ED53F0B559A69FD76CFE5ED</key>
+		<key>324CCD3BE28BFCD3851E789872ACE05E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9FF55981150D833CB42894BD151A8248</key>
+		<key>833BAB1B8689BCB97EB8BD7D288FD91D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A5EBD7587C664DFDAEDF4D10F03E5D43</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,6 +87,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>CE0A701D8A271EFE0065667D13272921</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>CE0CC7E2B5B550BC4172F6FF9CC5D50A</key>
 		<dict>
 			<key>primary</key>
@@ -82,7 +102,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F1856956B2B0F929BE41B4D8A5E82CF2</key>
+		<key>E07EA748D7942175BED3FE780046D65F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

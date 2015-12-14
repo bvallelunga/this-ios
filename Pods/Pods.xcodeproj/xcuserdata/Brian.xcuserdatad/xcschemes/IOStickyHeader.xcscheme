@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '0A53B78FB2CC47B1318EC8EE'
+               BlueprintIdentifier = 'BE48DD0FA945681D5C4DCED4'
                BlueprintName = 'IOStickyHeader'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'IOStickyHeader.framework'>
