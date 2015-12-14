@@ -18,8 +18,8 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     
     private let manager = PHCachingImageManager()
     private var assets: [PHAsset] = []
-    private var selected: [Int: UIImage] = [:]
-    private var shift: Int = 0
+    private var selected: [PHAsset: UIImage] = [:]
+    private var selectedOrder: NSMutableArray = []
     private var date: NSDate!
     private var header: SelectionHeader!
     
@@ -75,7 +75,6 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         ]
         
         let results = PHAsset.fetchAssetsWithMediaType(.Image, options: options)
-        let currentCount = self.assets.count
 
         results.enumerateObjectsUsingBlock { (object, _, _) in
             if let asset = object as? PHAsset {
@@ -88,10 +87,6 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
             contentMode: .AspectFill,
             options: nil
         )
-        
-        if currentCount > 0 {
-            self.shift = currentCount - self.assets.count
-        }
         
         self.date = NSDate()
         self.collectionView?.reloadData()
@@ -117,7 +112,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
             
             options.deliveryMode = .Opportunistic
             
-            cell.upload = self.selected[indexPath.row + self.shift] != nil
+            cell.upload = self.selected[asset] != nil
             cell.layer.borderColor = Colors.green.CGColor
             cell.layer.borderWidth = cell.upload ? 3 : 0
             
@@ -173,14 +168,26 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         if cell.upload {
             self.manager.requestImageDataForAsset(asset, options: options) { (imageData, dataUTI, orientation, info) -> Void in
                 if let image = UIImage(data: imageData!) {
-                    self.selected[indexPath.row + self.shift] = image
-                    self.header.imagesSelected(Array(self.selected.values))
+                    self.selectedOrder.insertObject(asset, atIndex: 0)
+                    self.selected[asset] = image
+                    self.updateHeader()
                 }
             }
         } else  {
-            self.selected.removeValueForKey(indexPath.row + self.shift)
-            self.header.imagesSelected(Array(self.selected.values))
+            self.selectedOrder.removeObject(asset)
+            self.selected.removeValueForKey(asset)
+            self.updateHeader()
         }
+    }
+    
+    func updateHeader() {
+        var images: [UIImage] = []
+        
+        for asset in self.selectedOrder {
+            images.append(self.selected[asset as! PHAsset]!)
+        }
+        
+        self.header.imagesSelected(images)
     }
     
     func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
@@ -189,8 +196,8 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     
     // MARK: UIImagePickerController Methods
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
-        self.dismissViewControllerAnimated(true, completion: nil)
         UIImageWriteToSavedPhotosAlbum(image, self, "image:didFinishSavingWithError:contextInfo:", nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {

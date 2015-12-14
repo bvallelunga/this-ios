@@ -31,7 +31,7 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
     @IBOutlet weak var timerPicker: AKPickerView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var hashtag: String = "#hashtag"
+    private var hashtag: String = "#blackcat15"
     private var arrowAnimation = CABasicAnimation(keyPath: "transform")
     private var timer: SelectionTimer!
     private var timers: [SelectionTimer] = [
