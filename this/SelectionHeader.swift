@@ -72,6 +72,8 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
         self.tagField.layer.shadowOpacity = 1
         self.tagField.layer.shadowRadius = 0
         self.tagField.font = UIFont(name: "Bariol-Bold", size: 36)
+        self.tagField.addTarget(self.tagField, action: Selector("resignFirstResponder"),
+            forControlEvents: .EditingDidEndOnExit)
         
         self.arrowButton.layer.shadowColor = UIColor.blackColor().CGColor
         self.arrowButton.layer.shadowOffset = CGSizeMake(-1, 2)
@@ -105,6 +107,10 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
         self.collectionView.backgroundColor = UIColor.clearColor()
         self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         self.collectionView.registerClass(SelectionPhotoCell.self, forCellWithReuseIdentifier: "cell")
+        
+        let tapper = UITapGestureRecognizer(target: self, action: Selector("handleSingleTap:"))
+        tapper.cancelsTouchesInView = false
+        self.addGestureRecognizer(tapper)
         
         self.imagesSelected([])
     }
@@ -145,6 +151,10 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
 
     @IBAction func goToSettings(sender: AnyObject) {
         Globals.pagesController.setActiveChildController(0, animated: true,  direction: .Reverse)
+    }
+    
+    func handleSingleTap(gesture: UITapGestureRecognizer) {
+        self.endEditing(true)
     }
     
     func imagesSelected(images: [UIImage]) {
