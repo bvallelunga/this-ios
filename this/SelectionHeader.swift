@@ -184,7 +184,7 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let size = self.collectionView.frame.size.height/2 - 10
+        let size = self.collectionView.frame.size.height/2 - 5
         return CGSize(width: size, height: size)
     }
     
@@ -193,7 +193,7 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        let item = self.collectionView.frame.size.height/2 - 10
+        let item = self.collectionView.frame.size.height/2 - 5
         
         return (self.collectionView.frame.width - (item * 3))/2
     }

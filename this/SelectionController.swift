@@ -20,6 +20,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     private var assets: [PHAsset] = []
     private var selected: [Int: UIImage] = [:]
     private var shift: Int = 0
+    private var date: NSDate!
     private var header: SelectionHeader!
     
     override func viewDidLoad() {
@@ -42,12 +43,12 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         
         if let layout = self.collectionView?.collectionViewLayout as? IOStickyHeaderFlowLayout {
             layout.parallaxHeaderReferenceSize = CGSizeMake(size.width, size.height - (itemSize * 2))
-            layout.parallaxHeaderMinimumReferenceSize = CGSizeMake(size.width, 0)
+            layout.parallaxHeaderMinimumReferenceSize = CGSizeMake(size.width, size.height - (itemSize * 2))
             layout.itemSize = CGSizeMake(itemSize, itemSize)
             layout.minimumInteritemSpacing = 1
             layout.minimumLineSpacing = 1
             layout.sectionInset = UIEdgeInsets(top: 1, left: 0, bottom: 1, right: 0)
-            layout.parallaxHeaderAlwaysOnTop = true
+            layout.parallaxHeaderAlwaysOnTop = false
             layout.disableStickyHeaders = true
         }
             
@@ -64,18 +65,21 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     
     func getAssests() {
         let options = PHFetchOptions()
+        
+        if self.date != nil {
+            options.predicate = NSPredicate(format: "creationDate > %@", self.date)
+        }
+        
         options.sortDescriptors = [
-            NSSortDescriptor(key: "creationDate", ascending: false)
+            NSSortDescriptor(key: "creationDate", ascending: true)
         ]
         
         let results = PHAsset.fetchAssetsWithMediaType(.Image, options: options)
         let currentCount = self.assets.count
-        
-        self.assets.removeAll()
 
         results.enumerateObjectsUsingBlock { (object, _, _) in
             if let asset = object as? PHAsset {
-                self.assets.append(asset)
+                self.assets.insert(asset, atIndex: 0)
             }
         }
         
@@ -86,11 +90,10 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         )
         
         if currentCount > 0 {
-            self.shift = self.assets.count - currentCount
-            
-            print(self.assets.count, currentCount, self.shift)
+            self.shift = currentCount - self.assets.count
         }
         
+        self.date = NSDate()
         self.collectionView?.reloadData()
     }
 
@@ -116,7 +119,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
             
             cell.upload = self.selected[indexPath.row + self.shift] != nil
             cell.layer.borderColor = Colors.green.CGColor
-            cell.layer.borderWidth = cell.upload ? 2 : 0
+            cell.layer.borderWidth = cell.upload ? 3 : 0
             
             cell.tag = Int(self.manager.requestImageForAsset(asset,
                 targetSize: cell.frame.size,
@@ -165,18 +168,18 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         options.deliveryMode = .HighQualityFormat
         
         cell.upload = !cell.upload
-        cell.layer.borderWidth = cell.upload ? 2 : 0
+        cell.layer.borderWidth = cell.upload ? 3 : 0
         
-        self.manager.requestImageDataForAsset(asset, options: options) { (imageData, dataUTI, orientation, info) -> Void in
-            if let image = UIImage(data: imageData!) {
-                if cell.upload {
+        if cell.upload {
+            self.manager.requestImageDataForAsset(asset, options: options) { (imageData, dataUTI, orientation, info) -> Void in
+                if let image = UIImage(data: imageData!) {
                     self.selected[indexPath.row + self.shift] = image
-                } else {
-                    self.selected.removeValueForKey(indexPath.row + self.shift)
+                    self.header.imagesSelected(Array(self.selected.values))
                 }
-                
-                self.header.imagesSelected(Array(self.selected.values))
             }
+        } else  {
+            self.selected.removeValueForKey(indexPath.row + self.shift)
+            self.header.imagesSelected(Array(self.selected.values))
         }
     }
     

@@ -25,10 +25,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap to change" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uv0-dZ-e3e">
-                        <rect key="frame" x="8" y="75" width="420" height="30"/>
+                        <rect key="frame" x="8" y="75" width="420" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="JIt-mM-IxK"/>
-                            <constraint firstAttribute="height" constant="30" id="pra-xo-F5L"/>
+                            <constraint firstAttribute="height" constant="20" id="pra-xo-F5L"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="16"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -71,7 +71,7 @@
                             <action selector="goToFollowing:" destination="OVO-P5-zWt" eventType="touchUpInside" id="mcS-8z-0k4"/>
                         </connections>
                     </button>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="#changeme" placeholder="#this" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tBc-If-Uhi">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="#blackcat15" placeholder="#this" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tBc-If-Uhi">
                         <rect key="frame" x="63" y="35" width="310" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="EMu-kb-UaD"/>
@@ -84,7 +84,7 @@
                         </connections>
                     </textField>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1i5-Lz-ZAT">
-                        <rect key="frame" x="381" y="360" width="35" height="35"/>
+                        <rect key="frame" x="381" y="365" width="35" height="35"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="35" id="3Ew-CF-JLc"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="5fG-2s-G99"/>
@@ -104,7 +104,7 @@
                         </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qUN-NT-BA9" customClass="AKPickerView" customModule="AKPickerView_Swift">
-                        <rect key="frame" x="20" y="360" width="198" height="35"/>
+                        <rect key="frame" x="20" y="365" width="198" height="35"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="150" id="WxV-DM-9f6"/>
@@ -133,10 +133,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEE-QU-oI6">
-                        <rect key="frame" x="0.0" y="105" width="436" height="255"/>
+                        <rect key="frame" x="0.0" y="95" width="436" height="270"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="aHu-8U-EaD">
-                                <rect key="frame" x="20" y="27.5" width="396" height="200"/>
+                                <rect key="frame" x="20" y="35" width="396" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="z5b-xh-fg9"/>
                                 </constraints>
@@ -150,12 +150,16 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="aHu-8U-EaD" secondAttribute="trailing" constant="20" id="KoH-No-azt"/>
+                            <constraint firstItem="aHu-8U-EaD" firstAttribute="top" secondItem="sEE-QU-oI6" secondAttribute="top" constant="15" id="aOy-rs-koY"/>
+                            <constraint firstAttribute="bottom" secondItem="aHu-8U-EaD" secondAttribute="bottom" constant="15" id="eBO-Me-2uZ"/>
                             <constraint firstItem="aHu-8U-EaD" firstAttribute="centerY" secondItem="sEE-QU-oI6" secondAttribute="centerY" id="jZY-gB-76k"/>
                             <constraint firstItem="aHu-8U-EaD" firstAttribute="centerX" secondItem="sEE-QU-oI6" secondAttribute="centerX" id="uVN-hF-fMY"/>
                             <constraint firstItem="aHu-8U-EaD" firstAttribute="leading" secondItem="sEE-QU-oI6" secondAttribute="leading" constant="20" id="yVe-nT-GxZ"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="aOy-rs-koY"/>
+                                <exclude reference="eBO-Me-2uZ"/>
                                 <exclude reference="uVN-hF-fMY"/>
                             </mask>
                         </variation>
@@ -177,7 +181,7 @@
                 <constraint firstAttribute="trailing" secondItem="0c0-RK-aHc" secondAttribute="trailing" constant="20" id="SPF-wl-kTJ"/>
                 <constraint firstItem="2tu-ng-h4x" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" constant="8" id="SQU-qW-YSf"/>
                 <constraint firstItem="tBc-If-Uhi" firstAttribute="top" secondItem="OVO-P5-zWt" secondAttribute="top" constant="35" id="VPL-bK-xqa"/>
-                <constraint firstAttribute="bottom" secondItem="1i5-Lz-ZAT" secondAttribute="bottom" constant="25" id="Z9n-fg-id5"/>
+                <constraint firstAttribute="bottom" secondItem="1i5-Lz-ZAT" secondAttribute="bottom" constant="20" id="Z9n-fg-id5"/>
                 <constraint firstItem="EcJ-03-fEE" firstAttribute="top" secondItem="OVO-P5-zWt" secondAttribute="top" constant="35" id="Zs5-bI-RwL"/>
                 <constraint firstAttribute="trailing" secondItem="2tu-ng-h4x" secondAttribute="trailing" constant="8" id="a73-CW-lT3"/>
                 <constraint firstItem="xYA-3x-S0m" firstAttribute="centerY" secondItem="OVO-P5-zWt" secondAttribute="centerY" id="ba2-kf-215"/>
@@ -186,7 +190,7 @@
                 <constraint firstAttribute="trailing" secondItem="qUN-NT-BA9" secondAttribute="trailing" multiplier="2" id="fY3-6i-6UR"/>
                 <constraint firstItem="tBc-If-Uhi" firstAttribute="leading" secondItem="EcJ-03-fEE" secondAttribute="trailing" constant="8" id="ftK-l5-wVZ"/>
                 <constraint firstItem="tBc-If-Uhi" firstAttribute="top" secondItem="OVO-P5-zWt" secondAttribute="top" constant="35" id="gKK-jl-j97"/>
-                <constraint firstAttribute="bottom" secondItem="qUN-NT-BA9" secondAttribute="bottom" constant="25" id="j6m-qE-YbI"/>
+                <constraint firstAttribute="bottom" secondItem="qUN-NT-BA9" secondAttribute="bottom" constant="20" id="j6m-qE-YbI"/>
                 <constraint firstItem="2tu-ng-h4x" firstAttribute="top" secondItem="xYA-3x-S0m" secondAttribute="bottom" id="kFf-bv-gIh"/>
                 <constraint firstItem="sEE-QU-oI6" firstAttribute="centerX" secondItem="OVO-P5-zWt" secondAttribute="centerX" id="oee-Au-BAy"/>
                 <constraint firstItem="sEE-QU-oI6" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" id="okf-gN-HUU"/>
