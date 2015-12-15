@@ -1,1 +1,0 @@
-../../../ContactsManager/ContactsManager/KTSContactsManager.h

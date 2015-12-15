@@ -86,7 +86,6 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/AKPickerView_Swift.framework"
   install_framework "Pods/ActionSheetPicker_3_0.framework"
-  install_framework "Pods/ContactsManager.framework"
   install_framework "Pods/Gifu.framework"
   install_framework "Pods/IOStickyHeader.framework"
   install_framework "Pods/LLSimpleCamera.framework"
@@ -99,7 +98,6 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/AKPickerView_Swift.framework"
   install_framework "Pods/ActionSheetPicker_3_0.framework"
-  install_framework "Pods/ContactsManager.framework"
   install_framework "Pods/Gifu.framework"
   install_framework "Pods/IOStickyHeader.framework"
   install_framework "Pods/LLSimpleCamera.framework"

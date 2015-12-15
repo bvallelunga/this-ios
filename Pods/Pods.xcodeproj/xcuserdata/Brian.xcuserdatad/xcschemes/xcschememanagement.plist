@@ -14,11 +14,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>ContactsManager.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Gifu.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -72,22 +67,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>05184D3BF4906EA8BD3F5BB5AF35C53A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>230F06C649365BFB9A3B54AAE6CD35CE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>29A7C7E89743025BB1B90399B677ED88</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3C2B38B45299C2DCAFCE761BB370B1DB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4A2B550455F9EE322411F4D55A948114</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>69013D09FD2DE39E9CA9F71D2EAFB5D4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -102,12 +97,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B7E6FC3F7BD4E7296010469FA6023E8A</key>
+		<key>B73912867666FEF97D1DB9F166B85DD6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C9A565ED9F6D5381043B34550F4B0B6D</key>
+		<key>B7E6FC3F7BD4E7296010469FA6023E8A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -118,11 +113,6 @@
 			<true/>
 		</dict>
 		<key>CE0CC7E2B5B550BC4172F6FF9CC5D50A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CF400A7AB52BBDC0F60BD431BEBE4AC4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

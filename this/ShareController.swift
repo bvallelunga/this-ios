@@ -31,7 +31,6 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate {
     var headerFrame: CGRect!
     var contacts: Contacts = Contacts()
     var users: Users = Users()
-    var sectionShift = 0
     var delegate: ShareControllerDelegate!
     var headerController: ShareHeaderController!
 
@@ -93,12 +92,11 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate {
     
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        self.sectionShift = self.users.filtered.isEmpty ? 1 : 0
-        return 2 - self.sectionShift
+        return 2
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == self.sectionShift ? self.users.filtered.count : self.contacts.filtered.count
+        return section == 0 ? self.users.filtered.count : self.contacts.filtered.count
     }
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -106,7 +104,11 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate {
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 70
+        if (section == 0 && self.users.filtered.isEmpty) || (section == 1 && self.contacts.filtered.isEmpty) {
+            return 0
+        }
+        
+        return 40
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -114,7 +116,13 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate {
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == self.sectionShift ? "SUGGESTED CONTACTS" : "NOT YET ON THE APP"
+        if section == 0 && !self.users.filtered.isEmpty {
+            return "SUGGESTED FRIENDS"
+        } else if section == 1 && !self.contacts.filtered.isEmpty {
+            return "CONTACTS LIST"
+        }
+        
+        return nil
     }
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -128,7 +136,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! ShareTableCell
         
-        if indexPath.section == self.sectionShift {
+        if indexPath.section == 0 {
             let user = self.users.filtered[indexPath.row]
             cell.share = self.users.selected[user] != nil
         } else {
@@ -147,7 +155,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate {
             cell.share = self.contacts.selected[contact] != nil
         }
         
-        cell.accessoryView?.tintColor = cell.share ? cell.selectedColor: cell.normalColor
+        cell.updateAccessory()
         
         return cell
     }
@@ -156,9 +164,9 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! ShareTableCell
         
         cell.share = !cell.share
-        cell.accessoryView?.tintColor = cell.share ? cell.selectedColor: cell.normalColor
+        cell.updateAccessory()
         
-        if indexPath.section == self.sectionShift {
+        if indexPath.section == 0 {
             let user = self.users.filtered[indexPath.row]
             
             if cell.share {

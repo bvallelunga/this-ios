@@ -8,10 +8,14 @@
 
 import UIKit
 
+let normalColor = UIColor(red:0.87, green:0.87, blue:0.87, alpha:1)
+let selectedColor = Colors.blue
+let inviteImage = UIImage(named: "Invite")
+let selectImage = UIImage(named: "InviteSelected")
+
 class ShareTableCell: UITableViewCell {
     
-    var normalColor = UIColor(red:0.87, green:0.87, blue:0.87, alpha:1)
-    var selectedColor = Colors.blue
+    private var accessoryImageView = UIImageView(image: inviteImage)
     var share: Bool = false
 
     override func awakeFromNib() {
@@ -22,12 +26,18 @@ class ShareTableCell: UITableViewCell {
         self.textLabel?.font = UIFont(name: "Bariol", size: 20)
         self.detailTextLabel?.textColor = UIColor.lightGrayColor()
         self.detailTextLabel?.font = UIFont(name: "Bariol", size: 16)
-        self.accessoryView = UIImageView(image: UIImage(named: "Invite"))
-        self.accessoryView?.contentMode = .ScaleAspectFit
-        self.accessoryView?.tintColor = self.normalColor
-        self.accessoryView?.frame.size.height = self.frame.height
-        self.accessoryView?.frame.size.width = self.frame.height
-        self.accessoryView?.frame.origin.x = self.frame.width - self.frame.height
+        self.accessoryView = self.accessoryImageView
+        
+        self.accessoryImageView.contentMode = .ScaleAspectFit
+        self.accessoryImageView.tintColor = normalColor
+        self.accessoryImageView.frame.size.height = self.frame.height
+        self.accessoryImageView.frame.size.width = self.frame.height
+        self.accessoryImageView.frame.origin.x = self.frame.width - self.frame.height
+    }
+    
+    func updateAccessory() {
+        self.accessoryImageView.image = self.share ? selectImage : inviteImage
+        self.accessoryImageView.tintColor = self.share ? selectedColor : normalColor
     }
 
 }

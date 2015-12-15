@@ -366,7 +366,7 @@ and Privacy Policy.</string>
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="aek-zs-u9j">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <containerView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" id="cb9-SL-Jmt">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="310"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -386,14 +386,14 @@ and Privacy Policy.</string>
                                             <rect key="frame" x="15" y="6" width="31.5" height="19.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d6g-Qh-MOt">
                                             <rect key="frame" x="15" y="25.5" width="30.5" height="13.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -419,39 +419,51 @@ and Privacy Policy.</string>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="8qE-VF-d8j" kind="relationship" relationship="rootViewController" id="6eq-7s-Y7f"/>
+                        <segue destination="k6V-Dq-Mt4" kind="relationship" relationship="rootViewController" id="NTZ-X4-EoO"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CXh-zk-5cC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1768" y="1141"/>
         </scene>
-        <!--Following-->
-        <scene sceneID="JrZ-eT-MGv">
+        <!--Tags Controller-->
+        <scene sceneID="39k-9k-TlF">
             <objects>
-                <tableViewController id="8qE-VF-d8j" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="pam-E1-Tlz">
+                <viewController id="k6V-Dq-Mt4" customClass="TagsController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qc4-5L-May"/>
+                        <viewControllerLayoutGuide type="bottom" id="dwC-7F-gp7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="v7a-On-uHj">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="mkF-8h-f4z">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mkF-8h-f4z" id="Bwx-NJ-X4j">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="8qE-VF-d8j" id="Fuh-2L-il2"/>
-                            <outlet property="delegate" destination="8qE-VF-d8j" id="azT-bd-rwl"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Following" id="VHw-At-Ua8"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="udJ-4y-DMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Y0B-p6-qje">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="xxW-nD-dqP">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="goToSelection:" destination="k6V-Dq-Mt4" id="mqc-3e-hca"/>
+                            </connections>
+                        </barButtonItem>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="gyK-I6-NPS">
+                            <rect key="frame" x="180" y="7" width="240" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="FOLLOWING"/>
+                                <segment title="TRENDING"/>
+                            </segments>
+                            <connections>
+                                <action selector="segmentChanged:" destination="k6V-Dq-Mt4" eventType="valueChanged" id="jFA-oA-dL2"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="segment" destination="gyK-I6-NPS" id="pty-8d-X0Z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Chh-pn-ji1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2536" y="1141"/>
         </scene>
@@ -459,6 +471,10 @@ and Privacy Policy.</string>
         <scene sceneID="cnh-ky-KQX">
             <objects>
                 <viewController id="Tfm-c1-9m7" customClass="ShareHeaderController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Q1U-OR-mYV"/>
+                        <viewControllerLayoutGuide type="bottom" id="DFl-ih-tgt"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Lsf-ST-9dK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="310"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
