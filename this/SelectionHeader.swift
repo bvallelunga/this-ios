@@ -31,7 +31,7 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
     @IBOutlet weak var timerPicker: AKPickerView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var hashtag: String = "#blackcat15"
+    private var hashtag: String = ""
     private var arrowAnimation = CABasicAnimation(keyPath: "transform")
     private var timer: SelectionTimer!
     private var timers: [SelectionTimer] = [
@@ -75,7 +75,6 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
         self.tagField.font = UIFont(name: "Bariol-Bold", size: 36)
         self.tagField.addTarget(self.tagField, action: Selector("resignFirstResponder"),
             forControlEvents: .EditingDidEndOnExit)
-        self.tagField.text = self.hashtag
         
         self.arrowButton.layer.shadowColor = UIColor.blackColor().CGColor
         self.arrowButton.layer.shadowOffset = CGSizeMake(-1, 2)
@@ -114,6 +113,7 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
         self.addGestureRecognizer(tapper)
         
         self.imagesSelected([])
+        self.generateHashtag()
     }
     
     override func layoutSubviews() {
@@ -148,15 +148,28 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
     }
     
     @IBAction func goToFollowing(sender: AnyObject) {
-        Globals.pagesController.setActiveChildController(2, animated: true,  direction: .Forward)
+        Globals.pagesController.setActiveChildController(2, animated: true,
+            direction: .Forward, callback: nil)
     }
 
     @IBAction func goToSettings(sender: AnyObject) {
-        Globals.pagesController.setActiveChildController(0, animated: true,  direction: .Reverse)
+        Globals.pagesController.setActiveChildController(0, animated: true,
+            direction: .Reverse, callback: nil)
     }
     
     func handleSingleTap(gesture: UITapGestureRecognizer) {
         self.endEditing(true)
+    }
+    
+    func generateHashtag() {
+        self.hashtag = "#blackcat15"
+        self.tagField.text = self.hashtag
+    }
+    
+    func reset() {
+        self.imagesSelected([])
+        self.generateHashtag()
+        self.timerPicker.selectItem(2)
     }
     
     func imagesSelected(images: [UIImage]) {

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ShareControllerDelegate {
+    func shareControllerShared()
+}
+
 class ShareController: UITableViewController, ShareHeaderControllerDelegate {
     
     struct Users {
@@ -28,6 +32,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate {
     var contacts: Contacts = Contacts()
     var users: Users = Users()
     var sectionShift = 0
+    var delegate: ShareControllerDelegate!
     var headerController: ShareHeaderController!
 
     override func viewDidLoad() {
@@ -174,6 +179,13 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate {
     
     func backTriggred() {
         self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func shareTriggered() {
+        Globals.pagesController.setActiveChildController(2, animated: true, direction: .Forward) { () -> Void in
+            self.backTriggred()
+            self.delegate.shareControllerShared()
+        }
     }
     
     func filterBySearch(var text: String) {

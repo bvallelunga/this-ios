@@ -26,13 +26,20 @@ class SelectionCameraCell: UICollectionViewCell {
     }
     
     func setup() {
-        self.backgroundColor = UIColor.blackColor()
+        self.backgroundColor = Colors.darkGrey
         
         self.cameraView = LLSimpleCamera(quality: AVCaptureSessionPresetLow, position: LLCameraPositionRear, videoEnabled: false)
         self.cameraView.tapToFocus = false
         self.cameraView.view.frame = self.bounds
         self.cameraView.view.userInteractionEnabled = false
-        self.cameraView.start()
+        
+        let cameraStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+        
+        if cameraStatus == .NotDetermined  {
+            self.cameraView.view.hidden = true
+        } else {
+            self.cameraView.start()
+        }
         
         let iconViewer = UIImageView(frame: self.bounds)
         iconViewer.tintColor = UIColor.whiteColor()
@@ -44,9 +51,13 @@ class SelectionCameraCell: UICollectionViewCell {
         iconViewer.layer.shadowOpacity = 0.4
         iconViewer.layer.shadowRadius = 0
         
-        
         self.addSubview(self.cameraView.view)
         self.addSubview(iconViewer)
+    }
+    
+    func activateCamera() {
+        self.cameraView.view.hidden = false
+        self.cameraView.start()
     }
     
 }

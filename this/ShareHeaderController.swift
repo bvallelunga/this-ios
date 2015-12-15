@@ -11,6 +11,7 @@ import UIKit
 protocol ShareHeaderControllerDelegate {
     func filterBySearch(text: String)
     func backTriggred()
+    func shareTriggered()
 }
 
 class ShareHeaderController: UIViewController, UISearchBarDelegate {
@@ -50,7 +51,7 @@ class ShareHeaderController: UIViewController, UISearchBarDelegate {
     }
     
     @IBAction func nextTriggered(sender: AnyObject) {
-
+        self.delegate.shareTriggered()
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {

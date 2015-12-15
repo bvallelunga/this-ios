@@ -14,7 +14,8 @@ private let photoIdentifier = "photo"
 private let cameraIdentifier = "camera"
 
 class SelectionController: UICollectionViewController, UICollectionViewDelegateFlowLayout,
-    UIImagePickerControllerDelegate, UINavigationControllerDelegate, SelectionHeaderDelegate {
+    UIImagePickerControllerDelegate, UINavigationControllerDelegate,
+    SelectionHeaderDelegate, ShareControllerDelegate {
     
     private var hashtag: String = ""
     private let manager = PHCachingImageManager()
@@ -48,6 +49,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
             
             controller?.hashtag = self.hashtag
             controller?.images = images
+            controller?.delegate = self
         }
     }
     
@@ -78,33 +80,61 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
             withReuseIdentifier: "header")
     }
     
-    func getAssests() {
-        let options = PHFetchOptions()
-        
-        if self.date != nil {
-            options.predicate = NSPredicate(format: "creationDate > %@", self.date)
-        }
-        
-        options.sortDescriptors = [
-            NSSortDescriptor(key: "creationDate", ascending: true)
-        ]
-        
-        let results = PHAsset.fetchAssetsWithMediaType(.Image, options: options)
-
-        results.enumerateObjectsUsingBlock { (object, _, _) in
-            if let asset = object as? PHAsset {
-                self.assets.insert(asset, atIndex: 0)
-            }
-        }
-        
-        self.manager.startCachingImagesForAssets(assets,
-            targetSize: PHImageManagerMaximumSize,
-            contentMode: .AspectFill,
-            options: nil
-        )
-        
-        self.date = NSDate()
+    func reset() {
+        self.selected.removeAll()
+        self.selectedOrder.removeAllObjects()
         self.collectionView?.reloadData()
+        self.header.reset()
+    }
+    
+    func getAssests() {
+        self.assetsAuthorized { (authorized) -> Void in
+            guard authorized else {
+                return
+            }
+            
+            let options = PHFetchOptions()
+            
+            if self.date != nil {
+                options.predicate = NSPredicate(format: "creationDate > %@", self.date)
+            }
+            
+            options.sortDescriptors = [
+                NSSortDescriptor(key: "creationDate", ascending: true)
+            ]
+            
+            let results = PHAsset.fetchAssetsWithMediaType(.Image, options: options)
+            
+            results.enumerateObjectsUsingBlock { (object, _, _) in
+                if let asset = object as? PHAsset {
+                    self.assets.insert(asset, atIndex: 0)
+                }
+            }
+            
+            self.manager.startCachingImagesForAssets(self.assets,
+                targetSize: PHImageManagerMaximumSize,
+                contentMode: .AspectFill,
+                options: nil
+            )
+            
+            if !self.assets.isEmpty {
+                self.date = NSDate()
+            }
+            
+            self.collectionView?.reloadData()
+        }
+    }
+    
+    func assetsAuthorized(callback: (authorized: Bool) -> Void) {
+        let status = PHPhotoLibrary.authorizationStatus()
+        
+        if status == .NotDetermined {
+            PHPhotoLibrary.requestAuthorization({ (status) -> Void in
+                callback(authorized: status == .Authorized)
+            })
+        } else {
+            callback(authorized: status == .Authorized)
+        }
     }
 
     // MARK: UICollectionViewDataSource
@@ -195,6 +225,10 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         }
     }
     
+    func shareControllerShared() {
+        self.reset()
+    }
+    
     func updateHeader() {
         var images: [UIImage] = []
         
@@ -219,7 +253,10 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     // MARK: UIImagePickerController Methods
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         UIImageWriteToSavedPhotosAlbum(image, self, "image:didFinishSavingWithError:contextInfo:", nil)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true) { () -> Void in
+            let cell = self.collectionView?.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)) as! SelectionCameraCell
+            cell.activateCamera()
+        }
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
