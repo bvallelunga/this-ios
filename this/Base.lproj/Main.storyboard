@@ -546,7 +546,7 @@ and Privacy Policy.</string>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                             </searchBar>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.83921568627450982" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="f8x-Uo-MQj" firstAttribute="leading" secondItem="Lsf-ST-9dK" secondAttribute="leadingMargin" constant="-20" id="0g9-jP-ws0"/>
                             <constraint firstItem="gJf-fn-IJc" firstAttribute="bottom" secondItem="Lsf-ST-9dK" secondAttribute="bottomMargin" id="0hL-BE-9pY"/>

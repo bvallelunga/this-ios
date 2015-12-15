@@ -28,6 +28,7 @@ class ShareHeaderController: UIViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.view.backgroundColor = Colors.red
         self.stepLabel.textColor = UIColor(white: 0, alpha: 0.5)
         self.headerLabel.textColor = UIColor.whiteColor()
         self.headerLabel.text = "Invite your friends\nto post to \(self.hashtag)"

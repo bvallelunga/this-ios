@@ -31,7 +31,7 @@
                             <constraint firstAttribute="height" constant="20" id="pra-xo-F5L"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="16"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
                             <mask key="constraints">
@@ -129,7 +129,7 @@
                             <constraint firstAttribute="height" constant="50" id="1yN-yk-e5K"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="20"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEE-QU-oI6">

@@ -7,17 +7,33 @@
 //
 
 import UIKit
+import MessageUI
 
 protocol ShareControllerDelegate {
     func shareControllerShared()
 }
 
-class ShareController: UITableViewController, ShareHeaderControllerDelegate {
+class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFMessageComposeViewControllerDelegate {
+    
+    // TODO: REMOVE WHEN IMPLEMENTING PARSE
+    class User: NSObject {
+        var name: String = ""
+        var username: String = ""
+        var phone: String = ""
+        
+        convenience init(name: String, username: String, phone: String) {
+            self.init()
+            
+            self.name = name
+            self.username = username
+            self.phone = phone
+        }
+    }
     
     struct Users {
-        var raw: [Contact] = []
-        var filtered: [Contact] = []
-        var selected: [Contact: Bool] = [:]
+        var raw: [User] = []
+        var filtered: [User] = []
+        var selected: [User: Bool] = [:]
     }
     
     struct Contacts {
@@ -47,6 +63,8 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate {
         let tapper = UITapGestureRecognizer(target: self, action: Selector("handleSingleTap:"))
         tapper.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapper)
+        
+        self.tableView.delaysContentTouches = false
         
         self.loadContacts()
     }
@@ -139,12 +157,14 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate {
         if indexPath.section == 0 {
             let user = self.users.filtered[indexPath.row]
             cell.share = self.users.selected[user] != nil
+            cell.textLabel?.text = user.name
+            cell.detailTextLabel?.text = "@\(user.username)"
         } else {
             let contact = self.contacts.filtered[indexPath.row]
             var label = contact.phone.label
             let number = contact.phone.number
             
-            if label == nil {
+            if label == nil || label.isEmpty {
                 label = ""
             } else {
                 label = "\(label): "
@@ -189,11 +209,39 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-    func shareTriggered() {
+    func nextTriggered() {
         Globals.pagesController.setActiveChildController(2, animated: true, direction: .Forward) { () -> Void in
             self.backTriggred()
             self.delegate.shareControllerShared()
         }
+    }
+    
+    func shareTriggered() {
+        guard !self.contacts.selected.isEmpty else {
+            self.nextTriggered()
+            return
+        }
+        
+        let messageVC = MFMessageComposeViewController()
+        var contacts: [String] = []
+        let tag = String(self.hashtag.characters.dropFirst())
+        
+        for contact in self.contacts.selected.keys {
+            contacts.append(contact.phone.number)
+        }
+        
+        for image in self.images[0...min(2, self.images.count-1)] {
+            let data =  UIImageJPEGRepresentation(image, 0.5)
+            messageVC.addAttachmentData(data!, typeIdentifier: "image/jpeg", filename: "\(tag).jpg")
+        }
+        
+        messageVC.recipients = contacts
+        messageVC.messageComposeDelegate = self
+        messageVC.body = ("Thought it would be cool to share our photos of the event on #this app. " +
+            "Join me and post yours on \(self.hashtag) in the app. " +
+            "https://getthis.com/tag/\(tag)")
+        
+        self.presentViewController(messageVC, animated: true, completion: nil)
     }
     
     func filterBySearch(var text: String) {
@@ -208,9 +256,10 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate {
             
             for user in self.users.raw {
                 let containsName = NSString(string: user.name.lowercaseString).containsString(text)
-                let containsPhone = NSString(string: user.phone.number).containsString(text)
+                let containsPhone = NSString(string: user.phone).containsString(text)
+                let containsUsername = NSString(string: user.username).containsString(text)
                 
-                if containsName || containsPhone {
+                if containsName || containsPhone || containsUsername {
                     self.users.filtered.append(user)
                 }
             }
@@ -231,7 +280,24 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate {
     func loadContacts() {
         Contact.getContacts { (contacts) -> Void in
             self.contacts.raw = contacts
-            self.filterBySearch("")
+            self.loadUsers()
+        }
+    }
+    
+    func loadUsers() {
+        self.users.raw = [
+            User(name: "Brian Vallelunga", username: "bvallelunga", phone: "+13108492533"),
+            User(name: "Kyle Wu", username: "kwu", phone: "+13108492533")
+        ]
+        
+        self.filterBySearch("")
+    }
+    
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
+        self.dismissViewControllerAnimated(true) { () -> Void in
+            if result == MessageComposeResultSent {
+                self.nextTriggered()
+            }
         }
     }
 
