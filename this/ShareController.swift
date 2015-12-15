@@ -245,6 +245,9 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFM
     }
     
     func filterBySearch(var text: String) {
+        let numberSet = NSCharacterSet.decimalDigitCharacterSet().invertedSet
+        let number = text.componentsSeparatedByCharactersInSet(numberSet).joinWithSeparator("")
+        
         if text.isEmpty {
             self.users.filtered = self.users.raw
             self.contacts.filtered = self.contacts.raw
@@ -256,7 +259,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFM
             
             for user in self.users.raw {
                 let containsName = NSString(string: user.name.lowercaseString).containsString(text)
-                let containsPhone = NSString(string: user.phone).containsString(text)
+                let containsPhone = NSString(string: user.phone).containsString(number)
                 let containsUsername = NSString(string: user.username).containsString(text)
                 
                 if containsName || containsPhone || containsUsername {
@@ -266,7 +269,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFM
             
             for contact in self.contacts.raw {
                 let containsName = NSString(string: contact.name.lowercaseString).containsString(text)
-                let containsPhone = NSString(string: contact.phone.number).containsString(text)
+                let containsPhone = NSString(string: contact.phone.e164).containsString(number)
                 
                 if containsName || containsPhone {
                     self.contacts.filtered.append(contact)
