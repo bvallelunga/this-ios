@@ -67,6 +67,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFM
         self.tableView.delaysContentTouches = false
         
         self.loadContacts()
+        self.headerController.updateNextButtonTitle(false)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -203,6 +204,8 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFM
                 self.contacts.selected.removeValueForKey(contact)
             }
         }
+        
+        self.headerController.updateNextButtonTitle(!self.users.selected.isEmpty || !self.contacts.selected.isEmpty)
     }
     
     func backTriggred() {

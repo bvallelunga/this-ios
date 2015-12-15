@@ -55,6 +55,10 @@ class ShareHeaderController: UIViewController, UISearchBarDelegate {
         self.delegate.shareTriggered()
     }
     
+    func updateNextButtonTitle(selection: Bool) {
+        self.nextButton.setTitle(selection ? "SHARE" : "SKIP", forState: .Normal)
+    }
+    
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         self.searchBar.resignFirstResponder()
     }
