@@ -12,7 +12,7 @@ import ActionSheetPicker_3_0
 import AKPickerView_Swift
 
 protocol SelectionHeaderDelegate {
-
+    func updateTags(hashtag: String, timer: Int)
 }
 
 struct SelectionTimer {
@@ -144,7 +144,7 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
     }
 
     @IBAction func uploadTags(sender: AnyObject) {
-        
+        self.delegate.updateTags(self.hashtag, timer: self.timer.timer)
     }
     
     @IBAction func goToFollowing(sender: AnyObject) {

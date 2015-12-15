@@ -16,6 +16,7 @@ private let cameraIdentifier = "camera"
 class SelectionController: UICollectionViewController, UICollectionViewDelegateFlowLayout,
     UIImagePickerControllerDelegate, UINavigationControllerDelegate, SelectionHeaderDelegate {
     
+    private var hashtag: String = ""
     private let manager = PHCachingImageManager()
     private var assets: [PHAsset] = []
     private var selected: [PHAsset: UIImage] = [:]
@@ -35,7 +36,21 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         self.setupCollectionView()
         self.getAssests()
     }
-
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "share" {
+            let controller = segue.destinationViewController as? ShareController
+            var images: [UIImage] = []
+            
+            for asset in self.selectedOrder {
+                images.append(self.selected[asset as! PHAsset]!)
+            }
+            
+            controller?.hashtag = self.hashtag
+            controller?.images = images
+        }
+    }
+    
     func setupCollectionView() {
         let size = self.view.frame.size
         let itemSize = size.width/3 - 1
@@ -192,6 +207,13 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     
     func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
         self.getAssests()
+    }
+    
+    // MARK: SelectionHeader Methods
+    func updateTags(hashtag: String, timer: Int) {
+        print(hashtag, timer)
+        self.hashtag = hashtag
+        self.performSegueWithIdentifier("share", sender: self)
     }
     
     // MARK: UIImagePickerController Methods

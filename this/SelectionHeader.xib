@@ -78,7 +78,7 @@
                         </constraints>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="40"/>
-                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                         <connections>
                             <action selector="tagChanged:" destination="OVO-P5-zWt" eventType="editingChanged" id="dnO-ym-FIU"/>
                         </connections>

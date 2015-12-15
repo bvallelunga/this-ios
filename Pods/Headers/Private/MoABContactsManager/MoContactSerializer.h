@@ -1,0 +1,1 @@
+../../../MoABContactsManager/Pod/Classes/MoContactSerializer.h

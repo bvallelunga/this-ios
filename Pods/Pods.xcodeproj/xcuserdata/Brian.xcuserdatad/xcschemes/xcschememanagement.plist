@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ContactsManager.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Gifu.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -30,6 +35,16 @@
 			<false/>
 		</dict>
 		<key>Mixpanel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MoABContactsManager-MoABContactsManager.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MoABContactsManager.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -62,17 +77,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>324CCD3BE28BFCD3851E789872ACE05E</key>
+		<key>3C2B38B45299C2DCAFCE761BB370B1DB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4A2B550455F9EE322411F4D55A948114</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>69013D09FD2DE39E9CA9F71D2EAFB5D4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>833BAB1B8689BCB97EB8BD7D288FD91D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A5EBD7587C664DFDAEDF4D10F03E5D43</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,6 +107,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>C9A565ED9F6D5381043B34550F4B0B6D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>CE0A701D8A271EFE0065667D13272921</key>
 		<dict>
 			<key>primary</key>
@@ -97,12 +122,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>CF400A7AB52BBDC0F60BD431BEBE4AC4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D306E1A19F57F62CC2320ED0D34FE3F8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E07EA748D7942175BED3FE780046D65F</key>
+		<key>D3C5E102C1B048A039000AF20B205487</key>
 		<dict>
 			<key>primary</key>
 			<true/>
