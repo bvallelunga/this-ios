@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Bariol_Bold.ttf">
+            <string>Bariol-Bold</string>
+            <string>Bariol-Bold</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="229" id="gIg-B5-bBH" customClass="TrendingTableCell" customModule="_this" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="419" height="229"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gIg-B5-bBH" id="V29-jK-XhI">
+                <rect key="frame" x="0.0" y="0.0" width="419" height="228.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <collectionView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ei0-0Z-fsz">
+                        <rect key="frame" x="18" y="68" width="383" height="137.5"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ASV-tT-Os0">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GX0-5N-NyE">
+                        <rect key="frame" x="18" y="23" width="292" height="37"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="37" id="SzN-z6-Cpo"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="20"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8r-vu-1P9">
+                        <rect key="frame" x="371" y="23" width="30" height="37"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="nF0-G0-qUs"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="20"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Followers" translatesAutoresizingMaskIntoConstraints="NO" id="O28-wW-PWj">
+                        <rect key="frame" x="326" y="23" width="40" height="37"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="tDf-Rr-TE8"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="O28-wW-PWj" firstAttribute="top" secondItem="V29-jK-XhI" secondAttribute="topMargin" constant="15" id="1Ld-ha-EyV"/>
+                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="top" secondItem="p8r-vu-1P9" secondAttribute="bottom" constant="8" id="1vH-wQ-aDv"/>
+                    <constraint firstItem="p8r-vu-1P9" firstAttribute="height" secondItem="GX0-5N-NyE" secondAttribute="height" id="92C-lp-pse"/>
+                    <constraint firstItem="p8r-vu-1P9" firstAttribute="trailing" secondItem="V29-jK-XhI" secondAttribute="trailingMargin" constant="-10" id="Ca7-te-xjo"/>
+                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="top" secondItem="O28-wW-PWj" secondAttribute="bottom" constant="8" id="DpE-cc-UrL"/>
+                    <constraint firstItem="p8r-vu-1P9" firstAttribute="top" secondItem="V29-jK-XhI" secondAttribute="topMargin" constant="15" id="Hc2-RX-VaR"/>
+                    <constraint firstItem="O28-wW-PWj" firstAttribute="leading" secondItem="GX0-5N-NyE" secondAttribute="trailing" constant="16" id="L9j-MG-ExD"/>
+                    <constraint firstItem="GX0-5N-NyE" firstAttribute="leading" secondItem="V29-jK-XhI" secondAttribute="leadingMargin" constant="10" id="O5H-Gg-wRI"/>
+                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="leading" secondItem="V29-jK-XhI" secondAttribute="leadingMargin" constant="10" id="akx-UN-aDD"/>
+                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="trailing" secondItem="V29-jK-XhI" secondAttribute="trailingMargin" constant="-10" id="fZb-U2-Mg6"/>
+                    <constraint firstItem="p8r-vu-1P9" firstAttribute="leading" secondItem="O28-wW-PWj" secondAttribute="trailing" constant="5" id="i60-hu-4qQ"/>
+                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="top" secondItem="GX0-5N-NyE" secondAttribute="bottom" constant="8" id="kAi-Vi-sg0"/>
+                    <constraint firstItem="GX0-5N-NyE" firstAttribute="top" secondItem="V29-jK-XhI" secondAttribute="topMargin" constant="15" id="pLy-7h-qoy"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Ei0-0Z-fsz" secondAttribute="bottom" constant="15" id="qRa-HN-fsV"/>
+                    <constraint firstItem="GX0-5N-NyE" firstAttribute="top" secondItem="V29-jK-XhI" secondAttribute="topMargin" constant="5" id="vCj-d4-8js"/>
+                    <constraint firstItem="O28-wW-PWj" firstAttribute="height" secondItem="GX0-5N-NyE" secondAttribute="height" id="yLk-VP-ueP"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="vCj-d4-8js"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.13725490200000001" green="0.1215686275" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <connections>
+                <outlet property="collectionView" destination="Ei0-0Z-fsz" id="6gR-QB-GnU"/>
+                <outlet property="followersLabel" destination="p8r-vu-1P9" id="CcO-K0-eob"/>
+                <outlet property="iconImage" destination="O28-wW-PWj" id="Uff-rc-BYQ"/>
+                <outlet property="tagLabel" destination="GX0-5N-NyE" id="3b6-se-hxf"/>
+            </connections>
+            <point key="canvasLocation" x="336.5" y="348.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Followers" width="1200" height="1200"/>
+    </resources>
+</document>

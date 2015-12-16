@@ -9,6 +9,8 @@
 import UIKit
 import MessageUI
 
+private let reuseIdentifier = "cell"
+
 protocol ShareControllerDelegate {
     func shareControllerShared()
 }
@@ -153,7 +155,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFM
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! ShareTableCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! ShareTableCell
         
         if indexPath.section == 0 {
             let user = self.users.filtered[indexPath.row]

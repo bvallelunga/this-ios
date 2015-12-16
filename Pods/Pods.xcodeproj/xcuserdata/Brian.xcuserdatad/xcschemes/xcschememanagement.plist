@@ -64,6 +64,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>UIView+Shimmer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>libPhoneNumber-iOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -72,7 +77,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>01DE25FF2AA97F7D1CFC2D71952FA789</key>
+		<key>1943BB74C3E3C517EBA59715EE53F98C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,7 +92,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>30F92918AEDB42C748A5F0C219603B7C</key>
+		<key>2B9B4967C627BD7EAD329A7D29C2BC90</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,12 +102,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>43BB2784B0782899E932F49EB309ED22</key>
+		<key>6973C9002952DD62FA059E7B008CF0DB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>833BAB1B8689BCB97EB8BD7D288FD91D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A7511DBA119C7994105748CF6708669D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

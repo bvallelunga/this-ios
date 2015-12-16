@@ -51,16 +51,12 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
         self.backgroundColor = Colors.green
         
         self.placeholderLabel.textColor = UIColor(white: 0, alpha: 0.15)
-        self.placeholderLabel.layer.shadowColor = UIColor.whiteColor().CGColor
-        self.placeholderLabel.layer.shadowOffset = CGSizeMake(0, 2)
-        self.placeholderLabel.layer.shadowOpacity = 1
-        self.placeholderLabel.layer.shadowRadius = 0
+        self.placeholderLabel.shadowColor = UIColor.whiteColor()
+        self.placeholderLabel.shadowOffset = CGSizeMake(0, 2)
         
         self.tagLabel.textColor = UIColor(white: 0, alpha: 0.4)
-        self.tagLabel.layer.shadowColor = UIColor.whiteColor().CGColor
-        self.tagLabel.layer.shadowOffset = CGSizeMake(0, 1)
-        self.tagLabel.layer.shadowOpacity = 1
-        self.tagLabel.layer.shadowRadius = 0
+        self.tagLabel.shadowColor = UIColor.whiteColor()
+        self.tagLabel.shadowOffset = CGSizeMake(0, 1)
         
         self.placeholderView.layer.cornerRadius = 4
         self.placeholderView.clipsToBounds = true

@@ -30,7 +30,7 @@ class Contact: NSObject {
                 self.isValid = phoneUtil.isValidNumber(number)
                 self.number = try phoneUtil.format(number, numberFormat: .NATIONAL)
                 self.e164 = try phoneUtil.format(number, numberFormat: .E164)
-            } catch let error as NSError  {
+            } catch {
                 self.isValid = false
             }
         }

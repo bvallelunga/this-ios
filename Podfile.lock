@@ -12,6 +12,7 @@ PODS:
   - MoABContactsManager (1.0.5)
   - SHSPhoneComponent (2.15)
   - SVProgressHUD (1.1.3)
+  - UIView+Shimmer (1.0.0)
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (~> 2.0)
@@ -25,6 +26,7 @@ DEPENDENCIES:
   - MoABContactsManager (~> 1.0)
   - SHSPhoneComponent (~> 2.15)
   - SVProgressHUD (~> 1.1)
+  - UIView+Shimmer (~> 1.0)
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: 860466cb4a66854e6acb590071ecee404b48f49d
@@ -38,5 +40,6 @@ SPEC CHECKSUMS:
   MoABContactsManager: e3e208d64c41db8ff542d48264ee531140dad821
   SHSPhoneComponent: 4cec0653a150ad63cbc52b0c8b29ce2d3c9c26f0
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
+  UIView+Shimmer: ed634f95e8f4bda666b28b47bd85a4336a4117d8
 
 COCOAPODS: 0.39.0

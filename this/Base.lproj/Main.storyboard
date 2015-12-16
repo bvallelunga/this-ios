@@ -227,7 +227,7 @@ and Privacy Policy.</string>
         <!--Pages Controller-->
         <scene sceneID="Uv6-x6-18v">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="1" navigationOrientation="horizontal" spineLocation="mid" doubleSided="YES" id="bn8-b4-WMi" customClass="PagesController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="1" navigationOrientation="horizontal" spineLocation="none" id="bn8-b4-WMi" customClass="PagesController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="RTr-4U-aBK"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NiU-A7-RW5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -295,7 +295,7 @@ and Privacy Policy.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="3q0-fw-UJj">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="3q0-fw-UJj">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3q0-fw-UJj" id="vUW-a9-cim">
@@ -437,7 +437,31 @@ and Privacy Policy.</string>
                     <view key="view" contentMode="scaleToFill" id="v7a-On-uHj">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cUb-D1-90f">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <connections>
+                                    <segue destination="ZUV-hl-bSd" kind="embed" identifier="followingContainer" id="da6-J7-zTS"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gvi-Vr-hx0">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <connections>
+                                    <segue destination="5TX-d2-Gei" kind="embed" identifier="trendingContainer" id="nm1-aJ-ubq"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Gvi-Vr-hx0" firstAttribute="top" secondItem="Qc4-5L-May" secondAttribute="bottom" id="HUG-9F-hCC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cUb-D1-90f" secondAttribute="trailing" constant="-20" id="QIr-zn-sg8"/>
+                            <constraint firstItem="cUb-D1-90f" firstAttribute="top" secondItem="Qc4-5L-May" secondAttribute="bottom" id="Tfz-Uw-NA5"/>
+                            <constraint firstItem="dwC-7F-gp7" firstAttribute="top" secondItem="cUb-D1-90f" secondAttribute="bottom" id="WLd-uf-0kS"/>
+                            <constraint firstItem="cUb-D1-90f" firstAttribute="leading" secondItem="v7a-On-uHj" secondAttribute="leadingMargin" constant="-20" id="bgQ-Vd-9C9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Gvi-Vr-hx0" secondAttribute="trailing" constant="-20" id="cdr-iH-gBS"/>
+                            <constraint firstItem="Gvi-Vr-hx0" firstAttribute="leading" secondItem="v7a-On-uHj" secondAttribute="leadingMargin" constant="-20" id="gsw-5Y-fiH"/>
+                            <constraint firstItem="dwC-7F-gp7" firstAttribute="top" secondItem="Gvi-Vr-hx0" secondAttribute="bottom" id="oJP-cM-FRd"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Y0B-p6-qje">
                         <nil key="title"/>
@@ -460,12 +484,67 @@ and Privacy Policy.</string>
                         </segmentedControl>
                     </navigationItem>
                     <connections>
+                        <outlet property="followingContainer" destination="cUb-D1-90f" id="8Xm-ze-jWH"/>
                         <outlet property="segment" destination="gyK-I6-NPS" id="pty-8d-X0Z"/>
+                        <outlet property="trendingContainer" destination="Gvi-Vr-hx0" id="OYq-3c-0Dr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Chh-pn-ji1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2536" y="1141"/>
+        </scene>
+        <!--Trending Controller-->
+        <scene sceneID="9Yk-mo-2HS">
+            <objects>
+                <tableViewController id="5TX-d2-Gei" customClass="TrendingController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="47F-12-WGv">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="Qex-Tb-239">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qex-Tb-239" id="X90-wZ-djM">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="5TX-d2-Gei" id="iPw-N2-LTF"/>
+                            <outlet property="delegate" destination="5TX-d2-Gei" id="s32-0r-xXG"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hPF-g6-8YM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2939" y="1891"/>
+        </scene>
+        <!--Following Controller-->
+        <scene sceneID="kY5-A0-M4R">
+            <objects>
+                <collectionViewController id="ZUV-hl-bSd" customClass="FollowingController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" id="U1A-aU-DAZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fPP-eX-FcH">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="ZUV-hl-bSd" id="0mv-Zt-s9e"/>
+                            <outlet property="delegate" destination="ZUV-hl-bSd" id="Ypx-fq-Otd"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kbH-DQ-tGm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2133" y="1891"/>
         </scene>
         <!--Share Header Controller-->
         <scene sceneID="cnh-ky-KQX">

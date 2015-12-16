@@ -94,6 +94,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/MoABContactsManager.framework"
   install_framework "Pods/SHSPhoneComponent.framework"
   install_framework "Pods/SVProgressHUD.framework"
+  install_framework "Pods/UIView_Shimmer.framework"
   install_framework "Pods/libPhoneNumber_iOS.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -107,5 +108,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/MoABContactsManager.framework"
   install_framework "Pods/SHSPhoneComponent.framework"
   install_framework "Pods/SVProgressHUD.framework"
+  install_framework "Pods/UIView_Shimmer.framework"
   install_framework "Pods/libPhoneNumber_iOS.framework"
 fi

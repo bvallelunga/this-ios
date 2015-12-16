@@ -11,6 +11,11 @@ import UIKit
 class TagsController: UIViewController {
 
     @IBOutlet weak var segment: UISegmentedControl!
+    @IBOutlet weak var followingContainer: UIView!
+    @IBOutlet weak var trendingContainer: UIView!
+    
+    private var followingController: FollowingController!
+    private var trendingController: TrendingController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,20 +53,31 @@ class TagsController: UIViewController {
         
         // Set Background Color
         self.view.backgroundColor = Colors.darkGrey
+        self.trendingContainer.backgroundColor = UIColor.clearColor()
+        self.followingContainer.backgroundColor = UIColor.clearColor()
+        
+        // Update Containers
+        self.segmentChanged(self)
 
     }
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        switch(segue.identifier!) {
+            case "followingContainer":
+                self.followingController = segue.destinationViewController as? FollowingController
+            
+            case "trendingContainer":
+                self.trendingController = segue.destinationViewController as? TrendingController
+            
+            default: break
+        }
     }
-    */
     
     @IBAction func segmentChanged(sender: AnyObject) {
+        let index = self.segment.selectedSegmentIndex
+        self.followingContainer.hidden = index != 0
+        self.trendingContainer.hidden = index != 1
     }
 
     @IBAction func goToSelection(sender: AnyObject) {
