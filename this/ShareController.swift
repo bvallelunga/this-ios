@@ -240,8 +240,8 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFM
         
         messageVC.recipients = contacts
         messageVC.messageComposeDelegate = self
-        messageVC.body = ("Thought it would be cool to share our photos of the event on #this app. " +
-            "Join me and post yours on \(self.hashtag) in the app. " +
+        messageVC.body = ("Thought it would be cool to share our photos on #this app. " +
+            "Join me and post yours to \(self.hashtag). " +
             "https://getthis.com/tag/\(tag)")
         
         self.presentViewController(messageVC, animated: true, completion: nil)
@@ -296,7 +296,23 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFM
             User(name: "Kyle Wu", username: "kwu", phone: "+13108492533")
         ]
         
+        self.intersectionsUsersContacts()
         self.filterBySearch("")
+    }
+    
+    func intersectionsUsersContacts() {
+        var contacts: [String: Int] = [:]
+        
+        for (i, contact) in self.contacts.raw.enumerate() {
+            contacts[contact.phone.e164] = i
+        }
+        
+        for user in self.users.raw {
+            if let i = contacts[user.phone] {
+                contacts.removeValueForKey(user.phone)
+                self.contacts.raw.removeAtIndex(i)
+            }
+        }
     }
     
     func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {

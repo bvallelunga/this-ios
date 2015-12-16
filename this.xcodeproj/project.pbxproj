@@ -20,6 +20,7 @@
 		D35AF9031C1E79340024D7E3 /* Placeholder.gif in Resources */ = {isa = PBXBuildFile; fileRef = D35AF9021C1E79340024D7E3 /* Placeholder.gif */; };
 		D370FE6B1C200DCF00769EBA /* TagsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D370FE6A1C200DCF00769EBA /* TagsController.swift */; };
 		D370FE6D1C200EFA00769EBA /* UISegementControl+RemoveBorders.swift in Sources */ = {isa = PBXBuildFile; fileRef = D370FE6C1C200EFA00769EBA /* UISegementControl+RemoveBorders.swift */; };
+		D370FE701C20E68F00769EBA /* NavNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D370FE6F1C20E68F00769EBA /* NavNotification.swift */; };
 		D394D3681C1E85B000CB0FE9 /* SelectionCameraCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D394D3671C1E85B000CB0FE9 /* SelectionCameraCell.swift */; };
 		D39AB7411C1F8A9800C9E96F /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39AB7401C1F8A9800C9E96F /* ShareController.swift */; };
 		D39AB7431C1F8AC800C9E96F /* ShareHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39AB7421C1F8AC800C9E96F /* ShareHeaderController.swift */; };
@@ -87,6 +88,7 @@
 		D35AF9021C1E79340024D7E3 /* Placeholder.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Placeholder.gif; sourceTree = "<group>"; };
 		D370FE6A1C200DCF00769EBA /* TagsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsController.swift; sourceTree = "<group>"; };
 		D370FE6C1C200EFA00769EBA /* UISegementControl+RemoveBorders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISegementControl+RemoveBorders.swift"; sourceTree = "<group>"; };
+		D370FE6F1C20E68F00769EBA /* NavNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavNotification.swift; sourceTree = "<group>"; };
 		D394D3671C1E85B000CB0FE9 /* SelectionCameraCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionCameraCell.swift; sourceTree = "<group>"; };
 		D39AB7401C1F8A9800C9E96F /* ShareController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
 		D39AB7421C1F8AC800C9E96F /* ShareHeaderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareHeaderController.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				D3E293001C1B7C1400925EAC /* Core */,
 				D3E293101C1BA4EB00925EAC /* Models */,
 				D3E293021C1B7C3900925EAC /* Controllers */,
+				D370FE6E1C20E67E00769EBA /* Utils */,
 				D3E293031C1B7C4100925EAC /* Views */,
 				D3E293231C1C17D000925EAC /* Extensions */,
 				D3E293011C1B7C1D00925EAC /* Support */,
@@ -220,6 +223,14 @@
 				D39AB7481C1FFBA100C9E96F /* Following */,
 			);
 			name = Tags;
+			sourceTree = "<group>";
+		};
+		D370FE6E1C20E67E00769EBA /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D370FE6F1C20E68F00769EBA /* NavNotification.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		D39AB73E1C1F8A5800C9E96F /* Selection */ = {
@@ -547,6 +558,7 @@
 				D39AB7471C1FDDB300C9E96F /* ShareTableCell.swift in Sources */,
 				D3E293201C1C097B00925EAC /* AuthStepVerify.swift in Sources */,
 				D370FE6B1C200DCF00769EBA /* TagsController.swift in Sources */,
+				D370FE701C20E68F00769EBA /* NavNotification.swift in Sources */,
 				D3224A6A1C1AADA3009DFA85 /* AppDelegate.swift in Sources */,
 				D3E293181C1BA92900925EAC /* ProgressBar.swift in Sources */,
 				D39AB74A1C1FFBDC00C9E96F /* FollowingController.swift in Sources */,

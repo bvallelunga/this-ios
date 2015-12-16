@@ -24,6 +24,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     private var selectedOrder: NSMutableArray = []
     private var date: NSDate!
     private var header: SelectionHeader!
+    private var limit: Int = 20
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -204,6 +205,12 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         let asset = self.assets[indexPath.row-1]
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! SelectionPhotoCell
         let options = PHImageRequestOptions()
+        
+        if !cell.upload && self.selectedOrder.count >= self.limit {
+            NavNotification.show("Too many photos 😉")
+            return
+        }
+        
         
         options.deliveryMode = .HighQualityFormat
         

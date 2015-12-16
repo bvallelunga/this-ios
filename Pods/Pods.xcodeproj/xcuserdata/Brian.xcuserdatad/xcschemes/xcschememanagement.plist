@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>CWStatusBarNotification.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Gifu.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -67,7 +72,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>05184D3BF4906EA8BD3F5BB5AF35C53A</key>
+		<key>01DE25FF2AA97F7D1CFC2D71952FA789</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -77,12 +82,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>29A7C7E89743025BB1B90399B677ED88</key>
+		<key>233B529E4F6EE6E3DF4E23BAFD26903D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>30F92918AEDB42C748A5F0C219603B7C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>3C2B38B45299C2DCAFCE761BB370B1DB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>43BB2784B0782899E932F49EB309ED22</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -93,11 +108,6 @@
 			<true/>
 		</dict>
 		<key>AEA56EBE1B518C71721209FB26701898</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B73912867666FEF97D1DB9F166B85DD6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

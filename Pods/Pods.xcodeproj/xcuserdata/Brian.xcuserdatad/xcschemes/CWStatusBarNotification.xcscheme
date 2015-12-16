@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '183ABA77CDB325B7EBF7ED2D'
-               BlueprintName = 'ActionSheetPicker-3.0'
+               BlueprintIdentifier = 'AFFE12F79384A4F5169FF2E7'
+               BlueprintName = 'CWStatusBarNotification'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'ActionSheetPicker_3_0.framework'>
+               BuildableName = 'CWStatusBarNotification.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
