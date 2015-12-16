@@ -22,7 +22,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ei0-0Z-fsz">
-                        <rect key="frame" x="18" y="68" width="383" height="137.5"/>
+                        <rect key="frame" x="18" y="65" width="383" height="140.5"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ASV-tT-Os0">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -30,8 +30,8 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GX0-5N-NyE">
-                        <rect key="frame" x="18" y="23" width="292" height="37"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#blackcat15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GX0-5N-NyE">
+                        <rect key="frame" x="18" y="23" width="268" height="37"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="37" id="SzN-z6-Cpo"/>
                         </constraints>
@@ -39,52 +39,73 @@
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8r-vu-1P9">
-                        <rect key="frame" x="371" y="23" width="30" height="37"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Followers" translatesAutoresizingMaskIntoConstraints="NO" id="O28-wW-PWj">
+                        <rect key="frame" x="348" y="23" width="30" height="37"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="nF0-G0-qUs"/>
+                            <constraint firstAttribute="width" constant="30" id="tDf-Rr-TE8"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Small Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Bzw-No-q13">
+                        <rect key="frame" x="386" y="18" width="20" height="42"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="Hhs-y8-ccc"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8r-vu-1P9">
+                        <rect key="frame" x="296" y="23" width="50" height="37"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="nF0-G0-qUs"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="20"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Followers" translatesAutoresizingMaskIntoConstraints="NO" id="O28-wW-PWj">
-                        <rect key="frame" x="326" y="23" width="40" height="37"/>
-                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="40" id="tDf-Rr-TE8"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="O28-wW-PWj" firstAttribute="top" secondItem="V29-jK-XhI" secondAttribute="topMargin" constant="15" id="1Ld-ha-EyV"/>
-                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="top" secondItem="p8r-vu-1P9" secondAttribute="bottom" constant="8" id="1vH-wQ-aDv"/>
+                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="top" secondItem="p8r-vu-1P9" secondAttribute="bottom" constant="5" id="1vH-wQ-aDv"/>
+                    <constraint firstItem="Bzw-No-q13" firstAttribute="height" secondItem="O28-wW-PWj" secondAttribute="height" id="2tf-om-Psd"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Bzw-No-q13" secondAttribute="trailing" constant="5" id="3br-XW-Stg"/>
                     <constraint firstItem="p8r-vu-1P9" firstAttribute="height" secondItem="GX0-5N-NyE" secondAttribute="height" id="92C-lp-pse"/>
-                    <constraint firstItem="p8r-vu-1P9" firstAttribute="trailing" secondItem="V29-jK-XhI" secondAttribute="trailingMargin" constant="-10" id="Ca7-te-xjo"/>
-                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="top" secondItem="O28-wW-PWj" secondAttribute="bottom" constant="8" id="DpE-cc-UrL"/>
+                    <constraint firstItem="p8r-vu-1P9" firstAttribute="trailing" secondItem="V29-jK-XhI" secondAttribute="trailingMargin" constant="-50" id="Ca7-te-xjo"/>
+                    <constraint firstItem="Bzw-No-q13" firstAttribute="leading" secondItem="O28-wW-PWj" secondAttribute="trailing" constant="8" id="DAq-r2-7XE"/>
+                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="top" secondItem="O28-wW-PWj" secondAttribute="bottom" constant="5" id="DpE-cc-UrL"/>
                     <constraint firstItem="p8r-vu-1P9" firstAttribute="top" secondItem="V29-jK-XhI" secondAttribute="topMargin" constant="15" id="Hc2-RX-VaR"/>
+                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="top" secondItem="Bzw-No-q13" secondAttribute="bottom" constant="5" id="KO8-2o-9D5"/>
                     <constraint firstItem="O28-wW-PWj" firstAttribute="leading" secondItem="GX0-5N-NyE" secondAttribute="trailing" constant="16" id="L9j-MG-ExD"/>
                     <constraint firstItem="GX0-5N-NyE" firstAttribute="leading" secondItem="V29-jK-XhI" secondAttribute="leadingMargin" constant="10" id="O5H-Gg-wRI"/>
+                    <constraint firstItem="Bzw-No-q13" firstAttribute="top" secondItem="V29-jK-XhI" secondAttribute="topMargin" constant="10" id="Qj0-2X-L8Z"/>
+                    <constraint firstItem="O28-wW-PWj" firstAttribute="leading" secondItem="p8r-vu-1P9" secondAttribute="trailing" constant="2" id="RM4-MV-2jk"/>
                     <constraint firstItem="Ei0-0Z-fsz" firstAttribute="leading" secondItem="V29-jK-XhI" secondAttribute="leadingMargin" constant="10" id="akx-UN-aDD"/>
                     <constraint firstItem="Ei0-0Z-fsz" firstAttribute="trailing" secondItem="V29-jK-XhI" secondAttribute="trailingMargin" constant="-10" id="fZb-U2-Mg6"/>
                     <constraint firstItem="p8r-vu-1P9" firstAttribute="leading" secondItem="O28-wW-PWj" secondAttribute="trailing" constant="5" id="i60-hu-4qQ"/>
-                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="top" secondItem="GX0-5N-NyE" secondAttribute="bottom" constant="8" id="kAi-Vi-sg0"/>
+                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="top" secondItem="GX0-5N-NyE" secondAttribute="bottom" constant="5" id="kAi-Vi-sg0"/>
                     <constraint firstItem="GX0-5N-NyE" firstAttribute="top" secondItem="V29-jK-XhI" secondAttribute="topMargin" constant="15" id="pLy-7h-qoy"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Ei0-0Z-fsz" secondAttribute="bottom" constant="15" id="qRa-HN-fsV"/>
                     <constraint firstItem="GX0-5N-NyE" firstAttribute="top" secondItem="V29-jK-XhI" secondAttribute="topMargin" constant="5" id="vCj-d4-8js"/>
+                    <constraint firstItem="Bzw-No-q13" firstAttribute="leading" secondItem="p8r-vu-1P9" secondAttribute="trailing" constant="5" id="xbz-fS-9OR"/>
                     <constraint firstItem="O28-wW-PWj" firstAttribute="height" secondItem="GX0-5N-NyE" secondAttribute="height" id="yLk-VP-ueP"/>
+                    <constraint firstItem="p8r-vu-1P9" firstAttribute="leading" secondItem="GX0-5N-NyE" secondAttribute="trailing" constant="10" id="zze-ws-xoj"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
                         <exclude reference="vCj-d4-8js"/>
+                        <exclude reference="Ca7-te-xjo"/>
+                        <exclude reference="i60-hu-4qQ"/>
+                        <exclude reference="L9j-MG-ExD"/>
+                        <exclude reference="2tf-om-Psd"/>
+                        <exclude reference="xbz-fS-9OR"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.13725490200000001" green="0.1215686275" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
+                <outlet property="arrowImage" destination="Bzw-No-q13" id="kGn-7j-gsd"/>
                 <outlet property="collectionView" destination="Ei0-0Z-fsz" id="6gR-QB-GnU"/>
                 <outlet property="followersLabel" destination="p8r-vu-1P9" id="CcO-K0-eob"/>
-                <outlet property="iconImage" destination="O28-wW-PWj" id="Uff-rc-BYQ"/>
+                <outlet property="iconImage" destination="O28-wW-PWj" id="g63-1S-Bbh"/>
                 <outlet property="tagLabel" destination="GX0-5N-NyE" id="3b6-se-hxf"/>
             </connections>
             <point key="canvasLocation" x="336.5" y="348.5"/>
@@ -92,5 +113,6 @@
     </objects>
     <resources>
         <image name="Followers" width="1200" height="1200"/>
+        <image name="Small Arrow" width="310" height="1200"/>
     </resources>
 </document>

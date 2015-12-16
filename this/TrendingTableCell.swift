@@ -14,6 +14,7 @@ class TrendingTableCell: UITableViewCell, UICollectionViewDelegate, UICollection
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var followersLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var arrowImage: UIImageView!
     
     private var layout: UICollectionViewFlowLayout!
     
@@ -24,13 +25,14 @@ class TrendingTableCell: UITableViewCell, UICollectionViewDelegate, UICollection
         self.selectionStyle = .None
         self.backgroundColor = Colors.darkGrey
         self.iconImage.tintColor = UIColor(white: 1, alpha: 0.5)
+        self.arrowImage.tintColor = UIColor(white: 0, alpha: 0.5)
         self.followersLabel.textColor = UIColor(white: 1, alpha: 0.5)
         
         self.collectionView.backgroundColor = UIColor.clearColor()
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         
-        self.collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        self.collectionView.registerClass(TrendingCollectionCell.self, forCellWithReuseIdentifier: "cell")
         self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, 0)
         
         let size = (UIScreen.mainScreen().bounds.width-20)/4 - 3
@@ -49,9 +51,10 @@ class TrendingTableCell: UITableViewCell, UICollectionViewDelegate, UICollection
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! TrendingCollectionCell
         
         cell.backgroundColor = Colors.lightGrey
+        cell.imageView.image = UIImage(named: "Sample-0")
         
         return cell
     }
