@@ -12,8 +12,22 @@ class TagController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.view.backgroundColor = Colors.darkGrey
+        
+        let shadow = NSShadow()
+        shadow.shadowColor = UIColor(red:0, green:0, blue:0, alpha:0.1)
+        shadow.shadowOffset = CGSizeMake(0, 2)
+        
+        if let font = UIFont(name: "Bariol-Bold", size: 26) {
+            self.navigationController?.navigationBar.titleTextAttributes = [
+                NSForegroundColorAttributeName: UIColor.whiteColor(),
+                NSFontAttributeName: font,
+                NSShadowAttributeName: shadow
+            ]
+        }
+        
+        self.title = "#blackcat15"
     }
     
     override func viewDidAppear(animated: Bool) {
