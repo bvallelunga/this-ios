@@ -11,6 +11,8 @@ import UIKit
 private let reuseIdentifier = "cell"
 
 class TrendingController: UITableViewController {
+    
+    var parent: TagsController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +36,10 @@ class TrendingController: UITableViewController {
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 300
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.parent.performSegueWithIdentifier("next", sender: self)
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

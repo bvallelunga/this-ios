@@ -11,9 +11,10 @@ import UIKit
 private let tagIdentifier = "tag"
 private let spacerIdentifier = "spacer"
 
-class FollowingController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class FollowingController: UICollectionViewController, UICollectionViewDelegateFlowLayout, FollowingTagCellDelegate {
     
     private var tags = [1]
+    var parent: TagsController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,6 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
         return 1
     }
 
-
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return max(tags.count, 6)
     }
@@ -52,6 +52,7 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(tagIdentifier, forIndexPath: indexPath) as! FollowingTagCell
         
         cell.alpha = 1
+        cell.delegate = self
         
         return cell
     }
@@ -71,6 +72,10 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let size = self.view.frame.size
         return CGSizeMake(size.width/2 - 0.5, size.height/3 - 1)
+    }
+    
+    func tagCellTapped() {
+        self.parent.performSegueWithIdentifier("next", sender: self)
     }
 
 }

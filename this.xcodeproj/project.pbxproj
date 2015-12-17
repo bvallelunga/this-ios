@@ -15,6 +15,7 @@
 		D3224A741C1AADA3009DFA85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3224A721C1AADA3009DFA85 /* LaunchScreen.storyboard */; };
 		D3224A7F1C1AADA3009DFA85 /* thisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3224A7E1C1AADA3009DFA85 /* thisTests.swift */; };
 		D3224A8A1C1AADA3009DFA85 /* thisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3224A891C1AADA3009DFA85 /* thisUITests.swift */; };
+		D32D18BF1C224B3B0097D653 /* TagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D18BE1C224B3B0097D653 /* TagController.swift */; };
 		D35AF8F61C1E4E610024D7E3 /* SelectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D35AF8F51C1E4E610024D7E3 /* SelectionHeader.xib */; };
 		D35AF8FF1C1E6FBB0024D7E3 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35AF8FE1C1E6FBB0024D7E3 /* Photos.swift */; };
 		D35AF9011C1E70ED0024D7E3 /* SelectionPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35AF9001C1E70ED0024D7E3 /* SelectionPhotoCell.swift */; };
@@ -89,6 +90,7 @@
 		D3224A851C1AADA3009DFA85 /* thisUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = thisUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3224A891C1AADA3009DFA85 /* thisUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = thisUITests.swift; sourceTree = "<group>"; };
 		D3224A8B1C1AADA3009DFA85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D32D18BE1C224B3B0097D653 /* TagController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagController.swift; sourceTree = "<group>"; };
 		D35AF8F51C1E4E610024D7E3 /* SelectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionHeader.xib; sourceTree = "<group>"; };
 		D35AF8FE1C1E6FBB0024D7E3 /* Photos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		D35AF9001C1E70ED0024D7E3 /* SelectionPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionPhotoCell.swift; sourceTree = "<group>"; };
@@ -228,6 +230,14 @@
 			path = thisUITests;
 			sourceTree = "<group>";
 		};
+		D32D18BD1C224AA50097D653 /* Tag */ = {
+			isa = PBXGroup;
+			children = (
+				D32D18BE1C224B3B0097D653 /* TagController.swift */,
+			);
+			name = Tag;
+			sourceTree = "<group>";
+		};
 		D370FE691C200DAC00769EBA /* Tags */ = {
 			isa = PBXGroup;
 			children = (
@@ -331,6 +341,7 @@
 				D3E293281C1C276400925EAC /* Pages */,
 				D3CFC9E11C1E40E300E7C5B4 /* Upload */,
 				D370FE691C200DAC00769EBA /* Tags */,
+				D32D18BD1C224AA50097D653 /* Tag */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -597,6 +608,7 @@
 				D35AF9011C1E70ED0024D7E3 /* SelectionPhotoCell.swift in Sources */,
 				D35AF8FF1C1E6FBB0024D7E3 /* Photos.swift in Sources */,
 				D39AB7431C1F8AC800C9E96F /* ShareHeaderController.swift in Sources */,
+				D32D18BF1C224B3B0097D653 /* TagController.swift in Sources */,
 				D3E2931A1C1BB66D00925EAC /* Globals.swift in Sources */,
 				D3E2932C1C1C279B00925EAC /* PageController.swift in Sources */,
 				D3E293151C1BA61400925EAC /* AuthController.swift in Sources */,

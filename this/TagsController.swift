@@ -66,9 +66,11 @@ class TagsController: UIViewController {
         switch(segue.identifier!) {
             case "followingContainer":
                 self.followingController = segue.destinationViewController as? FollowingController
+                self.followingController.parent = self
             
             case "trendingContainer":
                 self.trendingController = segue.destinationViewController as? TrendingController
+                self.trendingController.parent = self
             
             default: break
         }

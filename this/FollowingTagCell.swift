@@ -8,12 +8,17 @@
 
 import UIKit
 
+protocol FollowingTagCellDelegate {
+    func tagCellTapped()
+}
+
 class FollowingTagCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var badgeLabel: UILabel!
     
+    var delegate: FollowingTagCellDelegate!
     private var currentImage: Int = 0
     private var imageTimer: NSTimer!
     private var images: [UIImage] = [
@@ -41,20 +46,33 @@ class FollowingTagCell: UICollectionViewCell {
         self.badgeLabel.layer.masksToBounds = true
         self.badgeLabel.layer.cornerRadius = self.badgeLabel.bounds.height/2
         
+        let gesture = UITapGestureRecognizer(target: self, action: Selector("tapped:"))
+        self.addGestureRecognizer(gesture)
+        
         // TODO: Remove when parse is added
         self.tagLabel.text = "#blackcat15"
         self.imageView.image = self.images.first
     }
     
+    func tapped(gesture: UITapGestureRecognizer) {
+        self.delegate.tagCellTapped()
+    }
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesBegan(touches, withEvent: event)
+        
         self.startCycling()
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesEnded(touches, withEvent: event)
+        
         self.stopCycling()
     }
     
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+        super.touchesCancelled(touches, withEvent: event)
+        
         self.stopCycling()
     }
     
@@ -67,8 +85,6 @@ class FollowingTagCell: UICollectionViewCell {
     }
     
     func startCycling() {
-        self.cycleImage()
-        
         self.tagLabel.alpha = 0
         self.badgeLabel.alpha = 0
         

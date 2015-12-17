@@ -410,6 +410,24 @@ and Privacy Policy.</string>
             </objects>
             <point key="canvasLocation" x="3344" y="381"/>
         </scene>
+        <!--Tag Controller-->
+        <scene sceneID="iND-Sr-Naw">
+            <objects>
+                <viewController id="fEH-hu-Gqt" customClass="TagController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CIS-Zf-qUy"/>
+                        <viewControllerLayoutGuide type="bottom" id="t7W-kY-VVd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SqB-m9-iV1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dsv-UI-44j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3344" y="1141"/>
+        </scene>
         <!--Page Controller-->
         <scene sceneID="0gd-ve-Zbe">
             <objects>
@@ -487,6 +505,7 @@ and Privacy Policy.</string>
                         <outlet property="followingContainer" destination="cUb-D1-90f" id="8Xm-ze-jWH"/>
                         <outlet property="segment" destination="gyK-I6-NPS" id="pty-8d-X0Z"/>
                         <outlet property="trendingContainer" destination="Gvi-Vr-hx0" id="OYq-3c-0Dr"/>
+                        <segue destination="fEH-hu-Gqt" kind="show" identifier="next" id="ysv-3N-4r2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Chh-pn-ji1" userLabel="First Responder" sceneMemberID="firstResponder"/>
