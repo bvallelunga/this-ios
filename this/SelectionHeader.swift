@@ -161,6 +161,11 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
         self.endEditing(true)
     }
     
+    func setHashtag(tag: String) {
+        self.hashtag = tag
+        self.tagField.text = tag
+    }
+    
     func generateHashtag() {
         self.hashtag = "#blackcat15"
         self.tagField.text = self.hashtag
@@ -213,7 +218,7 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let size = self.collectionView.frame.size.width/2 - 30
+        let size = self.collectionView.frame.size.width/2 - 25
         return CGSize(width: size, height: size)
     }
     
@@ -222,7 +227,7 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 20
+        return 10
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

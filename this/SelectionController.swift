@@ -236,6 +236,10 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         self.reset()
     }
     
+    func setHashtag(tag: String) {
+        self.header.setHashtag(tag)
+    }
+    
     func updateHeader() {
         var images: [UIImage] = []
         

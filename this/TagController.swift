@@ -13,9 +13,13 @@ class TagController: UIViewController {
     @IBOutlet weak var messageInput: UITextField!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
+    var hashtag: String = "#blackcat15"
+    private var tableController: TagTableController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = self.hashtag
         self.view.backgroundColor = UIColor.whiteColor()
         
         let shadow = NSShadow()
@@ -29,9 +33,6 @@ class TagController: UIViewController {
                 NSShadowAttributeName: shadow
             ]
         }
-        
-        // TODO: Change for real hashtag
-        self.title = "#blackcat15"
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -56,9 +57,23 @@ class TagController: UIViewController {
         notificationCenter.removeObserver(self, name:UIKeyboardWillHideNotification, object: nil)
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "table" {
+            self.tableController = segue.destinationViewController as? TagTableController
+        }
+    }
+    
+    @IBAction func uploadTriggerd(sender: AnyObject) {
+        Globals.selectionController.setHashtag(self.hashtag)
+        Globals.pagesController.setActiveChildController(1, animated: true, direction: .Reverse, callback: nil)
+    }
+
     @IBAction func postMessage(sender: AnyObject) {
-        self.messageInput.resignFirstResponder()
+        self.tableController.messages.append(self.messageInput.text!)
+        self.tableController.tableView.reloadData()
+        
         self.messageInput.text = ""
+        self.messageInput.resignFirstResponder()
     }
     
     // MARK: NSNotificationCenter
@@ -67,28 +82,12 @@ class TagController: UIViewController {
         let rect = (userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue).CGRectValue()
         
         self.bottomConstraint.constant = rect.size.height
-        
-        UIView.animateWithDuration(0.1) { () -> Void in
-            self.view.layoutIfNeeded()
-        }
+        self.view.layoutIfNeeded()
     }
     
     func keyboardDidHide() {
         self.bottomConstraint.constant = 0
-        
-        UIView.animateWithDuration(0.1) { () -> Void in
-            self.view.layoutIfNeeded()
-        }
+        self.view.layoutIfNeeded()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -12,30 +12,24 @@ class TagTableController: UITableViewController {
     
     
     @IBOutlet weak var headerContainer: UIView!
+    @IBOutlet var emptyContainer: UIView!
     
     private var headerController: TagHeaderController!
     private var headerFrame: CGRect!
     private var keyboardActive: Bool = false
+    var messages: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.edgesForExtendedLayout = .None
         self.view.backgroundColor = UIColor.whiteColor()
         self.tableView.backgroundColor = UIColor.whiteColor()
-        self.edgesForExtendedLayout = .None
-        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         self.tableView.separatorColor = UIColor(red:0.97, green:0.97, blue:0.97, alpha:1)
         
         let tapper = UITapGestureRecognizer(target: self, action: Selector("handleSingleTap:"))
         tapper.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapper)
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let percent: CGFloat = 0.8
-        self.headerContainer.frame.size.height = self.view.frame.height * percent
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -86,27 +80,33 @@ class TagTableController: UITableViewController {
     // MARK: NSNotificationCenter
     func keyboardDidShow(notification: NSNotification) {
         self.keyboardActive = true
-    
-        UIView.animateWithDuration(0.1) { () -> Void in
-            self.headerController.view.frame.size.height = 0
-            self.headerContainer.frame.size.height = 0
-            self.headerContainer.alpha = 0
-        }
+        
+        self.headerController.view.frame.size.height = 0
+        self.headerContainer.frame.size.height = 0
+        self.headerContainer.alpha = 0
+        self.tableView.tableHeaderView = self.tableView.tableHeaderView
     }
     
     func keyboardDidHide() {
         self.keyboardActive = false
         
-        UIView.animateWithDuration(0.1) { () -> Void in
-            self.headerContainer.frame = self.headerFrame
-            self.headerController.view.frame = self.headerFrame
-            self.headerContainer.alpha = 1
-        }
+        self.headerContainer.frame = self.headerFrame
+        self.headerController.view.frame = self.headerFrame
+        self.headerContainer.alpha = 1
+        self.tableView.tableHeaderView = self.tableView.tableHeaderView
     }
 
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 0
+        if self.messages.isEmpty {
+            self.tableView.tableFooterView = self.emptyContainer
+            self.tableView.separatorStyle = .None
+            return 0
+        }
+        
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        self.tableView.separatorStyle = .SingleLine;
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

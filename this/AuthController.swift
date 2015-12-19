@@ -75,10 +75,7 @@ class AuthController: UIViewController {
         let rect = (userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue).CGRectValue()
         
         self.progressBarBottom.constant = rect.size.height
-        
-        UIView.animateWithDuration(0.1) { () -> Void in
-            self.view.layoutIfNeeded()
-        }
+        self.view.layoutIfNeeded()
     }
 
     @IBAction func backTriggered(sender: AnyObject) {
