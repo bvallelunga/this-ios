@@ -120,7 +120,7 @@
                         <rect key="frame" x="0.0" y="95" width="436" height="270"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" indicatorStyle="black" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="aHu-8U-EaD">
-                                <rect key="frame" x="20" y="35" width="396" height="200"/>
+                                <rect key="frame" x="0.0" y="35" width="436" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="z5b-xh-fg9"/>
                                 </constraints>
@@ -133,12 +133,12 @@
                             </collectionView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="aHu-8U-EaD" secondAttribute="trailing" constant="20" id="KoH-No-azt"/>
+                            <constraint firstAttribute="trailing" secondItem="aHu-8U-EaD" secondAttribute="trailing" id="KoH-No-azt"/>
                             <constraint firstItem="aHu-8U-EaD" firstAttribute="top" secondItem="sEE-QU-oI6" secondAttribute="top" constant="15" id="aOy-rs-koY"/>
                             <constraint firstAttribute="bottom" secondItem="aHu-8U-EaD" secondAttribute="bottom" constant="15" id="eBO-Me-2uZ"/>
                             <constraint firstItem="aHu-8U-EaD" firstAttribute="centerY" secondItem="sEE-QU-oI6" secondAttribute="centerY" id="jZY-gB-76k"/>
                             <constraint firstItem="aHu-8U-EaD" firstAttribute="centerX" secondItem="sEE-QU-oI6" secondAttribute="centerX" id="uVN-hF-fMY"/>
-                            <constraint firstItem="aHu-8U-EaD" firstAttribute="leading" secondItem="sEE-QU-oI6" secondAttribute="leading" constant="20" id="yVe-nT-GxZ"/>
+                            <constraint firstItem="aHu-8U-EaD" firstAttribute="leading" secondItem="sEE-QU-oI6" secondAttribute="leading" id="yVe-nT-GxZ"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">

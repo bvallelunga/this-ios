@@ -101,7 +101,7 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.backgroundColor = UIColor.clearColor()
-        self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 20)
         self.collectionView.registerClass(SelectionPhotoCell.self, forCellWithReuseIdentifier: "cell")
         
         let tapper = UITapGestureRecognizer(target: self, action: Selector("handleSingleTap:"))
@@ -149,8 +149,12 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
     }
 
     @IBAction func goToSettings(sender: AnyObject) {
-        Globals.pagesController.setActiveChildController(0, animated: true,
-            direction: .Reverse, callback: nil)
+        Globals.landingController.navigationController?.popToRootViewControllerAnimated(false)
+        
+        
+        // TODO: Uncomment
+        //Globals.pagesController.setActiveChildController(0, animated: true,
+        //    direction: .Reverse, callback: nil)
     }
     
     func handleSingleTap(gesture: UITapGestureRecognizer) {
@@ -209,7 +213,7 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let size = self.collectionView.frame.size.width/2 - 10
+        let size = self.collectionView.frame.size.width/2 - 30
         return CGSize(width: size, height: size)
     }
     

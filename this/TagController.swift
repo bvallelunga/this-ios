@@ -10,10 +10,13 @@ import UIKit
 
 class TagController: UIViewController {
 
+    @IBOutlet weak var messageInput: UITextField!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = Colors.darkGrey
+        self.view.backgroundColor = UIColor.whiteColor()
         
         let shadow = NSShadow()
         shadow.shadowColor = UIColor(red:0, green:0, blue:0, alpha:0.1)
@@ -27,6 +30,7 @@ class TagController: UIViewController {
             ]
         }
         
+        // TODO: Change for real hashtag
         self.title = "#blackcat15"
     }
     
@@ -34,14 +38,48 @@ class TagController: UIViewController {
         super.viewDidAppear(animated)
         
         Globals.pagesController.lockPageView()
+        
+        // Register for keyboard notifications
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(self, selector: Selector("keyboardDidShow:"), name:UIKeyboardWillShowNotification, object: nil)
+        notificationCenter.addObserver(self, selector: Selector("keyboardDidHide"), name:UIKeyboardWillHideNotification, object: nil)
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidAppear(animated)
         
         Globals.pagesController.unlockPageView()
+        
+        // Unregister for keyboard notifications
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.removeObserver(self, name:UIKeyboardWillShowNotification, object: nil)
+        notificationCenter.removeObserver(self, name:UIKeyboardWillHideNotification, object: nil)
     }
     
+    @IBAction func postMessage(sender: AnyObject) {
+        self.messageInput.resignFirstResponder()
+        self.messageInput.text = ""
+    }
+    
+    // MARK: NSNotificationCenter
+    func keyboardDidShow(notification: NSNotification) {
+        let userInfo = NSDictionary(dictionary: notification.userInfo!)
+        let rect = (userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue).CGRectValue()
+        
+        self.bottomConstraint.constant = rect.size.height
+        
+        UIView.animateWithDuration(0.1) { () -> Void in
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func keyboardDidHide() {
+        self.bottomConstraint.constant = 0
+        
+        UIView.animateWithDuration(0.1) { () -> Void in
+            self.view.layoutIfNeeded()
+        }
+    }
 
     /*
     // MARK: - Navigation

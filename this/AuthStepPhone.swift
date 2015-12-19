@@ -50,6 +50,10 @@ class AuthStepPhone: AuthStep {
         do {
             let number = try phoneUtil.parseWithPhoneCarrierRegion(self.value)
             try self.parentController.phoneNumber = phoneUtil.format(number, numberFormat: .E164)
+            
+            // TODO: Remove and make random
+            self.parentController.phoneVerify = "1234"
+            
             callback(segue: false)
         } catch let error as NSError  {
             print(error.description)

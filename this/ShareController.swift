@@ -58,7 +58,6 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFM
         self.view.backgroundColor = UIColor.whiteColor()
         self.tableView.backgroundColor = UIColor.whiteColor()
         self.edgesForExtendedLayout = .None
-        
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         self.tableView.separatorColor = UIColor(red:0.97, green:0.97, blue:0.97, alpha:1)
         
