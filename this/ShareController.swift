@@ -295,6 +295,8 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFM
     func loadContacts() {
         Contact.getContacts { (contacts) -> Void in
             self.contacts.raw = contacts
+            
+            self.filterBySearch("")
             self.loadUsers()
         }
     }

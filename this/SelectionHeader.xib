@@ -3,10 +3,10 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Bariol_Bold.ttf">
+            <string>Bariol-Bold</string>
             <string>Bariol-Bold</string>
         </mutableArray>
         <mutableArray key="Bariol_Regular.ttf">
@@ -103,19 +103,6 @@
                             <action selector="uploadTags:" destination="OVO-P5-zWt" eventType="touchUpInside" id="LQx-vn-Hkm"/>
                         </connections>
                     </button>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qUN-NT-BA9" customClass="AKPickerView" customModule="AKPickerView_Swift">
-                        <rect key="frame" x="20" y="365" width="198" height="35"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="150" id="WxV-DM-9f6"/>
-                            <constraint firstAttribute="height" constant="35" id="fuw-Ga-Yl2"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="WxV-DM-9f6"/>
-                            </mask>
-                        </variation>
-                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEE-QU-oI6">
                         <rect key="frame" x="0.0" y="95" width="436" height="270"/>
                         <subviews>
@@ -164,15 +151,40 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HKK-Hn-PVx">
+                        <rect key="frame" x="50" y="358" width="127" height="42"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="127" id="RvJ-Lt-Hh1"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="30"/>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="changeTimer:" destination="OVO-P5-zWt" eventType="touchUpInside" id="kL6-6g-Irf"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Timer" translatesAutoresizingMaskIntoConstraints="NO" id="1FM-jF-uDL">
+                        <rect key="frame" x="20" y="370" width="30" height="18"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="BAX-iT-APN"/>
+                            <constraint firstAttribute="width" constant="30" id="eCU-oz-jfw"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" red="0.0" green="0.83921568627450982" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="1i5-Lz-ZAT" firstAttribute="top" secondItem="sEE-QU-oI6" secondAttribute="bottom" id="5LD-BO-OiF"/>
+                <constraint firstAttribute="bottom" secondItem="1FM-jF-uDL" secondAttribute="bottom" constant="20" id="5st-cH-b8h"/>
                 <constraint firstItem="0c0-RK-aHc" firstAttribute="centerY" secondItem="EcJ-03-fEE" secondAttribute="centerY" id="6gj-Zn-dMu"/>
-                <constraint firstItem="qUN-NT-BA9" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" constant="20" id="6qp-3N-Ts2"/>
-                <constraint firstItem="qUN-NT-BA9" firstAttribute="top" secondItem="sEE-QU-oI6" secondAttribute="bottom" id="77V-at-F6I"/>
+                <constraint firstItem="1FM-jF-uDL" firstAttribute="centerY" secondItem="OVO-P5-zWt" secondAttribute="centerY" id="7DB-lz-XAl"/>
+                <constraint firstItem="HKK-Hn-PVx" firstAttribute="centerY" secondItem="OVO-P5-zWt" secondAttribute="centerY" id="7MZ-EL-eeb"/>
                 <constraint firstItem="tBc-If-Uhi" firstAttribute="centerY" secondItem="EcJ-03-fEE" secondAttribute="centerY" id="88B-Ik-9IM"/>
+                <constraint firstAttribute="bottom" secondItem="HKK-Hn-PVx" secondAttribute="bottom" constant="20" id="913-fb-WAg"/>
+                <constraint firstItem="HKK-Hn-PVx" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" constant="20" id="9BD-yK-s3u"/>
                 <constraint firstItem="0c0-RK-aHc" firstAttribute="centerY" secondItem="EcJ-03-fEE" secondAttribute="centerY" id="Csf-PF-edq"/>
                 <constraint firstItem="sEE-QU-oI6" firstAttribute="centerY" secondItem="OVO-P5-zWt" secondAttribute="centerY" id="Hdj-ca-ntX"/>
                 <constraint firstAttribute="trailing" secondItem="1i5-Lz-ZAT" secondAttribute="trailing" constant="20" id="OdC-R6-pep"/>
@@ -187,15 +199,17 @@
                 <constraint firstItem="xYA-3x-S0m" firstAttribute="centerY" secondItem="OVO-P5-zWt" secondAttribute="centerY" id="ba2-kf-215"/>
                 <constraint firstItem="0c0-RK-aHc" firstAttribute="leading" secondItem="tBc-If-Uhi" secondAttribute="trailing" constant="8" id="cBi-3U-CsA"/>
                 <constraint firstItem="tBc-If-Uhi" firstAttribute="centerY" secondItem="EcJ-03-fEE" secondAttribute="centerY" id="cHK-Ge-LIn"/>
-                <constraint firstAttribute="trailing" secondItem="qUN-NT-BA9" secondAttribute="trailing" multiplier="2" id="fY3-6i-6UR"/>
+                <constraint firstItem="1FM-jF-uDL" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" constant="20" id="dpz-qt-8Tj"/>
                 <constraint firstItem="tBc-If-Uhi" firstAttribute="leading" secondItem="EcJ-03-fEE" secondAttribute="trailing" constant="8" id="ftK-l5-wVZ"/>
                 <constraint firstItem="tBc-If-Uhi" firstAttribute="top" secondItem="OVO-P5-zWt" secondAttribute="top" constant="35" id="gKK-jl-j97"/>
-                <constraint firstAttribute="bottom" secondItem="qUN-NT-BA9" secondAttribute="bottom" constant="20" id="j6m-qE-YbI"/>
                 <constraint firstItem="2tu-ng-h4x" firstAttribute="top" secondItem="xYA-3x-S0m" secondAttribute="bottom" id="kFf-bv-gIh"/>
+                <constraint firstItem="1FM-jF-uDL" firstAttribute="centerY" secondItem="HKK-Hn-PVx" secondAttribute="centerY" id="nRS-sJ-wAT"/>
                 <constraint firstItem="sEE-QU-oI6" firstAttribute="centerX" secondItem="OVO-P5-zWt" secondAttribute="centerX" id="oee-Au-BAy"/>
                 <constraint firstItem="sEE-QU-oI6" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" id="okf-gN-HUU"/>
                 <constraint firstItem="uv0-dZ-e3e" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" constant="8" id="q44-zN-zJQ"/>
                 <constraint firstItem="EcJ-03-fEE" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" constant="20" id="rSW-dp-cCj"/>
+                <constraint firstItem="HKK-Hn-PVx" firstAttribute="leading" secondItem="1FM-jF-uDL" secondAttribute="trailing" id="scp-a9-g0V"/>
+                <constraint firstAttribute="bottom" secondItem="1FM-jF-uDL" secondAttribute="bottom" constant="25" id="tdI-vn-384"/>
                 <constraint firstItem="0c0-RK-aHc" firstAttribute="top" secondItem="OVO-P5-zWt" secondAttribute="top" constant="35" id="v51-CV-nio"/>
                 <constraint firstItem="uv0-dZ-e3e" firstAttribute="top" secondItem="tBc-If-Uhi" secondAttribute="bottom" id="vpq-51-0zH"/>
                 <constraint firstItem="xYA-3x-S0m" firstAttribute="centerX" secondItem="OVO-P5-zWt" secondAttribute="centerX" id="zab-iE-YJN"/>
@@ -209,6 +223,11 @@
                     <exclude reference="gKK-jl-j97"/>
                     <exclude reference="Hdj-ca-ntX"/>
                     <exclude reference="oee-Au-BAy"/>
+                    <exclude reference="7MZ-EL-eeb"/>
+                    <exclude reference="9BD-yK-s3u"/>
+                    <exclude reference="5st-cH-b8h"/>
+                    <exclude reference="7DB-lz-XAl"/>
+                    <exclude reference="tdI-vn-384"/>
                     <exclude reference="6gj-Zn-dMu"/>
                     <exclude reference="v51-CV-nio"/>
                 </mask>
@@ -220,7 +239,8 @@
                 <outlet property="placeholderView" destination="xYA-3x-S0m" id="aH8-cs-zAf"/>
                 <outlet property="tagField" destination="tBc-If-Uhi" id="Zbz-2d-qc2"/>
                 <outlet property="tagLabel" destination="uv0-dZ-e3e" id="UHy-vV-y2l"/>
-                <outlet property="timerPicker" destination="qUN-NT-BA9" id="OTU-aX-lLK"/>
+                <outlet property="timerButton" destination="HKK-Hn-PVx" id="WbB-7v-7sQ"/>
+                <outlet property="timerImage" destination="1FM-jF-uDL" id="AYk-3M-q0K"/>
             </connections>
             <point key="canvasLocation" x="418" y="128"/>
         </collectionViewCell>
@@ -229,5 +249,6 @@
         <image name="Arrow" width="512" height="512"/>
         <image name="Profile" width="700" height="700"/>
         <image name="Tags" width="700" height="700"/>
+        <image name="Timer" width="700" height="700"/>
     </resources>
 </document>

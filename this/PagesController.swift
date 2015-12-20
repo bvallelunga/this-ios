@@ -55,25 +55,17 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
         
         self.didMoveToParentViewController(self)
         
+        // Remove Text From Back Button
+        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(-1000, -1000),
+            forBarMetrics: UIBarMetrics.Default)
+        
+        // Set Start Page
+        self.setActiveController(self.currentPage, animated: false, direction: .Forward)
+        
         // Get Settings
 //        Settings.sharedInstance { (settings) -> Void in
 //            self.settings = settings
 //        }
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Remove Text From Back Button
-        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(-1000, -1000),
-            forBarMetrics: UIBarMetrics.Default)
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // Set Start Page
-        self.setActiveController(self.currentPage, animated: false, direction: .Forward)
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

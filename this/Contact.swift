@@ -46,7 +46,7 @@ class Contact: NSObject {
         manager.sortDescriptors = [NSSortDescriptor(key: "fullName", ascending: true)]
         manager.fieldsMask = .All
         
-        manager.contacts { (status, moContacts, error) -> Void in
+        manager.contacts { (status, moContacts, error) -> Void in            
             if error == nil && status == .Authorized {
                 for moContact in moContacts as! [MoContact] {
                     

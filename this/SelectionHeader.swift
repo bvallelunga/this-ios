@@ -8,7 +8,6 @@
 
 import UIKit
 import Gifu
-import ActionSheetPicker_3_0
 import AKPickerView_Swift
 
 protocol SelectionHeaderDelegate {
@@ -20,26 +19,27 @@ struct SelectionTimer {
     var timer: Int!
 }
 
-class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerViewDelegate,
-    UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
+class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
+    UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var placeholderView: AnimatableImageView!
     @IBOutlet weak var placeholderLabel: UILabel!
     @IBOutlet weak var tagField: UITextField!
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var arrowButton: UIButton!
-    @IBOutlet weak var timerPicker: AKPickerView!
+    @IBOutlet weak var timerButton: UIButton!
+    @IBOutlet weak var timerImage: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var hashtag: String = ""
     private var arrowAnimation = CABasicAnimation(keyPath: "transform")
     private var timer: SelectionTimer!
     private var timers: [SelectionTimer] = [
-        SelectionTimer(title: "5 days", timer: 5),
-        SelectionTimer(title: "4 days", timer: 4),
-        SelectionTimer(title: "3 days", timer: 3),
+        SelectionTimer(title: "1 day", timer: 1),
         SelectionTimer(title: "2 days", timer: 2),
-        SelectionTimer(title: "1 day", timer: 1)
+        SelectionTimer(title: "3 days", timer: 3),
+        SelectionTimer(title: "4 days", timer: 4),
+        SelectionTimer(title: "5 days", timer: 5)
     ]
     
     var delegate: SelectionHeaderDelegate!
@@ -86,17 +86,16 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
         self.arrowAnimation.autoreverses = true
         self.arrowAnimation.repeatCount = FLT_MAX
         
-        self.timerPicker.delegate = self
-        self.timerPicker.dataSource = self
-        self.timerPicker.pickerViewStyle = .Wheel
-        self.timerPicker.backgroundColor = UIColor.clearColor()
-        self.timerPicker.highlightedTextColor = UIColor.whiteColor()
-        self.timerPicker.textColor = UIColor(white: 1, alpha: 0.8)
-        self.timerPicker.font = UIFont(name: "Bariol-Bold", size: 24)!
-        self.timerPicker.highlightedFont = UIFont(name: "Bariol-Bold", size: 24)!
-        self.timerPicker.interitemSpacing = 15
-        self.timerPicker.selectItem(2)
-        self.timerPicker.reloadData()
+        self.timerButton.contentHorizontalAlignment = .Left
+        self.timerButton.layer.shadowColor = UIColor.blackColor().CGColor
+        self.timerButton.layer.shadowOffset = CGSizeMake(-1, 1)
+        self.timerButton.layer.shadowOpacity = 0.1
+        self.timerButton.layer.shadowRadius = 0
+        self.timerImage.tintColor = UIColor.whiteColor()
+        self.timerImage.layer.shadowColor = UIColor.blackColor().CGColor
+        self.timerImage.layer.shadowOffset = CGSizeMake(-1, 1)
+        self.timerImage.layer.shadowOpacity = 0.1
+        self.timerImage.layer.shadowRadius = 0
         
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
@@ -108,8 +107,7 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
         tapper.cancelsTouchesInView = false
         self.addGestureRecognizer(tapper)
         
-        self.imagesSelected([])
-        self.generateHashtag()
+        self.reset()
     }
     
     override func layoutSubviews() {
@@ -120,8 +118,24 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
         self.placeholderLabel.alpha = newAlpha
         self.placeholderView.alpha = newAlpha
         self.arrowButton.alpha = newAlpha
-        self.timerPicker.alpha = newAlpha
+        self.timerButton.alpha = newAlpha
         self.collectionView.alpha = newAlpha
+    }
+    
+    @IBAction func changeTimer(sender: AnyObject) {
+        let sheet = UIAlertController(title: "Auto Delete",
+            message: "When should your photos auto delete?", preferredStyle: .ActionSheet)
+        
+        sheet.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        
+        for (i, timer) in self.timers.enumerate() {
+            let action = UIAlertAction(title: timer.title, style: .Default) { (action) in
+                self.setTimer(i)
+            }
+            sheet.addAction(action)
+        }
+        
+        Globals.selectionController.presentViewController(sheet, animated: true, completion: nil)
     }
     
     @IBAction func tagChanged(sender: AnyObject) {
@@ -173,7 +187,12 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
     func reset() {
         self.imagesSelected([])
         self.generateHashtag()
-        self.timerPicker.selectItem(2)
+        self.setTimer(2)
+    }
+    
+    func setTimer(index: Int) {
+        self.timer = self.timers[index]
+        self.timerButton.setTitle(self.timer.title, forState: .Normal)
     }
     
     func imagesSelected(images: [UIImage]) {
