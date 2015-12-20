@@ -71,11 +71,17 @@ class TagController: UIViewController {
     }
 
     @IBAction func postMessage(sender: AnyObject) {
-        self.tableController.messages.append(self.messageInput.text!)
-        self.tableController.tableView.reloadData()
-        
-        self.messageInput.text = ""
-        self.messageInput.resignFirstResponder()
+        if let message = self.messageInput.text {
+            guard !message.isEmpty else {
+                return
+            }
+            
+            self.tableController.messages.append(message)
+            self.tableController.tableView.reloadData()
+            
+            self.messageInput.text = ""
+            self.messageInput.resignFirstResponder()
+        }
     }
     
     // MARK: NSNotificationCenter

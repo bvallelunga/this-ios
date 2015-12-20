@@ -546,7 +546,7 @@ and Privacy Policy.</string>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="18"/>
                                         <state key="normal" title="SEND">
-                                            <color key="titleColor" red="0.0" green="0.7803921568627451" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.2196078431372549" green="0.27058823529411763" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="postMessage:" destination="Njs-W8-ya8" eventType="touchUpInside" id="Pnx-6E-DRN"/>

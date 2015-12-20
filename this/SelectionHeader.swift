@@ -123,10 +123,8 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     }
     
     @IBAction func changeTimer(sender: AnyObject) {
-        let sheet = UIAlertController(title: "Auto Delete",
-            message: "When should your photos auto delete?", preferredStyle: .ActionSheet)
-        
-        sheet.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        let sheet = UIAlertController(title: "When should your photos auto delete?",
+            message: nil, preferredStyle: .ActionSheet)
         
         for (i, timer) in self.timers.enumerate() {
             let action = UIAlertAction(title: timer.title, style: .Default) { (action) in
