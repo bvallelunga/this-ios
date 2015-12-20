@@ -18,7 +18,6 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
     private let pages = 3
     private var storyBoard = UIStoryboard(name: "Main", bundle: nil)
     private var scrollView: UIScrollView!
-    //private var notification: CWStatusBarNotification!
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -26,20 +25,6 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
         
         // Set Global
         Globals.pagesController = self
-        
-        // Create Notification
-//        self.notification = CWStatusBarNotification()
-//        self.notification.notificationAnimationInStyle = .Top
-//        self.notification.notificationAnimationOutStyle = .Top
-//        self.notification.notificationAnimationType = .Overlay
-//        self.notification.notificationStyle = .NavigationBarNotification
-//        self.notification.notificationLabelBackgroundColor = UIColor(red:0.64, green:0.2, blue:0.62, alpha:1)
-//        self.notification.notificationLabelTextColor = UIColor.whiteColor()
-//        self.notification.notificationLabelFont = UIFont(name: "HelveticaNeue-Bold", size: 20)
-//        self.notification.notificationTappedBlock = {
-//            self.notification.dismissNotification()
-//            self.setActiveChildController(0, animated: true, gotToRoot: true, direction: .Reverse)
-//        }
         
         // Create Page View Controller
         self.view.backgroundColor = UIColor.clearColor()

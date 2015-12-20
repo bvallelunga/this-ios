@@ -14,11 +14,15 @@ class TagsController: UIViewController {
     @IBOutlet weak var followingContainer: UIView!
     @IBOutlet weak var trendingContainer: UIView!
     
+    var hashtag: String!
+    
     private var followingController: FollowingController!
     private var trendingController: TrendingController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Globals.tagsController = self
         
         // Setup Segment
         let attributes = [
@@ -71,6 +75,10 @@ class TagsController: UIViewController {
             case "trendingContainer":
                 self.trendingController = segue.destinationViewController as? TrendingController
                 self.trendingController.parent = self
+            
+            case "next":
+                let controller = segue.destinationViewController as? TagController
+                controller?.hashtag = self.hashtag
             
             default: break
         }

@@ -75,6 +75,7 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
     }
     
     func tagCellTapped() {
+        self.parent.hashtag = "#blackcat15"
         self.parent.performSegueWithIdentifier("next", sender: self)
     }
 

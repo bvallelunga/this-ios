@@ -25,7 +25,8 @@ class TagTableController: UITableViewController {
         self.edgesForExtendedLayout = .None
         self.view.backgroundColor = UIColor.whiteColor()
         self.tableView.backgroundColor = UIColor.whiteColor()
-        self.tableView.separatorColor = UIColor(red:0.97, green:0.97, blue:0.97, alpha:1)
+        self.tableView.separatorColor = UIColor.clearColor()
+        self.tableView.separatorStyle = .None
         
         let tapper = UITapGestureRecognizer(target: self, action: Selector("handleSingleTap:"))
         tapper.cancelsTouchesInView = false
@@ -55,6 +56,7 @@ class TagTableController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "header" {
             self.headerController = segue.destinationViewController as? TagHeaderController
+            self.headerController.view.clipsToBounds = true
         }
     }
     
@@ -110,7 +112,30 @@ class TagTableController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return self.messages.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let message = self.messages[indexPath.row]
+        
+        cell.textLabel?.attributedText = self.buildText("@bvallelunga", message: message)
+        
+        return cell
+    }
+    
+    func buildText(user: String, message: String) -> NSAttributedString {
+        let text = NSMutableAttributedString(string: user, attributes: [
+            NSFontAttributeName: UIFont(name: "Bariol-Bold", size: 20)!,
+            NSForegroundColorAttributeName: Colors.greyBlue
+        ])
+        
+        text.appendAttributedString(NSAttributedString(string: " " + message, attributes: [
+            NSFontAttributeName: UIFont(name: "Bariol", size: 20)!,
+            NSForegroundColorAttributeName: UIColor.blackColor()
+        ]))
+        
+        return text
     }
     
     func handleSingleTap(gesture: UITapGestureRecognizer) {

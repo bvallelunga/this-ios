@@ -35,14 +35,15 @@ class TrendingTableCell: UITableViewCell, UICollectionViewDelegate, UICollection
         self.collectionView.registerClass(TrendingCollectionCell.self, forCellWithReuseIdentifier: "cell")
         self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, 0)
         
-        let size = (UIScreen.mainScreen().bounds.width-20)/4 - 3
         self.layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         self.layout.minimumInteritemSpacing = 1
         self.layout.minimumLineSpacing = 1
-        self.layout.itemSize = CGSizeMake(size, size)
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        let size = self.collectionView.bounds.width/4 - 1
+        self.layout.itemSize = CGSizeMake(size, size)
+        
         return 1
     }
     

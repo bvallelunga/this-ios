@@ -35,10 +35,11 @@ class TrendingController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 300
+        return 250
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.parent.hashtag = "#redsnake45"
         self.parent.performSegueWithIdentifier("next", sender: self)
     }
 

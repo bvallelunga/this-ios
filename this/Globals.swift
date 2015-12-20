@@ -13,6 +13,7 @@ class Globals: NSObject {
     static var landingController: LandingController!
     static var pagesController: PagesController!
     static var selectionController: SelectionController!
+    static var tagsController: TagsController!
     
     class func delay(delay:Double, closure:()->()) {
         dispatch_after(

@@ -546,7 +546,7 @@ and Privacy Policy.</string>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="18"/>
                                         <state key="normal" title="SEND">
-                                            <color key="titleColor" red="0.0" green="0.62352941176470589" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.0" green="0.7803921568627451" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="postMessage:" destination="Njs-W8-ya8" eventType="touchUpInside" id="Pnx-6E-DRN"/>
@@ -646,12 +646,21 @@ and Privacy Policy.</string>
                             </connections>
                         </containerView>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="4Xk-zr-Vzx">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="cell" textLabel="fbh-ij-inS" style="IBUITableViewCellStyleDefault" id="4Xk-zr-Vzx">
                                 <rect key="frame" x="0.0" y="428" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Xk-zr-Vzx" id="d3U-BK-buI">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fbh-ij-inS">
+                                            <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -688,7 +697,7 @@ and Privacy Policy.</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is no time like the present to start a conversation" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="8AP-sf-KOq">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commentary begins with a comment. What's yours?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="8AP-sf-KOq">
                                 <rect key="frame" x="20" y="20" width="560" height="580"/>
                                 <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="30"/>
                                 <color key="textColor" red="0.73596862356053527" green="0.73596862356053527" blue="0.73596862356053527" alpha="1" colorSpace="calibratedRGB"/>
@@ -895,6 +904,10 @@ and Privacy Policy.</string>
         <scene sceneID="xJ1-gW-w08">
             <objects>
                 <viewController id="cxi-M1-E8G" customClass="TagHeaderController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3jg-9C-C90"/>
+                        <viewControllerLayoutGuide type="bottom" id="pcP-lq-Rah"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="I7d-du-gr6">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

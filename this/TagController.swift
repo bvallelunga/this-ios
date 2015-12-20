@@ -13,7 +13,7 @@ class TagController: UIViewController {
     @IBOutlet weak var messageInput: UITextField!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
-    var hashtag: String = "#blackcat15"
+    var hashtag: String = "#bluedog13"
     private var tableController: TagTableController!
     
     override func viewDidLoad() {
@@ -65,7 +65,9 @@ class TagController: UIViewController {
     
     @IBAction func uploadTriggerd(sender: AnyObject) {
         Globals.selectionController.setHashtag(self.hashtag)
-        Globals.pagesController.setActiveController(1, direction: .Reverse)
+        Globals.pagesController.setActiveController(1, direction: .Reverse) { () -> Void in
+            self.navigationController?.popViewControllerAnimated(false)
+        }
     }
 
     @IBAction func postMessage(sender: AnyObject) {

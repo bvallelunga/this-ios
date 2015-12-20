@@ -232,8 +232,26 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         }
     }
     
-    func shareControllerShared() {
-        self.reset()
+    func shareControllerDismiss() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func shareControllerShared(count: Int) {
+        Globals.pagesController.setActiveController(2, direction: .Forward) { () -> Void in
+            Globals.tagsController.hashtag = self.hashtag
+            Globals.tagsController.performSegueWithIdentifier("next", sender: self)
+            self.reset()
+        }
+    }
+    
+    func shareControllerShared(count: Int, callback: () -> Void) {
+        Globals.pagesController.setActiveController(2, direction: .Forward) { () -> Void in
+            Globals.tagsController.hashtag = self.hashtag
+            Globals.tagsController.performSegueWithIdentifier("next", sender: self)
+            
+            self.reset()
+            callback()
+        }
     }
     
     func setHashtag(tag: String) {

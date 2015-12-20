@@ -12,7 +12,8 @@ import MessageUI
 private let reuseIdentifier = "cell"
 
 protocol ShareControllerDelegate {
-    func shareControllerShared()
+    func shareControllerDismiss()
+    func shareControllerShared(count: Int, callback: () -> Void)
 }
 
 class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFMessageComposeViewControllerDelegate {
@@ -90,6 +91,10 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFM
             self.headerController?.delegate = self
             self.headerController.hashtag = self.hashtag
         }
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
     }
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -210,13 +215,14 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFM
     }
     
     func backTriggred() {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.delegate.shareControllerDismiss()
     }
     
     func nextTriggered() {
-        Globals.pagesController.setActiveController(2, direction: .Forward) { () -> Void in
+        let count = self.users.selected.count + self.contacts.selected.count
+        
+        self.delegate.shareControllerShared(count) { () -> Void in
             self.backTriggred()
-            self.delegate.shareControllerShared()
         }
     }
     
@@ -234,9 +240,11 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFM
             contacts.append(contact.phone.number)
         }
         
-        for image in self.images[0...min(2, self.images.count-1)] {
-            let data =  UIImageJPEGRepresentation(image, 0.5)
-            messageVC.addAttachmentData(data!, typeIdentifier: "image/jpeg", filename: "\(tag).jpg")
+        if !self.images.isEmpty {
+            for image in self.images[0...min(2, self.images.count-1)] {
+                let data =  UIImageJPEGRepresentation(image, 0.5)
+                messageVC.addAttachmentData(data!, typeIdentifier: "image/jpeg", filename: "\(tag).jpg")
+            }
         }
         
         messageVC.recipients = contacts

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TagHeaderController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
+class TagHeaderController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, ShareControllerDelegate {
 
     @IBOutlet weak var followingButton: UIButton!
     @IBOutlet weak var inviteButton: UIButton!
@@ -77,11 +77,26 @@ class TagHeaderController: UIViewController, UICollectionViewDelegateFlowLayout,
     }
     
     @IBAction func inviteTriggered(sender: AnyObject) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyBoard.instantiateViewControllerWithIdentifier("ShareController") as! ShareController
         
+        controller.delegate = self
+        controller.images = self.images
+        
+        self.presentViewController(controller, animated: true, completion: nil)
     }
 
     @IBAction func followingTriggered(sender: AnyObject) {
     
+    }
+    
+    func shareControllerDismiss() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func shareControllerShared(count: Int, callback: () -> Void) {
+        print(count)
+        callback()
     }
     
     // MARK: UICollectionViewDataSource
