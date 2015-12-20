@@ -83,7 +83,7 @@ class TagsController: UIViewController {
     }
 
     @IBAction func goToSelection(sender: AnyObject) {
-        Globals.pagesController.setActiveChildController(1, animated: true, direction: .Reverse, callback: nil)
+        Globals.pagesController.setActiveController(1, direction: .Reverse)
     }
 
 }

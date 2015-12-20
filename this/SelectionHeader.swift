@@ -144,8 +144,7 @@ class SelectionHeader: UICollectionViewCell, AKPickerViewDataSource, AKPickerVie
     }
     
     @IBAction func goToFollowing(sender: AnyObject) {
-        Globals.pagesController.setActiveChildController(2, animated: true,
-            direction: .Forward, callback: nil)
+        Globals.pagesController.setActiveController(2, direction: .Forward)
     }
 
     @IBAction func goToSettings(sender: AnyObject) {

@@ -214,7 +214,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFM
     }
     
     func nextTriggered() {
-        Globals.pagesController.setActiveChildController(2, animated: true, direction: .Forward) { () -> Void in
+        Globals.pagesController.setActiveController(2, direction: .Forward) { () -> Void in
             self.backTriggred()
             self.delegate.shareControllerShared()
         }

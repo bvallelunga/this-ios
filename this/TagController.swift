@@ -65,7 +65,7 @@ class TagController: UIViewController {
     
     @IBAction func uploadTriggerd(sender: AnyObject) {
         Globals.selectionController.setHashtag(self.hashtag)
-        Globals.pagesController.setActiveChildController(1, animated: true, direction: .Reverse, callback: nil)
+        Globals.pagesController.setActiveController(1, direction: .Reverse)
     }
 
     @IBAction func postMessage(sender: AnyObject) {

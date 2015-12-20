@@ -88,7 +88,7 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
         super.viewDidAppear(animated)
         
         // Set Start Page
-        self.setActiveChildController(self.currentPage, animated: false, direction: .Forward, callback: nil)
+        self.setActiveController(self.currentPage, animated: false, direction: .Forward)
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -104,7 +104,7 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
         self.scrollView?.scrollEnabled = true
     }
     
-    func setActiveChildController(index: Int, animated: Bool, direction: UIPageViewControllerNavigationDirection, callback: (() -> Void)!) {
+    func setActiveController(index: Int, animated: Bool = true, direction: UIPageViewControllerNavigationDirection, callback: (() -> Void)! = nil) {
         self.unlockPageView()
         
         self.setViewControllers([self.viewControllerAtIndex(index)],

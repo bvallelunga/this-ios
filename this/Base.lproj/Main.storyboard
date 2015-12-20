@@ -688,7 +688,7 @@ and Privacy Policy.</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You're not getting any younger,  now's the time to speak up!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="8AP-sf-KOq">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is no time like the present to start a conversation" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="8AP-sf-KOq">
                                 <rect key="frame" x="20" y="20" width="560" height="580"/>
                                 <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="30"/>
                                 <color key="textColor" red="0.73596862356053527" green="0.73596862356053527" blue="0.73596862356053527" alpha="1" colorSpace="calibratedRGB"/>
