@@ -8,7 +8,8 @@
 
 import UIKit
 
-class TagHeaderController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, ShareControllerDelegate {
+class TagHeaderController: UIViewController, UICollectionViewDelegate,
+    UICollectionViewDataSource, ShareControllerDelegate {
 
     @IBOutlet weak var followingButton: UIButton!
     @IBOutlet weak var inviteButton: UIButton!
@@ -16,48 +17,52 @@ class TagHeaderController: UIViewController, UICollectionViewDelegateFlowLayout,
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var hashtag: String = ""
+    
+    private var layout = TagCollectionLayout()
+    private var downloadMode: Bool = false
     private var images: [UIImage] = [
         UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-1")!,
-        UIImage(named: "Sample-2")!,
         UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-1")!,
-        UIImage(named: "Sample-2")!,
         UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-1")!,
-        UIImage(named: "Sample-2")!,
         UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-1")!,
-        UIImage(named: "Sample-2")!,
         UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-1")!,
-        UIImage(named: "Sample-2")!,
         UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-1")!,
-        UIImage(named: "Sample-2")!,
         UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-1")!,
-        UIImage(named: "Sample-2")!,
         UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-1")!,
-        UIImage(named: "Sample-2")!,
         UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-1")!,
-        UIImage(named: "Sample-2")!,
         UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-1")!,
-        UIImage(named: "Sample-2")!,
-        UIImage(named: "Sample-3")!
+        UIImage(named: "Sample-0")!,
+        UIImage(named: "Sample-0")!,
+        UIImage(named: "Sample-0")!,
+        UIImage(named: "Sample-0")!,
+        UIImage(named: "Sample-0")!,
+        UIImage(named: "Sample-0")!,
+        UIImage(named: "Sample-0")!,
+        UIImage(named: "Sample-0")!,
+        UIImage(named: "Sample-0")!,
+        UIImage(named: "Sample-0")!,
+        UIImage(named: "Sample-0")!,
+        UIImage(named: "Sample-3")!,
+        UIImage(named: "Sample-0")!,
+        UIImage(named: "Sample-3")!,
+        UIImage(named: "Sample-1")!
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.view.backgroundColor = Colors.darkGrey
+        
+        self.layout.minimumInteritemSpacing = 20
+        self.layout.minimumLineSpacing = 10
+        
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         self.collectionView.contentInset = UIEdgeInsetsMake(10, 10, 10, 10)
-        self.collectionView.registerClass(SelectionPhotoCell.self, forCellWithReuseIdentifier: "cell")
+        self.collectionView.collectionViewLayout = self.layout
+        self.collectionView.alwaysBounceVertical = false
+        self.collectionView.registerClass(TagCollectionCell.self, forCellWithReuseIdentifier: "cell")
         
         self.setupButton(self.followingButton, color: Colors.blue)
         self.setupButton(self.inviteButton, color: Colors.green)
@@ -73,7 +78,13 @@ class TagHeaderController: UIViewController, UICollectionViewDelegateFlowLayout,
     }
 
     @IBAction func downloadTriggered(sender: AnyObject) {
-    
+        self.downloadMode = !self.downloadMode
+        self.downloadButton.tintColor = self.downloadMode ? Colors.blue : UIColor.whiteColor()
+        self.collectionView.reloadData()
+        
+        if self.downloadMode {
+            NavNotification.show("Tap Photos To Download", color: Colors.blue)
+        }
     }
     
     @IBAction func inviteTriggered(sender: AnyObject) {
@@ -82,6 +93,8 @@ class TagHeaderController: UIViewController, UICollectionViewDelegateFlowLayout,
         
         controller.delegate = self
         controller.images = self.images
+        controller.hashtag = self.hashtag
+        controller.backText = "CANCEL"
         
         self.presentViewController(controller, animated: true, completion: nil)
     }
@@ -95,12 +108,14 @@ class TagHeaderController: UIViewController, UICollectionViewDelegateFlowLayout,
     }
     
     func shareControllerShared(count: Int, callback: () -> Void) {
-        print(count)
         callback()
     }
     
     // MARK: UICollectionViewDataSource
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        let size = self.collectionView.frame.size.width/4 - 15
+        self.layout.itemSize = CGSizeMake(size, size)
+        
         return 1
     }
     
@@ -115,24 +130,21 @@ class TagHeaderController: UIViewController, UICollectionViewDelegateFlowLayout,
         )
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let size = self.collectionView.frame.size.width/4 - 15
-        return CGSize(width: size, height: size)
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 10
-    }
-    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! SelectionPhotoCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! TagCollectionCell
         
         cell.imageView.image = self.images[indexPath.row]
-        cell.backgroundColor = Colors.lightGrey
-        cell.layer.cornerRadius = 4
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor(white: 0, alpha: 1).CGColor
+        cell.downloadMode(self.downloadMode)
         
         return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! TagCollectionCell
+        let image = self.images[indexPath.row]
+        
+        cell.downloaded()
+        
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
 }

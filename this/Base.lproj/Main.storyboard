@@ -546,7 +546,7 @@ and Privacy Policy.</string>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="18"/>
                                         <state key="normal" title="SEND">
-                                            <color key="titleColor" red="0.2196078431372549" green="0.27058823529411763" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.0" green="0.68627450980000004" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="postMessage:" destination="Njs-W8-ya8" eventType="touchUpInside" id="Pnx-6E-DRN"/>
@@ -994,13 +994,13 @@ and Privacy Policy.</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3hb-En-b6V">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="305"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="g43-07-5zK">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="g43-07-5zK">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="305"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="305" id="Hb3-Wk-Xmh"/>
                                         </constraints>
-                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ijw-sN-n3K">
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mHg-MH-TLQ">
                                             <size key="itemSize" width="50" height="50"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>

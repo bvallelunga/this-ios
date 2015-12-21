@@ -60,6 +60,7 @@ class TagController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "table" {
             self.tableController = segue.destinationViewController as? TagTableController
+            self.tableController.hashtag = self.hashtag
         }
     }
     

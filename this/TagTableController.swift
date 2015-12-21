@@ -17,6 +17,8 @@ class TagTableController: UITableViewController {
     private var headerController: TagHeaderController!
     private var headerFrame: CGRect!
     private var keyboardActive: Bool = false
+    
+    var hashtag: String = ""
     var messages: [String] = []
 
     override func viewDidLoad() {
@@ -57,6 +59,7 @@ class TagTableController: UITableViewController {
         if segue.identifier == "header" {
             self.headerController = segue.destinationViewController as? TagHeaderController
             self.headerController.view.clipsToBounds = true
+            self.headerController.hashtag = self.hashtag
         }
     }
     

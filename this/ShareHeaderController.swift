@@ -17,6 +17,7 @@ protocol ShareHeaderControllerDelegate {
 class ShareHeaderController: UIViewController, UISearchBarDelegate {
 
     var hashtag: String = ""
+    var backText: String!
     var delegate: ShareHeaderControllerDelegate!
     
     @IBOutlet weak var stepLabel: UILabel!
@@ -32,6 +33,8 @@ class ShareHeaderController: UIViewController, UISearchBarDelegate {
         self.stepLabel.textColor = UIColor(white: 0, alpha: 0.5)
         self.headerLabel.textColor = UIColor.whiteColor()
         self.headerLabel.text = "Invite your friends\nto post to \(self.hashtag)"
+        
+        self.backButton.setTitle(self.backText, forState: .Normal)
         
         // Configure Search Bar
         self.searchBar.delegate = self

@@ -28,7 +28,6 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var arrowButton: UIButton!
     @IBOutlet weak var timerButton: UIButton!
-    @IBOutlet weak var timerImage: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var hashtag: String = ""
@@ -91,11 +90,6 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         self.timerButton.layer.shadowOffset = CGSizeMake(-1, 1)
         self.timerButton.layer.shadowOpacity = 0.1
         self.timerButton.layer.shadowRadius = 0
-        self.timerImage.tintColor = UIColor.whiteColor()
-        self.timerImage.layer.shadowColor = UIColor.blackColor().CGColor
-        self.timerImage.layer.shadowOffset = CGSizeMake(-1, 1)
-        self.timerImage.layer.shadowOpacity = 0.1
-        self.timerImage.layer.shadowRadius = 0
         
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
@@ -190,7 +184,7 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     
     func setTimer(index: Int) {
         self.timer = self.timers[index]
-        self.timerButton.setTitle(self.timer.title, forState: .Normal)
+        self.timerButton.setTitle("⏲ \(self.timer.title)", forState: .Normal)
     }
     
     func imagesSelected(images: [UIImage]) {

@@ -46,6 +46,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFM
     }
     
     var hashtag: String = ""
+    var backText: String = "BACK"
     var images: [UIImage] = []
     var headerFrame: CGRect!
     var contacts: Contacts = Contacts()
@@ -90,6 +91,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFM
             self.headerController = segue.destinationViewController as? ShareHeaderController
             self.headerController?.delegate = self
             self.headerController.hashtag = self.hashtag
+            self.headerController.backText = self.backText
         }
     }
     
