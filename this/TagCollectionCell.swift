@@ -54,12 +54,12 @@ class TagCollectionCell: UICollectionViewCell {
     }
     
     func downloaded() {
-        UIView.animateWithDuration(0.25, animations: { () -> Void in
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
             self.label.alpha = 1
         })
         
-        Globals.delay(3) { () -> () in
-            UIView.animateWithDuration(0.25, animations: { () -> Void in
+        Globals.delay(1.5) { () -> () in
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
                 self.label.alpha = 0
             })
         }
