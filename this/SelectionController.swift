@@ -39,6 +39,18 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         self.getAssests()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.header?.placeholderView?.startAnimatingGIF()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.header?.placeholderView?.stopAnimatingGIF()
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "share" {
             let controller = segue.destinationViewController as? ShareController

@@ -65,15 +65,4 @@
     return YES;
 }
 
-- (CGSize)collectionViewContentSize{
-    CGSize size = [super collectionViewContentSize];
-    
-    CGFloat collectionViewWidth = self.collectionView.frame.size.width;
-    NSInteger nbOfScreens = (int)ceil((size.width / collectionViewWidth));
-    
-    CGSize newSize = CGSizeMake((nbOfScreens) * collectionViewWidth, size.height);
-    
-    return newSize;
-}
-
 @end

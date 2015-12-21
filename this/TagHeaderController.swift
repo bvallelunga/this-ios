@@ -100,7 +100,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     }
 
     @IBAction func followingTriggered(sender: AnyObject) {
-    
+        self.followingButton.setTitle("FOLLOW", forState: .Normal)
     }
     
     func shareControllerDismiss() {
@@ -143,8 +143,11 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! TagCollectionCell
         let image = self.images[indexPath.row]
         
-        cell.downloaded()
-        
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        if self.downloadMode {
+            cell.downloaded()
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        } else {
+            
+        }
     }
 }

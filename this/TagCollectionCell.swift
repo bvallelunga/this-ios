@@ -49,8 +49,9 @@ class TagCollectionCell: UICollectionViewCell {
     }
     
     func downloadMode(active: Bool) {
-        self.layer.borderWidth = active ? 2 : 1
+        self.layer.borderWidth = active ? 4 : 1
         self.layer.borderColor =  active ? Colors.blue.CGColor : UIColor(white: 0, alpha: 1).CGColor
+        self.label.alpha = 0
     }
     
     func downloaded() {
@@ -58,7 +59,7 @@ class TagCollectionCell: UICollectionViewCell {
             self.label.alpha = 1
         })
         
-        Globals.delay(1.5) { () -> () in
+        Globals.delay(1) { () -> () in
             UIView.animateWithDuration(0.2, animations: { () -> Void in
                 self.label.alpha = 0
             })

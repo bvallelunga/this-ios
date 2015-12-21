@@ -51,12 +51,15 @@ class LandingController: UIViewController {
         self.view.layer.insertSublayer(playerLayer, atIndex: 0)
         self.player.actionAtItemEnd = .None
         self.player.volume = 0
-        self.player.play()
         
         // Enable Movie Looping
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerRestart:"), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil)
         
-        self.performSegueWithIdentifier("next", sender: self)
+        if true {
+            self.performSegueWithIdentifier("next", sender: self)
+        } else {
+            self.player.play()
+        }
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
