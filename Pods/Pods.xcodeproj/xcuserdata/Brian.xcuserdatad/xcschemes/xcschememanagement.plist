@@ -49,6 +49,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>NYTPhotoViewer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -64,11 +69,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>UIView+Shimmer.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>libPhoneNumber-iOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -77,11 +77,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1943BB74C3E3C517EBA59715EE53F98C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>230F06C649365BFB9A3B54AAE6CD35CE</key>
 		<dict>
 			<key>primary</key>
@@ -92,7 +87,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2B9B4967C627BD7EAD329A7D29C2BC90</key>
+		<key>28D35BF4BA68566FC0F0A41FD7293F02</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2D720BA4E84B4627974AA1CC384CB3CC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -102,17 +102,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6973C9002952DD62FA059E7B008CF0DB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>833BAB1B8689BCB97EB8BD7D288FD91D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A7511DBA119C7994105748CF6708669D</key>
+		<key>8CF2C4ADC5FF9727BE837DA6B87AD165</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -143,6 +138,11 @@
 			<true/>
 		</dict>
 		<key>D3C5E102C1B048A039000AF20B205487</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E142AAA516EFFE1499EAF62FCA9DC56D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

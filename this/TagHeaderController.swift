@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import NYTPhotoViewer
 
 class TagHeaderController: UIViewController, UICollectionViewDelegate,
-    UICollectionViewDataSource, ShareControllerDelegate {
+    UICollectionViewDataSource, ShareControllerDelegate, NYTPhotosViewControllerDelegate {
 
     @IBOutlet weak var followingButton: UIButton!
     @IBOutlet weak var inviteButton: UIButton!
@@ -22,31 +23,30 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     private var layout = TagCollectionLayout()
     private var downloadMode: Bool = false
     private var images: [UIImage] = [
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-0")!,
+        UIImage(named: "Sample-1")!,
+        UIImage(named: "Sample-2")!,
         UIImage(named: "Sample-3")!,
         UIImage(named: "Sample-0")!,
+        UIImage(named: "Sample-1")!,
+        UIImage(named: "Sample-2")!,
         UIImage(named: "Sample-3")!,
-        UIImage(named: "Sample-1")!
+        UIImage(named: "Sample-0")!,
+        UIImage(named: "Sample-1")!,
+        UIImage(named: "Sample-2")!,
+        UIImage(named: "Sample-3")!,
+        UIImage(named: "Sample-0")!,
+        UIImage(named: "Sample-1")!,
+        UIImage(named: "Sample-2")!,
+        UIImage(named: "Sample-3")!,
+        UIImage(named: "Sample-0")!,
+        UIImage(named: "Sample-1")!,
+        UIImage(named: "Sample-2")!,
+        UIImage(named: "Sample-3")!,
+        UIImage(named: "Sample-0")!,
+        UIImage(named: "Sample-1")!,
+        UIImage(named: "Sample-2")!,
+        UIImage(named: "Sample-3")!,
+        UIImage(named: "Sample-0")!
     ]
     
     override func viewDidLoad() {
@@ -79,11 +79,11 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
 
     @IBAction func downloadTriggered(sender: AnyObject) {
         self.downloadMode = !self.downloadMode
-        self.downloadButton.tintColor = self.downloadMode ? Colors.blue : UIColor.whiteColor()
+        self.downloadButton.tintColor = self.downloadMode ? Colors.offBlue : UIColor.whiteColor()
         self.collectionView.reloadData()
         
         if self.downloadMode {
-            NavNotification.show("Tap Photos To Download", color: Colors.blue)
+            NavNotification.show("Tap Photos To Download", color: Colors.offBlue)
         }
     }
     
@@ -146,8 +146,63 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         if self.downloadMode {
             cell.downloaded()
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-        } else {
-            
+            return
         }
+        
+        var photos: [GalleryPhoto] = []
+        var intialPhoto: GalleryPhoto!
+        
+        for (i, image) in self.images.enumerate() {
+            let photo = GalleryPhoto(image: image, user: "@bvallelunga", postedAt: "\(i) hrs ago", hashtag: self.hashtag)
+            
+            photo.indexPath = NSIndexPath(forItem: i, inSection: 0)
+            
+            if i == indexPath.row {
+                intialPhoto = photo
+            }
+            
+            photos.append(photo)
+        }
+        
+        
+        let controller = NYTPhotosViewController(photos: photos, initialPhoto: intialPhoto)
+        
+        controller.delegate = self
+        controller.leftBarButtonItem.title = "Done"
+        
+        self.presentViewController(controller, animated: true, completion: nil)
     }
+    
+    func photosViewController(photosViewController: NYTPhotosViewController!, handleActionButtonTappedForPhoto photo: NYTPhoto!) -> Bool {
+        let image = photo as! GalleryPhoto
+        let text = "\(image.user) pic on \(self.hashtag) is epic!"
+        let controller = ShareGenerator.share(text, image: image.image)
+        photosViewController.presentViewController(controller, animated: true, completion: nil)
+        return true
+    }
+    
+    func photosViewController(photosViewController: NYTPhotosViewController!, referenceViewForPhoto photo: NYTPhoto!) -> UIView! {
+        return self.collectionView.cellForItemAtIndexPath((photo as! GalleryPhoto).indexPath!)
+    }
+}
+
+class GalleryPhoto: NSObject, NYTPhoto {
+    
+    var image: UIImage?
+    var indexPath: NSIndexPath?
+    var placeholderImage: UIImage?
+    var user: String = ""
+    var attributedCaptionTitle: NSAttributedString?
+    var attributedCaptionSummary: NSAttributedString?
+    var attributedCaptionCredit: NSAttributedString?
+    
+    init(image: UIImage?, user: String, postedAt: String, hashtag: String) {
+        self.image = image
+        self.user = user
+        self.attributedCaptionTitle = NSAttributedString(string: user, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+        self.attributedCaptionSummary =  NSAttributedString(string: postedAt, attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
+        self.attributedCaptionCredit = NSAttributedString(string: hashtag, attributes: [NSForegroundColorAttributeName: UIColor.darkGrayColor()])
+        super.init()
+    }
+    
 }

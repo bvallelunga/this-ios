@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '40C0E80E56B515EFCC151172'
-               BlueprintName = 'UIView+Shimmer'
+               BlueprintIdentifier = 'C5419A603C7995725EB7559A'
+               BlueprintName = 'NYTPhotoViewer'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'UIView_Shimmer.framework'>
+               BuildableName = 'NYTPhotoViewer.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
