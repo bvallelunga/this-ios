@@ -313,18 +313,18 @@ and Privacy Policy.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <containerView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" id="cj9-uA-tSZ">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="130"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <connections>
                                 <segue destination="Hyq-uP-HpV" kind="embed" identifier="header" id="Kbs-qZ-rKN"/>
                             </connections>
                         </containerView>
                         <view key="tableFooterView" contentMode="scaleToFill" id="qFa-LH-0dw">
-                            <rect key="frame" x="0.0" y="443.5" width="600" height="60"/>
+                            <rect key="frame" x="0.0" y="605.5" width="600" height="70"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3bR-Wp-Iyr">
-                                    <rect key="frame" x="30" y="5" width="540" height="50"/>
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3bR-Wp-Iyr">
+                                    <rect key="frame" x="30" y="5" width="540" height="35"/>
                                     <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="22"/>
                                     <state key="normal" title="Sign Out"/>
                                     <connections>
@@ -334,17 +334,17 @@ and Privacy Policy.</string>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="3bR-Wp-Iyr" secondAttribute="bottom" constant="5" id="8rY-lv-T85"/>
+                                <constraint firstAttribute="bottom" secondItem="3bR-Wp-Iyr" secondAttribute="bottom" constant="20" id="8rY-lv-T85"/>
                                 <constraint firstItem="3bR-Wp-Iyr" firstAttribute="width" secondItem="qFa-LH-0dw" secondAttribute="width" multiplier="0.9" id="aWf-dV-Fcr"/>
                                 <constraint firstItem="3bR-Wp-Iyr" firstAttribute="centerX" secondItem="qFa-LH-0dw" secondAttribute="centerX" id="b3f-dP-Ntw"/>
-                                <constraint firstItem="3bR-Wp-Iyr" firstAttribute="top" secondItem="qFa-LH-0dw" secondAttribute="top" constant="5" id="uwR-kg-sEV"/>
+                                <constraint firstItem="3bR-Wp-Iyr" firstAttribute="top" secondItem="qFa-LH-0dw" secondAttribute="top" id="uwR-kg-sEV"/>
                             </constraints>
                         </view>
                         <sections>
                             <tableViewSection headerTitle="About Me" id="Bso-wg-59Z">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="IzZ-gA-3C2" detailTextLabel="vNQ-CI-7Qf" style="IBUITableViewCellStyleValue1" id="3q0-fw-UJj">
-                                        <rect key="frame" x="0.0" y="199.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="179.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3q0-fw-UJj" id="vUW-a9-cim">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -369,10 +369,10 @@ and Privacy Policy.</string>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Help &amp; LEgal" id="LT3-0N-XWD">
+                            <tableViewSection headerTitle="Help" id="LT3-0N-XWD">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" textLabel="DKN-TI-qMV" style="IBUITableViewCellStyleDefault" id="B2a-uE-Qni">
-                                        <rect key="frame" x="0.0" y="293.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="273.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B2a-uE-Qni" id="AFb-JS-FaL">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
@@ -389,7 +389,7 @@ and Privacy Policy.</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" textLabel="Tet-4U-iei" style="IBUITableViewCellStyleDefault" id="x9z-bv-3PC">
-                                        <rect key="frame" x="0.0" y="337.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="317.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x9z-bv-3PC" id="KSn-Ll-mSL">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
@@ -406,13 +406,68 @@ and Privacy Policy.</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" textLabel="9b2-2k-cOy" style="IBUITableViewCellStyleDefault" id="1hq-Qh-pB4">
-                                        <rect key="frame" x="0.0" y="381.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="361.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1hq-Qh-pB4" id="jg0-sn-MXC">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Terms of Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9b2-2k-cOy">
+                                                    <rect key="frame" x="15" y="0.0" width="550" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="People" id="8kz-vX-e9B">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" textLabel="Vcy-N4-HoF" style="IBUITableViewCellStyleDefault" id="nQU-6F-Ixh">
+                                        <rect key="frame" x="0.0" y="455.5" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nQU-6F-Ixh" id="DEb-vd-Xpn">
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Invite Facebook Friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vcy-N4-HoF">
+                                                    <rect key="frame" x="15" y="0.0" width="550" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" textLabel="Xug-yx-V2X" style="IBUITableViewCellStyleDefault" id="oJm-dV-yaQ">
+                                        <rect key="frame" x="0.0" y="499.5" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oJm-dV-yaQ" id="njR-QZ-euh">
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Tweet #this" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Xug-yx-V2X">
+                                                    <rect key="frame" x="15" y="0.0" width="550" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" textLabel="Uru-Zx-VrP" style="IBUITableViewCellStyleDefault" id="dYK-bF-aDw">
+                                        <rect key="frame" x="0.0" y="543.5" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dYK-bF-aDw" id="XFL-pT-tkY">
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Review on the App Store" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Uru-Zx-VrP">
                                                     <rect key="frame" x="15" y="0.0" width="550" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -1210,8 +1265,12 @@ and Privacy Policy.</string>
         <scene sceneID="srf-po-2CZ">
             <objects>
                 <viewController id="Hyq-uP-HpV" customClass="ProfileHeaderController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cMf-Xq-Qff"/>
+                        <viewControllerLayoutGuide type="bottom" id="JJg-XA-F1h"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="lbG-Y4-IaF">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="130"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K7L-0j-l5l">
@@ -1232,14 +1291,14 @@ and Privacy Policy.</string>
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KA8-zm-Xev">
-                                <rect key="frame" x="0.0" y="148" width="600" height="2"/>
+                                <rect key="frame" x="0.0" y="128" width="600" height="2"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.095323741010000004" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="YSq-sK-dju"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8i-QC-VH6">
-                                <rect key="frame" x="15" y="45" width="525" height="70"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g8i-QC-VH6">
+                                <rect key="frame" x="15" y="34" width="525" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ua8-Yw-KZB">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>

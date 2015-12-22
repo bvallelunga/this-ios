@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Social
+import SafariServices
 
 class ProfileController: UITableViewController {
 
@@ -60,17 +62,27 @@ class ProfileController: UITableViewController {
         
         if indexPath.section == 0 {
             self.updateName()
-        } else if indexPath.row == 0 {
-            self.FAQs()
-        } else if indexPath.row == 1 {
-            self.privacyPolicy()
-        } else if indexPath.row == 2 {
-            self.termsOfService()
+        } else if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                self.FAQs()
+            } else if indexPath.row == 1 {
+                self.privacyPolicy()
+            } else if indexPath.row == 2 {
+                self.termsOfService()
+            }
+        } else if indexPath.section == 2 {
+            if indexPath.row == 0 {
+                self.shareFacebook()
+            } else if indexPath.row == 1 {
+                self.shareTwitter()
+            } else if indexPath.row == 2 {
+                self.rateApp()
+            }
         }
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 55
+        return 50
     }
     
     @IBAction func signoutTriggered(sender: AnyObject) {
@@ -105,15 +117,59 @@ class ProfileController: UITableViewController {
         self.presentViewController(controller, animated: true, completion: nil)
     }
     
-    func FAQs() {
+    func rateApp() {
+        let url = NSURL(string: "itms-apps://itunes.apple.com/app/id\(123)")
+        UIApplication.sharedApplication().openURL(url!)
+    }
     
+    func shareFacebook() {
+        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
+            let sheet = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+            
+            sheet.setInitialText("NEEDS TO CHANGE")
+            sheet.addImage(UIImage(named: "Sample-0"))
+            
+            self.presentViewController(sheet, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func shareTwitter() {
+        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter){
+            let sheet = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+            
+            sheet.setInitialText("NEEDS TO CHANGE")
+            sheet.addImage(UIImage(named: "Sample-0"))
+            
+            self.presentViewController(sheet, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func FAQs() {
+        let url = NSURL(string: "http://www.google.com")
+        let controller =  SFSafariViewController(URL: url!)
+        
+        self.presentViewController(controller, animated: true, completion: nil)
     }
     
     func privacyPolicy() {
-    
+        let url = NSURL(string: "http://www.google.com")
+        let controller =  SFSafariViewController(URL: url!)
+        
+        self.presentViewController(controller, animated: true, completion: nil)
     }
     
     func termsOfService() {
-    
+        let url = NSURL(string: "http://www.google.com")
+        let controller =  SFSafariViewController(URL: url!)
+        
+        self.presentViewController(controller, animated: true, completion: nil)
     }
 }
