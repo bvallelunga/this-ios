@@ -30,7 +30,7 @@ class ProfileHeaderController: UIViewController, UIImagePickerControllerDelegate
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(-1000, -1000),
             forBarMetrics: UIBarMetrics.Default)
         
-        self.avatarButton.clipsToBounds = true
+        self.avatarButton.layer.masksToBounds = true
         self.avatarButton.contentMode = .ScaleAspectFill
         self.avatarButton.backgroundColor = UIColor(white: 0, alpha: 0.1)
         self.avatarButton.tintColor = UIColor(white: 1, alpha: 0.4)

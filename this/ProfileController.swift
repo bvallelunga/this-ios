@@ -13,11 +13,20 @@ class ProfileController: UITableViewController {
     var headerFrame: CGRect!
     var headerController: ProfileHeaderController!
     
+    @IBOutlet weak var signoutButton: UIButton!
+    @IBOutlet weak var nameLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.edgesForExtendedLayout = .None
         self.navigationController?.navigationBarHidden = true
+        self.tableView.backgroundColor = UIColor(red:0.99, green:0.99, blue:0.99, alpha:1)
+        self.tableView.separatorColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:1)
+        
+        self.signoutButton.backgroundColor = Colors.red
+        self.signoutButton.tintColor = UIColor.whiteColor()
+        self.signoutButton.layer.cornerRadius = 6
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -45,13 +54,66 @@ class ProfileController: UITableViewController {
         
         self.headerController.view.frame = rect
     }
-
-    // MARK: - Table view data source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 0
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        if indexPath.section == 0 {
+            self.updateName()
+        } else if indexPath.row == 0 {
+            self.FAQs()
+        } else if indexPath.row == 1 {
+            self.privacyPolicy()
+        } else if indexPath.row == 2 {
+            self.termsOfService()
+        }
     }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 55
+    }
+    
+    @IBAction func signoutTriggered(sender: AnyObject) {
+        let controller = UIAlertController(title: "You Sure?", message: nil, preferredStyle: .Alert)
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let save = UIAlertAction(title: "Sign Out", style: .Destructive) { (action) -> Void in
+            Globals.landingController.navigationController?.popToRootViewControllerAnimated(false)
+        }
+        
+        controller.addAction(cancel)
+        controller.addAction(save)
+        
+        self.presentViewController(controller, animated: true, completion: nil)
+    }
+    
+    func updateName() {
+        let controller = UIAlertController(title: "Gotta Name?", message: nil, preferredStyle: .Alert)
+        let cancel = UIAlertAction(title: "Cancel", style: .Destructive, handler: nil)
+        let save = UIAlertAction(title: "Save", style: .Default) { (action) -> Void in
+            let name = controller.textFields?.first?.text
+            
+            self.nameLabel.text = name
+        }
+        
+        controller.addTextFieldWithConfigurationHandler { (textField) -> Void in
+            textField.placeholder = "Name"
+        }
+        
+        controller.addAction(cancel)
+        controller.addAction(save)
+        
+        self.presentViewController(controller, animated: true, completion: nil)
+    }
+    
+    func FAQs() {
+    
+    }
+    
+    func privacyPolicy() {
+    
+    }
+    
+    func termsOfService() {
+    
     }
 }

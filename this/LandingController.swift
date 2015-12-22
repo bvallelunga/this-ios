@@ -57,8 +57,6 @@ class LandingController: UIViewController {
         
         if true {
             self.performSegueWithIdentifier("next", sender: self)
-        } else {
-            self.player.play()
         }
     }
     
@@ -68,6 +66,12 @@ class LandingController: UIViewController {
     
     func playerRestart(notification: NSNotification) {
         self.player.currentItem?.seekToTime(kCMTimeZero)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.player.play()
     }
     
     override func viewDidDisappear(animated: Bool) {

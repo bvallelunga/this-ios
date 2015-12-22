@@ -154,10 +154,6 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     }
 
     @IBAction func goToSettings(sender: AnyObject) {
-        //Globals.landingController.navigationController?.popToRootViewControllerAnimated(false)
-        
-        
-        // TODO: Uncomment
         Globals.pagesController.setActiveController(0, direction: .Reverse)
     }
     
