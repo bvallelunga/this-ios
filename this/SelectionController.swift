@@ -191,17 +191,12 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     }
     
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        switch kind {
-            case IOStickyHeaderParallaxHeader:
-                let cell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "header", forIndexPath: indexPath) as! SelectionHeader
-                
-                cell.delegate = self
-                self.header = cell
-                
-                return cell
-            default:
-                assert(false, "Unexpected element kind")
-        }
+        let cell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "header", forIndexPath: indexPath) as! SelectionHeader
+        
+        cell.delegate = self
+        self.header = cell
+        
+        return cell
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {

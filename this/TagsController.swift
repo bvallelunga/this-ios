@@ -47,8 +47,6 @@ class TagsController: UIViewController {
         self.navigationController?.navigationBar.translucent = false
         self.navigationController?.navigationBar.barTintColor = Colors.lightGrey
         self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
-        
-        // Set Back Button Color
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
         // Remove Text From Back Button

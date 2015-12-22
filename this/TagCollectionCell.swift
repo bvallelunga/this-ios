@@ -50,7 +50,7 @@ class TagCollectionCell: UICollectionViewCell {
     }
     
     func downloadMode(active: Bool) {
-        self.layer.borderColor =  active ? Colors.offBlue.CGColor : UIColor(white: 0, alpha: 1).CGColor
+        self.layer.borderColor =  active ? Colors.blue.CGColor : UIColor(white: 0, alpha: 1).CGColor
         self.label.alpha = 0
     }
     

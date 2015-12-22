@@ -83,7 +83,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         self.collectionView.reloadData()
         
         if self.downloadMode {
-            NavNotification.show("Tap Photos To Download", color: Colors.offBlue)
+            NavNotification.show("Tap Photos To Download", color: Colors.blue)
         }
     }
     
