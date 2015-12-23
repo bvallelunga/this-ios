@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Bariol_Bold.ttf">
@@ -151,10 +152,18 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Timer" translatesAutoresizingMaskIntoConstraints="NO" id="fVK-ks-aT8">
+                        <rect key="frame" x="20" y="366" width="30" height="25"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="bzV-Ol-imb"/>
+                        </constraints>
+                    </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HKK-Hn-PVx">
-                        <rect key="frame" x="20" y="358" width="127" height="42"/>
+                        <rect key="frame" x="52" y="355" width="127" height="45"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="127" id="RvJ-Lt-Hh1"/>
+                            <constraint firstAttribute="height" constant="45" id="luc-3p-jUb"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="30"/>
                         <state key="normal" title="Button">
@@ -175,6 +184,7 @@
                 <constraint firstItem="tBc-If-Uhi" firstAttribute="centerY" secondItem="EcJ-03-fEE" secondAttribute="centerY" id="88B-Ik-9IM"/>
                 <constraint firstAttribute="bottom" secondItem="HKK-Hn-PVx" secondAttribute="bottom" constant="20" id="913-fb-WAg"/>
                 <constraint firstItem="HKK-Hn-PVx" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" constant="20" id="9BD-yK-s3u"/>
+                <constraint firstItem="fVK-ks-aT8" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" constant="20" id="AAL-8Z-fBi"/>
                 <constraint firstItem="0c0-RK-aHc" firstAttribute="centerY" secondItem="EcJ-03-fEE" secondAttribute="centerY" id="Csf-PF-edq"/>
                 <constraint firstItem="sEE-QU-oI6" firstAttribute="centerY" secondItem="OVO-P5-zWt" secondAttribute="centerY" id="Hdj-ca-ntX"/>
                 <constraint firstAttribute="trailing" secondItem="1i5-Lz-ZAT" secondAttribute="trailing" constant="20" id="OdC-R6-pep"/>
@@ -186,10 +196,13 @@
                 <constraint firstAttribute="bottom" secondItem="1i5-Lz-ZAT" secondAttribute="bottom" constant="20" id="Z9n-fg-id5"/>
                 <constraint firstItem="EcJ-03-fEE" firstAttribute="top" secondItem="OVO-P5-zWt" secondAttribute="top" constant="35" id="Zs5-bI-RwL"/>
                 <constraint firstAttribute="trailing" secondItem="2tu-ng-h4x" secondAttribute="trailing" constant="8" id="a73-CW-lT3"/>
+                <constraint firstItem="HKK-Hn-PVx" firstAttribute="height" secondItem="fVK-ks-aT8" secondAttribute="height" multiplier="1.8" id="aMr-aH-41z"/>
+                <constraint firstItem="HKK-Hn-PVx" firstAttribute="leading" secondItem="fVK-ks-aT8" secondAttribute="trailing" constant="2" id="ah4-ow-DzM"/>
                 <constraint firstItem="xYA-3x-S0m" firstAttribute="centerY" secondItem="OVO-P5-zWt" secondAttribute="centerY" id="ba2-kf-215"/>
                 <constraint firstItem="0c0-RK-aHc" firstAttribute="leading" secondItem="tBc-If-Uhi" secondAttribute="trailing" constant="8" id="cBi-3U-CsA"/>
                 <constraint firstItem="tBc-If-Uhi" firstAttribute="centerY" secondItem="EcJ-03-fEE" secondAttribute="centerY" id="cHK-Ge-LIn"/>
                 <constraint firstItem="HKK-Hn-PVx" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" constant="20" id="ep5-cH-6QM"/>
+                <constraint firstAttribute="bottom" secondItem="fVK-ks-aT8" secondAttribute="bottom" constant="20" id="fhU-f8-1t1"/>
                 <constraint firstItem="tBc-If-Uhi" firstAttribute="leading" secondItem="EcJ-03-fEE" secondAttribute="trailing" constant="8" id="ftK-l5-wVZ"/>
                 <constraint firstItem="tBc-If-Uhi" firstAttribute="top" secondItem="OVO-P5-zWt" secondAttribute="top" constant="35" id="gKK-jl-j97"/>
                 <constraint firstItem="2tu-ng-h4x" firstAttribute="top" secondItem="xYA-3x-S0m" secondAttribute="bottom" id="kFf-bv-gIh"/>
@@ -197,8 +210,10 @@
                 <constraint firstItem="sEE-QU-oI6" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" id="okf-gN-HUU"/>
                 <constraint firstItem="uv0-dZ-e3e" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" constant="8" id="q44-zN-zJQ"/>
                 <constraint firstItem="EcJ-03-fEE" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" constant="20" id="rSW-dp-cCj"/>
+                <constraint firstItem="HKK-Hn-PVx" firstAttribute="centerY" secondItem="fVK-ks-aT8" secondAttribute="centerY" id="sWc-05-yTZ"/>
                 <constraint firstItem="0c0-RK-aHc" firstAttribute="top" secondItem="OVO-P5-zWt" secondAttribute="top" constant="35" id="v51-CV-nio"/>
                 <constraint firstItem="uv0-dZ-e3e" firstAttribute="top" secondItem="tBc-If-Uhi" secondAttribute="bottom" id="vpq-51-0zH"/>
+                <constraint firstItem="fVK-ks-aT8" firstAttribute="height" secondItem="HKK-Hn-PVx" secondAttribute="height" id="y00-6Q-dM6"/>
                 <constraint firstItem="xYA-3x-S0m" firstAttribute="centerX" secondItem="OVO-P5-zWt" secondAttribute="centerX" id="zab-iE-YJN"/>
                 <constraint firstAttribute="trailing" secondItem="sEE-QU-oI6" secondAttribute="trailing" id="zsM-La-lJ9"/>
             </constraints>
@@ -210,8 +225,11 @@
                     <exclude reference="gKK-jl-j97"/>
                     <exclude reference="Hdj-ca-ntX"/>
                     <exclude reference="oee-Au-BAy"/>
+                    <exclude reference="fhU-f8-1t1"/>
+                    <exclude reference="y00-6Q-dM6"/>
                     <exclude reference="7MZ-EL-eeb"/>
                     <exclude reference="9BD-yK-s3u"/>
+                    <exclude reference="ep5-cH-6QM"/>
                     <exclude reference="6gj-Zn-dMu"/>
                     <exclude reference="v51-CV-nio"/>
                 </mask>
@@ -224,6 +242,7 @@
                 <outlet property="tagField" destination="tBc-If-Uhi" id="Zbz-2d-qc2"/>
                 <outlet property="tagLabel" destination="uv0-dZ-e3e" id="UHy-vV-y2l"/>
                 <outlet property="timerButton" destination="HKK-Hn-PVx" id="WbB-7v-7sQ"/>
+                <outlet property="timerImage" destination="fVK-ks-aT8" id="DKM-d8-zL5"/>
             </connections>
             <point key="canvasLocation" x="418" y="128"/>
         </collectionViewCell>
@@ -232,5 +251,6 @@
         <image name="Arrow" width="512" height="512"/>
         <image name="Profile" width="700" height="700"/>
         <image name="Tags" width="700" height="700"/>
+        <image name="Timer" width="700" height="700"/>
     </resources>
 </document>

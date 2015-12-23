@@ -19,7 +19,7 @@ struct SelectionTimer {
 }
 
 class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
-    UICollectionViewDataSource, UICollectionViewDelegate {
+    UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var placeholderView: FLAnimatedImageView!
     @IBOutlet weak var placeholderLabel: UILabel!
@@ -28,6 +28,7 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     @IBOutlet weak var arrowButton: UIButton!
     @IBOutlet weak var timerButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var timerImage: UIImageView!
     
     private var hashtag: String = ""
     private var arrowAnimation = CABasicAnimation(keyPath: "transform")
@@ -70,6 +71,7 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         self.tagField.layer.shadowOpacity = 1
         self.tagField.layer.shadowRadius = 0
         self.tagField.font = UIFont(name: "Bariol-Bold", size: 36)
+        self.tagField.delegate = self
         self.tagField.addTarget(self.tagField, action: Selector("resignFirstResponder"),
             forControlEvents: .EditingDidEndOnExit)
         
@@ -92,6 +94,10 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         self.timerButton.layer.shadowOffset = CGSizeMake(-1, 1)
         self.timerButton.layer.shadowOpacity = 0.1
         self.timerButton.layer.shadowRadius = 0
+        self.timerImage.tintColor = UIColor.whiteColor()
+        self.timerImage.layer.shadowOffset = CGSizeMake(-1, 1)
+        self.timerImage.layer.shadowOpacity = 0.1
+        self.timerImage.layer.shadowRadius = 0
         
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
@@ -159,6 +165,10 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         Globals.pagesController.setActiveController(0, direction: .Reverse)
     }
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textField.selectAll(self)
+    }
+    
     func handleSingleTap(gesture: UITapGestureRecognizer) {
         self.endEditing(true)
     }
@@ -181,7 +191,7 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     
     func setTimer(index: Int) {
         self.timer = self.timers[index]
-        self.timerButton.setTitle("⏲ \(self.timer.title)", forState: .Normal)
+        self.timerButton.setTitle(self.timer.title, forState: .Normal)
     }
     
     func imagesSelected(images: [UIImage]) {

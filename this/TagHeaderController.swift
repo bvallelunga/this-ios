@@ -54,7 +54,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         
         self.view.backgroundColor = Colors.darkGrey
         
-        self.layout.minimumInteritemSpacing = 20
+        self.layout.minimumInteritemSpacing = 10
         self.layout.minimumLineSpacing = 10
         
         self.collectionView.dataSource = self
@@ -79,7 +79,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
 
     @IBAction func downloadTriggered(sender: AnyObject) {
         self.downloadMode = !self.downloadMode
-        self.downloadButton.tintColor = self.downloadMode ? Colors.offBlue : UIColor.whiteColor()
+        self.downloadButton.tintColor = self.downloadMode ? Colors.blue : UIColor.whiteColor()
         self.collectionView.reloadData()
         
         if self.downloadMode {

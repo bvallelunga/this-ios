@@ -807,7 +807,7 @@ and Privacy Policy.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <containerView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" id="Qsn-Df-6gA">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="375"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <connections>
                                 <segue destination="cxi-M1-E8G" kind="embed" identifier="header" id="EGU-ne-ZpE"/>
@@ -815,7 +815,7 @@ and Privacy Policy.</string>
                         </containerView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="cell" textLabel="fbh-ij-inS" style="IBUITableViewCellStyleDefault" id="4Xk-zr-Vzx">
-                                <rect key="frame" x="0.0" y="428" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="403" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Xk-zr-Vzx" id="d3U-BK-buI">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -1085,11 +1085,11 @@ and Privacy Policy.</string>
                         <viewControllerLayoutGuide type="bottom" id="pcP-lq-Rah"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="I7d-du-gr6">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1dm-hU-i8N">
-                                <rect key="frame" x="0.0" y="335" width="600" height="65"/>
+                                <rect key="frame" x="0.0" y="310" width="600" height="65"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YjL-hV-bzz">
                                         <rect key="frame" x="15" y="10" width="175" height="45"/>
@@ -1168,13 +1168,13 @@ and Privacy Policy.</string>
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3hb-En-b6V">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="305"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="280"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="g43-07-5zK">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="305"/>
+                                        <rect key="frame" x="0.0" y="-0.5" width="600" height="280"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="305" id="Hb3-Wk-Xmh"/>
+                                            <constraint firstAttribute="height" constant="280" id="Hb3-Wk-Xmh"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mHg-MH-TLQ">
                                             <size key="itemSize" width="50" height="50"/>
@@ -1213,7 +1213,7 @@ and Privacy Policy.</string>
                                 </variation>
                             </view>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="kgh-Er-Gfo">
-                                <rect key="frame" x="0.0" y="305" width="600" height="30"/>
+                                <rect key="frame" x="0.0" y="280" width="600" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="ge4-hj-hcd"/>
                                     <constraint firstAttribute="width" constant="97" id="xHK-97-cil"/>

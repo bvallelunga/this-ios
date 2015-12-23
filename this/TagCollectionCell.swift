@@ -31,7 +31,6 @@ class TagCollectionCell: UICollectionViewCell {
         self.layer.masksToBounds = true
         self.backgroundColor = Colors.lightGrey
         self.layer.cornerRadius = 4
-        self.layer.borderWidth = 1
         
         self.imageView.frame = self.bounds
         self.imageView.contentMode = .ScaleAspectFill
@@ -50,7 +49,8 @@ class TagCollectionCell: UICollectionViewCell {
     }
     
     func downloadMode(active: Bool) {
-        self.layer.borderColor =  active ? Colors.blue.CGColor : UIColor(white: 0, alpha: 1).CGColor
+        self.layer.borderWidth = active ? 2 : 1
+        self.layer.borderColor = active ? Colors.blue.CGColor : UIColor(white: 0, alpha: 1).CGColor
         self.label.alpha = 0
     }
     

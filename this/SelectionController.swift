@@ -172,7 +172,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
             
             cell.upload = self.selected[asset] != nil
             cell.layer.borderColor = Colors.green.CGColor
-            cell.layer.borderWidth = cell.upload ? 3 : 0
+            cell.layer.borderWidth = cell.upload ? 5 : 0
             
             cell.tag = Int(self.manager.requestImageForAsset(asset,
                 targetSize: cell.frame.size,
@@ -222,7 +222,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         options.deliveryMode = .HighQualityFormat
         
         cell.upload = !cell.upload
-        cell.layer.borderWidth = cell.upload ? 3 : 0
+        cell.layer.borderWidth = cell.upload ? 5 : 0
         
         if cell.upload {
             self.manager.requestImageDataForAsset(asset, options: options) { (imageData, dataUTI, orientation, info) -> Void in
