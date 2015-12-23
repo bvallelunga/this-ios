@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Config.update(nil)
         
         // Create Installation
-        //Installation.startup()
+        Installation.currentInstallation().startup()
         
         // Configure Settings Panel
         StateTracker.appVersion = Globals.appBuildVersion()

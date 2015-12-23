@@ -55,7 +55,7 @@ class LandingController: UIViewController {
         // Enable Movie Looping
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerRestart:"), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil)
         
-        if true {
+        if User.current() != nil {
             self.performSegueWithIdentifier("next", sender: self)
         }
     }

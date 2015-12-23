@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  Comment.swift
 //  this
 //
 //  Created by Brian Vallelunga on 12/23/15.
@@ -9,14 +9,12 @@
 import UIKit
 import Parse
 
-var staticUser: User!
-
-class User: PFUser {
+class Comment: PFObject {
     
     // Instance Variables
-    @NSManaged var fullName: String
-    @NSManaged var phoneNumber: String
-    
+    @NSManaged var user: User
+    @NSManaged var tag: Tag
+    @NSManaged var message: String
     
     // Parse Setup
     override class func initialize() {
@@ -28,8 +26,8 @@ class User: PFUser {
         }
     }
     
-    class func current() -> User! {
-        return staticUser != nil ? staticUser : User.currentUser()
+    static func parseClassName() -> String {
+        return "Comment"
     }
 
 }

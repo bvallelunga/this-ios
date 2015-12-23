@@ -20,6 +20,11 @@
 		D32D18BF1C224B3B0097D653 /* TagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D18BE1C224B3B0097D653 /* TagController.swift */; };
 		D32D18C11C24EDC70097D653 /* TagHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D18C01C24EDC70097D653 /* TagHeaderController.swift */; };
 		D32D18C31C24F4790097D653 /* TagTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D18C21C24F4790097D653 /* TagTableController.swift */; };
+		D33B13DC1C2AA2A000C54DB9 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B13DB1C2AA2A000C54DB9 /* Tag.swift */; };
+		D33B13DE1C2AA2E600C54DB9 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B13DD1C2AA2E600C54DB9 /* Photo.swift */; };
+		D33B13E01C2AA36300C54DB9 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B13DF1C2AA36300C54DB9 /* Comment.swift */; };
+		D33B13E21C2AA47200C54DB9 /* Installation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B13E11C2AA47200C54DB9 /* Installation.swift */; };
+		D33B13E41C2AA58800C54DB9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B13E31C2AA58800C54DB9 /* Config.swift */; };
 		D35AF8F61C1E4E610024D7E3 /* SelectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D35AF8F51C1E4E610024D7E3 /* SelectionHeader.xib */; };
 		D35AF9011C1E70ED0024D7E3 /* SelectionPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35AF9001C1E70ED0024D7E3 /* SelectionPhotoCell.swift */; };
 		D35AF9031C1E79340024D7E3 /* Placeholder.gif in Resources */ = {isa = PBXBuildFile; fileRef = D35AF9021C1E79340024D7E3 /* Placeholder.gif */; };
@@ -103,6 +108,11 @@
 		D32D18BE1C224B3B0097D653 /* TagController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagController.swift; sourceTree = "<group>"; };
 		D32D18C01C24EDC70097D653 /* TagHeaderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagHeaderController.swift; sourceTree = "<group>"; };
 		D32D18C21C24F4790097D653 /* TagTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTableController.swift; sourceTree = "<group>"; };
+		D33B13DB1C2AA2A000C54DB9 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		D33B13DD1C2AA2E600C54DB9 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		D33B13DF1C2AA36300C54DB9 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		D33B13E11C2AA47200C54DB9 /* Installation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Installation.swift; sourceTree = "<group>"; };
+		D33B13E31C2AA58800C54DB9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D35AF8F51C1E4E610024D7E3 /* SelectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionHeader.xib; sourceTree = "<group>"; };
 		D35AF9001C1E70ED0024D7E3 /* SelectionPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionPhotoCell.swift; sourceTree = "<group>"; };
 		D35AF9021C1E79340024D7E3 /* Placeholder.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Placeholder.gif; sourceTree = "<group>"; };
@@ -273,6 +283,30 @@
 			name = Tag;
 			sourceTree = "<group>";
 		};
+		D33B13D91C2AA24D00C54DB9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D3E293111C1BA4FE00925EAC /* Colors.swift */,
+				D3E293191C1BB66D00925EAC /* Globals.swift */,
+				D3C958D81C2A979700B6EE9D /* StateTracker.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		D33B13DA1C2AA25F00C54DB9 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				D3C958D61C2A94E700B6EE9D /* User.swift */,
+				D33B13DB1C2AA2A000C54DB9 /* Tag.swift */,
+				D33B13DD1C2AA2E600C54DB9 /* Photo.swift */,
+				D33B13DF1C2AA36300C54DB9 /* Comment.swift */,
+				D39AB7441C1FAE2900C9E96F /* Contact.swift */,
+				D33B13E11C2AA47200C54DB9 /* Installation.swift */,
+				D33B13E31C2AA58800C54DB9 /* Config.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		D370FE691C200DAC00769EBA /* Tags */ = {
 			isa = PBXGroup;
 			children = (
@@ -404,11 +438,8 @@
 		D3E293101C1BA4EB00925EAC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D3E293111C1BA4FE00925EAC /* Colors.swift */,
-				D3E293191C1BB66D00925EAC /* Globals.swift */,
-				D39AB7441C1FAE2900C9E96F /* Contact.swift */,
-				D3C958D61C2A94E700B6EE9D /* User.swift */,
-				D3C958D81C2A979700B6EE9D /* StateTracker.swift */,
+				D33B13D91C2AA24D00C54DB9 /* Helpers */,
+				D33B13DA1C2AA25F00C54DB9 /* Data */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -634,7 +665,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D33B13DE1C2AA2E600C54DB9 /* Photo.swift in Sources */,
 				D39AB7471C1FDDB300C9E96F /* ShareTableCell.swift in Sources */,
+				D33B13E41C2AA58800C54DB9 /* Config.swift in Sources */,
 				D3E293201C1C097B00925EAC /* AuthStepVerify.swift in Sources */,
 				D3C2D2FF1C27BDB6002F0241 /* TagCollectionCell.swift in Sources */,
 				D3C2D2FD1C27B0E1002F0241 /* TagCollectionLayout.m in Sources */,
@@ -648,6 +681,7 @@
 				D3E293181C1BA92900925EAC /* ProgressBar.swift in Sources */,
 				D39AB74A1C1FFBDC00C9E96F /* TrendingController.swift in Sources */,
 				D3E293221C1C16EA00925EAC /* AuthStepUsername.swift in Sources */,
+				D33B13DC1C2AA2A000C54DB9 /* Tag.swift in Sources */,
 				D35AF9011C1E70ED0024D7E3 /* SelectionPhotoCell.swift in Sources */,
 				D39AB7431C1F8AC800C9E96F /* ShareHeaderController.swift in Sources */,
 				D32D18BF1C224B3B0097D653 /* TagController.swift in Sources */,
@@ -660,8 +694,10 @@
 				D32D18C31C24F4790097D653 /* TagTableController.swift in Sources */,
 				D3CFC9E31C1E416000E7C5B4 /* SelectionController.swift in Sources */,
 				D394D3681C1E85B000CB0FE9 /* SelectionCameraCell.swift in Sources */,
+				D33B13E01C2AA36300C54DB9 /* Comment.swift in Sources */,
 				D3CFC9E51C1E490800E7C5B4 /* SelectionHeader.swift in Sources */,
 				D3C958D71C2A94E700B6EE9D /* User.swift in Sources */,
+				D33B13E21C2AA47200C54DB9 /* Installation.swift in Sources */,
 				D3E293061C1B7DFC00925EAC /* LandingController.swift in Sources */,
 				D39AB7411C1F8A9800C9E96F /* ShareController.swift in Sources */,
 				D3D240481C27FC5F00917AE3 /* ShareGenerator.swift in Sources */,
