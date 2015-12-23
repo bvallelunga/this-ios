@@ -8,13 +8,14 @@
 
 import UIKit
 import Social
-import SafariServices
+import JSQWebViewController
 
 class ProfileController: UITableViewController {
 
     private var headerFrame: CGRect!
     private var headerController: ProfileHeaderController!
     private var user = User.current()
+    private var config: Config!
     
     @IBOutlet weak var signoutButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
@@ -34,6 +35,10 @@ class ProfileController: UITableViewController {
         self.signoutButton.layer.cornerRadius = 6
         
         self.nameLabel.text = self.user.fullName
+        
+        Config.sharedInstance { (config) -> Void in
+            self.config = config
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -165,17 +170,24 @@ class ProfileController: UITableViewController {
     }
     
     func FAQs() {
-        let url = NSURL(string: "http://www.google.com")
-        UIApplication.sharedApplication().openURL(url!)
+        let url = NSURL(string: self.config.faqsURL)
+        self.presentBrowser(url!)
     }
     
     func privacyPolicy() {
-        let url = NSURL(string: "http://www.google.com")
-        UIApplication.sharedApplication().openURL(url!)
+        let url = NSURL(string: self.config.privacyURL)
+        self.presentBrowser(url!)
     }
     
     func termsOfService() {
-        let url = NSURL(string: "http://www.google.com")
-        UIApplication.sharedApplication().openURL(url!)
+        let url = NSURL(string: self.config.termsURL)
+        self.presentBrowser(url!)
+    }
+    
+    func presentBrowser(url: NSURL) {
+        let controller = WebViewController(url: url)
+        let nav = UINavigationController(rootViewController: controller)
+        
+        self.presentViewController(nav, animated: true, completion: nil)
     }
 }

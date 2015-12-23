@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Update Config
-        //Config.update(nil)
+        Config.update(nil)
         
         // Create Installation
         Installation.startup()

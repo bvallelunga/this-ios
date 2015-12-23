@@ -52,6 +52,7 @@ class TagCollectionCell: UICollectionViewCell {
         self.layer.borderWidth = active ? 2 : 1
         self.layer.borderColor = active ? Colors.blue.CGColor : UIColor(white: 0, alpha: 1).CGColor
         self.label.alpha = 0
+        self.alpha = 1
     }
     
     func downloaded() {
@@ -62,6 +63,8 @@ class TagCollectionCell: UICollectionViewCell {
         Globals.delay(1) { () -> () in
             UIView.animateWithDuration(0.15, animations: { () -> Void in
                 self.label.alpha = 0
+                self.layer.borderColor = UIColor(white: 0, alpha: 1).CGColor
+                self.alpha = 0.25
             })
         }
     }

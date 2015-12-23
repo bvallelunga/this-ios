@@ -24,12 +24,16 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     private var selectedOrder: NSMutableArray = []
     private var date: NSDate!
     private var header: SelectionHeader!
-    private var limit: Int = 20
+    private var config: Config!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         Globals.selectionController = self
+        
+        Config.sharedInstance { (config) -> Void in
+            self.config = config
+        }
         
         // Navigation Controller
         self.navigationController?.navigationBarHidden = true
@@ -213,7 +217,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! SelectionPhotoCell
         let options = PHImageRequestOptions()
         
-        if !cell.upload && self.selectedOrder.count >= self.limit {
+        if !cell.upload && self.selectedOrder.count >= self.config.uploadLimit {
             NavNotification.show("Too many photos 😉")
             return
         }
