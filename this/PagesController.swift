@@ -13,8 +13,6 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
     // MARK: Instance Variables
     var controllers = Dictionary<Int, PageController>()
     var currentPage = 1
-    //private var user = User.current()
-    //private var settings: Settings!
     private let pages = 3
     private var storyBoard = UIStoryboard(name: "Main", bundle: nil)
     private var scrollView: UIScrollView!
@@ -61,11 +59,6 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
         
         // Set Start Page
         self.setActiveController(self.currentPage, animated: false, direction: .Forward)
-        
-        // Get Settings
-//        Settings.sharedInstance { (settings) -> Void in
-//            self.settings = settings
-//        }
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

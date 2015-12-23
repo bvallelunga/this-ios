@@ -65,9 +65,7 @@ class ProfileHeaderController: UIViewController, UIImagePickerControllerDelegate
     
     func updateHeader() {
         self.userLabel.text = self.user.username
-        self.nameLabel.text = "\(self.user.following.count) Tags"
-        
-        print(self.user)
+        self.nameLabel.text = self.user.fullName
         
 //        self.user.fetchPhoto { (image) -> Void in
 //            self.avatarButton.setImage(image, forState: .Normal)
