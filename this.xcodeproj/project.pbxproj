@@ -294,6 +294,7 @@
 				D3E293191C1BB66D00925EAC /* Globals.swift */,
 				D3C958D81C2A979700B6EE9D /* StateTracker.swift */,
 				D33B13E71C2AB61000C54DB9 /* ErrorHandler.swift */,
+				D33B13E31C2AA58800C54DB9 /* Config.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -306,7 +307,6 @@
 				D33B13DD1C2AA2E600C54DB9 /* Photo.swift */,
 				D33B13DF1C2AA36300C54DB9 /* Comment.swift */,
 				D33B13E11C2AA47200C54DB9 /* Installation.swift */,
-				D33B13E31C2AA58800C54DB9 /* Config.swift */,
 				D39AB7441C1FAE2900C9E96F /* Contact.swift */,
 			);
 			name = Data;

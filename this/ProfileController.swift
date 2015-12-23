@@ -135,7 +135,7 @@ class ProfileController: UITableViewController {
     }
     
     func rateApp() {
-        let url = NSURL(string: "itms-apps://itunes.apple.com/app/id\(123)")
+        let url = NSURL(string: "itms-apps://itunes.apple.com/app/id\(self.config.itunesId)")
         UIApplication.sharedApplication().openURL(url!)
     }
     
@@ -163,7 +163,7 @@ class ProfileController: UITableViewController {
             
             self.presentViewController(sheet, animated: true, completion: nil)
         } else {
-            let alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Accounts", message: "Please login to a Twitter account to share.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
