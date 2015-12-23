@@ -8,7 +8,6 @@
 
 import UIKit
 import Gifu
-import AKPickerView_Swift
 
 protocol SelectionHeaderDelegate {
     func updateTags(hashtag: String, timer: Int)
@@ -204,18 +203,6 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
                 self.arrowButton.layer.addAnimation(self.arrowAnimation, forKey: "scaleAnimation")
             }
         }
-    }
-    
-    func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
-        return self.timers.count
-    }
-    
-    func pickerView(pickerView: AKPickerView, titleForItem item: Int) -> String {
-        return self.timers[item].title
-    }
-    
-    func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
-        self.timer = self.timers[item]
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {

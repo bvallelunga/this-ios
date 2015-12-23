@@ -16,7 +16,8 @@ protocol ShareControllerDelegate {
     func shareControllerShared(count: Int, callback: () -> Void)
 }
 
-class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFMessageComposeViewControllerDelegate {
+class ShareController: UITableViewController, ShareHeaderControllerDelegate,
+    MFMessageComposeViewControllerDelegate {
     
     // TODO: REMOVE WHEN IMPLEMENTING PARSE
     class User: NSObject {
@@ -335,5 +336,18 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate, MFM
             }
         }
     }
+    
+//    func generateImage() -> UIImage {
+//        UIGraphicsBeginImageContextWithOptions(self.mosaic.frame.size, true, 0)
+//        
+//        self.mosaic.drawViewHierarchyInRect(self.mosaic.frame, afterScreenUpdates: true)
+//        let snapshot = UIGraphicsGetImageFromCurrentImageContext()
+//        
+//        UIGraphicsEndImageContext()
+//        
+//        print(snapshot)
+//        
+//        return snapshot
+//    }
 
 }

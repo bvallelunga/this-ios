@@ -21,6 +21,8 @@ class ProfileController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Globals.profileController = self
+        
         self.edgesForExtendedLayout = .None
         self.navigationController?.navigationBarHidden = true
         self.tableView.backgroundColor = UIColor(red:0.99, green:0.99, blue:0.99, alpha:1)

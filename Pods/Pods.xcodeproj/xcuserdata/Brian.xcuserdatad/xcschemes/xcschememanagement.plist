@@ -4,17 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>AKPickerView-Swift.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>ActionSheetPicker-3.0.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>CWStatusBarNotification.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FMMosaicLayout.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -87,27 +82,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>28D35BF4BA68566FC0F0A41FD7293F02</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2D720BA4E84B4627974AA1CC384CB3CC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>3C2B38B45299C2DCAFCE761BB370B1DB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>833BAB1B8689BCB97EB8BD7D288FD91D</key>
+		<key>6F2DA61A21F99DBE2DAFE90B0229C502</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8CF2C4ADC5FF9727BE837DA6B87AD165</key>
+		<key>8390C85D74BAD6043BE402BB3E3A42AD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9323D2C03FE9B38CE8E4AAD6CBC20014</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -118,11 +108,6 @@
 			<true/>
 		</dict>
 		<key>B7E6FC3F7BD4E7296010469FA6023E8A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CE0A701D8A271EFE0065667D13272921</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -143,6 +128,11 @@
 			<true/>
 		</dict>
 		<key>E142AAA516EFFE1499EAF62FCA9DC56D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F09A491EC5056EF8BE71930EF546D2F5</key>
 		<dict>
 			<key>primary</key>
 			<true/>

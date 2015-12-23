@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E4E95D032E104D969371B875'
-               BlueprintName = 'ActionSheetPicker-3.0'
+               BlueprintIdentifier = 'F8C46C9C250D96F0A12F1A27'
+               BlueprintName = 'FMMosaicLayout'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'ActionSheetPicker_3_0.framework'>
+               BuildableName = 'FMMosaicLayout.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

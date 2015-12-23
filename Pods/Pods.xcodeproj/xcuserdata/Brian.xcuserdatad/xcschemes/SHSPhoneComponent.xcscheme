@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '5FCC25595D63BCE0E3887EBA'
+               BlueprintIdentifier = '5C384B422E6A4FF70C447F41'
                BlueprintName = 'SHSPhoneComponent'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'SHSPhoneComponent.framework'>

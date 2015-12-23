@@ -14,6 +14,7 @@ class Globals: NSObject {
     static var pagesController: PagesController!
     static var selectionController: SelectionController!
     static var tagsController: TagsController!
+    static var profileController: ProfileController!
     
     class func delay(delay:Double, closure:()->()) {
         dispatch_after(
