@@ -42,13 +42,13 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.header?.placeholderView?.startAnimatingGIF()
+        self.header?.placeholderView?.startAnimating()
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.header?.placeholderView?.stopAnimatingGIF()
+        self.header?.placeholderView?.stopAnimating()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

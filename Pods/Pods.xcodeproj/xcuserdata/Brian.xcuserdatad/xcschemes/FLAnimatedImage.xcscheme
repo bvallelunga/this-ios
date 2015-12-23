@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '38710BF31469B5B8D5DD85A5'
-               BlueprintName = 'Gifu'
+               BlueprintIdentifier = '75E3FC0EF63F5E9ECC551EB0'
+               BlueprintName = 'FLAnimatedImage'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Gifu.framework'>
+               BuildableName = 'FLAnimatedImage.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

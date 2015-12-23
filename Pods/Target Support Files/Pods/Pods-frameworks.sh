@@ -85,8 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/CWStatusBarNotification.framework"
-  install_framework "Pods/FMMosaicLayout.framework"
-  install_framework "Pods/Gifu.framework"
+  install_framework "Pods/FLAnimatedImage.framework"
   install_framework "Pods/IOStickyHeader.framework"
   install_framework "Pods/LLSimpleCamera.framework"
   install_framework "Pods/Mixpanel.framework"
@@ -98,8 +97,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/CWStatusBarNotification.framework"
-  install_framework "Pods/FMMosaicLayout.framework"
-  install_framework "Pods/Gifu.framework"
+  install_framework "Pods/FLAnimatedImage.framework"
   install_framework "Pods/IOStickyHeader.framework"
   install_framework "Pods/LLSimpleCamera.framework"
   install_framework "Pods/Mixpanel.framework"

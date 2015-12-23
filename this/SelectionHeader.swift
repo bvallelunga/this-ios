@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Gifu
+import FLAnimatedImage
 
 protocol SelectionHeaderDelegate {
     func updateTags(hashtag: String, timer: Int)
@@ -21,7 +21,7 @@ struct SelectionTimer {
 class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     UICollectionViewDataSource, UICollectionViewDelegate {
     
-    @IBOutlet weak var placeholderView: AnimatableImageView!
+    @IBOutlet weak var placeholderView: FLAnimatedImageView!
     @IBOutlet weak var placeholderLabel: UILabel!
     @IBOutlet weak var tagField: UITextField!
     @IBOutlet weak var tagLabel: UILabel!
@@ -56,10 +56,13 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         self.tagLabel.shadowColor = UIColor.whiteColor()
         self.tagLabel.shadowOffset = CGSizeMake(0, 1)
         
+        let path = NSBundle.mainBundle().URLForResource("Placeholder", withExtension: "gif")!
+        let image = FLAnimatedImage(animatedGIFData: NSData(contentsOfURL: path.absoluteURL))
+        
         self.placeholderView.layer.cornerRadius = 4
         self.placeholderView.clipsToBounds = true
         self.placeholderView.contentMode = .ScaleAspectFill
-        self.placeholderView.animateWithImage(named: "Placeholder.gif")
+        self.placeholderView.animatedImage = image
         
         self.tagField.tintColor = UIColor(white: 0, alpha: 0.25)
         self.tagField.layer.shadowColor = UIColor(white: 0, alpha: 0.1).CGColor

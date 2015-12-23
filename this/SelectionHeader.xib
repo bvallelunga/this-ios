@@ -135,7 +135,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xYA-3x-S0m" customClass="AnimatableImageView" customModule="Gifu">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xYA-3x-S0m" customClass="FLAnimatedImageView">
                         <rect key="frame" x="148" y="147" width="140" height="126"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="126" id="UFo-m4-b4c"/>

@@ -9,12 +9,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>FMMosaicLayout.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Gifu.xcscheme</key>
+		<key>FLAnimatedImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -72,6 +67,16 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>030FA25AB20BCC954E2EEFFBDA9CCD44</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>177E8B610B7CB45A26B09F739E53A13E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>230F06C649365BFB9A3B54AAE6CD35CE</key>
 		<dict>
 			<key>primary</key>
@@ -87,22 +92,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6F2DA61A21F99DBE2DAFE90B0229C502</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8390C85D74BAD6043BE402BB3E3A42AD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9323D2C03FE9B38CE8E4AAD6CBC20014</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AEA56EBE1B518C71721209FB26701898</key>
+		<key>69A12570CACA758EA1BF749803E504E1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -132,7 +122,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F09A491EC5056EF8BE71930EF546D2F5</key>
+		<key>FE113CEF81C16AA59EC049ACE130BCB2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
