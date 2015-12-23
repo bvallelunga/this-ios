@@ -21,7 +21,6 @@
 		D32D18C11C24EDC70097D653 /* TagHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D18C01C24EDC70097D653 /* TagHeaderController.swift */; };
 		D32D18C31C24F4790097D653 /* TagTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D18C21C24F4790097D653 /* TagTableController.swift */; };
 		D35AF8F61C1E4E610024D7E3 /* SelectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D35AF8F51C1E4E610024D7E3 /* SelectionHeader.xib */; };
-		D35AF8FF1C1E6FBB0024D7E3 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35AF8FE1C1E6FBB0024D7E3 /* Photos.swift */; };
 		D35AF9011C1E70ED0024D7E3 /* SelectionPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35AF9001C1E70ED0024D7E3 /* SelectionPhotoCell.swift */; };
 		D35AF9031C1E79340024D7E3 /* Placeholder.gif in Resources */ = {isa = PBXBuildFile; fileRef = D35AF9021C1E79340024D7E3 /* Placeholder.gif */; };
 		D370FE6B1C200DCF00769EBA /* TagsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D370FE6A1C200DCF00769EBA /* TagsController.swift */; };
@@ -42,6 +41,8 @@
 		D39AB74E1C1FFEB100C9E96F /* TrendingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39AB74D1C1FFEB100C9E96F /* TrendingTableCell.swift */; };
 		D3C2D2FD1C27B0E1002F0241 /* TagCollectionLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C2D2FC1C27B0E1002F0241 /* TagCollectionLayout.m */; };
 		D3C2D2FF1C27BDB6002F0241 /* TagCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C2D2FE1C27BDB6002F0241 /* TagCollectionCell.swift */; };
+		D3C958D71C2A94E700B6EE9D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C958D61C2A94E700B6EE9D /* User.swift */; };
+		D3C958D91C2A979700B6EE9D /* StateTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C958D81C2A979700B6EE9D /* StateTracker.swift */; };
 		D3CFC9E31C1E416000E7C5B4 /* SelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFC9E21C1E416000E7C5B4 /* SelectionController.swift */; };
 		D3CFC9E51C1E490800E7C5B4 /* SelectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFC9E41C1E490800E7C5B4 /* SelectionHeader.swift */; };
 		D3D240481C27FC5F00917AE3 /* ShareGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D240471C27FC5F00917AE3 /* ShareGenerator.swift */; };
@@ -103,7 +104,6 @@
 		D32D18C01C24EDC70097D653 /* TagHeaderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagHeaderController.swift; sourceTree = "<group>"; };
 		D32D18C21C24F4790097D653 /* TagTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTableController.swift; sourceTree = "<group>"; };
 		D35AF8F51C1E4E610024D7E3 /* SelectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionHeader.xib; sourceTree = "<group>"; };
-		D35AF8FE1C1E6FBB0024D7E3 /* Photos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		D35AF9001C1E70ED0024D7E3 /* SelectionPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionPhotoCell.swift; sourceTree = "<group>"; };
 		D35AF9021C1E79340024D7E3 /* Placeholder.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Placeholder.gif; sourceTree = "<group>"; };
 		D370FE6A1C200DCF00769EBA /* TagsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsController.swift; sourceTree = "<group>"; };
@@ -126,6 +126,10 @@
 		D3C2D2FB1C27B0E1002F0241 /* TagCollectionLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagCollectionLayout.h; sourceTree = "<group>"; };
 		D3C2D2FC1C27B0E1002F0241 /* TagCollectionLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagCollectionLayout.m; sourceTree = "<group>"; };
 		D3C2D2FE1C27BDB6002F0241 /* TagCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionCell.swift; sourceTree = "<group>"; };
+		D3C958D41C2A8C0C00B6EE9D /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		D3C958D51C2A8C1700B6EE9D /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		D3C958D61C2A94E700B6EE9D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D3C958D81C2A979700B6EE9D /* StateTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateTracker.swift; sourceTree = "<group>"; };
 		D3CFC9E21C1E416000E7C5B4 /* SelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionController.swift; sourceTree = "<group>"; };
 		D3CFC9E41C1E490800E7C5B4 /* SelectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionHeader.swift; sourceTree = "<group>"; };
 		D3D240471C27FC5F00917AE3 /* ShareGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareGenerator.swift; sourceTree = "<group>"; };
@@ -226,6 +230,7 @@
 		D3224A681C1AADA3009DFA85 /* this */ = {
 			isa = PBXGroup;
 			children = (
+				D3C958D31C2A8BF600B6EE9D /* Config */,
 				D3E293001C1B7C1400925EAC /* Core */,
 				D3E293101C1BA4EB00925EAC /* Models */,
 				D3E293021C1B7C3900925EAC /* Controllers */,
@@ -320,6 +325,15 @@
 			name = Trending;
 			sourceTree = "<group>";
 		};
+		D3C958D31C2A8BF600B6EE9D /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				D3C958D41C2A8C0C00B6EE9D /* Debug.xcconfig */,
+				D3C958D51C2A8C1700B6EE9D /* Release.xcconfig */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
 		D3CFC9E11C1E40E300E7C5B4 /* Selection */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,8 +406,9 @@
 			children = (
 				D3E293111C1BA4FE00925EAC /* Colors.swift */,
 				D3E293191C1BB66D00925EAC /* Globals.swift */,
-				D35AF8FE1C1E6FBB0024D7E3 /* Photos.swift */,
 				D39AB7441C1FAE2900C9E96F /* Contact.swift */,
+				D3C958D61C2A94E700B6EE9D /* User.swift */,
+				D3C958D81C2A979700B6EE9D /* StateTracker.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -634,10 +649,10 @@
 				D39AB74A1C1FFBDC00C9E96F /* TrendingController.swift in Sources */,
 				D3E293221C1C16EA00925EAC /* AuthStepUsername.swift in Sources */,
 				D35AF9011C1E70ED0024D7E3 /* SelectionPhotoCell.swift in Sources */,
-				D35AF8FF1C1E6FBB0024D7E3 /* Photos.swift in Sources */,
 				D39AB7431C1F8AC800C9E96F /* ShareHeaderController.swift in Sources */,
 				D32D18BF1C224B3B0097D653 /* TagController.swift in Sources */,
 				D3E2931A1C1BB66D00925EAC /* Globals.swift in Sources */,
+				D3C958D91C2A979700B6EE9D /* StateTracker.swift in Sources */,
 				D3E2932C1C1C279B00925EAC /* PageController.swift in Sources */,
 				D3E293151C1BA61400925EAC /* AuthController.swift in Sources */,
 				D3E293121C1BA4FE00925EAC /* Colors.swift in Sources */,
@@ -646,6 +661,7 @@
 				D3CFC9E31C1E416000E7C5B4 /* SelectionController.swift in Sources */,
 				D394D3681C1E85B000CB0FE9 /* SelectionCameraCell.swift in Sources */,
 				D3CFC9E51C1E490800E7C5B4 /* SelectionHeader.swift in Sources */,
+				D3C958D71C2A94E700B6EE9D /* User.swift in Sources */,
 				D3E293061C1B7DFC00925EAC /* LandingController.swift in Sources */,
 				D39AB7411C1F8A9800C9E96F /* ShareController.swift in Sources */,
 				D3D240481C27FC5F00917AE3 /* ShareGenerator.swift in Sources */,
@@ -714,6 +730,7 @@
 /* Begin XCBuildConfiguration section */
 		D3224A8C1C1AADA3009DFA85 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D3C958D41C2A8C0C00B6EE9D /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -759,6 +776,7 @@
 		};
 		D3224A8D1C1AADA3009DFA85 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D3C958D51C2A8C1700B6EE9D /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -803,6 +821,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = this/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vallelungabrian.this;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -820,6 +839,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = this/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vallelungabrian.this;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -830,6 +850,7 @@
 		};
 		D3224A921C1AADA3009DFA85 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D3C958D41C2A8C0C00B6EE9D /* Debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = thisTests/Info.plist;
@@ -842,6 +863,7 @@
 		};
 		D3224A931C1AADA3009DFA85 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D3C958D51C2A8C1700B6EE9D /* Release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = thisTests/Info.plist;
@@ -854,6 +876,7 @@
 		};
 		D3224A951C1AADA3009DFA85 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D3C958D41C2A8C0C00B6EE9D /* Debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = thisUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -866,6 +889,7 @@
 		};
 		D3224A961C1AADA3009DFA85 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D3C958D51C2A8C1700B6EE9D /* Release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = thisUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

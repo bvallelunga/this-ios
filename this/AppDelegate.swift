@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Parse
+import ParseCrashReporting
+import Mixpanel
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +18,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        //Initialize Parse
+        let credentials = Globals.parseCredentials()
+        
+        ParseCrashReporting.enable()
+        PFUser.enableRevocableSessionInBackground()
+        
+        Parse.setApplicationId(credentials[0], clientKey: credentials[1])
+        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        
+        let mixpanel = Mixpanel.sharedInstanceWithToken(Globals.mixpanelToken())
+        mixpanel.miniNotificationPresentationTime = 10
+        mixpanel.checkForNotificationsOnActive = true
+        mixpanel.checkForSurveysOnActive = true
+        mixpanel.checkForVariantsOnActive = true
+        mixpanel.showNotificationOnActive = true
+        mixpanel.identify(mixpanel.distinctId)
+        
+        // Track an app open here if we launch with a push, unless
+        // "content_available" was used to trigger a background push (introduced
+        // in iOS 7). In that case, we skip tracking here to avoid double
+        // counting the app-open.
+        if application.applicationState != UIApplicationState.Background {
+            let preBackgroundPush = !application.respondsToSelector(Selector("backgroundRefreshStatus"))
+            let oldPushHandlerOnly = !self.respondsToSelector(Selector("application:didReceiveRemoteNotification:fetchCompletionHandler:"))
+            let noPushPayload = (launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] == nil)
+            
+            if preBackgroundPush || oldPushHandlerOnly || noPushPayload {
+                PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
+                mixpanel.track("Mobile.App.Open")
+            }
+        }
+        
+        // Update Config
+        //Config.update(nil)
+        
+        // Create Installation
+        //Installation.startup()
+        
+        // Configure Settings Panel
+        StateTracker.appVersion = Globals.appBuildVersion()
+        
         return true
     }
 

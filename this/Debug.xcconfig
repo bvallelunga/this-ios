@@ -1,0 +1,13 @@
+//
+//  Debug.xcconfig
+//  this
+//
+//  Created by Brian Vallelunga on 12/23/15.
+//  Copyright © 2015 Brian Vallelunga. All rights reserved.
+//
+
+PARSE_APPLICATION_ID = G9TbuDcsjrgciofmxTpEShjpMbwc0u09ZEBLh8C0
+PARSE_CLIENT_KEY = oobWelAqGAuFr6GJRb6rOCJby8Fc2gCyLow2FMVO
+PARSE_PROJECT = debug
+
+MIXPANEL_TOKEN =

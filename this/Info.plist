@@ -52,5 +52,26 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>ParseApplicationID</key>
+	<string>${PARSE_APPLICATION_ID}</string>
+	<key>ParseClientKey</key>
+	<string>${PARSE_CLIENT_KEY}</string>
+	<key>ParseProject</key>
+	<string>${PARSE_PROJECT}</string>
+	<key>MixpanelToken</key>
+	<string>${MIXPANEL_TOKEN}</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.vallelungabrian.this</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>this</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

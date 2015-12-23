@@ -6,7 +6,6 @@
 //  Copyright © 2015 Brian Vallelunga. All rights reserved.
 //
 
-import UIKit
 import MoABContactsManager
 import libPhoneNumber_iOS
 

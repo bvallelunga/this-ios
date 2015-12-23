@@ -8,7 +8,7 @@
 
 import UIKit
 import Photos
-import IOStickyHeader
+import CSStickyHeaderFlowLayout
 
 private let photoIdentifier = "photo"
 private let cameraIdentifier = "camera"
@@ -71,7 +71,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         let itemSize = size.width/3 - 1
         let headerNib = UINib(nibName: "SelectionHeader", bundle: NSBundle.mainBundle())
         
-        if let layout = self.collectionView?.collectionViewLayout as? IOStickyHeaderFlowLayout {
+        if let layout = self.collectionView?.collectionViewLayout as? CSStickyHeaderFlowLayout {
             layout.parallaxHeaderReferenceSize = CGSizeMake(size.width, size.height - (itemSize * 2))
             layout.parallaxHeaderMinimumReferenceSize = CGSizeMake(size.width, size.height - (itemSize * 2))
             layout.itemSize = CGSizeMake(itemSize, itemSize)
@@ -89,7 +89,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         self.collectionView?.delegate = self
         
         self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, 0)
-        self.collectionView?.registerNib(headerNib, forSupplementaryViewOfKind: IOStickyHeaderParallaxHeader,
+        self.collectionView?.registerNib(headerNib, forSupplementaryViewOfKind: CSStickyHeaderParallaxHeader,
             withReuseIdentifier: "header")
     }
     

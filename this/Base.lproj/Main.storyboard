@@ -503,7 +503,7 @@ and Privacy Policy.</string>
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="jsO-tk-8jh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <collectionViewLayout key="collectionViewLayout" id="Pgt-U6-gTy" customClass="IOStickyHeaderFlowLayout" customModule="IOStickyHeader"/>
+                        <collectionViewLayout key="collectionViewLayout" id="Whc-Ib-VVe" customClass="CSStickyHeaderFlowLayout"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="camera" id="Qc6-2b-1qk">
                                 <rect key="frame" x="0.0" y="0.0" width="86" height="78"/>

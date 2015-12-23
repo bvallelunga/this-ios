@@ -156,22 +156,16 @@ class ProfileController: UITableViewController {
     
     func FAQs() {
         let url = NSURL(string: "http://www.google.com")
-        let controller =  SFSafariViewController(URL: url!)
-        
-        self.presentViewController(controller, animated: true, completion: nil)
+        UIApplication.sharedApplication().openURL(url!)
     }
     
     func privacyPolicy() {
         let url = NSURL(string: "http://www.google.com")
-        let controller =  SFSafariViewController(URL: url!)
-        
-        self.presentViewController(controller, animated: true, completion: nil)
+        UIApplication.sharedApplication().openURL(url!)
     }
     
     func termsOfService() {
         let url = NSURL(string: "http://www.google.com")
-        let controller =  SFSafariViewController(URL: url!)
-        
-        self.presentViewController(controller, animated: true, completion: nil)
+        UIApplication.sharedApplication().openURL(url!)
     }
 }
