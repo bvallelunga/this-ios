@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class Photo: PFObject {
+class Photo: PFObject, PFSubclassing {
     
     // Instance Variables
     @NSManaged var user: User

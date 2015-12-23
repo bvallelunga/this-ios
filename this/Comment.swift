@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class Comment: PFObject {
+class Comment: PFObject, PFSubclassing {
     
     // Instance Variables
     @NSManaged var user: User

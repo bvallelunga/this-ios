@@ -31,5 +31,16 @@ class User: PFUser {
     class func current() -> User! {
         return staticUser != nil ? staticUser : User.currentUser()
     }
+    
+    class func verifyNumber(number: String) -> String {
+        let code = String(Globals.random(4))
+        
+        PFCloud.callFunctionInBackground("verifyPhone", withParameters: [
+            "phone": number,
+            "code": code
+        ])
+        
+        return code
+    }
 
 }

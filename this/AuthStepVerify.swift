@@ -40,7 +40,7 @@ class AuthStepVerify: AuthStep {
         input = input.stringByReplacingOccurrencesOfString(" ", withString: "",
             options: NSStringCompareOptions.LiteralSearch, range: nil)
         
-        return true //self.parentController.phoneVerify == input
+        return self.parentController.phoneVerify == input
     }
     
     override func next(callback: (segue: Bool) -> Void) {

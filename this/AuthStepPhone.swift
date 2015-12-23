@@ -49,10 +49,10 @@ class AuthStepPhone: AuthStep {
     override func next(callback: (segue: Bool) -> Void) {
         do {
             let number = try phoneUtil.parseWithPhoneCarrierRegion(self.value)
-            try self.parentController.phoneNumber = phoneUtil.format(number, numberFormat: .E164)
+            let e164 = try phoneUtil.format(number, numberFormat: .E164)
             
-            // TODO: Remove and make random
-            self.parentController.phoneVerify = "1234"
+            self.parentController.phoneNumber = e164
+            self.parentController.phoneVerify = User.verifyNumber(e164)
             
             callback(segue: false)
         } catch let error as NSError  {

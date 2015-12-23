@@ -25,10 +25,6 @@ class Globals: NSObject {
             dispatch_get_main_queue(), closure)
     }
     
-    class func registerParseClasses() {
-        User.registerSubclass()
-    }
-    
     class func parseCredentials() -> [String] {
         let parseApplicationID = self.infoDictionary["ParseApplicationID"] as! String
         let parseClientKey = self.infoDictionary["ParseClientKey"] as! String
@@ -40,15 +36,22 @@ class Globals: NSObject {
         return self.infoDictionary["MixpanelToken"] as! String
     }
     
-    class func appBuildVersion() -> String {
-        let version = self.infoDictionary["CFBundleShortVersionString"] as! NSString
-        let build = self.infoDictionary[String(kCFBundleVersionKey)] as! NSString
-        
-        return "\(version) - \(build)"
+    class func appVersionBuild() -> String {
+        return "\(self.appVersion()) - \(self.appBuild())"
+    }
+    
+    class func appBuild() -> String {
+        return self.infoDictionary[String(kCFBundleVersionKey)] as! String
     }
     
     class func appVersion() -> String {
         return self.infoDictionary["CFBundleShortVersionString"] as! String
+    }
+    
+    class func random(digits: Int) -> Int {
+        let min = Int(pow(Double(10), Double(digits-1))) - 1
+        let max = Int(pow(Double(10), Double(digits))) - 1
+        return Int(min...max)
     }
 
 }

@@ -13,8 +13,8 @@ class Installation: PFInstallation {
     
     // Instance Variables
     @NSManaged var user: User
-    @NSManaged var appBuild: String
-    @NSManaged var appVersion: String
+    @NSManaged var appBuildNumber: String
+    @NSManaged var appVersionBuild: String
     
     // Parse Setup
     override class func initialize() {
@@ -27,10 +27,12 @@ class Installation: PFInstallation {
     }
     
     // Instance Methods
-    func startup() {
-        self.appVersion = Globals.appVersion()
-        self.appBuild = Globals.appBuildVersion()
-        self.saveEventually()
+    class func startup() {
+        let installation = Installation.currentInstallation()
+        
+        installation.appBuildNumber = Globals.appBuild()
+        installation.appVersionBuild = Globals.appVersionBuild()
+        installation.saveEventually()
     }
 
 }
