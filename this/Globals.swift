@@ -6,6 +6,8 @@
 //  Copyright © 2015 Brian Vallelunga. All rights reserved.
 //
 
+import AlamofireImage
+
 class Globals: NSObject {
     
     static var landingController: LandingController!
@@ -15,6 +17,8 @@ class Globals: NSObject {
     static var profileController: ProfileController!
     
     static let infoDictionary = NSBundle.mainBundle().infoDictionary!
+    static let imageCache = AutoPurgingImageCache()
+    static let imageDownloader = ImageDownloader()
     
     class func delay(delay:Double, closure:()->()) {
         dispatch_after(
@@ -53,5 +57,5 @@ class Globals: NSObject {
         let max = Int(pow(Double(10), Double(digits))) - 1
         return Int(min...max)
     }
-
+    
 }

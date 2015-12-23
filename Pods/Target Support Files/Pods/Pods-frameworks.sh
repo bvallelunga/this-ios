@@ -84,6 +84,8 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods/Alamofire.framework"
+  install_framework "Pods/AlamofireImage.framework"
   install_framework "Pods/Bolts.framework"
   install_framework "Pods/CSStickyHeaderFlowLayout.framework"
   install_framework "Pods/CWStatusBarNotification.framework"
@@ -99,6 +101,8 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/libPhoneNumber_iOS.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods/Alamofire.framework"
+  install_framework "Pods/AlamofireImage.framework"
   install_framework "Pods/Bolts.framework"
   install_framework "Pods/CSStickyHeaderFlowLayout.framework"
   install_framework "Pods/CWStatusBarNotification.framework"

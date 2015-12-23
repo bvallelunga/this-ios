@@ -44,7 +44,9 @@ class AuthStepUsername: AuthStep {
     }
     
     override func next(callback: (segue: Bool) -> Void) {
-        callback(segue: true)
+        User.register(self.value, phone: self.parentController.phoneNumber) { (user) -> Void in
+            callback(segue: true)
+        }
     }
 
 }

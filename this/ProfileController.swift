@@ -12,8 +12,9 @@ import SafariServices
 
 class ProfileController: UITableViewController {
 
-    var headerFrame: CGRect!
-    var headerController: ProfileHeaderController!
+    private var headerFrame: CGRect!
+    private var headerController: ProfileHeaderController!
+    private var user = User.current()
     
     @IBOutlet weak var signoutButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
@@ -31,6 +32,8 @@ class ProfileController: UITableViewController {
         self.signoutButton.backgroundColor = Colors.red
         self.signoutButton.tintColor = UIColor.whiteColor()
         self.signoutButton.layer.cornerRadius = 6
+        
+        self.nameLabel.text = self.user.fullName
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -91,7 +94,7 @@ class ProfileController: UITableViewController {
         let controller = UIAlertController(title: "You Sure?", message: nil, preferredStyle: .Alert)
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         let save = UIAlertAction(title: "Sign Out", style: .Destructive) { (action) -> Void in
-            Globals.landingController.navigationController?.popToRootViewControllerAnimated(false)
+            User.logOut()
         }
         
         controller.addAction(cancel)
@@ -104,13 +107,20 @@ class ProfileController: UITableViewController {
         let controller = UIAlertController(title: "Gotta Name?", message: nil, preferredStyle: .Alert)
         let cancel = UIAlertAction(title: "Cancel", style: .Destructive, handler: nil)
         let save = UIAlertAction(title: "Save", style: .Default) { (action) -> Void in
-            let name = controller.textFields?.first?.text
-            
-            self.nameLabel.text = name
+            if let name = controller.textFields?.first?.text {
+                self.nameLabel.text = name
+                self.user.fullName = name
+                self.user.saveInBackground()
+                
+                self.headerController.updateHeader()
+                self.tableView.reloadData()
+            }
         }
         
         controller.addTextFieldWithConfigurationHandler { (textField) -> Void in
             textField.placeholder = "Name"
+            textField.autocapitalizationType = .Words
+            textField.text = self.user.fullName
         }
         
         controller.addAction(cancel)

@@ -15,6 +15,8 @@ class ProfileHeaderController: UIViewController, UIImagePickerControllerDelegate
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     
+    private var user = User.current()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +38,9 @@ class ProfileHeaderController: UIViewController, UIImagePickerControllerDelegate
         self.avatarButton.tintColor = UIColor(white: 1, alpha: 0.4)
         self.avatarButton.layer.borderColor = UIColor(white: 0, alpha: 0.2).CGColor
         self.avatarButton.layer.borderWidth = 1
+        self.avatarButton.imageView?.contentMode = .ScaleAspectFill
+        
+        self.updateHeader()
     }
     
     override func viewDidLayoutSubviews() {
@@ -58,12 +63,22 @@ class ProfileHeaderController: UIViewController, UIImagePickerControllerDelegate
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
+    func updateHeader() {
+        self.userLabel.text = self.user.username
+        self.nameLabel.text = "\(self.user.following.count) Tags"
+        
+        print(self.user)
+        
+//        self.user.fetchPhoto { (image) -> Void in
+//            self.avatarButton.setImage(image, forState: .Normal)
+//        }
+    }
+    
     // MARK: UIImagePickerController Methods
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         self.dismissViewControllerAnimated(true, completion: nil)
         self.avatarButton.setImage(image, forState: .Normal)
-        self.avatarButton.imageView?.contentMode = .ScaleAspectFill
-        print(self.avatarButton)
+        self.user.uploadPhoto(image)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {

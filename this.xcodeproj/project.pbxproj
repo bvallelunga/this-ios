@@ -26,6 +26,7 @@
 		D33B13E21C2AA47200C54DB9 /* Installation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B13E11C2AA47200C54DB9 /* Installation.swift */; };
 		D33B13E41C2AA58800C54DB9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B13E31C2AA58800C54DB9 /* Config.swift */; };
 		D33B13E61C2AADE900C54DB9 /* Int+Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B13E51C2AADE900C54DB9 /* Int+Range.swift */; };
+		D33B13E81C2AB61000C54DB9 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B13E71C2AB61000C54DB9 /* ErrorHandler.swift */; };
 		D35AF8F61C1E4E610024D7E3 /* SelectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D35AF8F51C1E4E610024D7E3 /* SelectionHeader.xib */; };
 		D35AF9011C1E70ED0024D7E3 /* SelectionPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35AF9001C1E70ED0024D7E3 /* SelectionPhotoCell.swift */; };
 		D35AF9031C1E79340024D7E3 /* Placeholder.gif in Resources */ = {isa = PBXBuildFile; fileRef = D35AF9021C1E79340024D7E3 /* Placeholder.gif */; };
@@ -115,6 +116,7 @@
 		D33B13E11C2AA47200C54DB9 /* Installation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Installation.swift; sourceTree = "<group>"; };
 		D33B13E31C2AA58800C54DB9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D33B13E51C2AADE900C54DB9 /* Int+Range.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Range.swift"; sourceTree = "<group>"; };
+		D33B13E71C2AB61000C54DB9 /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		D35AF8F51C1E4E610024D7E3 /* SelectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionHeader.xib; sourceTree = "<group>"; };
 		D35AF9001C1E70ED0024D7E3 /* SelectionPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionPhotoCell.swift; sourceTree = "<group>"; };
 		D35AF9021C1E79340024D7E3 /* Placeholder.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Placeholder.gif; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				D3E293111C1BA4FE00925EAC /* Colors.swift */,
 				D3E293191C1BB66D00925EAC /* Globals.swift */,
 				D3C958D81C2A979700B6EE9D /* StateTracker.swift */,
+				D33B13E71C2AB61000C54DB9 /* ErrorHandler.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -705,6 +708,7 @@
 				D3E293061C1B7DFC00925EAC /* LandingController.swift in Sources */,
 				D39AB7411C1F8A9800C9E96F /* ShareController.swift in Sources */,
 				D3D240481C27FC5F00917AE3 /* ShareGenerator.swift in Sources */,
+				D33B13E81C2AB61000C54DB9 /* ErrorHandler.swift in Sources */,
 				D3E2932A1C1C277600925EAC /* PagesController.swift in Sources */,
 				D3E2931E1C1BBE3000925EAC /* AuthStepPhone.swift in Sources */,
 				D39AB74E1C1FFEB100C9E96F /* TrendingTableCell.swift in Sources */,
