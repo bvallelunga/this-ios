@@ -17,17 +17,7 @@ class User: PFUser {
     @NSManaged var fullName: String
     @NSManaged var phone: String
     @NSManaged var photo: PFFile
-    @NSManaged var following: [Tag]
-    
-    // Parse Setup
-    override class func initialize() {
-        struct Static {
-            static var onceToken : dispatch_once_t = 0;
-        }
-        dispatch_once(&Static.onceToken) {
-            self.registerSubclass()
-        }
-    }
+    @NSManaged var following: PFRelation
     
     // Class Methods
     class func current() -> User! {
@@ -51,7 +41,7 @@ class User: PFUser {
         return code
     }
     
-    class func logInWithPhone(number: String, callback: (user: User) -> Void) {
+    class func logInWithPhone(number: String, callback: (user: User!) -> Void) {
         PFCloud.callFunctionInBackground("loginPhone", withParameters: [
             "phone": number
         ]) { (response, error) -> Void in
@@ -59,12 +49,16 @@ class User: PFUser {
                 PFUser.becomeInBackground(sessionToken, block: { (pfuser, error) -> Void in
                     if let user = pfuser as? User {
                         callback(user: user)
-                    } else {
+                    } else if error != nil {
                         ErrorHandler.handleParse(error!)
+                    } else {
+                        callback(user: nil)
                     }
                 })
-            } else {
+            } else if error != nil {
                 ErrorHandler.handleParse(error!)
+            } else {
+                callback(user: nil)
             }
         }
     }
@@ -83,20 +77,6 @@ class User: PFUser {
                 ErrorHandler.handleParse(error!)
             }
         }
-    }
-    
-    class func numberExists(number: String, callback: (exists: Bool) -> Void) {
-        let query = User.query()
-        
-        query?.whereKey("phone", equalTo: number)
-        
-        query?.countObjectsInBackgroundWithBlock({ (count, error) -> Void in
-            if error == nil {
-                callback(exists: count > 0)
-            } else {
-                ErrorHandler.handleParse(error)
-            }
-        })
     }
     
     // Instance Methods

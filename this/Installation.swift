@@ -16,16 +16,6 @@ class Installation: PFInstallation {
     @NSManaged var appBuildNumber: String
     @NSManaged var appVersionBuild: String
     
-    // Parse Setup
-    override class func initialize() {
-        struct Static {
-            static var onceToken : dispatch_once_t = 0;
-        }
-        dispatch_once(&Static.onceToken) {
-            self.registerSubclass()
-        }
-    }
-    
     // Instance Methods
     class func startup() {
         let installation = Installation.currentInstallation()

@@ -83,7 +83,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         self.collectionView.reloadData()
         
         if self.downloadMode {
-            NavNotification.show("Tap Photos To Download", color: Colors.blue)
+            NavNotification.show("Tap Photos To Download", color: Colors.blue, duration: 1.5)
         }
     }
     
@@ -177,7 +177,9 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         let image = photo as! GalleryPhoto
         let text = "\(image.user) pic on \(self.hashtag) is epic!"
         let controller = ShareGenerator.share(text, image: image.image)
+        
         photosViewController.presentViewController(controller, animated: true, completion: nil)
+        
         return true
     }
     

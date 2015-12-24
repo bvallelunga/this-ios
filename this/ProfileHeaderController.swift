@@ -64,12 +64,16 @@ class ProfileHeaderController: UIViewController, UIImagePickerControllerDelegate
     }
     
     func updateHeader() {
-        self.userLabel.text = self.user.username
-        self.nameLabel.text = self.user.fullName
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .MediumStyle
+        formatter.timeStyle = .NoStyle
         
-//        self.user.fetchPhoto { (image) -> Void in
-//            self.avatarButton.setImage(image, forState: .Normal)
-//        }
+        self.userLabel.text = self.user.username
+        self.nameLabel.text = "Joined \(formatter.stringFromDate(self.user.createdAt!))"
+        
+        self.user.fetchPhoto { (image) -> Void in
+            self.avatarButton.setImage(image, forState: .Normal)
+        }
     }
     
     // MARK: UIImagePickerController Methods

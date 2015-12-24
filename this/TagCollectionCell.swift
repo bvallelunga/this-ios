@@ -58,6 +58,7 @@ class TagCollectionCell: UICollectionViewCell {
     func downloaded() {
         UIView.animateWithDuration(0.15, animations: { () -> Void in
             self.label.alpha = 1
+            self.alpha = 1
         })
         
         Globals.delay(1) { () -> () in

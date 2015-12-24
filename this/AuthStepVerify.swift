@@ -46,16 +46,9 @@ class AuthStepVerify: AuthStep {
     override func next(callback: (segue: Bool) -> Void) {
         let number = self.parentController.phoneNumber
         
-        User.numberExists(self.parentController.phoneNumber) { (exists) -> Void in
-            if !exists {
-                callback(segue: false)
-                return
-            }
-            
-            User.logInWithPhone(number, callback: { (user) -> Void in
-                callback(segue: true)
-            })
-        }
+        User.logInWithPhone(number, callback: { (user) -> Void in
+            callback(segue: user != nil)
+        })
     }
 
 }

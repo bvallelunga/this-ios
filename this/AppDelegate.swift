@@ -22,7 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Initialize Parse
         let credentials = Globals.parseCredentials()
         
+        User.registerSubclass()
+        Tag.registerSubclass()
+        Photo.registerSubclass()
+        Comment.registerSubclass()
+        Installation.registerSubclass()
+        
         ParseCrashReporting.enable()
+        Parse.enableLocalDatastore()
         PFUser.enableRevocableSessionInBackground()
         
         Parse.setApplicationId(credentials[0], clientKey: credentials[1])
