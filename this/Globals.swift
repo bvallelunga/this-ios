@@ -18,7 +18,12 @@ class Globals: NSObject {
     
     static let infoDictionary = NSBundle.mainBundle().infoDictionary!
     static let imageCache = AutoPurgingImageCache()
-    static let imageDownloader = ImageDownloader()
+    static let imageDownloader = ImageDownloader(
+        configuration: ImageDownloader.defaultURLSessionConfiguration(),
+        downloadPrioritization: .FIFO,
+        maximumActiveDownloads: 8,
+        imageCache: imageCache
+    )
     
     class func delay(delay:Double, closure:()->()) {
         dispatch_after(

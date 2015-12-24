@@ -18,7 +18,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var hashtag: String = ""
+    var tag: Tag!
     
     private var layout = TagCollectionLayout()
     private var downloadMode: Bool = false
@@ -83,7 +83,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         self.collectionView.reloadData()
         
         if self.downloadMode {
-            NavNotification.show("Tap Photos To Download", color: Colors.blue, duration: 1.5)
+            NavNotification.show("Tap Photos To Download", color: Colors.blue, duration: 1.5, vibrate: false)
         }
     }
     
@@ -93,7 +93,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         
         controller.delegate = self
         controller.images = self.images
-        controller.hashtag = self.hashtag
+        //controller.hashtag = self.hashtag
         controller.backText = "CANCEL"
         
         self.presentViewController(controller, animated: true, completion: nil)
@@ -153,7 +153,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         var intialPhoto: GalleryPhoto!
         
         for (i, image) in self.images.enumerate() {
-            let photo = GalleryPhoto(image: image, user: "@bvallelunga", postedAt: "\(i) hrs ago", hashtag: self.hashtag)
+            let photo = GalleryPhoto(image: image, user: "@bvallelunga", postedAt: "\(i) hrs ago", hashtag: self.tag.name)
             
             photo.indexPath = NSIndexPath(forItem: i, inSection: 0)
             
@@ -175,7 +175,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     
     func photosViewController(photosViewController: NYTPhotosViewController!, handleActionButtonTappedForPhoto photo: NYTPhoto!) -> Bool {
         let image = photo as! GalleryPhoto
-        let text = "\(image.user) pic on \(self.hashtag) is epic!"
+        let text = "\(image.user) pic on \(self.tag.name) is epic!"
         let controller = ShareGenerator.share(text, image: image.image)
         
         photosViewController.presentViewController(controller, animated: true, completion: nil)

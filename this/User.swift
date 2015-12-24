@@ -17,7 +17,7 @@ class User: PFUser {
     @NSManaged var fullName: String
     @NSManaged var phone: String
     @NSManaged var photo: PFFile
-    @NSManaged var following: PFRelation
+    @NSManaged var tags: PFRelation
     
     // Class Methods
     class func current() -> User! {
@@ -101,7 +101,7 @@ class User: PFUser {
         Globals.imageDownloader.downloadImage(URLRequest: request) { response in
             if let image: UIImage = response.result.value {
                 callback(image: image)
-                    
+                
                 Globals.imageCache.addImage(image, forRequest: request)
             } else {
                 print(response)

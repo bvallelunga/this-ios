@@ -17,14 +17,16 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     UIImagePickerControllerDelegate, UINavigationControllerDelegate,
     SelectionHeaderDelegate, ShareControllerDelegate {
     
-    private var hashtag: String = ""
+    private var tag: Tag!
     private let manager = PHCachingImageManager()
     private var assets: [PHAsset] = []
     private var selected: [PHAsset: UIImage] = [:]
     private var selectedOrder: NSMutableArray = []
+    private var photos: [PHAsset: Photo] = [:]
     private var date: NSDate!
     private var header: SelectionHeader!
     private var config: Config!
+    private var user = User.current()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +66,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
                 images.append(self.selected[asset as! PHAsset]!)
             }
             
-            controller?.hashtag = self.hashtag
+            controller?.tag = self.tag
             controller?.images = images
             controller?.delegate = self
         }
@@ -217,7 +219,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! SelectionPhotoCell
         let options = PHImageRequestOptions()
         
-        if !cell.upload && self.selectedOrder.count >= self.config.uploadLimit {
+        if !cell.upload && self.config != nil && self.selectedOrder.count >= self.config.uploadLimit {
             NavNotification.show("Too many photos 😉")
             return
         }
@@ -233,12 +235,15 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
                 if let image = UIImage(data: imageData!) {
                     self.selectedOrder.insertObject(asset, atIndex: 0)
                     self.selected[asset] = image
+                    self.photos[asset] = Photo.create(self.user, image: image)
                     self.updateHeader()
                 }
             }
         } else  {
             self.selectedOrder.removeObject(asset)
             self.selected.removeValueForKey(asset)
+            self.photos[asset]?.deleteInBackground()
+            self.photos.removeValueForKey(asset)
             self.updateHeader()
         }
     }
@@ -249,7 +254,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     
     func shareControllerShared(count: Int, callback: () -> Void) {
         Globals.pagesController.setActiveController(2, direction: .Forward) { () -> Void in
-            Globals.tagsController.hashtag = self.hashtag
+            Globals.tagsController.tag = self.tag
             Globals.tagsController.performSegueWithIdentifier("next", sender: self)
             
             self.reset()
@@ -277,9 +282,12 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     
     // MARK: SelectionHeader Methods
     func updateTags(hashtag: String, timer: Int) {
-        print(hashtag, timer)
-        self.hashtag = hashtag
-        self.performSegueWithIdentifier("share", sender: self)
+        Tag.findCreate(hashtag) { (tag) -> Void in
+            tag.postImages(timer, user: self.user, photos: Array(self.photos.values))
+            
+            self.tag = tag
+            self.performSegueWithIdentifier("share", sender: self)
+        }
     }
     
     // MARK: UIImagePickerController Methods

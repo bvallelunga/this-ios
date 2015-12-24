@@ -13,6 +13,8 @@ private let reuseIdentifier = "cell"
 class TrendingController: UITableViewController {
     
     var parent: TagsController!
+    
+    private var tags: [Tag] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +33,7 @@ class TrendingController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.tags.count
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -39,7 +41,7 @@ class TrendingController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.parent.hashtag = "#redsnake45"
+        self.parent.tag = self.tags[indexPath.row]
         self.parent.performSegueWithIdentifier("next", sender: self)
     }
 

@@ -46,7 +46,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         var selected: [Contact: Bool] = [:]
     }
     
-    var hashtag: String = ""
+    var tag: Tag!
     var backText: String = "BACK"
     var images: [UIImage] = []
     var headerFrame: CGRect!
@@ -96,7 +96,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         if segue.identifier == "header" {
             self.headerController = segue.destinationViewController as? ShareHeaderController
             self.headerController?.delegate = self
-            self.headerController.hashtag = self.hashtag
+            self.headerController.tag = self.tag
             self.headerController.backText = self.backText
         }
     }
@@ -242,7 +242,6 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         
         let messageVC = MFMessageComposeViewController()
         var contacts: [String] = []
-        let tag = String(self.hashtag.characters.dropFirst())
         
         for contact in self.contacts.selected.keys {
             contacts.append(contact.phone.number)
@@ -257,7 +256,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         
         messageVC.recipients = contacts
         messageVC.messageComposeDelegate = self
-        messageVC.body = String(format: self.config.inviteMessage, self.hashtag, tag)
+        messageVC.body = String(format: self.config.inviteMessage, self.tag.name, self.tag.name)
         
         self.presentViewController(messageVC, animated: true, completion: nil)
     }

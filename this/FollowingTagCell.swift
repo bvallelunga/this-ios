@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FollowingTagCellDelegate {
-    func tagCellTapped()
+    func tagCellTapped(tag: Tag)
 }
 
 class FollowingTagCell: UICollectionViewCell {
@@ -21,12 +21,8 @@ class FollowingTagCell: UICollectionViewCell {
     var delegate: FollowingTagCellDelegate!
     private var currentImage: Int = 0
     private var imageTimer: NSTimer!
-    private var images: [UIImage] = [
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-1")!,
-        UIImage(named: "Sample-2")!,
-        UIImage(named: "Sample-3")!
-    ]
+    private var images: [UIImage] = []
+    var hashtag: Tag!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,14 +44,16 @@ class FollowingTagCell: UICollectionViewCell {
         
         let gesture = UITapGestureRecognizer(target: self, action: Selector("tapped:"))
         self.addGestureRecognizer(gesture)
-        
-        // TODO: Remove when parse is added
-        self.tagLabel.text = "#blackcat15"
-        self.imageView.image = self.images.first
+    }
+    
+    func updateTag(tag: Tag) {
+        self.hashtag = tag
+        self.tagLabel.text = "#\(tag.name)"
+        //self.imageView.image = tag.images
     }
     
     func tapped(gesture: UITapGestureRecognizer) {
-        self.delegate.tagCellTapped()
+        self.delegate.tagCellTapped(self.hashtag)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

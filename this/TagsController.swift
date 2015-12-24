@@ -14,7 +14,7 @@ class TagsController: UIViewController {
     @IBOutlet weak var followingContainer: UIView!
     @IBOutlet weak var trendingContainer: UIView!
     
-    var hashtag: String!
+    var tag: Tag!
     
     private var followingController: FollowingController!
     private var trendingController: TrendingController!
@@ -76,7 +76,7 @@ class TagsController: UIViewController {
             
             case "next":
                 let controller = segue.destinationViewController as? TagController
-                controller?.hashtag = self.hashtag
+                controller?.tag = self.tag
             
             default: break
         }

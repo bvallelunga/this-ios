@@ -13,7 +13,7 @@ private let spacerIdentifier = "spacer"
 
 class FollowingController: UICollectionViewController, UICollectionViewDelegateFlowLayout, FollowingTagCellDelegate {
     
-    private var tags = [1]
+    private var tags: [Tag] = []
     var parent: TagsController!
     
     override func viewDidLoad() {
@@ -53,6 +53,7 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
         
         cell.alpha = 1
         cell.delegate = self
+        cell.updateTag(self.tags[indexPath.row])
         
         return cell
     }
@@ -74,8 +75,8 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
         return CGSizeMake(size.width/2 - 0.5, size.height/3 - 1)
     }
     
-    func tagCellTapped() {
-        self.parent.hashtag = "#blackcat15"
+    func tagCellTapped(tag: Tag) {
+        self.parent.tag = tag
         self.parent.performSegueWithIdentifier("next", sender: self)
     }
 

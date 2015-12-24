@@ -22,11 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Initialize Parse
         let credentials = Globals.parseCredentials()
         
-        User.registerSubclass()
         Tag.registerSubclass()
         Photo.registerSubclass()
         Comment.registerSubclass()
         Installation.registerSubclass()
+        User.registerSubclass()
         
         ParseCrashReporting.enable()
         Parse.enableLocalDatastore()

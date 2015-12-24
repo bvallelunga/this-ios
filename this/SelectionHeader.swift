@@ -153,8 +153,9 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         }
     }
 
-    @IBAction func uploadTags(sender: AnyObject) {
-        self.delegate.updateTags(self.hashtag, timer: self.timer.timer)
+    @IBAction func uploadPhotos(sender: AnyObject) {
+        let hashtag = String(self.hashtag.characters.dropFirst())
+        self.delegate.updateTags(hashtag, timer: self.timer.timer)
     }
     
     @IBAction func goToFollowing(sender: AnyObject) {

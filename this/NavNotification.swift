@@ -11,7 +11,7 @@ import AudioToolbox
 
 class NavNotification: NSObject {
     
-    class func show(text: String, duration: NSTimeInterval = 3, color: UIColor = Colors.red, callback: (() -> Void)! = nil) {
+    class func show(text: String, duration: NSTimeInterval = 3, color: UIColor = Colors.red, vibrate: Bool = true, callback: (() -> Void)! = nil) {
         let notification = CWStatusBarNotification()
         
         notification.notificationAnimationInStyle = .Top
@@ -26,7 +26,10 @@ class NavNotification: NSObject {
             callback?()
         }
         
-        AudioServicesPlayAlertSound(UInt32(kSystemSoundID_Vibrate))
+        if vibrate {
+            AudioServicesPlayAlertSound(UInt32(kSystemSoundID_Vibrate))
+        }
+            
         notification.displayNotificationWithMessage(text, forDuration: duration)
     }
     

@@ -17,6 +17,8 @@ class TrendingTableCell: UITableViewCell, UICollectionViewDelegate, UICollection
     @IBOutlet weak var arrowImage: UIImageView!
     
     private var layout: UICollectionViewFlowLayout!
+    private var images: [UIImage] = []
+    var hashtag: Tag!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,6 +42,10 @@ class TrendingTableCell: UITableViewCell, UICollectionViewDelegate, UICollection
         self.layout.minimumLineSpacing = 1
     }
     
+    func updateTag(tag: Tag) {
+        self.hashtag = tag
+    }
+    
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         let size = self.collectionView.bounds.width/4 - 1
         self.layout.itemSize = CGSizeMake(size, size)
@@ -55,7 +61,12 @@ class TrendingTableCell: UITableViewCell, UICollectionViewDelegate, UICollection
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! TrendingCollectionCell
         
         cell.backgroundColor = Colors.lightGrey
-        cell.imageView.image = UIImage(named: "Sample-0")
+        
+        if indexPath.row > self.images.count {
+            cell.imageView.image = nil
+        } else {
+            cell.imageView.image = self.images[indexPath.row]
+        }
         
         return cell
     }

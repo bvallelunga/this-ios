@@ -13,13 +13,13 @@ class TagController: UIViewController {
     @IBOutlet weak var messageInput: UITextField!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
-    var hashtag: String = "#bluedog13"
+    var tag: Tag!
     private var tableController: TagTableController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = self.hashtag
+        self.title = self.tag.name
         self.view.backgroundColor = UIColor.whiteColor()
         
         let shadow = NSShadow()
@@ -60,12 +60,12 @@ class TagController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "table" {
             self.tableController = segue.destinationViewController as? TagTableController
-            self.tableController.hashtag = self.hashtag
+            self.tableController.tag = self.tag
         }
     }
     
     @IBAction func uploadTriggerd(sender: AnyObject) {
-        Globals.selectionController.setHashtag(self.hashtag)
+        Globals.selectionController.setHashtag(self.tag.name)
         Globals.pagesController.setActiveController(1, direction: .Reverse) { () -> Void in
             self.navigationController?.popViewControllerAnimated(false)
         }
