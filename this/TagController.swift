@@ -19,7 +19,7 @@ class TagController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = self.tag.name
+        self.title = "#\(self.tag.name)"
         self.view.backgroundColor = UIColor.whiteColor()
         
         let shadow = NSShadow()

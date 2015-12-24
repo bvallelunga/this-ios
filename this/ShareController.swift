@@ -19,21 +19,6 @@ protocol ShareControllerDelegate {
 class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     MFMessageComposeViewControllerDelegate {
     
-    // TODO: REMOVE WHEN IMPLEMENTING PARSE
-    class User: NSObject {
-        var name: String = ""
-        var username: String = ""
-        var phone: String = ""
-        
-        convenience init(name: String, username: String, phone: String) {
-            self.init()
-            
-            self.name = name
-            self.username = username
-            self.phone = phone
-        }
-    }
-    
     struct Users {
         var raw: [User] = []
         var filtered: [User] = []
@@ -54,6 +39,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     var users: Users = Users()
     var delegate: ShareControllerDelegate!
     var headerController: ShareHeaderController!
+    var user = User.current()
     var config: Config!
 
     override func viewDidLoad() {
@@ -172,8 +158,14 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         if indexPath.section == 0 {
             let user = self.users.filtered[indexPath.row]
             cell.share = self.users.selected[user] != nil
-            cell.textLabel?.text = user.name
-            cell.detailTextLabel?.text = "@\(user.username)"
+            
+            if !user.fullName.isEmpty {
+                cell.textLabel?.text = user.fullName
+                cell.detailTextLabel?.text = "@\(user.username!)"
+            } else {
+                cell.textLabel?.text = "@\(user.username!)"
+                cell.detailTextLabel?.text = nil
+            }
         } else {
             let contact = self.contacts.filtered[indexPath.row]
             var label = contact.phone.label
@@ -235,6 +227,15 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     }
     
     func shareTriggered() {
+        // Share For Users        
+        for user in self.users.selected.keys {
+            self.tag.followers.addObject(user)
+        }
+        
+        self.tag.saveInBackground()
+        
+        
+        // Share For Contacts
         guard !self.contacts.selected.isEmpty else {
             self.nextTriggered()
             return
@@ -275,9 +276,9 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
             text = text.lowercaseString
             
             for user in self.users.raw {
-                let containsName = NSString(string: user.name.lowercaseString).containsString(text)
+                let containsName = NSString(string: user.fullName.lowercaseString).containsString(text)
                 let containsPhone = NSString(string: user.phone).containsString(number)
-                let containsUsername = NSString(string: user.username).containsString(text)
+                let containsUsername = NSString(string: user.username!).containsString(text)
                 
                 if containsName || containsPhone || containsUsername {
                     self.users.filtered.append(user)
@@ -298,7 +299,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     }
     
     func loadContacts() {
-        Contact.getContacts { (contacts) -> Void in
+        Contact.getContacts(self.user) { (contacts) -> Void in
             self.contacts.raw = contacts
             
             self.filterBySearch("")
@@ -307,13 +308,13 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     }
     
     func loadUsers() {
-        self.users.raw = [
-            User(name: "Brian Vallelunga", username: "bvallelunga", phone: "+13108492533"),
-            User(name: "Kyle Wu", username: "kwu", phone: "+13108492533")
-        ]
+        let numbers = self.contacts.raw.map({ $0.phone.e164 })
         
-        self.intersectionsUsersContacts()
-        self.filterBySearch("")
+        User.findByNumbers(numbers) { (users) -> Void in
+            self.users.raw = users
+            self.intersectionsUsersContacts()
+            self.filterBySearch("")
+        }
     }
     
     func intersectionsUsersContacts() {
@@ -338,18 +339,5 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
             }
         }
     }
-    
-//    func generateImage() -> UIImage {
-//        UIGraphicsBeginImageContextWithOptions(self.mosaic.frame.size, true, 0)
-//        
-//        self.mosaic.drawViewHierarchyInRect(self.mosaic.frame, afterScreenUpdates: true)
-//        let snapshot = UIGraphicsGetImageFromCurrentImageContext()
-//        
-//        UIGraphicsEndImageContext()
-//        
-//        print(snapshot)
-//        
-//        return snapshot
-//    }
 
 }

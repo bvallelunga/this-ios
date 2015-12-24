@@ -17,7 +17,6 @@ class User: PFUser {
     @NSManaged var fullName: String
     @NSManaged var phone: String
     @NSManaged var photo: PFFile
-    @NSManaged var tags: PFRelation
     
     // Class Methods
     class func current() -> User! {
@@ -79,11 +78,25 @@ class User: PFUser {
         }
     }
     
+    class func findByNumbers(numbers: [String], callback: (users: [User]) -> Void) {
+        let query = User.query()
+        
+        query?.whereKey("phone", containedIn: numbers)
+            
+        query?.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if let users = objects as? [User] {
+                callback(users: users)
+            } else {
+                ErrorHandler.handleParse(error!)
+            }
+        }
+    }
+    
     // Instance Methods
     func uploadPhoto(image: UIImage) {
         let data = UIImageJPEGRepresentation(image, 0.7)
         self.photo = PFFile(name: "image.jpeg", data: data!)!
-        self.saveInBackground()
+        self.saveEventually()
     }
     
     func fetchPhoto(callback: (image: UIImage) -> Void) {

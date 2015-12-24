@@ -27,8 +27,8 @@ class ProfileController: UITableViewController {
         
         self.edgesForExtendedLayout = .None
         self.navigationController?.navigationBarHidden = true
-        self.tableView.backgroundColor = UIColor(red:0.99, green:0.99, blue:0.99, alpha:1)
-        self.tableView.separatorColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:1)
+        self.tableView.backgroundColor = Colors.offWhite
+        self.tableView.separatorColor = Colors.whiteGrey
         
         self.signoutButton.backgroundColor = Colors.red
         self.signoutButton.tintColor = UIColor.whiteColor()

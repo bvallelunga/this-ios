@@ -15,13 +15,14 @@ class Tag: PFObject, PFSubclassing {
     @NSManaged var name: String
     @NSManaged var followers: PFRelation
     @NSManaged var photos: PFRelation
+    @NSManaged var comments: PFRelation
     
     static func parseClassName() -> String {
         return "Tag"
     }
     
     // Class Methods
-    class func findCreate(name: String, callback: (tag: Tag) -> Void) {
+    class func findOrCreate(name: String, callback: (tag: Tag) -> Void) {
         let query = Tag.query()
         
         query?.whereKey("name", equalTo: name)
@@ -47,7 +48,7 @@ class Tag: PFObject, PFSubclassing {
     // Instance Methods
     func postImages(timer: Int, user: User, photos: [Photo]) {
         let expireAt = NSCalendar.currentCalendar()
-            .dateByAddingUnit(.Day, value: -timer, toDate: NSDate(), options: [])!
+            .dateByAddingUnit(.Day, value: timer, toDate: NSDate(), options: [])!
         
         self.followers.addObject(user)
         
@@ -56,11 +57,10 @@ class Tag: PFObject, PFSubclassing {
             
             photo.tag = self
             photo.expireAt = expireAt
-            photo.saveInBackground()
         }
         
-        user.tags.addObject(self)
-        user.saveInBackground()
+        Photo.saveAllInBackground(photos)
+        self.saveInBackground()
     }
 
 }

@@ -25,6 +25,24 @@ class TrendingController: UITableViewController {
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         self.tableView.separatorColor = UIColor.clearColor()
         self.tableView.registerNib(cellNib, forCellReuseIdentifier: reuseIdentifier)
+        
+        // Add Refresh
+        self.refreshControl = UIRefreshControl()
+        
+        self.refreshControl?.tintColor = Colors.offWhite
+        self.refreshControl?.addTarget(self, action: Selector("reloadTags"), forControlEvents: UIControlEvents.ValueChanged)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if self.tags.isEmpty {
+            self.reloadTags()
+        }
+    }
+    
+    func reloadTags() {
+        self.refreshControl?.endRefreshing()
     }
 
     // MARK: - Table view data source

@@ -32,7 +32,7 @@ class Photo: PFObject, PFSubclassing {
             let data = UIImageJPEGRepresentation(image, 0.7)
             
             photo.original = PFFile(name: "image.jpeg", data: data!)!
-            photo.saveInBackground()
+            photo.saveEventually()
         }
 
         return photo

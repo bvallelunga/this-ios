@@ -206,6 +206,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        // Show Camera
         if indexPath.row == 0 {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
@@ -215,22 +216,23 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
             return
         }
         
+        
+        // Toggle Library Image
         let asset = self.assets[indexPath.row-1]
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! SelectionPhotoCell
-        let options = PHImageRequestOptions()
         
         if !cell.upload && self.config != nil && self.selectedOrder.count >= self.config.uploadLimit {
             NavNotification.show("Too many photos 😉")
             return
         }
         
-        
-        options.deliveryMode = .HighQualityFormat
-        
         cell.upload = !cell.upload
         cell.layer.borderWidth = cell.upload ? 5 : 0
         
         if cell.upload {
+            let options = PHImageRequestOptions()
+            options.deliveryMode = .HighQualityFormat
+            
             self.manager.requestImageDataForAsset(asset, options: options) { (imageData, dataUTI, orientation, info) -> Void in
                 if let image = UIImage(data: imageData!) {
                     self.selectedOrder.insertObject(asset, atIndex: 0)
@@ -282,7 +284,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     
     // MARK: SelectionHeader Methods
     func updateTags(hashtag: String, timer: Int) {
-        Tag.findCreate(hashtag) { (tag) -> Void in
+        Tag.findOrCreate(hashtag) { (tag) -> Void in
             tag.postImages(timer, user: self.user, photos: Array(self.photos.values))
             
             self.tag = tag

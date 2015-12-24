@@ -38,9 +38,13 @@ class Contact: NSObject {
     var name: String = ""
     var phone: Phone!
     
-    class func getContacts(callback: (contacts: [Contact]) -> Void) {
+    class func getContacts(me: User, callback: (contacts: [Contact]) -> Void) {
         var contacts: [Contact] = []
         var phones: [String: Bool] = [:]
+        
+        phones[me.phone] = true
+        
+        print(phones)
         
         manager.sortDescriptors = [NSSortDescriptor(key: "fullName", ascending: true)]
         manager.fieldsMask = .All
@@ -60,8 +64,8 @@ class Contact: NSObject {
                             
                             contact.phone = phone
                             
-                            if !contact.name.isEmpty && phone.isValid && phones[phone.number] == nil {
-                                phones[phone.number] = true
+                            if !contact.name.isEmpty && phone.isValid && phones[phone.e164] == nil {
+                                phones[phone.e164] = true
                                 contacts.append(contact)
                             }
                         }

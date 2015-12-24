@@ -14,6 +14,7 @@ private let spacerIdentifier = "spacer"
 class FollowingController: UICollectionViewController, UICollectionViewDelegateFlowLayout, FollowingTagCellDelegate {
     
     private var tags: [Tag] = []
+    private var refreshControl: UIRefreshControl!
     var parent: TagsController!
     
     override func viewDidLoad() {
@@ -29,6 +30,24 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
         
         self.collectionView?.registerNib(tagCell, forCellWithReuseIdentifier: tagIdentifier)
         self.collectionView?.registerNib(spacerCell, forCellWithReuseIdentifier: spacerIdentifier)
+        
+        // Add Refresh
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.tintColor = Colors.offWhite
+        self.refreshControl.addTarget(self, action: Selector("reloadTags"), forControlEvents: UIControlEvents.ValueChanged)
+        self.collectionView?.insertSubview(self.refreshControl, atIndex: 0)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if self.tags.isEmpty {
+            self.reloadTags()
+        }
+    }
+    
+    func reloadTags() {
+        self.refreshControl.endRefreshing()
     }
 
     // MARK: UICollectionViewDataSource
