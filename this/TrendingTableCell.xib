@@ -30,31 +30,31 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#blackcat15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GX0-5N-NyE">
-                        <rect key="frame" x="18" y="18" width="268" height="37"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="changeme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GX0-5N-NyE">
+                        <rect key="frame" x="18" y="18" width="268" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="37" id="SzN-z6-Cpo"/>
+                            <constraint firstAttribute="height" constant="30" id="SzN-z6-Cpo"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="24"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Followers" translatesAutoresizingMaskIntoConstraints="NO" id="O28-wW-PWj">
-                        <rect key="frame" x="348" y="18" width="30" height="37"/>
+                        <rect key="frame" x="348" y="18" width="30" height="30"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="tDf-Rr-TE8"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Small Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Bzw-No-q13">
-                        <rect key="frame" x="386" y="16" width="20" height="39"/>
+                        <rect key="frame" x="386" y="16" width="20" height="32"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="Hhs-y8-ccc"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8r-vu-1P9">
-                        <rect key="frame" x="296" y="18" width="50" height="37"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8r-vu-1P9">
+                        <rect key="frame" x="296" y="18" width="50" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="nF0-G0-qUs"/>
                         </constraints>
@@ -65,15 +65,15 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="O28-wW-PWj" firstAttribute="top" secondItem="V29-jK-XhI" secondAttribute="topMargin" constant="10" id="1Ld-ha-EyV"/>
-                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="top" secondItem="p8r-vu-1P9" secondAttribute="bottom" constant="5" id="1vH-wQ-aDv"/>
+                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="top" secondItem="p8r-vu-1P9" secondAttribute="bottom" constant="12" id="1vH-wQ-aDv"/>
                     <constraint firstItem="Bzw-No-q13" firstAttribute="height" secondItem="O28-wW-PWj" secondAttribute="height" id="2tf-om-Psd"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Bzw-No-q13" secondAttribute="trailing" constant="5" id="3br-XW-Stg"/>
                     <constraint firstItem="p8r-vu-1P9" firstAttribute="height" secondItem="GX0-5N-NyE" secondAttribute="height" id="92C-lp-pse"/>
                     <constraint firstItem="p8r-vu-1P9" firstAttribute="trailing" secondItem="V29-jK-XhI" secondAttribute="trailingMargin" constant="-50" id="Ca7-te-xjo"/>
                     <constraint firstItem="Bzw-No-q13" firstAttribute="leading" secondItem="O28-wW-PWj" secondAttribute="trailing" constant="8" id="DAq-r2-7XE"/>
-                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="top" secondItem="O28-wW-PWj" secondAttribute="bottom" constant="5" id="DpE-cc-UrL"/>
+                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="top" secondItem="O28-wW-PWj" secondAttribute="bottom" constant="12" id="DpE-cc-UrL"/>
                     <constraint firstItem="p8r-vu-1P9" firstAttribute="top" secondItem="V29-jK-XhI" secondAttribute="topMargin" constant="10" id="Hc2-RX-VaR"/>
-                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="top" secondItem="Bzw-No-q13" secondAttribute="bottom" constant="5" id="KO8-2o-9D5"/>
+                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="top" secondItem="Bzw-No-q13" secondAttribute="bottom" constant="12" id="KO8-2o-9D5"/>
                     <constraint firstItem="O28-wW-PWj" firstAttribute="leading" secondItem="GX0-5N-NyE" secondAttribute="trailing" constant="16" id="L9j-MG-ExD"/>
                     <constraint firstItem="GX0-5N-NyE" firstAttribute="leading" secondItem="V29-jK-XhI" secondAttribute="leadingMargin" constant="10" id="O5H-Gg-wRI"/>
                     <constraint firstItem="Bzw-No-q13" firstAttribute="top" secondItem="V29-jK-XhI" secondAttribute="topMargin" constant="8" id="Qj0-2X-L8Z"/>
@@ -82,7 +82,7 @@
                     <constraint firstItem="Ei0-0Z-fsz" firstAttribute="leading" secondItem="V29-jK-XhI" secondAttribute="leadingMargin" constant="10" id="akx-UN-aDD"/>
                     <constraint firstItem="Ei0-0Z-fsz" firstAttribute="trailing" secondItem="V29-jK-XhI" secondAttribute="trailingMargin" constant="-10" id="fZb-U2-Mg6"/>
                     <constraint firstItem="p8r-vu-1P9" firstAttribute="leading" secondItem="O28-wW-PWj" secondAttribute="trailing" constant="5" id="i60-hu-4qQ"/>
-                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="top" secondItem="GX0-5N-NyE" secondAttribute="bottom" constant="5" id="kAi-Vi-sg0"/>
+                    <constraint firstItem="Ei0-0Z-fsz" firstAttribute="top" secondItem="GX0-5N-NyE" secondAttribute="bottom" constant="12" id="kAi-Vi-sg0"/>
                     <constraint firstItem="GX0-5N-NyE" firstAttribute="top" secondItem="V29-jK-XhI" secondAttribute="topMargin" constant="10" id="pLy-7h-qoy"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Ei0-0Z-fsz" secondAttribute="bottom" constant="10" id="qRa-HN-fsV"/>
                     <constraint firstItem="GX0-5N-NyE" firstAttribute="top" secondItem="V29-jK-XhI" secondAttribute="topMargin" constant="5" id="vCj-d4-8js"/>

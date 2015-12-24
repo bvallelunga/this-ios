@@ -29,7 +29,7 @@ class TrendingController: UITableViewController {
         // Add Refresh
         self.refreshControl = UIRefreshControl()
         
-        self.refreshControl?.tintColor = Colors.offWhite
+        self.refreshControl?.tintColor = UIColor.lightGrayColor()
         self.refreshControl?.addTarget(self, action: Selector("reloadTags"), forControlEvents: UIControlEvents.ValueChanged)
     }
     
@@ -51,7 +51,7 @@ class TrendingController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.tags.count
+        return max(self.tags.count, 6)
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -59,13 +59,21 @@ class TrendingController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.parent.tag = self.tags[indexPath.row]
-        self.parent.performSegueWithIdentifier("next", sender: self)
+        if self.tags.count > indexPath.row {
+            self.parent.tag = self.tags[indexPath.row]
+            self.parent.performSegueWithIdentifier("next", sender: self)
+        }
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! TrendingTableCell
 
+        if self.tags.count <= indexPath.row {
+            cell.makeSpacer()
+        } else {
+            cell.updateTag(self.tags[indexPath.row])
+        }
+        
         return cell
     }
 }

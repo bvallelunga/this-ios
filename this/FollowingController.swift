@@ -33,7 +33,7 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
         
         // Add Refresh
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.tintColor = Colors.offWhite
+        self.refreshControl.tintColor = UIColor.lightGrayColor()
         self.refreshControl.addTarget(self, action: Selector("reloadTags"), forControlEvents: UIControlEvents.ValueChanged)
         self.collectionView?.insertSubview(self.refreshControl, atIndex: 0)
     }

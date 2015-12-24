@@ -44,6 +44,15 @@ class TrendingTableCell: UITableViewCell, UICollectionViewDelegate, UICollection
     
     func updateTag(tag: Tag) {
         self.hashtag = tag
+        self.contentView.alpha = 1
+    }
+    
+    func makeSpacer() {
+        self.tagLabel.text = ""
+        self.tagLabel.backgroundColor = Colors.lightGrey
+        self.followersLabel.hidden = true
+        self.iconImage.hidden = true
+        self.contentView.alpha = 0.15
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -62,8 +71,9 @@ class TrendingTableCell: UITableViewCell, UICollectionViewDelegate, UICollection
         
         cell.backgroundColor = Colors.lightGrey
         
-        if indexPath.row > self.images.count {
+        if self.images.count <= indexPath.row {
             cell.imageView.image = nil
+            cell.imageView.backgroundColor = Colors.tiles[indexPath.row]
         } else {
             cell.imageView.image = self.images[indexPath.row]
         }
