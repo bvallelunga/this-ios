@@ -21,6 +21,9 @@ class Config {
     var termsURL: String!
     var privacyURL: String!
     var faqsURL: String!
+    var facebookMessage: String!
+    var twitterMessage: String!
+    var inviteMessage: String!
     var parse: PFConfig!
     
     // MARK: Convenience Methods
@@ -34,6 +37,9 @@ class Config {
         self.faqsURL = object["faqsURL"] as? String
         self.itunesId = object["itunesId"] as? String
         self.uploadLimit = object["uploadLimit"] as? Int
+        self.facebookMessage = object["facebookMessage"] as? String
+        self.twitterMessage = object["twitterMessage"] as? String
+        self.inviteMessage = object["inviteMessage"] as? String
         self.parse = object
     }
     

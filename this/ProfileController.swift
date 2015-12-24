@@ -143,7 +143,7 @@ class ProfileController: UITableViewController {
         if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
             let sheet = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
             
-            sheet.setInitialText("NEEDS TO CHANGE")
+            sheet.setInitialText(self.config.facebookMessage)
             sheet.addImage(UIImage(named: "Sample-0"))
             
             self.presentViewController(sheet, animated: true, completion: nil)
@@ -158,7 +158,7 @@ class ProfileController: UITableViewController {
         if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter){
             let sheet = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
             
-            sheet.setInitialText("NEEDS TO CHANGE")
+            sheet.setInitialText(self.config.twitterMessage)
             sheet.addImage(UIImage(named: "Sample-0"))
             
             self.presentViewController(sheet, animated: true, completion: nil)

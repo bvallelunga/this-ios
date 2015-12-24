@@ -54,6 +54,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     var users: Users = Users()
     var delegate: ShareControllerDelegate!
     var headerController: ShareHeaderController!
+    var config: Config!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +73,10 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         
         self.loadContacts()
         self.headerController.updateNextButtonTitle(false)
+        
+        Config.sharedInstance { (config) -> Void in
+            self.config = config
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -252,9 +257,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         
         messageVC.recipients = contacts
         messageVC.messageComposeDelegate = self
-        messageVC.body = ("Thought it would be cool to share our photos on #this app. " +
-            "Join me and post yours to \(self.hashtag). " +
-            "https://getthis.com/tag/\(tag)")
+        messageVC.body = String(format: self.config.inviteMessage, self.hashtag, tag)
         
         self.presentViewController(messageVC, animated: true, completion: nil)
     }

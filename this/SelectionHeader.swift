@@ -206,7 +206,7 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     }
     
     func checkArrow() {
-        let enabled = !images.isEmpty && !self.hashtag.isEmpty
+        let enabled = !self.images.isEmpty && !self.hashtag.isEmpty
         
         if enabled != self.arrowButton.enabled {
             self.arrowButton.enabled = enabled
