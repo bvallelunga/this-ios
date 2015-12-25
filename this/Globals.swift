@@ -15,6 +15,8 @@ class Globals: NSObject {
     static var selectionController: SelectionController!
     static var tagsController: TagsController!
     static var profileController: ProfileController!
+    static var followingController: FollowingController!
+    static var trendingController: TrendingController!
     
     static let infoDictionary = NSBundle.mainBundle().infoDictionary!
     static let imageCache = AutoPurgingImageCache()
@@ -32,6 +34,25 @@ class Globals: NSObject {
                 Int64(delay * Double(NSEC_PER_SEC))
             ),
             dispatch_get_main_queue(), closure)
+    }
+    
+    class func fetchImage(url: String, callback: (image: UIImage) -> Void) {
+        let request = NSURLRequest(URL: NSURL(string: url)!)
+        
+        if let image = Globals.imageCache.imageForRequest(request) {
+            callback(image: image)
+            return
+        }
+        
+        Globals.imageDownloader.downloadImage(URLRequest: request) { response in
+            if let image: UIImage = response.result.value {
+                callback(image: image)
+                
+                Globals.imageCache.addImage(image, forRequest: request)
+            } else {
+                print(response)
+            }
+        }
     }
     
     class func parseCredentials() -> [String] {

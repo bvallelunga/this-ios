@@ -18,6 +18,7 @@ class TrendingTableCell: UITableViewCell, UICollectionViewDelegate, UICollection
     
     private var layout: UICollectionViewFlowLayout!
     private var images: [UIImage] = []
+    private var spacer: Bool = false
     var hashtag: Tag!
     
     override func awakeFromNib() {
@@ -43,16 +44,36 @@ class TrendingTableCell: UITableViewCell, UICollectionViewDelegate, UICollection
     }
     
     func updateTag(tag: Tag) {
+        self.spacer = false
         self.hashtag = tag
         self.contentView.alpha = 1
+        self.tagLabel.text = tag.hashtag
+        self.followersLabel.text = "\(tag.followerCount)"
+        self.followersLabel.hidden = false
+        self.iconImage.hidden = false
+        self.tagLabel.backgroundColor = UIColor.clearColor()
+        self.images.removeAll()
+        self.collectionView.reloadData()
+        
+        tag.photos(8) { (photos) -> Void in
+            for photo in photos {
+                photo.fetchThumbnail({ (image) -> Void in
+                    self.images.append(image)
+                    self.collectionView.reloadData()
+                })
+            }
+        }
     }
     
     func makeSpacer() {
+        self.spacer = true
         self.tagLabel.text = ""
         self.tagLabel.backgroundColor = Colors.lightGrey
         self.followersLabel.hidden = true
         self.iconImage.hidden = true
         self.contentView.alpha = 0.15
+        self.images.removeAll()
+        self.collectionView.reloadData()
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -69,11 +90,14 @@ class TrendingTableCell: UITableViewCell, UICollectionViewDelegate, UICollection
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! TrendingCollectionCell
         
-        cell.backgroundColor = Colors.lightGrey
+        if self.spacer {
+            cell.backgroundColor = Colors.tiles[indexPath.row]
+        } else {
+            cell.backgroundColor = Colors.lightGrey
+        }
         
         if self.images.count <= indexPath.row {
             cell.imageView.image = nil
-            cell.imageView.backgroundColor = Colors.tiles[indexPath.row]
         } else {
             cell.imageView.image = self.images[indexPath.row]
         }

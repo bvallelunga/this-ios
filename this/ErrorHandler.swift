@@ -10,7 +10,7 @@ import Parse
 
 class ErrorHandler {
     class func handleParse(error: NSError!) {
-        if error.domain != PFParseErrorDomain {
+        guard error != nil && error.domain == PFParseErrorDomain else {
             return
         }
         

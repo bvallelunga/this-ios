@@ -15,6 +15,7 @@ class TrendingController: UITableViewController {
     var parent: TagsController!
     
     private var tags: [Tag] = []
+    private var date: NSDate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,13 +37,18 @@ class TrendingController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        if self.tags.isEmpty {
+        if self.date == nil || self.tags.isEmpty || NSCalendar.currentCalendar().components(.Minute, fromDate: self.date, toDate: NSDate(), options: []).minute > 2 {
             self.reloadTags()
         }
     }
     
     func reloadTags() {
-        self.refreshControl?.endRefreshing()
+        Tag.trending { (tags) -> Void in
+            self.tags = tags
+            self.tableView.reloadData()
+            self.refreshControl?.endRefreshing()
+            self.date = NSDate()
+        }
     }
 
     // MARK: - Table view data source
@@ -51,7 +57,7 @@ class TrendingController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return max(self.tags.count, 6)
+        return max(self.tags.count, 3)
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

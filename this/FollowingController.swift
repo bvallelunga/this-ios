@@ -15,6 +15,8 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
     
     private var tags: [Tag] = []
     private var refreshControl: UIRefreshControl!
+    private var user = User.current()
+    private var date: NSDate!
     var parent: TagsController!
     
     override func viewDidLoad() {
@@ -41,13 +43,18 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        if self.tags.isEmpty {
+        if self.date == nil || self.tags.isEmpty || NSCalendar.currentCalendar().components(.Minute, fromDate: self.date, toDate: NSDate(), options: []).minute > 2 {
             self.reloadTags()
         }
     }
     
     func reloadTags() {
-        self.refreshControl.endRefreshing()
+        self.user.tags { (tags) -> Void in
+            self.tags = tags
+            self.collectionView?.reloadData()
+            self.refreshControl.endRefreshing()
+            self.date = NSDate()
+        }
     }
 
     // MARK: UICollectionViewDataSource
@@ -91,6 +98,7 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let size = self.view.frame.size
+        
         return CGSizeMake(size.width/2 - 0.5, size.height/3 - 1)
     }
     

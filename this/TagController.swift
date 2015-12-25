@@ -19,7 +19,7 @@ class TagController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "#\(self.tag.name)"
+        self.title = self.tag.hashtag
         self.view.backgroundColor = UIColor.whiteColor()
         
         let shadow = NSShadow()
@@ -65,7 +65,7 @@ class TagController: UIViewController {
     }
     
     @IBAction func uploadTriggerd(sender: AnyObject) {
-        Globals.selectionController.setHashtag(self.tag.name)
+        Globals.selectionController.setHashtag(self.tag.hashtag)
         Globals.pagesController.setActiveController(1, direction: .Reverse) { () -> Void in
             self.navigationController?.popViewControllerAnimated(false)
         }

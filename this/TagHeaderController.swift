@@ -93,8 +93,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         
         controller.delegate = self
         controller.images = self.images
-        //controller.hashtag = self.hashtag
-        controller.backText = "CANCEL"
+        controller.tag = self.tag
         
         self.presentViewController(controller, animated: true, completion: nil)
     }
@@ -103,12 +102,8 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         self.followingButton.setTitle("FOLLOW", forState: .Normal)
     }
     
-    func shareControllerDismiss() {
+    func shareControllerShared(count: Int) {
         self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func shareControllerShared(count: Int, callback: () -> Void) {
-        callback()
     }
     
     // MARK: UICollectionViewDataSource

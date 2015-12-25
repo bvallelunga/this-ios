@@ -49,13 +49,13 @@ class User: PFUser {
                     if let user = pfuser as? User {
                         callback(user: user)
                     } else if error != nil {
-                        ErrorHandler.handleParse(error!)
+                        ErrorHandler.handleParse(error)
                     } else {
                         callback(user: nil)
                     }
                 })
             } else if error != nil {
-                ErrorHandler.handleParse(error!)
+                ErrorHandler.handleParse(error)
             } else {
                 callback(user: nil)
             }
@@ -73,7 +73,7 @@ class User: PFUser {
             if success {
                 callback(user: user)
             } else {
-                ErrorHandler.handleParse(error!)
+                ErrorHandler.handleParse(error)
             }
         }
     }
@@ -87,7 +87,7 @@ class User: PFUser {
             if let users = objects as? [User] {
                 callback(users: users)
             } else {
-                ErrorHandler.handleParse(error!)
+                ErrorHandler.handleParse(error)
             }
         }
     }
@@ -104,22 +104,23 @@ class User: PFUser {
             return
         }
         
-        let request = NSURLRequest(URL: NSURL(string: url)!)
-        
-        if let image = Globals.imageCache.imageForRequest(request) {
-            callback(image: image)
-            return
-        }
-        
-        Globals.imageDownloader.downloadImage(URLRequest: request) { response in
-            if let image: UIImage = response.result.value {
-                callback(image: image)
-                
-                Globals.imageCache.addImage(image, forRequest: request)
-            } else {
-                print(response)
-            }
-        }
+        Globals.fetchImage(url, callback: callback)
     }
-
+    
+    func tags(callback: (tags: [Tag]) -> Void) {
+        let query = Tag.query()
+        
+        query?.whereKey("followers", equalTo: self)
+        query?.whereKey("photoCount", greaterThan: 0)
+        query?.addDescendingOrder("followerCount")
+        query?.addAscendingOrder("updatedAt")
+        
+        query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+            if let tags = objects as? [Tag] {
+                callback(tags: tags)
+            } else {
+                ErrorHandler.handleParse(error)
+            }
+        })
+    }
 }

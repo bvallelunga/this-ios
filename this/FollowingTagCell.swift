@@ -48,8 +48,22 @@ class FollowingTagCell: UICollectionViewCell {
     
     func updateTag(tag: Tag) {
         self.hashtag = tag
-        self.tagLabel.text = "#\(tag.name)"
-        //self.imageView.image = tag.images
+        self.tagLabel.text = tag.hashtag
+        self.badgeLabel.hidden = true
+        self.images.removeAll()
+        self.imageView.image = nil
+        
+        tag.photos(8) { (photos) -> Void in
+            for (i, photo) in photos.enumerate() {
+                photo.fetchThumbnail({ (image) -> Void in
+                    self.images.append(image)
+                    
+                    if i == 0 {
+                        self.imageView.image = image
+                    }
+                })
+            }
+        }
     }
     
     func tapped(gesture: UITapGestureRecognizer) {
@@ -75,11 +89,13 @@ class FollowingTagCell: UICollectionViewCell {
     }
     
     func cycleImage() {
-        if ++self.currentImage >= self.images.count {
-            self.currentImage = 0
+        if !self.images.isEmpty {
+            if ++self.currentImage >= self.images.count {
+                self.currentImage = 0
+            }
+            
+            self.imageView.image = self.images[self.currentImage]
         }
-        
-        self.imageView.image = self.images[self.currentImage]
     }
     
     func startCycling() {

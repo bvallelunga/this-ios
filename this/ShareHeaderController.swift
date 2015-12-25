@@ -10,7 +10,6 @@ import UIKit
 
 protocol ShareHeaderControllerDelegate {
     func filterBySearch(text: String)
-    func backTriggred()
     func shareTriggered()
 }
 
@@ -22,7 +21,6 @@ class ShareHeaderController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var stepLabel: UILabel!
     @IBOutlet weak var headerLabel: UILabel!
-    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -32,9 +30,7 @@ class ShareHeaderController: UIViewController, UISearchBarDelegate {
         self.view.backgroundColor = Colors.red
         self.stepLabel.textColor = UIColor(white: 0, alpha: 0.5)
         self.headerLabel.textColor = UIColor.whiteColor()
-        self.headerLabel.text = "Invite your friends\nto post to #\(self.tag.name)"
-        
-        self.backButton.setTitle(self.backText, forState: .Normal)
+        self.headerLabel.text = "Invite your friends\nto post to \(self.tag.hashtag)"
         
         // Configure Search Bar
         self.searchBar.delegate = self
@@ -48,10 +44,6 @@ class ShareHeaderController: UIViewController, UISearchBarDelegate {
                 }
             }
         }
-    }
-    
-    @IBAction func backTriggered(sender: AnyObject) {
-        self.delegate.backTriggred()
     }
     
     @IBAction func nextTriggered(sender: AnyObject) {

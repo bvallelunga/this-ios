@@ -14,8 +14,14 @@ class Tag: PFObject, PFSubclassing {
     // Instance Variables
     @NSManaged var name: String
     @NSManaged var followers: PFRelation
+    @NSManaged var followerCount: Int
     @NSManaged var photos: PFRelation
+    @NSManaged var photoCount: Int
     @NSManaged var comments: PFRelation
+    
+    var hashtag: String {
+        return "#\(name)"
+    }
     
     static func parseClassName() -> String {
         return "Tag"
@@ -32,7 +38,7 @@ class Tag: PFObject, PFSubclassing {
                 callback(tag: tag)
                 return
             } else if error?.code != PFErrorCode.ErrorObjectNotFound.rawValue {
-                ErrorHandler.handleParse(error!)
+                ErrorHandler.handleParse(error)
                 return
             }
             
@@ -45,7 +51,44 @@ class Tag: PFObject, PFSubclassing {
         })
     }
     
+    class func trending(callback: (tags: [Tag]) -> Void) {
+        let query = Tag.query()
+        
+        query?.addAscendingOrder("updatedAt")
+        query?.addDescendingOrder("followerCount")
+        query?.addDescendingOrder("photoCount")
+        query?.whereKey("photoCount", greaterThan: 0)
+        
+        query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+            if let tags = objects as? [Tag] {
+                callback(tags: tags)
+            } else {
+                ErrorHandler.handleParse(error)
+            }
+        })
+    }
+    
     // Instance Methods
+    func photos(limit: Int! = nil, callback: (photos: [Photo]) -> Void) {
+        let query = self.photos.query()
+        
+        query.whereKeyExists("original")
+        query.whereKeyExists("thumbnail")
+        query.whereKey("expireAt", greaterThan: NSDate())
+        
+        if limit != nil {
+            query.limit = limit
+        }
+        
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if let photos = objects as? [Photo] {
+                callback(photos: photos)
+            } else {
+                ErrorHandler.handleParse(error)
+            }
+        }
+    }
+    
     func postImages(timer: Int, user: User, photos: [Photo]) {
         let expireAt = NSCalendar.currentCalendar()
             .dateByAddingUnit(.Day, value: timer, toDate: NSDate(), options: [])!
@@ -62,5 +105,5 @@ class Tag: PFObject, PFSubclassing {
         Photo.saveAllInBackground(photos)
         self.saveInBackground()
     }
-
+    
 }

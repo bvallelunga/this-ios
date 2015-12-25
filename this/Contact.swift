@@ -44,8 +44,6 @@ class Contact: NSObject {
         
         phones[me.phone] = true
         
-        print(phones)
-        
         manager.sortDescriptors = [NSSortDescriptor(key: "fullName", ascending: true)]
         manager.fieldsMask = .All
         

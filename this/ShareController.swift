@@ -12,8 +12,7 @@ import MessageUI
 private let reuseIdentifier = "cell"
 
 protocol ShareControllerDelegate {
-    func shareControllerDismiss()
-    func shareControllerShared(count: Int, callback: () -> Void)
+    func shareControllerShared(count: Int)
 }
 
 class ShareController: UITableViewController, ShareHeaderControllerDelegate,
@@ -32,7 +31,6 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     }
     
     var tag: Tag!
-    var backText: String = "BACK"
     var images: [UIImage] = []
     var headerFrame: CGRect!
     var contacts: Contacts = Contacts()
@@ -83,7 +81,6 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
             self.headerController = segue.destinationViewController as? ShareHeaderController
             self.headerController?.delegate = self
             self.headerController.tag = self.tag
-            self.headerController.backText = self.backText
         }
     }
     
@@ -214,24 +211,20 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         self.headerController.updateNextButtonTitle(!self.users.selected.isEmpty || !self.contacts.selected.isEmpty)
     }
     
-    func backTriggred() {
-        self.delegate.shareControllerDismiss()
-    }
-    
     func nextTriggered() {
         let count = self.users.selected.count + self.contacts.selected.count
         
-        self.delegate.shareControllerShared(count) { () -> Void in
-            self.backTriggred()
-        }
+        self.delegate.shareControllerShared(count)
     }
     
     func shareTriggered() {
-        // Share For Users        
-        for user in self.users.selected.keys {
+        // Share For Users  
+        let users = self.users.selected.keys
+        
+        for user in users {
             self.tag.followers.addObject(user)
         }
-        
+    
         self.tag.saveInBackground()
         
         
