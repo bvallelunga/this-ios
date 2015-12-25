@@ -21,6 +21,7 @@
             <string>Bariol-Bold</string>
             <string>Bariol-Bold</string>
             <string>Bariol-Bold</string>
+            <string>Bariol-Bold</string>
         </mutableArray>
         <mutableArray key="Bariol_Regular.ttf">
             <string>Bariol-Regular</string>
@@ -1001,6 +1002,20 @@ and Privacy Policy.</string>
                                 </constraints>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                             </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAN-X5-TJ5">
+                                <rect key="frame" x="0.0" y="213" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="Rsy-7A-LZG"/>
+                                    <constraint firstAttribute="height" constant="50" id="ufK-Co-DA1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="18"/>
+                                <state key="normal" title="BACK">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="backTriggered:" destination="Tfm-c1-9m7" eventType="touchUpInside" id="odE-6m-0VB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1019,6 +1034,8 @@ and Privacy Policy.</string>
                             <constraint firstItem="oQy-rD-3Xq" firstAttribute="trailing" secondItem="Lsf-ST-9dK" secondAttribute="trailingMargin" id="IIs-bR-gfd"/>
                             <constraint firstItem="gJf-fn-IJc" firstAttribute="top" secondItem="f8x-Uo-MQj" secondAttribute="bottom" id="Jla-ZE-Yok"/>
                             <constraint firstItem="Hxo-sh-8Un" firstAttribute="top" secondItem="e0H-Ou-up5" secondAttribute="bottom" id="Km6-oB-57Y"/>
+                            <constraint firstItem="f8x-Uo-MQj" firstAttribute="top" secondItem="mAN-X5-TJ5" secondAttribute="bottom" id="Q4a-1j-Ceo"/>
+                            <constraint firstItem="mAN-X5-TJ5" firstAttribute="leading" secondItem="Lsf-ST-9dK" secondAttribute="leading" id="Qvx-dO-amk"/>
                             <constraint firstItem="gJf-fn-IJc" firstAttribute="leading" secondItem="Lsf-ST-9dK" secondAttribute="leading" id="TRV-Xe-SVJ"/>
                             <constraint firstItem="e0H-Ou-up5" firstAttribute="top" secondItem="oQy-rD-3Xq" secondAttribute="bottom" id="UH7-1H-tLe"/>
                             <constraint firstItem="oQy-rD-3Xq" firstAttribute="leading" secondItem="Lsf-ST-9dK" secondAttribute="leadingMargin" id="V28-Fo-jyQ"/>
@@ -1042,6 +1059,7 @@ and Privacy Policy.</string>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="mAN-X5-TJ5" id="7qT-Cp-WP0"/>
                         <outlet property="headerLabel" destination="e0H-Ou-up5" id="UaK-DX-jEB"/>
                         <outlet property="nextButton" destination="Hxo-sh-8Un" id="pTO-a3-NfP"/>
                         <outlet property="searchBar" destination="gJf-fn-IJc" id="GFi-zo-nh4"/>

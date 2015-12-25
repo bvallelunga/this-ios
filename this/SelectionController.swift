@@ -250,6 +250,11 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         }
     }
     
+    func shareControllerCancelled() {
+        self.reset()
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     func shareControllerShared(count: Int) {
         Globals.pagesController.setActiveController(2, direction: .Forward) { () -> Void in
             Globals.tagsController.tag = self.tag

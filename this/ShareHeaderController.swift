@@ -11,6 +11,7 @@ import UIKit
 protocol ShareHeaderControllerDelegate {
     func filterBySearch(text: String)
     func shareTriggered()
+    func backTriggered()
 }
 
 class ShareHeaderController: UIViewController, UISearchBarDelegate {
@@ -20,6 +21,7 @@ class ShareHeaderController: UIViewController, UISearchBarDelegate {
     var delegate: ShareHeaderControllerDelegate!
     
     @IBOutlet weak var stepLabel: UILabel!
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -44,6 +46,12 @@ class ShareHeaderController: UIViewController, UISearchBarDelegate {
                 }
             }
         }
+        
+        self.backButton.setTitle(self.backText, forState: .Normal)
+    }
+    
+    @IBAction func backTriggered(sender: AnyObject) {
+        self.delegate.backTriggered()
     }
     
     @IBAction func nextTriggered(sender: AnyObject) {

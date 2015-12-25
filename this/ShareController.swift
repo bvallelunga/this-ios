@@ -12,6 +12,7 @@ import MessageUI
 private let reuseIdentifier = "cell"
 
 protocol ShareControllerDelegate {
+    func shareControllerCancelled()
     func shareControllerShared(count: Int)
 }
 
@@ -31,6 +32,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     }
     
     var tag: Tag!
+    var backButton = "BACK"
     var images: [UIImage] = []
     var headerFrame: CGRect!
     var contacts: Contacts = Contacts()
@@ -81,6 +83,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
             self.headerController = segue.destinationViewController as? ShareHeaderController
             self.headerController?.delegate = self
             self.headerController.tag = self.tag
+            self.headerController.backText = self.backButton
         }
     }
     
@@ -209,6 +212,10 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         }
         
         self.headerController.updateNextButtonTitle(!self.users.selected.isEmpty || !self.contacts.selected.isEmpty)
+    }
+    
+    func backTriggered() {
+        self.delegate.shareControllerCancelled()
     }
     
     func nextTriggered() {

@@ -22,32 +22,8 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     
     private var layout = TagCollectionLayout()
     private var downloadMode: Bool = false
-    private var images: [UIImage] = [
-        UIImage(named: "Sample-1")!,
-        UIImage(named: "Sample-2")!,
-        UIImage(named: "Sample-3")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-1")!,
-        UIImage(named: "Sample-2")!,
-        UIImage(named: "Sample-3")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-1")!,
-        UIImage(named: "Sample-2")!,
-        UIImage(named: "Sample-3")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-1")!,
-        UIImage(named: "Sample-2")!,
-        UIImage(named: "Sample-3")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-1")!,
-        UIImage(named: "Sample-2")!,
-        UIImage(named: "Sample-3")!,
-        UIImage(named: "Sample-0")!,
-        UIImage(named: "Sample-1")!,
-        UIImage(named: "Sample-2")!,
-        UIImage(named: "Sample-3")!,
-        UIImage(named: "Sample-0")!
-    ]
+    private var photos: [Photo] = []
+    private var images: [Photo: UIImage] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,8 +43,20 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         self.setupButton(self.followingButton, color: Colors.blue)
         self.setupButton(self.inviteButton, color: Colors.green)
         self.downloadButton.tintColor = UIColor.whiteColor()
-        
-        self.pageControl.numberOfPages = Int(ceil(Double(self.images.count)/12))
+    }
+    
+    func tagSet() {
+        self.tag.photos { (photos) -> Void in
+            self.photos = photos
+            self.collectionView.reloadData()
+            
+            for photo in photos {
+                photo.fetchThumbnail({ (image) -> Void in
+                    self.images[photo] = image
+                    self.collectionView.reloadData()
+                })
+            }
+        }
     }
     
     func setupButton(button: UIButton, color: UIColor) {
@@ -92,14 +80,19 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         let controller = storyBoard.instantiateViewControllerWithIdentifier("ShareController") as! ShareController
         
         controller.delegate = self
-        controller.images = self.images
+        controller.images = Array(self.images.values)
         controller.tag = self.tag
+        controller.backButton = "CANCEL"
         
         self.presentViewController(controller, animated: true, completion: nil)
     }
 
     @IBAction func followingTriggered(sender: AnyObject) {
         self.followingButton.setTitle("FOLLOW", forState: .Normal)
+    }
+    
+    func shareControllerCancelled() {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func shareControllerShared(count: Int) {
@@ -116,6 +109,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        self.pageControl.numberOfPages = Int(ceil(Double(self.images.count)/12))
         return self.images.count
     }
     
@@ -127,8 +121,10 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! TagCollectionCell
+        let photo = self.photos[indexPath.row]
+        let image = self.images[photo]
         
-        cell.imageView.image = self.images[indexPath.row]
+        cell.imageView.image = image
         cell.downloadMode(self.downloadMode)
         
         return cell
@@ -136,32 +132,42 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! TagCollectionCell
-        let image = self.images[indexPath.row]
         
         if self.downloadMode {
+            let photo = self.photos[indexPath.row]
+            
             cell.downloaded()
-            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            UIImageWriteToSavedPhotosAlbum(self.images[photo]!, nil, nil, nil)
+            
             return
         }
         
-        var photos: [GalleryPhoto] = []
+        var galleryPhotos: [GalleryPhoto] = []
         var intialPhoto: GalleryPhoto!
+        var controller: NYTPhotosViewController!
         
-        for (i, image) in self.images.enumerate() {
-            let photo = GalleryPhoto(image: image, user: "@bvallelunga", postedAt: "\(i) hrs ago", hashtag: self.tag.name)
-            
-            photo.indexPath = NSIndexPath(forItem: i, inSection: 0)
-            
-            if i == indexPath.row {
-                intialPhoto = photo
+        for (i, photo) in self.photos.enumerate() {
+            if let image = self.images[photo] {
+                let galleryPhoto = GalleryPhoto(placeholder: image, user: "@\(photo.user.username!)",
+                    postedAt: Globals.intervalDate(photo.createdAt!), hashtag: self.tag.hashtag)
+                
+                galleryPhoto.indexPath = NSIndexPath(forItem: i, inSection: 0)
+                
+                photo.fetchOriginal({ (image) -> Void in
+                    galleryPhoto.image = image
+                    controller?.updateImageForPhoto(galleryPhoto)
+                })
+                
+                if i == indexPath.row {
+                    intialPhoto = galleryPhoto
+                }
+                
+                galleryPhotos.append(galleryPhoto)
             }
-            
-            photos.append(photo)
         }
         
         
-        let controller = NYTPhotosViewController(photos: photos, initialPhoto: intialPhoto)
-        
+        controller = NYTPhotosViewController(photos: galleryPhotos, initialPhoto: intialPhoto)
         controller.delegate = self
         controller.leftBarButtonItem.title = "Done"
         
@@ -170,7 +176,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     
     func photosViewController(photosViewController: NYTPhotosViewController!, handleActionButtonTappedForPhoto photo: NYTPhoto!) -> Bool {
         let image = photo as! GalleryPhoto
-        let text = "\(image.user) pic on \(self.tag.name) is epic!"
+        let text = "\(image.user) pic on \(self.tag.hashtag) is epic!"
         let controller = ShareGenerator.share(text, image: image.image)
         
         photosViewController.presentViewController(controller, animated: true, completion: nil)
@@ -193,8 +199,8 @@ class GalleryPhoto: NSObject, NYTPhoto {
     var attributedCaptionSummary: NSAttributedString?
     var attributedCaptionCredit: NSAttributedString?
     
-    init(image: UIImage?, user: String, postedAt: String, hashtag: String) {
-        self.image = image
+    init(placeholder: UIImage?, user: String, postedAt: String, hashtag: String) {
+        self.placeholderImage = placeholder
         self.user = user
         self.attributedCaptionTitle = NSAttributedString(string: user, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
         self.attributedCaptionSummary =  NSAttributedString(string: postedAt, attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])

@@ -7,6 +7,7 @@
 //
 
 import AlamofireImage
+import FormatterKit
 
 class Globals: NSObject {
     
@@ -34,6 +35,12 @@ class Globals: NSObject {
                 Int64(delay * Double(NSEC_PER_SEC))
             ),
             dispatch_get_main_queue(), closure)
+    }
+    
+    class func intervalDate(date: NSDate) -> String {
+        let timeInterval = TTTTimeIntervalFormatter()
+        let interval = NSDate().timeIntervalSinceDate(date)
+        return timeInterval.stringForTimeInterval(-interval)
     }
     
     class func fetchImage(url: String, callback: (image: UIImage) -> Void) {

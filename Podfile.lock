@@ -6,6 +6,25 @@ PODS:
   - CSStickyHeaderFlowLayout (0.2.10)
   - CWStatusBarNotification (2.3.3)
   - FLAnimatedImage (1.0.10)
+  - FormatterKit (1.8.0):
+    - FormatterKit/AddressFormatter (= 1.8.0)
+    - FormatterKit/ArrayFormatter (= 1.8.0)
+    - FormatterKit/ColorFormatter (= 1.8.0)
+    - FormatterKit/LocationFormatter (= 1.8.0)
+    - FormatterKit/NameFormatter (= 1.8.0)
+    - FormatterKit/OrdinalNumberFormatter (= 1.8.0)
+    - FormatterKit/TimeIntervalFormatter (= 1.8.0)
+    - FormatterKit/UnitOfInformationFormatter (= 1.8.0)
+    - FormatterKit/URLRequestFormatter (= 1.8.0)
+  - FormatterKit/AddressFormatter (1.8.0)
+  - FormatterKit/ArrayFormatter (1.8.0)
+  - FormatterKit/ColorFormatter (1.8.0)
+  - FormatterKit/LocationFormatter (1.8.0)
+  - FormatterKit/NameFormatter (1.8.0)
+  - FormatterKit/OrdinalNumberFormatter (1.8.0)
+  - FormatterKit/TimeIntervalFormatter (1.8.0)
+  - FormatterKit/UnitOfInformationFormatter (1.8.0)
+  - FormatterKit/URLRequestFormatter (1.8.0)
   - JSQWebViewController (2.0.1)
   - libPhoneNumber-iOS (0.8.10)
   - LLSimpleCamera (4.0.0)
@@ -27,6 +46,7 @@ DEPENDENCIES:
   - CSStickyHeaderFlowLayout (~> 0.2)
   - CWStatusBarNotification (~> 2.3)
   - FLAnimatedImage (~> 1.0)
+  - FormatterKit (~> 1.8)
   - JSQWebViewController (~> 2.0)
   - libPhoneNumber-iOS (~> 0.8)
   - LLSimpleCamera (~> 4.0)
@@ -45,6 +65,7 @@ SPEC CHECKSUMS:
   CSStickyHeaderFlowLayout: 5366582779d8b7c9ba9b9cc729c218cc23888776
   CWStatusBarNotification: 2349142e97c9f16fb8247ed3c00308cd355d334b
   FLAnimatedImage: e16a1e1cef08e4c509b47e4acbe3923f65c16135
+  FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
   JSQWebViewController: 2e416ae6604676510812bbda050d63a1488003a4
   libPhoneNumber-iOS: 7bfd00f843fdcd82b5182b463e8eb3b27579f41d
   LLSimpleCamera: 4acecd6fabca1cb5841302ee03e03123e290af3d

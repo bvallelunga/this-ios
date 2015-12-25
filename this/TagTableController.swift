@@ -60,6 +60,7 @@ class TagTableController: UITableViewController {
             self.headerController = segue.destinationViewController as? TagHeaderController
             self.headerController.view.clipsToBounds = true
             self.headerController.tag = self.tag
+            self.headerController.tagSet()
         }
     }
     
