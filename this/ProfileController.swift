@@ -140,33 +140,11 @@ class ProfileController: UITableViewController {
     }
     
     func shareFacebook() {
-        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
-            let sheet = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-            
-            sheet.setInitialText(self.config.facebookMessage)
-            sheet.addImage(self.config.shareImage)
-            
-            self.presentViewController(sheet, animated: true, completion: nil)
-        } else {
-            let alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
+        self.presentShare("facebook")
     }
     
     func shareTwitter() {
-        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter){
-            let sheet = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-            
-            sheet.setInitialText(self.config.twitterMessage)
-            sheet.addImage(UIImage(named: "Sample-0"))
-            
-            self.presentViewController(sheet, animated: true, completion: nil)
-        } else {
-            let alert = UIAlertController(title: "Accounts", message: "Please login to a Twitter account to share.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
+        self.presentShare("twitter")
     }
     
     func FAQs() {
@@ -189,5 +167,24 @@ class ProfileController: UITableViewController {
         let nav = UINavigationController(rootViewController: controller)
         
         self.presentViewController(nav, animated: true, completion: nil)
+    }
+    
+    func presentShare(network: String) {
+        let message = network == "facebook" ? self.config.facebookMessage : self.config.twitterMessage
+        let type = network == "facebook" ? SLServiceTypeFacebook : SLServiceTypeTwitter
+        
+        if SLComposeViewController.isAvailableForServiceType(type){
+            let sheet = SLComposeViewController(forServiceType: type)
+            
+            sheet.setInitialText(message)
+            sheet.addImage(self.config.shareImage)
+            
+            self.presentViewController(sheet, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Accounts", message: "Please login to your account to share.",
+                preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     }
 }
