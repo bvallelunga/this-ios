@@ -24,6 +24,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     private var downloadMode: Bool = false
     private var photos: [Photo] = []
     private var images: [Photo: UIImage] = [:]
+    private var config: Config!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,10 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         self.setupButton(self.followingButton, color: Colors.blue)
         self.setupButton(self.inviteButton, color: Colors.green)
         self.downloadButton.tintColor = UIColor.whiteColor()
+        
+        Config.sharedInstance { (config) -> Void in
+            self.config = config
+        }
     }
     
     func tagSet() {
@@ -175,9 +180,9 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     }
     
     func photosViewController(photosViewController: NYTPhotosViewController!, handleActionButtonTappedForPhoto photo: NYTPhoto!) -> Bool {
-        let image = photo as! GalleryPhoto
-        let text = "\(image.user) pic on \(self.tag.hashtag) is epic!"
-        let controller = ShareGenerator.share(text, image: image.image)
+        let galleryPhoto = photo as! GalleryPhoto
+        let text = String(format: self.config.photoMessage, String(galleryPhoto.user), self.tag.hashtag)
+        let controller = ShareGenerator.share(text, image: galleryPhoto.image)
         
         photosViewController.presentViewController(controller, animated: true, completion: nil)
         

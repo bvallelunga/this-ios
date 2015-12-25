@@ -24,6 +24,7 @@ class Config {
     var facebookMessage: String!
     var twitterMessage: String!
     var inviteMessage: String!
+    var photoMessage: String!
     var shareImage: UIImage!
     var parse: PFConfig!
     
@@ -41,6 +42,7 @@ class Config {
         self.facebookMessage = object["facebookMessage"] as? String
         self.twitterMessage = object["twitterMessage"] as? String
         self.inviteMessage = object["inviteMessage"] as? String
+        self.photoMessage = object["photoMessage"] as? String
         self.parse = object
         
         if let shareImage = object["shareImage"] as? PFFile {
