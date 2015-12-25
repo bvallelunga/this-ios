@@ -144,7 +144,7 @@ class ProfileController: UITableViewController {
             let sheet = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
             
             sheet.setInitialText(self.config.facebookMessage)
-            sheet.addImage(UIImage(named: "Sample-0"))
+            sheet.addImage(self.config.shareImage)
             
             self.presentViewController(sheet, animated: true, completion: nil)
         } else {

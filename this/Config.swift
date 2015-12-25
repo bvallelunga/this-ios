@@ -24,6 +24,7 @@ class Config {
     var facebookMessage: String!
     var twitterMessage: String!
     var inviteMessage: String!
+    var shareImage: UIImage!
     var parse: PFConfig!
     
     // MARK: Convenience Methods
@@ -41,6 +42,12 @@ class Config {
         self.twitterMessage = object["twitterMessage"] as? String
         self.inviteMessage = object["inviteMessage"] as? String
         self.parse = object
+        
+        if let shareImage = object["shareImage"] as? PFFile {
+            Globals.fetchImage(shareImage.url!, callback: { (image) -> Void in
+                self.shareImage = image
+            })
+        }
     }
     
     // MARK: Class Methods
