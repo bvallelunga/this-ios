@@ -20,11 +20,11 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     
     var tag: Tag!
     
+    private var config: Config!
     private var layout = TagCollectionLayout()
     private var downloadMode: Bool = false
     private var photos: [Photo] = []
     private var images: [Photo: UIImage] = [:]
-    private var config: Config!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +53,6 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     func tagSet() {
         self.tag.photos { (photos) -> Void in
             self.photos = photos
-            self.collectionView.reloadData()
             
             for photo in photos {
                 photo.fetchThumbnail({ (image) -> Void in
@@ -112,7 +111,6 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         return 1
     }
     
-    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         self.pageControl.numberOfPages = Int(ceil(Double(self.images.count)/12))
         return self.images.count
@@ -139,10 +137,13 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! TagCollectionCell
         
         if self.downloadMode {
+            cell.downloaded()
+            
             let photo = self.photos[indexPath.row]
             
-            cell.downloaded()
-            UIImageWriteToSavedPhotosAlbum(self.images[photo]!, nil, nil, nil)
+            photo.fetchOriginal({ (image) -> Void in
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            })
             
             return
         }
@@ -153,18 +154,19 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         
         for (i, photo) in self.photos.enumerate() {
             if let image = self.images[photo] {
-                let galleryPhoto = GalleryPhoto(placeholder: image, user: "@\(photo.user.username!)",
+                let galleryPhoto = GalleryPhoto(placeholder: image, user: photo.user.screenname,
                     postedAt: Globals.intervalDate(photo.createdAt!), hashtag: self.tag.hashtag)
                 
                 galleryPhoto.indexPath = NSIndexPath(forItem: i, inSection: 0)
-                
-                photo.fetchOriginal({ (image) -> Void in
-                    galleryPhoto.image = image
-                    controller?.updateImageForPhoto(galleryPhoto)
-                })
+                galleryPhoto.photo = photo
                 
                 if i == indexPath.row {
                     intialPhoto = galleryPhoto
+                    
+                    galleryPhoto.photo.fetchOriginal({ (image) -> Void in
+                        galleryPhoto.image = image
+                        controller.updateImageForPhoto(galleryPhoto)
+                    })
                 }
                 
                 galleryPhotos.append(galleryPhoto)
@@ -179,25 +181,42 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         self.presentViewController(controller, animated: true, completion: nil)
     }
     
+    func photosViewController(photosViewController: NYTPhotosViewController!, didDisplayPhoto photo: NYTPhoto!, atIndex photoIndex: UInt) {
+        guard photo.image == nil else {
+            return
+        }
+            
+        let galleryPhoto = photo as! GalleryPhoto
+        
+        galleryPhoto.photo.fetchOriginal({ (image) -> Void in
+            galleryPhoto.image = image
+            photosViewController.updateImageForPhoto(photo)
+        })
+    }
+    
     func photosViewController(photosViewController: NYTPhotosViewController!, handleActionButtonTappedForPhoto photo: NYTPhoto!) -> Bool {
         let galleryPhoto = photo as! GalleryPhoto
-        let text = String(format: self.config.photoMessage, String(galleryPhoto.user), self.tag.hashtag)
-        let controller = ShareGenerator.share(text, image: galleryPhoto.image)
         
-        photosViewController.presentViewController(controller, animated: true, completion: nil)
+        galleryPhoto.photo.fetchOriginal({ (image) -> Void in
+            let text = String(format: self.config.photoMessage, String(galleryPhoto.user), self.tag.hashtag)
+            let controller = ShareGenerator.share(text, image: galleryPhoto.image)
+            
+            photosViewController.presentViewController(controller, animated: true, completion: nil)
+        })
         
         return true
     }
     
     func photosViewController(photosViewController: NYTPhotosViewController!, referenceViewForPhoto photo: NYTPhoto!) -> UIView! {
-        return self.collectionView.cellForItemAtIndexPath((photo as! GalleryPhoto).indexPath!)
+        return self.collectionView.cellForItemAtIndexPath((photo as! GalleryPhoto).indexPath)
     }
 }
 
 class GalleryPhoto: NSObject, NYTPhoto {
     
     var image: UIImage?
-    var indexPath: NSIndexPath?
+    var photo: Photo!
+    var indexPath: NSIndexPath!
     var placeholderImage: UIImage?
     var user: String = ""
     var attributedCaptionTitle: NSAttributedString?
@@ -207,9 +226,12 @@ class GalleryPhoto: NSObject, NYTPhoto {
     init(placeholder: UIImage?, user: String, postedAt: String, hashtag: String) {
         self.placeholderImage = placeholder
         self.user = user
-        self.attributedCaptionTitle = NSAttributedString(string: user, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
-        self.attributedCaptionSummary =  NSAttributedString(string: postedAt, attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
-        self.attributedCaptionCredit = NSAttributedString(string: hashtag, attributes: [NSForegroundColorAttributeName: UIColor.darkGrayColor()])
+        self.attributedCaptionTitle = NSAttributedString(string: user,
+            attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+        self.attributedCaptionSummary =  NSAttributedString(string: postedAt,
+            attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
+        self.attributedCaptionCredit = NSAttributedString(string: hashtag,
+            attributes: [NSForegroundColorAttributeName: UIColor.darkGrayColor()])
         super.init()
     }
     

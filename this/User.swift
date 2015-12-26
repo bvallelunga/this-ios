@@ -18,6 +18,10 @@ class User: PFUser {
     @NSManaged var phone: String
     @NSManaged var photo: PFFile
     
+    var screenname: String {
+        return "@\(username!)"
+    }
+    
     // Class Methods
     class func current() -> User! {
         return staticUser != nil ? staticUser : User.currentUser()

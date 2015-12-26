@@ -54,11 +54,11 @@ class FollowingTagCell: UICollectionViewCell {
         self.imageView.image = nil
         
         tag.photos(8) { (photos) -> Void in
-            for (i, photo) in photos.enumerate() {
+            for photo in photos {
                 photo.fetchThumbnail({ (image) -> Void in
                     self.images.append(image)
                     
-                    if i == 0 {
+                    if photo == photos.first {
                         self.imageView.image = image
                     }
                 })

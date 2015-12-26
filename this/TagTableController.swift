@@ -17,6 +17,7 @@ class TagTableController: UITableViewController {
     private var headerController: TagHeaderController!
     private var headerFrame: CGRect!
     private var keyboardActive: Bool = false
+    private var user = User.current()
     
     var tag: Tag!
     var messages: [String] = []
@@ -123,7 +124,7 @@ class TagTableController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         let message = self.messages[indexPath.row]
         
-        cell.textLabel?.attributedText = self.buildText("@bvallelunga", message: message)
+        cell.textLabel?.attributedText = self.buildText(self.user.screenname, message: message)
         
         return cell
     }

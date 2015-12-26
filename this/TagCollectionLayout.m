@@ -31,7 +31,7 @@
     NSInteger xD = (int)(O / nbColumns);
     NSInteger yD = O % nbColumns;
     
-    NSInteger D = xD + yD * nbLines + idxPage * nbColumns * nbLines;
+    NSInteger D = xD + (yD * nbLines) + (idxPage * nbColumns * nbLines);
     
     NSIndexPath *fakeIndexPath = [NSIndexPath indexPathForItem:D inSection:indexPath.section];
     UICollectionViewLayoutAttributes *attributes = [super layoutAttributesForItemAtIndexPath:fakeIndexPath];
