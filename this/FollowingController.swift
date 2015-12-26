@@ -22,6 +22,8 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Globals.followingController = self
+        
         // Setup Background
         self.view.backgroundColor = UIColor.clearColor()
         self.collectionView?.backgroundColor = UIColor.clearColor()

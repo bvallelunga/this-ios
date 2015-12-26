@@ -34,13 +34,16 @@ class TrendingTableCell: UITableViewCell, UICollectionViewDelegate, UICollection
         self.collectionView.backgroundColor = UIColor.clearColor()
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-        
+        self.collectionView.layer.cornerRadius = 3
+        self.collectionView.layer.masksToBounds = true
         self.collectionView.registerClass(TrendingCollectionCell.self, forCellWithReuseIdentifier: "cell")
-        self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, 0)
+        self.collectionView.scrollIndicatorInsets = UIEdgeInsetsZero
+        self.collectionView.contentInset = UIEdgeInsetsZero
         
         self.layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         self.layout.minimumInteritemSpacing = 1
         self.layout.minimumLineSpacing = 1
+        self.layout.sectionInset = UIEdgeInsetsZero
     }
     
     func updateTag(tag: Tag) {

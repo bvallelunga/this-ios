@@ -19,6 +19,8 @@ class TrendingController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Globals.trendingController = self
 
         // Setup Table
         let cellNib = UINib(nibName: "TrendingTableCell", bundle: NSBundle.mainBundle())
@@ -61,7 +63,7 @@ class TrendingController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 250
+        return 245
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

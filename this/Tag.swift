@@ -120,9 +120,10 @@ class Tag: PFObject, PFSubclassing {
         }
     }
     
-    func postImages(timer: Int, user: User, photos: [Photo]) {
+    func postImages(timer: Int, user: User, photos: [Photo], callback: () -> Void) {
         let expireAt = NSCalendar.currentCalendar()
             .dateByAddingUnit(.Day, value: timer, toDate: NSDate(), options: [])!
+        var objects: [PFObject] = [self]
         
         self.followers.addObject(user)
         
@@ -131,10 +132,16 @@ class Tag: PFObject, PFSubclassing {
             
             photo.tag = self
             photo.expireAt = expireAt
+            objects.append(photo)
         }
         
-        Photo.saveAllInBackground(photos)
-        self.saveInBackground()
+        Photo.saveAllInBackground(objects) { (success, error) -> Void in
+            if success {
+                callback()
+            } else {
+                ErrorHandler.handleParse(error)
+            }
+        }
     }
     
 }

@@ -106,6 +106,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
 
     @IBAction func followingTriggered(sender: AnyObject) {
         self.following = !self.following
+        self.updateFollowingButton()
         
         if self.following {
             self.tag.followers.addObject(self.user)
@@ -113,9 +114,13 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
             self.tag.followers.removeObject(self.user)
         }
         
-        self.tag.saveInBackground()
-        self.updateFollowingButton()
-        Globals.followingController.reloadTags()
+        self.tag.saveInBackgroundWithBlock { (success, error) -> Void in
+            if success {
+                Globals.followingController.reloadTags()
+            } else {
+                ErrorHandler.handleParse(error)
+            }
+        }
     }
     
     func shareControllerCancelled() {

@@ -259,6 +259,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         Globals.pagesController.setActiveController(2, direction: .Forward) { () -> Void in
             Globals.tagsController.tag = self.tag
             Globals.tagsController.performSegueWithIdentifier("next", sender: self)
+            Globals.followingController.reloadTags()
             
             self.reset()
             self.navigationController?.popViewControllerAnimated(true)
@@ -286,7 +287,9 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     // MARK: SelectionHeader Methods
     func updateTags(hashtag: String, timer: Int) {
         Tag.findOrCreate(hashtag) { (tag) -> Void in
-            tag.postImages(timer, user: self.user, photos: Array(self.photos.values))
+            tag.postImages(timer, user: self.user, photos: Array(self.photos.values)) { () -> Void in
+                Globals.followingController?.reloadTags()
+            }
             
             self.tag = tag
             self.performSegueWithIdentifier("share", sender: self)
