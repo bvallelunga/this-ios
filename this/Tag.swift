@@ -14,10 +14,11 @@ class Tag: PFObject, PFSubclassing {
     // Instance Variables
     @NSManaged var name: String
     @NSManaged var followers: PFRelation
-    @NSManaged var followerCount: Int
     @NSManaged var photos: PFRelation
-    @NSManaged var photoCount: Int
     @NSManaged var comments: PFRelation
+    @NSManaged var followerCount: Int
+    @NSManaged var photoCount: Int
+    @NSManaged var commentCount: Int
     
     var hashtag: String {
         return "#\(name)"
