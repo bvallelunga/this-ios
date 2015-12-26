@@ -25,6 +25,8 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     private var downloadMode: Bool = false
     private var photos: [Photo] = []
     private var images: [Photo: UIImage] = [:]
+    private var user = User.current()
+    private var following: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +46,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         self.setupButton(self.followingButton, color: Colors.blue)
         self.setupButton(self.inviteButton, color: Colors.green)
         self.downloadButton.tintColor = UIColor.whiteColor()
+        self.updateFollowingButton()
         
         Config.sharedInstance { (config) -> Void in
             self.config = config
@@ -61,6 +64,16 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
                 })
             }
         }
+        
+        self.tag.isUserFollowing(self.user) { (following) -> Void in
+            self.following = following
+            self.updateFollowingButton()
+        }
+    }
+    
+    func updateFollowingButton() {
+        let text = self.following ? "FOLLOWING" : "FOLLOW"
+        self.followingButton.setTitle(text, forState: .Normal)
     }
     
     func setupButton(button: UIButton, color: UIColor) {
@@ -92,7 +105,17 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     }
 
     @IBAction func followingTriggered(sender: AnyObject) {
-        self.followingButton.setTitle("FOLLOW", forState: .Normal)
+        self.following = !self.following
+        
+        if self.following {
+            self.tag.followers.addObject(self.user)
+        } else {
+            self.tag.followers.removeObject(self.user)
+        }
+        
+        self.tag.saveInBackground()
+        self.updateFollowingButton()
+        Globals.followingController.reloadTags()
     }
     
     func shareControllerCancelled() {

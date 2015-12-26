@@ -70,6 +70,20 @@ class Tag: PFObject, PFSubclassing {
     }
     
     // Instance Methods
+    func isUserFollowing(user: User, callback: (following: Bool) -> Void) {
+        let query = self.followers.query()
+        
+        query.whereKey("objectId", equalTo: user.objectId!)
+        
+        query.countObjectsInBackgroundWithBlock { (count, error) -> Void in
+            if error == nil {
+                callback(following: count > 0)
+            } else {
+                ErrorHandler.handleParse(error)
+            }
+        }
+    }
+    
     func comments(callback: (comments: [Comment]) -> Void) {
         let query = self.comments.query()
         

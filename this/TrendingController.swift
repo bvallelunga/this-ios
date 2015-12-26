@@ -37,7 +37,7 @@ class TrendingController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        if self.date == nil || self.tags.isEmpty || NSCalendar.currentCalendar().components(.Minute, fromDate: self.date, toDate: NSDate(), options: []).minute > 2 {
+        if self.date == nil || self.tags.isEmpty || NSCalendar.currentCalendar().components(.Minute, fromDate: self.date, toDate: NSDate(), options: []).minute > 10 {
             self.reloadTags()
         }
     }
