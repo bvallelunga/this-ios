@@ -18,9 +18,10 @@ class TagTableController: UITableViewController {
     private var headerFrame: CGRect!
     private var keyboardActive: Bool = false
     private var user = User.current()
+    private var commentHeights: [NSIndexPath: CGFloat] = [:]
     
     var tag: Tag!
-    var messages: [String] = []
+    var comments: [Comment] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,11 @@ class TagTableController: UITableViewController {
         let tapper = UITapGestureRecognizer(target: self, action: Selector("handleSingleTap:"))
         tapper.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapper)
+        
+        self.tag.comments { (comments) -> Void in
+            self.comments = comments
+            self.tableView.reloadData()
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -105,7 +111,7 @@ class TagTableController: UITableViewController {
 
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if self.messages.isEmpty {
+        if self.comments.isEmpty {
             self.tableView.tableFooterView = self.emptyContainer
             self.tableView.separatorStyle = .None
             return 0
@@ -117,16 +123,38 @@ class TagTableController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.messages.count
+        return self.comments.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        let message = self.messages[indexPath.row]
+        let comment = self.comments[indexPath.row]
         
-        cell.textLabel?.attributedText = self.buildText(self.user.screenname, message: message)
+        cell.textLabel?.attributedText = self.buildText(comment.user.screenname, message: comment.message)
+        cell.textLabel?.numberOfLines = 0
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if let height = self.commentHeights[indexPath] {
+            return height
+        }
+        
+        let comment = self.comments[indexPath.row]
+        let message = self.buildText(comment.user.screenname, message: comment.message)
+        let maxLabelSize = CGSizeMake(tableView.frame.width, 400)
+        let options = NSStringDrawingOptions.UsesLineFragmentOrigin
+        let bounds = message.boundingRectWithSize(maxLabelSize, options: options, context: nil)
+        let height = bounds.size.height + 20
+        self.commentHeights[indexPath] = height
+        
+        return height
+    }
+    
+    func scrollToBottom() {
+        let indexPath = NSIndexPath(forRow: self.comments.count-1, inSection: 0)
+        self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
     }
     
     func buildText(user: String, message: String) -> NSAttributedString {

@@ -8,12 +8,14 @@
 
 import UIKit
 
-class TagController: UIViewController {
+class TagController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var messageInput: UITextField!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sendButton: UIButton!
     
     var tag: Tag!
+    private var user = User.current()
     private var tableController: TagTableController!
     
     override func viewDidLoad() {
@@ -21,6 +23,9 @@ class TagController: UIViewController {
         
         self.title = self.tag.hashtag
         self.view.backgroundColor = UIColor.whiteColor()
+        self.messageInput.delegate = self
+        self.sendButton.setTitleColor(UIColor.lightGrayColor(), forState: .Disabled)
+        self.messageChanged(self)
         
         let shadow = NSShadow()
         shadow.shadowColor = UIColor(red:0, green:0, blue:0, alpha:0.1)
@@ -77,12 +82,23 @@ class TagController: UIViewController {
                 return
             }
             
-            self.tableController.messages.append(message)
-            self.tableController.tableView.reloadData()
-            
             self.messageInput.text = ""
-            self.messageInput.resignFirstResponder()
+            let comment = Comment.create(message, tag: self.tag, user: self.user)
+            
+            self.tableController.comments.append(comment)
+            self.tableController.tableView.reloadData()
+            self.tableController.scrollToBottom()
+            self.messageChanged(self)
         }
+    }
+    
+    @IBAction func messageChanged(sender: AnyObject) {
+        self.sendButton.enabled = !self.messageInput.text!.isEmpty
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.postMessage(self)
+        return true
     }
     
     // MARK: NSNotificationCenter
@@ -92,6 +108,10 @@ class TagController: UIViewController {
         
         self.bottomConstraint.constant = rect.size.height
         self.view.layoutIfNeeded()
+        
+        Globals.delay(0.25) { () -> () in
+            self.tableController.scrollToBottom()
+        }
     }
     
     func keyboardDidHide() {

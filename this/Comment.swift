@@ -19,5 +19,24 @@ class Comment: PFObject, PFSubclassing {
     static func parseClassName() -> String {
         return "Comment"
     }
+    
+    // Class Methods
+    class func create(message: String, tag: Tag, user: User) -> Comment {
+        let comment = Comment()
+        
+        comment.message = message
+        comment.tag = tag
+        comment.user = user
+        comment.saveInBackgroundWithBlock { (success, error) -> Void in
+            if success {
+                tag.comments.addObject(comment)
+                tag.saveInBackground()
+            } else {
+                ErrorHandler.handleParse(error)
+            }
+        }
+        
+        return comment
+    }
 
 }

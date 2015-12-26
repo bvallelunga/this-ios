@@ -69,12 +69,28 @@ class Tag: PFObject, PFSubclassing {
     }
     
     // Instance Methods
+    func comments(callback: (comments: [Comment]) -> Void) {
+        let query = self.comments.query()
+        
+        query.addAscendingOrder("createdAt")
+        
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if let comments = objects as? [Comment] {
+                callback(comments: comments)
+            } else {
+                ErrorHandler.handleParse(error)
+            }
+        }
+    }
+    
     func photos(limit: Int! = nil, callback: (photos: [Photo]) -> Void) {
         let query = self.photos.query()
         
         query.whereKeyExists("original")
         query.whereKeyExists("thumbnail")
         query.whereKey("expireAt", greaterThan: NSDate())
+        
+        query.addAscendingOrder("createdAt")
         
         if limit != nil {
             query.limit = limit

@@ -705,9 +705,12 @@ and Privacy Policy.</string>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Have something to say?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KqA-VR-I2W">
                                         <rect key="frame" x="10" y="5" width="520" height="40"/>
                                         <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="messageChanged:" destination="Njs-W8-ya8" eventType="editingChanged" id="gPp-VG-2UV"/>
+                                        </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AYd-eH-Iek">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AYd-eH-Iek">
                                         <rect key="frame" x="530" y="5" width="70" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="4eV-Ap-FSa"/>
@@ -792,6 +795,7 @@ and Privacy Policy.</string>
                     <connections>
                         <outlet property="bottomConstraint" destination="GB3-Vs-ZOq" id="Xvp-8K-LuS"/>
                         <outlet property="messageInput" destination="KqA-VR-I2W" id="NNQ-CY-QPp"/>
+                        <outlet property="sendButton" destination="AYd-eH-Iek" id="euf-bm-Jve"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mWV-J5-FoW" userLabel="First Responder" sceneMemberID="firstResponder"/>
