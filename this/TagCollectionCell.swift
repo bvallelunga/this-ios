@@ -55,18 +55,18 @@ class TagCollectionCell: UICollectionViewCell {
         self.alpha = 1
     }
     
-    func downloaded() {
+    func startDownload() {
         UIView.animateWithDuration(0.15, animations: { () -> Void in
             self.label.alpha = 1
             self.alpha = 1
         })
-        
-        Globals.delay(1) { () -> () in
-            UIView.animateWithDuration(0.15, animations: { () -> Void in
-                self.label.alpha = 0
-                self.layer.borderColor = UIColor(white: 0, alpha: 1).CGColor
-                self.alpha = 0.25
-            })
-        }
+    }
+    
+    func finishedDownload() {
+        UIView.animateWithDuration(0.15, animations: { () -> Void in
+            self.label.alpha = 0
+            self.layer.borderColor = UIColor(white: 0, alpha: 1).CGColor
+            self.alpha = 0.25
+        })
     }
 }

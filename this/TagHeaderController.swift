@@ -137,12 +137,13 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! TagCollectionCell
         
         if self.downloadMode {
-            cell.downloaded()
+            cell.startDownload()
             
             let photo = self.photos[indexPath.row]
             
             photo.fetchOriginal({ (image) -> Void in
                 UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                cell.finishedDownload()
             })
             
             return
