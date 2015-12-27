@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '4BA8E6BFF019FBF7913C2CCA'
+               BlueprintIdentifier = '969F0772FE5D0B1BE1C181D2'
                BlueprintName = 'JSQWebViewController'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'JSQWebViewController.framework'>

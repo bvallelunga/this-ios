@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '7BC85C0D5638FBC8784C4FCA'
-               BlueprintName = 'CWStatusBarNotification'
+               BlueprintIdentifier = '934BF58D325747484CBE68C0'
+               BlueprintName = 'PBImageStorage'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'CWStatusBarNotification.framework'>
+               BuildableName = 'PBImageStorage.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

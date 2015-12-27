@@ -153,6 +153,10 @@ class TagTableController: UITableViewController {
     }
     
     func scrollToBottom() {
+        guard !self.comments.isEmpty else {
+            return
+        }
+        
         let indexPath = NSIndexPath(forRow: self.comments.count-1, inSection: 0)
         self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
     }

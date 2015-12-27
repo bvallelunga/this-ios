@@ -8,6 +8,7 @@
 
 import AlamofireImage
 import FormatterKit
+import PBImageStorage
 
 class Globals: NSObject {
     
@@ -20,12 +21,12 @@ class Globals: NSObject {
     static var trendingController: TrendingController!
     
     static let infoDictionary = NSBundle.mainBundle().infoDictionary!
-    static let imageCache = AutoPurgingImageCache()
+    static let imageStorage = PBImageStorage(namespace: "imageAssets")
     static let imageDownloader = ImageDownloader(
         configuration: ImageDownloader.defaultURLSessionConfiguration(),
         downloadPrioritization: .FIFO,
         maximumActiveDownloads: 8,
-        imageCache: imageCache
+        imageCache: nil
     )
     
     class func delay(delay:Double, closure:()->()) {
@@ -46,16 +47,15 @@ class Globals: NSObject {
     class func fetchImage(url: String, callback: (image: UIImage) -> Void) {
         let request = NSURLRequest(URL: NSURL(string: url)!)
         
-        if let image = Globals.imageCache.imageForRequest(request) {
+        if let image = self.imageStorage.imageForKey(url) {
             callback(image: image)
             return
         }
-        
-        Globals.imageDownloader.downloadImage(URLRequest: request) { response in
+
+        self.imageDownloader.downloadImage(URLRequest: request) { response in
             if let image: UIImage = response.result.value {
                 callback(image: image)
-                
-                Globals.imageCache.addImage(image, forRequest: request)
+                self.imageStorage.setImage(image, forKey: url, diskOnly: false)
             } else {
                 print(response)
             }

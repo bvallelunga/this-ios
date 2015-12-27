@@ -26,7 +26,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     private var photos: [Photo] = []
     private var images: [Photo: UIImage] = [:]
     private var user = User.current()
-    private var following: Bool = false
+    private var following: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +43,9 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         self.collectionView.alwaysBounceVertical = false
         self.collectionView.registerClass(TagCollectionCell.self, forCellWithReuseIdentifier: "cell")
         
-        self.setupButton(self.followingButton, color: Colors.blue)
+        self.setupButton(self.followingButton, color: Colors.lightGrey)
         self.setupButton(self.inviteButton, color: Colors.green)
+        self.inviteButton.tintColor = UIColor.whiteColor()
         self.downloadButton.tintColor = UIColor.whiteColor()
         self.updateFollowingButton()
         
@@ -72,12 +73,21 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     }
     
     func updateFollowingButton() {
-        let text = self.following ? "FOLLOWING" : "FOLLOW"
+        guard let following = self.following else {
+            self.followingButton.setTitle("LOADING", forState: .Normal)
+            self.followingButton.tintColor = Colors.darkGrey
+            self.followingButton.backgroundColor = Colors.lightGrey
+            
+            return
+        }
+        
+        let text = following ? "FOLLOWING" : "FOLLOW"
+        self.followingButton.tintColor = UIColor.whiteColor()
+        self.followingButton.backgroundColor = Colors.blue
         self.followingButton.setTitle(text, forState: .Normal)
     }
     
     func setupButton(button: UIButton, color: UIColor) {
-        button.tintColor = UIColor.whiteColor()
         button.backgroundColor = color
         button.layer.cornerRadius = 3
     }
@@ -105,10 +115,13 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     }
 
     @IBAction func followingTriggered(sender: AnyObject) {
-        self.following = !self.following
-        self.updateFollowingButton()
+        guard var following = self.following else {
+            return
+        }
         
-        if self.following {
+        following = !following
+        
+        if following {
             self.tag.followers.addObject(self.user)
         } else {
             self.tag.followers.removeObject(self.user)
@@ -121,6 +134,9 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
                 ErrorHandler.handleParse(error)
             }
         }
+        
+        self.following = following
+        self.updateFollowingButton()
     }
     
     func shareControllerCancelled() {
@@ -141,6 +157,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         self.pageControl.numberOfPages = Int(ceil(Double(self.images.count)/12))
+        
         return self.images.count
     }
     
@@ -182,23 +199,17 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         var controller: NYTPhotosViewController!
         
         for (i, photo) in self.photos.enumerate() {
-            if let image = self.images[photo] {
-                let galleryPhoto = GalleryPhoto(placeholder: image, user: photo.user.screenname,
+            if let thumbnail = self.images[photo] {
+                let galleryPhoto = GalleryPhoto(placeholder: thumbnail, user: photo.user.screenname,
                     postedAt: Globals.intervalDate(photo.createdAt!), hashtag: self.tag.hashtag)
                 
                 galleryPhoto.indexPath = NSIndexPath(forItem: i, inSection: 0)
                 galleryPhoto.photo = photo
+                galleryPhotos.append(galleryPhoto)
                 
                 if i == indexPath.row {
                     intialPhoto = galleryPhoto
-                    
-                    galleryPhoto.photo.fetchOriginal({ (image) -> Void in
-                        galleryPhoto.image = image
-                        controller.updateImageForPhoto(galleryPhoto)
-                    })
                 }
-                
-                galleryPhotos.append(galleryPhoto)
             }
         }
         
@@ -206,8 +217,12 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         controller = NYTPhotosViewController(photos: galleryPhotos, initialPhoto: intialPhoto)
         controller.delegate = self
         controller.leftBarButtonItem.title = "Done"
-        
         self.presentViewController(controller, animated: true, completion: nil)
+        
+        if intialPhoto != nil {
+            controller.delegate?.photosViewController?(controller, didDisplayPhoto: intialPhoto,
+                atIndex: UInt(intialPhoto.indexPath.row))
+        }
     }
     
     func photosViewController(photosViewController: NYTPhotosViewController!, didDisplayPhoto photo: NYTPhoto!, atIndex photoIndex: UInt) {

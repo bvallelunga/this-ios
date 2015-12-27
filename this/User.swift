@@ -100,7 +100,14 @@ class User: PFUser {
     func uploadPhoto(image: UIImage) {
         let data = UIImageJPEGRepresentation(image, 0.7)
         self.photo = PFFile(name: "image.jpeg", data: data!)!
-        self.saveEventually()
+        
+        self.saveEventually { (success, error) -> Void in
+            if success {
+                Globals.imageStorage.setImage(image, forKey: self.photo.url, diskOnly: false)
+            } else {
+                ErrorHandler.handleParse(error)
+            }
+        }
     }
     
     func fetchPhoto(callback: (image: UIImage) -> Void) {
@@ -113,11 +120,15 @@ class User: PFUser {
     
     func tags(callback: (tags: [Tag]) -> Void) {
         let query = Tag.query()
+        let photoQuery = Photo.query()
+        
+        photoQuery?.whereKeyExists("original")
+        photoQuery?.whereKey("expireAt", greaterThan: NSDate())
         
         query?.whereKey("followers", equalTo: self)
-        query?.whereKey("photoCount", greaterThan: 0)
+        query?.whereKey("photos", matchesQuery: photoQuery!)
+        query?.addDescendingOrder("updatedAt")
         query?.addDescendingOrder("followerCount")
-        query?.addAscendingOrder("updatedAt")
         
         query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             if let tags = objects as? [Tag] {

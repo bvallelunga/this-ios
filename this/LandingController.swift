@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import AVKit
+import SVProgressHUD
 
 class LandingController: UIViewController {
     
@@ -58,6 +59,10 @@ class LandingController: UIViewController {
         if User.current() != nil {
             self.performSegueWithIdentifier("next", sender: self)
         }
+        
+        SVProgressHUD.setBackgroundColor(Colors.darkGrey)
+        SVProgressHUD.setForegroundColor(UIColor.whiteColor())
+        SVProgressHUD.setFont(UIFont(name: "Bariol-Bold", size: 22))
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

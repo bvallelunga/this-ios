@@ -69,6 +69,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>PBImageStorage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -102,7 +107,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>20D339149B510B6A745012D666904246</key>
+		<key>1366D7EF35328CDF50275B36F38BF663</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1D20A55511810B10A107C81385F2FC50</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -142,6 +152,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>6B7036E670DAE65462DFB018730552FA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>708E01B006A9F88B3C13711562282B5E</key>
 		<dict>
 			<key>primary</key>
@@ -153,11 +168,6 @@
 			<true/>
 		</dict>
 		<key>AB663F278A3C1379577D5E3122589792</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CA54C31511322C32B1FF6A392BC6C7F6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -182,17 +192,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DC04B4906C6A01EE9AE126716D110970</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>E142AAA516EFFE1499EAF62FCA9DC56D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>FE113CEF81C16AA59EC049ACE130BCB2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FE4B47764B271F30005056EE1B70ADB4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

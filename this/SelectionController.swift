@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import SVProgressHUD
 import CSStickyHeaderFlowLayout
 
 private let photoIdentifier = "photo"
@@ -22,7 +23,6 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     private var assets: [PHAsset] = []
     private var selected: [PHAsset: UIImage] = [:]
     private var selectedOrder: NSMutableArray = []
-    private var photos: [PHAsset: Photo] = [:]
     private var date: NSDate!
     private var header: SelectionHeader!
     private var config: Config!
@@ -161,7 +161,6 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         return 1
     }
 
-
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.assets.count + 1
     }
@@ -237,15 +236,12 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
                 if let image = UIImage(data: imageData!) {
                     self.selectedOrder.insertObject(asset, atIndex: 0)
                     self.selected[asset] = image
-                    self.photos[asset] = Photo.create(self.user, image: image)
                     self.updateHeader()
                 }
             }
         } else  {
             self.selectedOrder.removeObject(asset)
             self.selected.removeValueForKey(asset)
-            self.photos[asset]?.deleteInBackground()
-            self.photos.removeValueForKey(asset)
             self.updateHeader()
         }
     }
@@ -286,10 +282,14 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     
     // MARK: SelectionHeader Methods
     func updateTags(hashtag: String, timer: Int) {
+        SVProgressHUD.show()
+        
         Tag.findOrCreate(hashtag) { (tag) -> Void in
-            tag.postImages(timer, user: self.user, photos: Array(self.photos.values)) { () -> Void in
+            tag.postImages(timer, user: self.user, images: Array(self.selected.values)) { () -> Void in
                 Globals.followingController?.reloadTags()
             }
+            
+            SVProgressHUD.dismiss()
             
             self.tag = tag
             self.performSegueWithIdentifier("share", sender: self)

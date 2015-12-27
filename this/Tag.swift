@@ -20,6 +20,9 @@ class Tag: PFObject, PFSubclassing {
     @NSManaged var photoCount: Int
     @NSManaged var commentCount: Int
     
+    var arePhotosCached: Bool = false
+    var photosCached: [Photo] = []
+    
     var hashtag: String {
         return "#\(name)"
     }
@@ -54,11 +57,15 @@ class Tag: PFObject, PFSubclassing {
     
     class func trending(callback: (tags: [Tag]) -> Void) {
         let query = Tag.query()
+        let photoQuery = Photo.query()
         
-        query?.addAscendingOrder("updatedAt")
+        photoQuery?.whereKeyExists("original")
+        photoQuery?.whereKey("expireAt", greaterThan: NSDate())
+        
+        query?.whereKey("photos", matchesQuery: photoQuery!)
         query?.addDescendingOrder("followerCount")
+        query?.addDescendingOrder("updatedAt")
         query?.addDescendingOrder("photoCount")
-        query?.whereKey("photoCount", greaterThan: 0)
         
         query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             if let tags = objects as? [Tag] {
@@ -99,6 +106,15 @@ class Tag: PFObject, PFSubclassing {
     }
     
     func photos(limit: Int! = nil, callback: (photos: [Photo]) -> Void) {
+        if self.arePhotosCached {
+            callback(photos: self.photosCached)
+            return
+        }
+        
+        if !self.photosCached.isEmpty {
+            callback(photos: self.photosCached)
+        }
+        
         let query = self.photos.query()
         
         query.whereKeyExists("original")
@@ -113,34 +129,39 @@ class Tag: PFObject, PFSubclassing {
         
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if let photos = objects as? [Photo] {
-                callback(photos: photos)
+                if self.photosCached.count < photos.count {
+                    self.photosCached = photos
+                    self.arePhotosCached = limit == nil
+                }
+                
+                callback(photos: self.photosCached)
             } else {
                 ErrorHandler.handleParse(error)
             }
         }
     }
     
-    func postImages(timer: Int, user: User, photos: [Photo], callback: () -> Void) {
+    func postImages(timer: Int, user: User, images: [UIImage], callback: () -> Void) {
         let expireAt = NSCalendar.currentCalendar()
             .dateByAddingUnit(.Day, value: timer, toDate: NSDate(), options: [])!
-        var objects: [PFObject] = [self]
         
         self.followers.addObject(user)
         
-        for photo in photos {
-            self.photos.addObject(photo)
-            
-            photo.tag = self
-            photo.expireAt = expireAt
-            objects.append(photo)
-        }
-        
-        Photo.saveAllInBackground(objects) { (success, error) -> Void in
-            if success {
-                callback()
-            } else {
-                ErrorHandler.handleParse(error)
-            }
+        for image in images {
+            Photo.create(user, image: image, tag: self, expireAt: expireAt, callback: { (photo) -> Void in
+                self.photos.addObject(photo)
+                self.photosCached.append(photo)
+                
+                if images.last == image {
+                    self.saveInBackgroundWithBlock { (success, error) -> Void in
+                        if success {
+                            callback()
+                        } else {
+                            ErrorHandler.handleParse(error)
+                        }
+                    }
+                }
+            })
         }
     }
     
