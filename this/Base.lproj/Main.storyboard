@@ -1397,7 +1397,7 @@ and Privacy Policy.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IRh-Z4-C9Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3247" y="-552"/>
+            <point key="canvasLocation" x="3344" y="-383"/>
         </scene>
     </scenes>
     <resources>

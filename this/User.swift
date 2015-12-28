@@ -101,7 +101,7 @@ class User: PFUser {
         let data = UIImageJPEGRepresentation(image, 0.7)
         self.photo = PFFile(name: "image.jpeg", data: data!)!
         
-        self.saveEventually { (success, error) -> Void in
+        self.saveInBackgroundWithBlock { (success, error) -> Void in
             if success {
                 Globals.imageStorage.setImage(image, forKey: self.photo.url, diskOnly: false)
             } else {

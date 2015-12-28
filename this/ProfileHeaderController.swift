@@ -16,6 +16,7 @@ class ProfileHeaderController: UIViewController, UIImagePickerControllerDelegate
     @IBOutlet weak var nameLabel: UILabel!
     
     private var user = User.current()
+    private var avatarBorder = CALayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,13 +33,14 @@ class ProfileHeaderController: UIViewController, UIImagePickerControllerDelegate
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(-1000, -1000),
             forBarMetrics: UIBarMetrics.Default)
         
-        self.avatarButton.layer.masksToBounds = true
+        self.avatarBorder.borderColor = UIColor(white: 0, alpha: 0.2).CGColor
+        self.avatarBorder.borderWidth = 2
+        
         self.avatarButton.contentMode = .ScaleAspectFill
         self.avatarButton.backgroundColor = UIColor(white: 0, alpha: 0.1)
         self.avatarButton.tintColor = UIColor(white: 1, alpha: 0.4)
-        self.avatarButton.layer.borderColor = UIColor(white: 0, alpha: 0.2).CGColor
-        self.avatarButton.layer.borderWidth = 1
         self.avatarButton.imageView?.contentMode = .ScaleAspectFill
+        self.avatarButton.layer.insertSublayer(self.avatarBorder, atIndex: 0)
         
         self.updateHeader()
     }
@@ -46,7 +48,10 @@ class ProfileHeaderController: UIViewController, UIImagePickerControllerDelegate
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        self.avatarBorder.frame = CGRectMake(-2, -2, self.avatarButton.frame.width + 4, self.avatarButton.frame.height + 4)
+        self.avatarBorder.cornerRadius = self.avatarBorder.frame.width/2
         self.avatarButton.layer.cornerRadius = self.avatarButton.frame.width/2
+        self.avatarButton.imageView?.layer.cornerRadius = self.avatarButton.frame.width/2
     }
     
     @IBAction func goToSelection(sender: AnyObject) {
