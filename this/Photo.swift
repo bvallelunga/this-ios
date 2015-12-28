@@ -25,7 +25,7 @@ class Photo: PFObject, PFSubclassing {
     }
     
     // Class Methods
-    class func create(user: User, image: UIImage, tag: Tag, expireAt: NSDate, callback: (photo: Photo) -> Void) {
+    class func create(user: User, image: UIImage, tag: Tag, expireAt: NSDate, callback: (photo: Photo) -> Void) -> Photo {
         let photo = Photo()
         
         photo.user = user
@@ -55,6 +55,8 @@ class Photo: PFObject, PFSubclassing {
                 Globals.imageStorage.setImage(image, forKey: file.url, diskOnly: false)
             })
         }
+        
+        return photo
     }
 
     // Instance Method

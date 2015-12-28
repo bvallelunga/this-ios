@@ -112,18 +112,6 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         self.reset()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        let newAlpha = min(100, max(0, 100 - self.frame.origin.y)) / 100
-        
-        self.placeholderLabel.alpha = newAlpha
-        self.placeholderView.alpha = newAlpha
-        self.arrowButton.alpha = newAlpha
-        self.timerButton.alpha = newAlpha
-        self.collectionView.alpha = newAlpha
-    }
-    
     @IBAction func changeTimer(sender: AnyObject) {
         let sheet = UIAlertController(title: "When should your photos auto delete?",
             message: nil, preferredStyle: .ActionSheet)
@@ -143,7 +131,12 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
             text = text.stringByReplacingOccurrencesOfString(" ", withString: "",
                 options: NSStringCompareOptions.LiteralSearch, range: nil)
             
-            if !text.isEmpty && text[0] != "#" {
+            guard !text.isEmpty else {
+                self.generateHashtag()
+                return
+            }
+            
+            if text[0] != "#" {
                 text = "#" + text
             }
             
@@ -180,8 +173,14 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     }
     
     func generateHashtag() {
-        self.hashtag = "#blackcat15"
-        self.tagField.text = self.hashtag
+        self.hashtag = ""
+        self.tagField.text = ""
+        
+        Tag.random { (name) -> Void in
+            self.hashtag = name
+            self.tagField.text = name
+            self.checkArrow()
+        }
     }
     
     func reset() {
@@ -207,7 +206,8 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     }
     
     func checkArrow() {
-        let enabled = !self.images.isEmpty && !self.hashtag.isEmpty
+        let tagLength = NSString(string: self.hashtag).length
+        let enabled = !self.images.isEmpty && tagLength > 1
         
         if enabled != self.arrowButton.enabled {
             self.arrowButton.enabled = enabled

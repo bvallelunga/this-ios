@@ -130,7 +130,7 @@ class TagTableController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         let comment = self.comments[indexPath.row]
         
-        cell.textLabel?.attributedText = self.buildText(comment.user.screenname, message: comment.message)
+        cell.textLabel?.attributedText = self.buildText(comment.from, message: comment.message)
         cell.textLabel?.numberOfLines = 0
         
         return cell
@@ -142,7 +142,7 @@ class TagTableController: UITableViewController {
         }
         
         let comment = self.comments[indexPath.row]
-        let message = self.buildText(comment.user.screenname, message: comment.message)
+        let message = self.buildText(comment.from, message: comment.message)
         let maxLabelSize = CGSizeMake(tableView.frame.width, 400)
         let options = NSStringDrawingOptions.UsesLineFragmentOrigin
         let bounds = message.boundingRectWithSize(maxLabelSize, options: options, context: nil)

@@ -15,6 +15,7 @@ class Comment: PFObject, PFSubclassing {
     @NSManaged var user: User
     @NSManaged var tag: Tag
     @NSManaged var message: String
+    @NSManaged var from: String
     
     static func parseClassName() -> String {
         return "Comment"
@@ -27,6 +28,7 @@ class Comment: PFObject, PFSubclassing {
         comment.message = message
         comment.tag = tag
         comment.user = user
+        comment.from = user.screenname
         comment.saveInBackgroundWithBlock { (success, error) -> Void in
             if success {
                 tag.comments.addObject(comment)

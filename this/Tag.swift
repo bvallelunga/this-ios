@@ -32,6 +32,16 @@ class Tag: PFObject, PFSubclassing {
     }
     
     // Class Methods
+    class func random(callback: (name: String) -> Void) {
+        PFCloud.callFunctionInBackground("newTag", withParameters: nil) { (response, error) -> Void in
+            if let name = response as? String {
+                callback(name: name)
+            } else {
+                ErrorHandler.handleParse(error)
+            }
+        }
+    }
+    
     class func findOrCreate(name: String, callback: (tag: Tag) -> Void) {
         let query = Tag.query()
         
@@ -148,9 +158,8 @@ class Tag: PFObject, PFSubclassing {
         self.followers.addObject(user)
         
         for image in images {
-            Photo.create(user, image: image, tag: self, expireAt: expireAt, callback: { (photo) -> Void in
+            let photo = Photo.create(user, image: image, tag: self, expireAt: expireAt, callback: { (photo) -> Void in
                 self.photos.addObject(photo)
-                self.photosCached.append(photo)
                 
                 if images.last == image {
                     self.saveInBackgroundWithBlock { (success, error) -> Void in
@@ -162,6 +171,8 @@ class Tag: PFObject, PFSubclassing {
                     }
                 }
             })
+            
+            self.photosCached.append(photo)
         }
     }
     

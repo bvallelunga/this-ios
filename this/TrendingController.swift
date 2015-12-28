@@ -44,7 +44,7 @@ class TrendingController: UITableViewController {
         }
     }
     
-    func reloadTags() {
+    func reloadTags() {        
         Tag.trending { (tags) -> Void in
             self.tags = tags
             self.tableView.reloadData()
@@ -59,11 +59,11 @@ class TrendingController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return max(self.tags.count, 3)
+        return max(self.tags.count, 2)
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 245
+        return 238
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

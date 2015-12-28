@@ -68,7 +68,7 @@ class ProfileHeaderController: UIViewController, UIImagePickerControllerDelegate
         formatter.dateStyle = .MediumStyle
         formatter.timeStyle = .NoStyle
         
-        self.userLabel.text = self.user.username
+        self.userLabel.text = self.user.screenname
         self.nameLabel.text = "Joined \(formatter.stringFromDate(self.user.createdAt!))"
         
         self.user.fetchPhoto { (image) -> Void in
