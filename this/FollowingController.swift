@@ -51,7 +51,7 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
     }
     
     func reloadTags() {
-        self.user.tags { (tags) -> Void in
+        self.user.following { (tags) -> Void in
             self.tags = tags
             self.collectionView?.reloadData()
             self.refreshControl.endRefreshing()

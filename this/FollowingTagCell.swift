@@ -55,7 +55,7 @@ class FollowingTagCell: UICollectionViewCell {
         
         tag.photos(8) { (photos) -> Void in
             self.images.removeAll()
-            
+                        
             for photo in photos {
                 photo.fetchThumbnail({ (image) -> Void in
                     self.images.append(image)

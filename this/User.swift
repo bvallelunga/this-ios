@@ -118,24 +118,13 @@ class User: PFUser {
         Globals.fetchImage(url, callback: callback)
     }
     
-    func tags(callback: (tags: [Tag]) -> Void) {
-        let query = Tag.query()
-        let photoQuery = Photo.query()
-        
-        photoQuery?.whereKeyExists("original")
-        photoQuery?.whereKey("expireAt", greaterThan: NSDate())
-        
-        query?.whereKey("followers", equalTo: self)
-        query?.whereKey("photos", matchesQuery: photoQuery!)
-        query?.addDescendingOrder("updatedAt")
-        query?.addDescendingOrder("followerCount")
-        
-        query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+    func following(callback: (tags: [Tag]) -> Void) {
+        PFCloud.callFunctionInBackground("following", withParameters: nil) { (objects, error) -> Void in
             if let tags = objects as? [Tag] {
                 callback(tags: tags)
             } else {
                 ErrorHandler.handleParse(error)
             }
-        })
+        }
     }
 }

@@ -31,7 +31,7 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="changeme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GX0-5N-NyE">
-                        <rect key="frame" x="18" y="18" width="268" height="30"/>
+                        <rect key="frame" x="13" y="18" width="273" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="SzN-z6-Cpo"/>
                         </constraints>
@@ -75,7 +75,7 @@
                     <constraint firstItem="p8r-vu-1P9" firstAttribute="top" secondItem="V29-jK-XhI" secondAttribute="topMargin" constant="10" id="Hc2-RX-VaR"/>
                     <constraint firstItem="Ei0-0Z-fsz" firstAttribute="top" secondItem="Bzw-No-q13" secondAttribute="bottom" constant="4" id="KO8-2o-9D5"/>
                     <constraint firstItem="O28-wW-PWj" firstAttribute="leading" secondItem="GX0-5N-NyE" secondAttribute="trailing" constant="16" id="L9j-MG-ExD"/>
-                    <constraint firstItem="GX0-5N-NyE" firstAttribute="leading" secondItem="V29-jK-XhI" secondAttribute="leadingMargin" constant="10" id="O5H-Gg-wRI"/>
+                    <constraint firstItem="GX0-5N-NyE" firstAttribute="leading" secondItem="V29-jK-XhI" secondAttribute="leadingMargin" constant="5" id="O5H-Gg-wRI"/>
                     <constraint firstItem="Bzw-No-q13" firstAttribute="top" secondItem="V29-jK-XhI" secondAttribute="topMargin" constant="8" id="Qj0-2X-L8Z"/>
                     <constraint firstItem="O28-wW-PWj" firstAttribute="leading" secondItem="p8r-vu-1P9" secondAttribute="trailing" constant="2" id="RM4-MV-2jk"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Ei0-0Z-fsz" secondAttribute="trailing" constant="5" id="Y0V-qY-njC"/>

@@ -106,7 +106,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         self.header.reset()
     }
     
-    func getAssests() {
+    func getAssests(select: Bool = false) {
         self.assetsAuthorized { (authorized) -> Void in
             guard authorized else {
                 return
@@ -127,6 +127,10 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
             results.enumerateObjectsUsingBlock { (object, _, _) in
                 if let asset = object as? PHAsset {
                     self.assets.insert(asset, atIndex: 0)
+                    
+                    if select {
+                        self.cellSelected(asset, force: true)
+                    }
                 }
             }
             
@@ -229,20 +233,28 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         cell.layer.borderWidth = cell.upload ? 5 : 0
         
         if cell.upload {
-            let options = PHImageRequestOptions()
-            options.deliveryMode = .HighQualityFormat
-            
-            self.manager.requestImageDataForAsset(asset, options: options) { (imageData, dataUTI, orientation, info) -> Void in
-                if let image = UIImage(data: imageData!) {
-                    self.selectedOrder.insertObject(asset, atIndex: 0)
-                    self.selected[asset] = image
-                    self.updateHeader()
-                }
-            }
+            self.cellSelected(asset)
         } else  {
             self.selectedOrder.removeObject(asset)
             self.selected.removeValueForKey(asset)
             self.updateHeader()
+        }
+    }
+    
+    func cellSelected(asset: PHAsset, force: Bool = false) {
+        let options = PHImageRequestOptions()
+        options.deliveryMode = .HighQualityFormat
+        
+        self.manager.requestImageDataForAsset(asset, options: options) { (imageData, dataUTI, orientation, info) -> Void in
+            if let image = UIImage(data: imageData!) {
+                self.selectedOrder.insertObject(asset, atIndex: 0)
+                self.selected[asset] = image
+                self.updateHeader()
+                
+                if force {
+                    self.collectionView?.reloadData()
+                }
+            }
         }
     }
     
@@ -277,7 +289,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     }
     
     func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
-        self.getAssests()
+        self.getAssests(true)
     }
     
     // MARK: SelectionHeader Methods

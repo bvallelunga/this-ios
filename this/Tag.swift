@@ -66,24 +66,13 @@ class Tag: PFObject, PFSubclassing {
     }
     
     class func trending(callback: (tags: [Tag]) -> Void) {
-        let query = Tag.query()
-        let photoQuery = Photo.query()
-        
-        photoQuery?.whereKeyExists("original")
-        photoQuery?.whereKey("expireAt", greaterThan: NSDate())
-        
-        query?.whereKey("photos", matchesQuery: photoQuery!)
-        query?.addDescendingOrder("followerCount")
-        query?.addDescendingOrder("updatedAt")
-        query?.addDescendingOrder("photoCount")
-        
-        query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+        PFCloud.callFunctionInBackground("trending", withParameters: nil) { (objects, error) -> Void in
             if let tags = objects as? [Tag] {
                 callback(tags: tags)
             } else {
                 ErrorHandler.handleParse(error)
             }
-        })
+        }
     }
     
     // Instance Methods
