@@ -74,12 +74,13 @@ class Notifications: NSObject {
     class func sendPush(query: PFQuery, data: [NSObject : AnyObject]) {
         let push = PFPush()
         
+        push.setQuery(query)
+        push.setData(data)
+        
         if let message = data["message"] as? String {
             push.setMessage(message)
         }
-        
-        push.setQuery(query)
-        push.setData(data)
+    
         push.sendPushInBackground()
     }
     
