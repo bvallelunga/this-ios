@@ -57,8 +57,6 @@
 		D3CFC9E51C1E490800E7C5B4 /* SelectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFC9E41C1E490800E7C5B4 /* SelectionHeader.swift */; };
 		D3D240481C27FC5F00917AE3 /* ShareGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D240471C27FC5F00917AE3 /* ShareGenerator.swift */; };
 		D3E293061C1B7DFC00925EAC /* LandingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E293051C1B7DFC00925EAC /* LandingController.swift */; };
-		D3E2930A1C1B888400925EAC /* Bariol_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3E293081C1B888400925EAC /* Bariol_Bold.ttf */; };
-		D3E2930B1C1B888400925EAC /* Bariol_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3E293091C1B888400925EAC /* Bariol_Regular.ttf */; };
 		D3E2930F1C1B8D5200925EAC /* VideoBackground.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D3E2930E1C1B8D5200925EAC /* VideoBackground.mp4 */; };
 		D3E293121C1BA4FE00925EAC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E293111C1BA4FE00925EAC /* Colors.swift */; };
 		D3E293151C1BA61400925EAC /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E293141C1BA61400925EAC /* AuthController.swift */; };
@@ -72,6 +70,8 @@
 		D3E293271C1C1E4500925EAC /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E293261C1C1E4500925EAC /* CoreTelephony.framework */; };
 		D3E2932A1C1C277600925EAC /* PagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E293291C1C277600925EAC /* PagesController.swift */; };
 		D3E2932C1C1C279B00925EAC /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E2932B1C1C279B00925EAC /* PageController.swift */; };
+		D3E49ECD1C33ECF1003B367B /* Bariol_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3E49ECB1C33ECF1003B367B /* Bariol_Bold.ttf */; };
+		D3E49ECE1C33ECF1003B367B /* Bariol_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3E49ECC1C33ECF1003B367B /* Bariol_Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,8 +154,6 @@
 		D3CFC9E41C1E490800E7C5B4 /* SelectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionHeader.swift; sourceTree = "<group>"; };
 		D3D240471C27FC5F00917AE3 /* ShareGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareGenerator.swift; sourceTree = "<group>"; };
 		D3E293051C1B7DFC00925EAC /* LandingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingController.swift; sourceTree = "<group>"; };
-		D3E293081C1B888400925EAC /* Bariol_Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Bariol_Bold.ttf; path = Fonts/Bariol_Bold.ttf; sourceTree = "<group>"; };
-		D3E293091C1B888400925EAC /* Bariol_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Bariol_Regular.ttf; path = Fonts/Bariol_Regular.ttf; sourceTree = "<group>"; };
 		D3E2930E1C1B8D5200925EAC /* VideoBackground.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = VideoBackground.mp4; sourceTree = "<group>"; };
 		D3E293111C1BA4FE00925EAC /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		D3E293141C1BA61400925EAC /* AuthController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
@@ -169,6 +167,8 @@
 		D3E293261C1C1E4500925EAC /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		D3E293291C1C277600925EAC /* PagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesController.swift; sourceTree = "<group>"; };
 		D3E2932B1C1C279B00925EAC /* PageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
+		D3E49ECB1C33ECF1003B367B /* Bariol_Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Bariol_Bold.ttf; path = Fonts/Bariol_Bold.ttf; sourceTree = SOURCE_ROOT; };
+		D3E49ECC1C33ECF1003B367B /* Bariol_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Bariol_Regular.ttf; path = Fonts/Bariol_Regular.ttf; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -404,11 +404,11 @@
 		D3E293011C1B7C1D00925EAC /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				D3E49ECB1C33ECF1003B367B /* Bariol_Bold.ttf */,
+				D3E49ECC1C33ECF1003B367B /* Bariol_Regular.ttf */,
 				D3C2D2FA1C27B0E1002F0241 /* #this-Bridging-Header.h */,
 				D35AF9021C1E79340024D7E3 /* Placeholder.gif */,
 				D3E2930E1C1B8D5200925EAC /* VideoBackground.mp4 */,
-				D3E293081C1B888400925EAC /* Bariol_Bold.ttf */,
-				D3E293091C1B888400925EAC /* Bariol_Regular.ttf */,
 				D3224A701C1AADA3009DFA85 /* Assets.xcassets */,
 				D3224A721C1AADA3009DFA85 /* LaunchScreen.storyboard */,
 				D3224A751C1AADA3009DFA85 /* Info.plist */,
@@ -605,16 +605,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3E2930A1C1B888400925EAC /* Bariol_Bold.ttf in Resources */,
 				D370FE771C21034D00769EBA /* FollowingTagCell.xib in Resources */,
 				D370FE791C211C9200769EBA /* FollowingSpacerCell.xib in Resources */,
 				D3224A741C1AADA3009DFA85 /* LaunchScreen.storyboard in Resources */,
+				D3E49ECE1C33ECF1003B367B /* Bariol_Regular.ttf in Resources */,
 				D3224A711C1AADA3009DFA85 /* Assets.xcassets in Resources */,
+				D3E49ECD1C33ECF1003B367B /* Bariol_Bold.ttf in Resources */,
 				D35AF9031C1E79340024D7E3 /* Placeholder.gif in Resources */,
 				D3E2930F1C1B8D5200925EAC /* VideoBackground.mp4 in Resources */,
 				D3224A6F1C1AADA3009DFA85 /* Main.storyboard in Resources */,
 				D39AB74C1C1FFE9100C9E96F /* TrendingTableCell.xib in Resources */,
-				D3E2930B1C1B888400925EAC /* Bariol_Regular.ttf in Resources */,
 				D35AF8F61C1E4E610024D7E3 /* SelectionHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
