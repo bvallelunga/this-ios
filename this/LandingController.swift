@@ -56,8 +56,9 @@ class LandingController: UIViewController {
         // Enable Movie Looping
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerRestart:"), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil)
         
-        if User.current() != nil {
+        if let user = User.current() {
             self.performSegueWithIdentifier("next", sender: self)
+            Installation.setUser(user)
         }
         
         SVProgressHUD.setBackgroundColor(Colors.darkGrey)

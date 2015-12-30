@@ -43,11 +43,12 @@ class AuthStepVerify: AuthStep {
         return self.parentController.phoneVerify == input
     }
     
-    override func next(callback: (segue: Bool) -> Void) {
+    override func next(callback: (segue: Bool, skip: Bool) -> Void) {
         let number = self.parentController.phoneNumber
         
         User.logInWithPhone(number, callback: { (user) -> Void in
-            callback(segue: user != nil)
+            let notifications = self.parentController.notifications.enabled
+            callback(segue: user != nil && notifications, skip: true)
         })
     }
 

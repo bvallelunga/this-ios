@@ -264,11 +264,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     }
     
     func shareControllerShared(count: Int) {
-        Globals.pagesController.setActiveController(2, direction: .Forward) { () -> Void in
-            Globals.tagsController.tag = self.tag
-            Globals.tagsController.performSegueWithIdentifier("next", sender: self)
-            Globals.followingController.reloadTags()
-            
+        Globals.viewTag(self.tag) { () -> Void in
             self.reset()
             self.navigationController?.popViewControllerAnimated(true)
         }

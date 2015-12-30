@@ -45,7 +45,7 @@ class Tag: PFObject, PFSubclassing {
     class func findOrCreate(name: String, callback: (tag: Tag) -> Void) {
         let query = Tag.query()
         
-        query?.whereKey("name", equalTo: name)
+        query?.whereKey("name", equalTo: name.lowercaseString)
         
         query?.getFirstObjectInBackgroundWithBlock({ (object, error) -> Void in
             if let tag = object as? Tag {
@@ -76,6 +76,52 @@ class Tag: PFObject, PFSubclassing {
     }
     
     // Instance Methods
+    func invite(sender: User, users: [User]) {
+        for user in users {
+            self.followers.addObject(user)
+        }
+        
+        self.saveInBackgroundWithBlock { (success, error) -> Void in
+            guard success else {
+                ErrorHandler.handleParse(error)
+                return
+            }
+            
+            // Send Push Notification
+            let query = Installation.query()
+            var name = sender.fullName
+            
+            if name.isEmpty {
+                name = sender.screenname
+            }
+            
+            query?.whereKey("user", containedIn: users)
+            
+            Notifications.sendPush(query!, data: [
+                "badge": "Increment",
+                "tagID": self.objectId!,
+                "tagName": self.name,
+                "message": "\(name) invited you to \(self.hashtag)"
+            ])
+        }
+    }
+    
+    func suggested(numbers: [String], callback: (users: [User]) -> Void) {
+        let query = User.query()
+        let tagQuery = self.followers.query()
+        
+        query?.whereKey("phone", containedIn: numbers)
+        query?.whereKey("objectId", doesNotMatchKey: "objectId", inQuery: tagQuery)
+        
+        query?.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if let users = objects as? [User] {
+                callback(users: users)
+            } else {
+                ErrorHandler.handleParse(error)
+            }
+        }
+    }
+    
     func isUserFollowing(user: User, callback: (following: Bool) -> Void) {
         let query = self.followers.query()
         

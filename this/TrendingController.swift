@@ -68,8 +68,7 @@ class TrendingController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if self.tags.count > indexPath.row {
-            self.parent.tag = self.tags[indexPath.row]
-            self.parent.performSegueWithIdentifier("next", sender: self)
+            self.parent.viewTag(self.tags[indexPath.row])
         }
     }
 

@@ -105,8 +105,7 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
     }
     
     func tagCellTapped(tag: Tag) {
-        self.parent.tag = tag
-        self.parent.performSegueWithIdentifier("next", sender: self)
+        self.parent.viewTag(tag)
     }
 
 }

@@ -54,7 +54,13 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         }
     }
     
-    func tagSet() {
+    func updateTag(tag: Tag) {
+        self.tag = tag
+        self.images.removeAll()
+        self.photos.removeAll()
+        self.collectionView.reloadData()
+        
+        
         self.tag.photos { (photos) -> Void in
             self.photos = photos
             

@@ -46,7 +46,7 @@ class AuthStepPhone: AuthStep {
         return phoneUtil.isValidNumber(number)
     }
     
-    override func next(callback: (segue: Bool) -> Void) {
+    override func next(callback: (segue: Bool, skip: Bool) -> Void) {
         do {
             let number = try phoneUtil.parseWithPhoneCarrierRegion(self.value)
             let e164 = try phoneUtil.format(number, numberFormat: .E164)
@@ -54,7 +54,7 @@ class AuthStepPhone: AuthStep {
             self.parentController.phoneNumber = e164
             self.parentController.phoneVerify = User.verifyNumber(e164)
             
-            callback(segue: false)
+            callback(segue: false, skip: false)
         } catch let error as NSError  {
             print(error.description)
         }

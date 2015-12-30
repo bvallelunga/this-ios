@@ -12,7 +12,8 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
     
     // MARK: Instance Variables
     var controllers = Dictionary<Int, PageController>()
-    var currentPage = 1
+    var currentPage = -1
+    private var startPage = 1
     private let pages = 3
     private var storyBoard = UIStoryboard(name: "Main", bundle: nil)
     private var scrollView: UIScrollView!
@@ -58,7 +59,7 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
             forBarMetrics: UIBarMetrics.Default)
         
         // Set Start Page
-        self.setActiveController(self.currentPage, animated: false, direction: .Forward)
+        self.setActiveController(self.startPage, animated: false, direction: .Forward)
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -75,10 +76,18 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
     }
     
     func setActiveController(index: Int, animated: Bool = true, direction: UIPageViewControllerNavigationDirection, callback: (() -> Void)! = nil) {
+        let controller = self.viewControllerAtIndex(index)
+        
         self.unlockPageView()
         
-        self.setViewControllers([self.viewControllerAtIndex(index)],
-            direction: direction, animated: animated, completion: { (success: Bool) -> Void in
+        if self.currentPage == index && controller != nil {
+            callback?()
+            return
+        }
+        
+        self.setViewControllers([
+            self.viewControllerAtIndex(index)
+        ], direction: direction, animated: animated, completion: { (success: Bool) -> Void in
                 self.currentPage = index
                 callback?()
         })

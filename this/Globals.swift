@@ -9,6 +9,7 @@
 import AlamofireImage
 import FormatterKit
 import PBImageStorage
+import Mixpanel
 
 class Globals: NSObject {
     
@@ -16,10 +17,12 @@ class Globals: NSObject {
     static var pagesController: PagesController!
     static var selectionController: SelectionController!
     static var tagsController: TagsController!
+    static var tagController: TagController!
     static var profileController: ProfileController!
     static var followingController: FollowingController!
     static var trendingController: TrendingController!
     
+    static let mixpanel = Mixpanel.sharedInstance()
     static let infoDictionary = NSBundle.mainBundle().infoDictionary!
     static let imageStorage = PBImageStorage(namespace: "imageAssets")
     static let imageDownloader = ImageDownloader(
@@ -89,6 +92,18 @@ class Globals: NSObject {
         let min = Int(pow(Double(10), Double(digits-1))) - 1
         let max = Int(pow(Double(10), Double(digits))) - 1
         return Int(min...max)
+    }
+    
+    class func viewTag(tag: Tag, animated: Bool = true, callback: (() -> Void)! = nil) {
+        self.pagesController.setActiveController(2, animated: animated, direction: .Forward) { () -> Void in
+            if self.tagController != nil {
+                self.tagController.updateTag(tag)
+            } else {
+                self.tagsController.viewTag(tag)
+            }
+            
+            callback?()
+        }
     }
     
 }

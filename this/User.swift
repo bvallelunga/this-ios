@@ -52,6 +52,7 @@ class User: PFUser {
                 PFUser.becomeInBackground(sessionToken, block: { (pfuser, error) -> Void in
                     if let user = pfuser as? User {
                         callback(user: user)
+                        Installation.setUser(user)
                     } else if error != nil {
                         ErrorHandler.handleParse(error)
                     } else {
@@ -76,20 +77,7 @@ class User: PFUser {
         user.signUpInBackgroundWithBlock { (success, error) -> Void in
             if success {
                 callback(user: user)
-            } else {
-                ErrorHandler.handleParse(error)
-            }
-        }
-    }
-    
-    class func findByNumbers(numbers: [String], callback: (users: [User]) -> Void) {
-        let query = User.query()
-        
-        query?.whereKey("phone", containedIn: numbers)
-            
-        query?.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            if let users = objects as? [User] {
-                callback(users: users)
+                Installation.setUser(user)
             } else {
                 ErrorHandler.handleParse(error)
             }

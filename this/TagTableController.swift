@@ -36,10 +36,7 @@ class TagTableController: UITableViewController {
         tapper.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapper)
         
-        self.tag.comments { (comments) -> Void in
-            self.comments = comments
-            self.tableView.reloadData()
-        }
+        self.reloadComments()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -66,8 +63,7 @@ class TagTableController: UITableViewController {
         if segue.identifier == "header" {
             self.headerController = segue.destinationViewController as? TagHeaderController
             self.headerController.view.clipsToBounds = true
-            self.headerController.tag = self.tag
-            self.headerController.tagSet()
+            self.headerController.updateTag(self.tag)
         }
     }
     
@@ -87,6 +83,19 @@ class TagTableController: UITableViewController {
         rect.size.height += delta
         
         self.headerController.view.frame = rect
+    }
+    
+    func reloadComments() {
+        self.tag.comments { (comments) -> Void in
+            self.comments = comments
+            self.tableView.reloadData()
+        }
+    }
+    
+    func updateTag(tag: Tag) {
+        self.tag = tag
+        self.reloadComments()
+        self.headerController.updateTag(tag)
     }
     
     

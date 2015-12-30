@@ -43,6 +43,7 @@ class TagController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        Globals.tagController = self
         Globals.pagesController.lockPageView()
         
         // Register for keyboard notifications
@@ -54,6 +55,7 @@ class TagController: UIViewController, UITextFieldDelegate {
     override func viewDidDisappear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        Globals.tagController = nil
         Globals.pagesController.unlockPageView()
         
         // Unregister for keyboard notifications
@@ -94,6 +96,12 @@ class TagController: UIViewController, UITextFieldDelegate {
     
     @IBAction func messageChanged(sender: AnyObject) {
         self.sendButton.enabled = !self.messageInput.text!.isEmpty
+    }
+    
+    func updateTag(tag: Tag) {
+        self.tag = tag
+        self.title = tag.hashtag
+        self.tableController.updateTag(tag)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {

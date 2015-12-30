@@ -11,7 +11,9 @@ import AudioToolbox
 
 class NavNotification: NSObject {
     
-    class func show(text: String, duration: NSTimeInterval = 3, color: UIColor = Colors.red, vibrate: Bool = true, callback: (() -> Void)! = nil) {
+    class func show(text: String, duration: NSTimeInterval = 3, color: UIColor = Colors.red,
+        vibrate: Bool = true, callback: (() -> Void)! = nil) {
+            
         let notification = CWStatusBarNotification()
         
         notification.notificationAnimationInStyle = .Top
@@ -20,7 +22,7 @@ class NavNotification: NSObject {
         notification.notificationStyle = .NavigationBarNotification
         notification.notificationLabelBackgroundColor = color
         notification.notificationLabelTextColor = UIColor.whiteColor()
-        notification.notificationLabelFont = UIFont(name: "Bariol-Bold", size: 32)
+        notification.notificationLabelFont = UIFont(name: "Bariol-Bold", size: 25)
         notification.notificationTappedBlock = {
             notification.dismissNotification()
             callback?()

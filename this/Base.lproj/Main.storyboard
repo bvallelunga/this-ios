@@ -22,6 +22,7 @@
             <string>Bariol-Bold</string>
             <string>Bariol-Bold</string>
             <string>Bariol-Bold</string>
+            <string>Bariol-Bold</string>
         </mutableArray>
         <mutableArray key="Bariol_Regular.ttf">
             <string>Bariol-Regular</string>
@@ -195,6 +196,25 @@ and Privacy Policy.</string>
                                     <action selector="backTriggered:" destination="ARe-ja-kvx" eventType="touchUpInside" id="efo-BH-VH5"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wil-VE-cO8">
+                                <rect key="frame" x="62" y="357.5" width="476" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="0KM-45-GaK"/>
+                                    <constraint firstAttribute="width" constant="300" id="PkW-oF-vR3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="32"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="PkW-oF-vR3"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="bigButtonTriggered:" destination="ARe-ja-kvx" eventType="touchUpInside" id="d4g-c0-ZxA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.34509803921568627" green="0.74901960784313726" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -202,9 +222,11 @@ and Privacy Policy.</string>
                             <constraint firstItem="GQK-Bk-4oB" firstAttribute="top" secondItem="ybU-Sm-s25" secondAttribute="bottom" id="JFJ-lT-E4I"/>
                             <constraint firstItem="9wW-Cp-8IS" firstAttribute="trailing" secondItem="2dn-1O-E51" secondAttribute="trailingMargin" id="JMB-qY-WI5"/>
                             <constraint firstItem="9wW-Cp-8IS" firstAttribute="top" secondItem="uFC-Ce-mzw" secondAttribute="bottom" id="JPH-cT-Jdf"/>
+                            <constraint firstItem="Wil-VE-cO8" firstAttribute="centerY" secondItem="1EW-bS-usn" secondAttribute="centerY" id="OXo-FQ-xNE"/>
                             <constraint firstItem="GQK-Bk-4oB" firstAttribute="leading" secondItem="2dn-1O-E51" secondAttribute="leadingMargin" constant="-20" id="WDK-zn-qWb"/>
                             <constraint firstItem="n6Q-a8-uCr" firstAttribute="trailing" secondItem="2dn-1O-E51" secondAttribute="trailingMargin" id="WOh-oZ-AsI"/>
                             <constraint firstItem="rdu-GF-QpN" firstAttribute="leading" secondItem="2dn-1O-E51" secondAttribute="leadingMargin" constant="-20" id="X66-MJ-96v"/>
+                            <constraint firstItem="Wil-VE-cO8" firstAttribute="centerX" secondItem="2dn-1O-E51" secondAttribute="centerX" id="aer-OL-2gV"/>
                             <constraint firstItem="Zoj-s6-DUj" firstAttribute="top" secondItem="GQK-Bk-4oB" secondAttribute="bottom" id="b7Z-GI-hK8"/>
                             <constraint firstItem="n6Q-a8-uCr" firstAttribute="leading" secondItem="2dn-1O-E51" secondAttribute="leadingMargin" id="bqS-Wm-59b"/>
                             <constraint firstItem="n6Q-a8-uCr" firstAttribute="top" secondItem="9wW-Cp-8IS" secondAttribute="bottom" id="cf7-Ae-iae"/>
@@ -212,6 +234,7 @@ and Privacy Policy.</string>
                             <constraint firstAttribute="trailing" secondItem="ybU-Sm-s25" secondAttribute="trailing" id="dv4-Is-6El"/>
                             <constraint firstItem="1EW-bS-usn" firstAttribute="leading" secondItem="2dn-1O-E51" secondAttribute="leadingMargin" id="eQG-no-985"/>
                             <constraint firstItem="GQK-Bk-4oB" firstAttribute="top" secondItem="rdu-GF-QpN" secondAttribute="bottom" id="evD-ha-gxy"/>
+                            <constraint firstItem="Wil-VE-cO8" firstAttribute="width" secondItem="1EW-bS-usn" secondAttribute="width" multiplier="0.85" id="hDr-xf-s5v"/>
                             <constraint firstItem="1EW-bS-usn" firstAttribute="trailing" secondItem="2dn-1O-E51" secondAttribute="trailingMargin" id="jjX-nU-Ie7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ybU-Sm-s25" secondAttribute="trailing" constant="-20" id="p4p-cj-CtQ"/>
                             <constraint firstItem="1EW-bS-usn" firstAttribute="top" secondItem="n6Q-a8-uCr" secondAttribute="bottom" id="pfd-DU-wP8"/>
@@ -228,6 +251,7 @@ and Privacy Policy.</string>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="rdu-GF-QpN" id="sda-96-4tX"/>
+                        <outlet property="bigButton" destination="Wil-VE-cO8" id="VNJ-US-csS"/>
                         <outlet property="headerLabel" destination="n6Q-a8-uCr" id="lRV-dj-Cob"/>
                         <outlet property="nextButton" destination="ybU-Sm-s25" id="eBk-Dp-KpK"/>
                         <outlet property="progressBar" destination="GQK-Bk-4oB" id="fXi-I9-5eI"/>

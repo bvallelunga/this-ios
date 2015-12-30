@@ -18,8 +18,10 @@ class AuthStep: NSObject {
     var keyboard: UIKeyboardType = .PhonePad
     var showBack: Bool = true
     var nextText: String = "NEXT"
+    var bigText: String = "SETUP"
     var background: UIColor = UIColor.blackColor()
     var parentController: AuthController!
+    var input: Bool = true
     
     convenience init(parent: AuthController) {
         self.init()
@@ -37,7 +39,11 @@ class AuthStep: NSObject {
         return true
     }
     
-    func next(callback: (segue: Bool) -> Void) {
+    func next(callback: (segue: Bool, skip: Bool) -> Void) {
         
+    }
+    
+    func button(callback: (segue: Bool, skip: Bool) -> Void) {
+    
     }
 }

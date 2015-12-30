@@ -17,9 +17,11 @@ class AuthController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var bigButton: UIButton!
     
     var phoneNumber = ""
     var phoneVerify = ""
+    var notifications = Notifications()
     
     private var stepIndex: Int = 0
     private var step: AuthStep!
@@ -37,12 +39,20 @@ class AuthController: UIViewController {
         self.textField.layer.shadowOpacity = 1
         self.textField.layer.shadowRadius = 0
         self.textField.font = UIFont(name: "Bariol-Bold", size: 40)
-        self.textField.becomeFirstResponder()
+        
+        self.bigButton.backgroundColor = UIColor(white: 0, alpha: 0.4)
+        self.bigButton.tintColor = UIColor.whiteColor()
+        self.bigButton.layer.shadowColor = UIColor.blackColor().CGColor
+        self.bigButton.layer.shadowOffset = CGSizeMake(0, 3)
+        self.bigButton.layer.shadowRadius = 3
+        self.bigButton.layer.shadowOpacity = 0.3
+        self.bigButton.layer.cornerRadius = 38
         
         self.steps = [
             AuthStepPhone(parent: self),
             AuthStepVerify(parent: self),
-            AuthStepUsername(parent: self)
+            AuthStepUsername(parent: self),
+            AuthStepNotifications(parent: self)
         ]
         
         self.step = self.steps[self.stepIndex]
@@ -56,6 +66,8 @@ class AuthController: UIViewController {
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: Selector("keyboardDidShow:"),
             name:UIKeyboardWillShowNotification, object: nil)
+        notificationCenter.addObserver(self, selector: Selector("keyboardDidHide:"),
+            name:UIKeyboardWillHideNotification, object: nil)
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -64,6 +76,7 @@ class AuthController: UIViewController {
         // Unregister for keyboard notifications
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.removeObserver(self, name:UIKeyboardWillShowNotification, object: nil)
+        notificationCenter.removeObserver(self, name:UIKeyboardWillHideNotification, object: nil)
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -77,6 +90,11 @@ class AuthController: UIViewController {
         self.progressBarBottom.constant = rect.size.height
         self.view.layoutIfNeeded()
     }
+    
+    func keyboardDidHide(notification: NSNotification) {
+        self.progressBarBottom.constant = 0
+        self.view.layoutIfNeeded()
+    }
 
     @IBAction func backTriggered(sender: AnyObject) {
         if --self.stepIndex > -1 {
@@ -86,11 +104,21 @@ class AuthController: UIViewController {
     }
     
     @IBAction func nextTriggered(sender: AnyObject) {        
-        self.step.next { (segue) -> Void in
+        self.step.next { (segue, skip) -> Void in
             if segue {
                 self.performSegueWithIdentifier("next", sender: self)
             } else {
-                self.nextStep()
+                self.nextStep(skip)
+            }
+        }
+    }
+    
+    @IBAction func bigButtonTriggered(sender: AnyObject) {
+        self.step.button { (segue, skip) -> Void in
+            if segue {
+                self.performSegueWithIdentifier("next", sender: self)
+            } else {
+                self.nextStep(skip)
             }
         }
     }
@@ -103,8 +131,10 @@ class AuthController: UIViewController {
         }
     }
     
-    func nextStep() {
-        if ++self.stepIndex < self.steps.count {
+    func nextStep(skip: Bool) {
+        self.stepIndex += skip ? 2 : 1
+        
+        if self.stepIndex < self.steps.count {
             self.step = self.steps[self.stepIndex]
             self.loadStep()
         }
@@ -116,13 +146,22 @@ class AuthController: UIViewController {
         self.textField.placeholder = self.step.placeholder
         self.textField.text = self.step.formatValue(self.step.value)
         self.textField.keyboardType = self.step.keyboard
+        self.textField.hidden = !self.step.input
         self.textField.reloadInputViews()
         self.backButton.hidden = !self.step.showBack
         self.nextButton.setTitle(self.step.nextText, forState: .Normal)
         self.nextButton.enabled = self.step.isValid(self.step.value)
         self.nextButton.alpha = self.nextButton.enabled ? 1 : 0.5;
+        self.bigButton.hidden = self.step.input
+        self.bigButton.setTitle(self.step.bigText, forState: .Normal)
         
         self.progressBar.updatePercent(self.step.percent, animate: true)
+        
+        if self.step.input {
+            self.textField.becomeFirstResponder()
+        } else {
+            self.textField.resignFirstResponder()
+        }
         
         UIView.animateWithDuration(0.25) { () -> Void in
             self.view.backgroundColor = self.step.background

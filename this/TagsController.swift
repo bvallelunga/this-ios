@@ -91,5 +91,10 @@ class TagsController: UIViewController {
     @IBAction func goToSelection(sender: AnyObject) {
         Globals.pagesController.setActiveController(1, direction: .Reverse)
     }
+    
+    func viewTag(tag: Tag) {
+        self.tag = tag
+        self.performSegueWithIdentifier("next", sender: self)
+    }
 
 }

@@ -161,9 +161,9 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
             
             if !user.fullName.isEmpty {
                 cell.textLabel?.text = user.fullName
-                cell.detailTextLabel?.text = "@\(user.username!)"
+                cell.detailTextLabel?.text = user.screenname
             } else {
-                cell.textLabel?.text = "@\(user.username!)"
+                cell.textLabel?.text = user.screenname
                 cell.detailTextLabel?.text = nil
             }
         } else {
@@ -226,14 +226,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     
     func shareTriggered() {
         // Share For Users  
-        let users = self.users.selected.keys
-        
-        for user in users {
-            self.tag.followers.addObject(user)
-        }
-    
-        self.tag.saveInBackground()
-        
+        self.tag.invite(self.user, users: Array(self.users.selected.keys))
         
         // Share For Contacts
         guard !self.contacts.selected.isEmpty else {
@@ -310,7 +303,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     func loadUsers() {
         let numbers = self.contacts.raw.map({ $0.phone.e164 })
         
-        User.findByNumbers(numbers) { (users) -> Void in
+        self.tag.suggested(numbers) { (users) -> Void in
             self.users.raw = users
             self.intersectionsUsersContacts()
             self.filterBySearch("")
