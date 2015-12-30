@@ -49,13 +49,7 @@ class AuthController: UIViewController {
         self.bigButton.layer.shadowOpacity = 0.3
         self.bigButton.layer.cornerRadius = 38
         
-        if User.current() != nil {
-            if self.notifications.enabled {
-                self.performSegueWithIdentifier("skip", sender: self)
-                self.notifications.register()
-                return
-            }
-        } else {
+        if User.current() == nil {
             self.steps = [
                 AuthStepPhone(parent: self),
                 AuthStepVerify(parent: self),
@@ -63,7 +57,9 @@ class AuthController: UIViewController {
             ]
         }
         
-        if !self.notifications.enabled {
+        if self.notifications.enabled {
+            self.notifications.register()
+        } else {
             self.steps.append(AuthStepNotifications(parent: self))
         }
         
@@ -71,8 +67,12 @@ class AuthController: UIViewController {
             self.steps.append(AuthStepPhotos(parent: self))
         }
         
-        self.step = self.steps[self.stepIndex]
-        self.loadStep()
+        if self.steps.isEmpty {
+            self.performSegueWithIdentifier("next", sender: self)
+        } else {
+            self.step = self.steps[self.stepIndex]
+            self.loadStep()
+        }
     }
     
     override func viewWillAppear(animated: Bool) {

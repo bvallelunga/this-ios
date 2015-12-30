@@ -259,7 +259,6 @@ and Privacy Policy.</string>
                         <outlet property="stepLabel" destination="9wW-Cp-8IS" id="XOY-te-RQf"/>
                         <outlet property="textField" destination="1EW-bS-usn" id="iIR-Dx-c4I"/>
                         <segue destination="bn8-b4-WMi" kind="show" identifier="next" animates="NO" id="ClI-Kb-hWa"/>
-                        <segue destination="bn8-b4-WMi" kind="show" identifier="skip" animates="NO" id="5u8-yD-hIS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYW-kk-cdq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1452,6 +1451,5 @@ and Privacy Policy.</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ly5-Ec-cDj"/>
-        <segue reference="5u8-yD-hIS"/>
     </inferredMetricsTieBreakers>
 </document>
