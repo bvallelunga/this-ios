@@ -21,6 +21,9 @@ class ErrorHandler {
         case PFErrorCode.ErrorUserCannotBeAlteredWithoutSession.rawValue:
             self.handleInvalidSessionTokenError()
             
+        case PFErrorCode.ErrorUsernameTaken.rawValue:
+            NavNotification.show("Username Taken 😢")
+            
         default: print(error)
         }
     }

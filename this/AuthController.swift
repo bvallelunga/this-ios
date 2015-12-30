@@ -24,7 +24,7 @@ class AuthController: UIViewController {
     var phoneVerify = ""
     var notifications = Notifications()
     
-    private var stepIndex: Int = 0
+    private var stepIndex: Int = -1
     private var step: AuthStep!
     private var steps: [AuthStep] = []
     
@@ -67,12 +67,7 @@ class AuthController: UIViewController {
             self.steps.append(AuthStepPhotos(parent: self))
         }
         
-        if self.steps.isEmpty {
-            self.performSegueWithIdentifier("next", sender: self)
-        } else {
-            self.step = self.steps[self.stepIndex]
-            self.loadStep()
-        }
+        self.nextStep(false)
     }
     
     override func viewWillAppear(animated: Bool) {

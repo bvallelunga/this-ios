@@ -22,7 +22,7 @@ class NavNotification: NSObject {
         notification.notificationStyle = .NavigationBarNotification
         notification.notificationLabelBackgroundColor = color
         notification.notificationLabelTextColor = UIColor.whiteColor()
-        notification.notificationLabelFont = UIFont(name: "Bariol-Bold", size: 25)
+        notification.notificationLabelFont = UIFont(name: "Bariol-Bold", size: 28)
         notification.notificationTappedBlock = {
             notification.dismissNotification()
             callback?()
