@@ -21,7 +21,6 @@ class TagController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = self.tag.hashtag
         self.view.backgroundColor = UIColor.whiteColor()
         self.messageInput.delegate = self
         self.sendButton.setTitleColor(UIColor.lightGrayColor(), forState: .Disabled)
@@ -38,6 +37,8 @@ class TagController: UIViewController, UITextFieldDelegate {
                 NSShadowAttributeName: shadow
             ]
         }
+        
+        self.updateTag(self.tag)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -67,7 +68,6 @@ class TagController: UIViewController, UITextFieldDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "table" {
             self.tableController = segue.destinationViewController as? TagTableController
-            self.tableController.tag = self.tag
         }
     }
     
@@ -102,6 +102,7 @@ class TagController: UIViewController, UITextFieldDelegate {
         self.tag = tag
         self.title = tag.hashtag
         self.tableController.updateTag(tag)
+        StateTracker.clearTagNotification(self.tag)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {

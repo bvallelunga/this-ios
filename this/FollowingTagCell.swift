@@ -47,9 +47,12 @@ class FollowingTagCell: UICollectionViewCell {
     }
     
     func updateTag(tag: Tag) {
+        let count = StateTracker.countTagNotification(tag)
+        
         self.hashtag = tag
         self.tagLabel.text = tag.hashtag
-        self.badgeLabel.hidden = true
+        self.badgeLabel.hidden = count == 0
+        self.badgeLabel.text = String(count)
         self.images.removeAll()
         self.imageView.image = nil
         
@@ -70,6 +73,7 @@ class FollowingTagCell: UICollectionViewCell {
     
     func tapped(gesture: UITapGestureRecognizer) {
         self.delegate.tagCellTapped(self.hashtag)
+        self.badgeLabel.hidden = true
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

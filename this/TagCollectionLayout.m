@@ -34,10 +34,8 @@
     NSInteger D = xD + (yD * nbLines) + (idxPage * nbColumns * nbLines);
     
     NSIndexPath *fakeIndexPath = [NSIndexPath indexPathForItem:D inSection:indexPath.section];
-    UICollectionViewLayoutAttributes *attributes = [super layoutAttributesForItemAtIndexPath:fakeIndexPath];
     
-    // return them to collection view
-    return attributes;
+    return [super layoutAttributesForItemAtIndexPath:fakeIndexPath];
 }
 
 -(NSArray*)layoutAttributesForElementsInRect:(CGRect)rect

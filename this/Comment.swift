@@ -38,6 +38,20 @@ class Comment: PFObject, PFSubclassing {
             }
         }
         
+        // Send Push Notification
+        let query = Installation.query()
+        
+        query?.whereKey("user", matchesQuery: tag.followers.query())
+        query?.whereKey("user", notEqualTo: user)
+        
+        Notifications.sendPush(query!, data: [
+            "badge": "Increment",
+            "actions": "viewTag",
+            "tagID": tag.objectId!,
+            "tagName": tag.name,
+            "alert": "\(user.name): \(message)"
+        ])
+        
         return comment
     }
 

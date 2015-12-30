@@ -35,6 +35,8 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         
         self.layout.minimumInteritemSpacing = 10
         self.layout.minimumLineSpacing = 10
+        self.layout.nbColumns = 4
+        self.layout.nbLines = 3
         
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
@@ -206,7 +208,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         
         for (i, photo) in self.photos.enumerate() {
             if let thumbnail = self.images[photo] {
-                let galleryPhoto = GalleryPhoto(placeholder: thumbnail, user: photo.user.screenname,
+                let galleryPhoto = GalleryPhoto(placeholder: thumbnail, user: photo.from,
                     postedAt: Globals.intervalDate(photo.createdAt!), hashtag: self.tag.hashtag)
                 
                 galleryPhoto.indexPath = NSIndexPath(forItem: i, inSection: 0)

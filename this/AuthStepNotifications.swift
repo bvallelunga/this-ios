@@ -13,10 +13,10 @@ class AuthStepNotifications: AuthStep {
     override init() {
         super.init()
         
-        self.title = "NOTIFICATIONS"
+        self.title = "NOTIFICATION PERMISSIONS"
         self.nextText = "SKIP"
-        self.header = "Can I hit you up\nwhen things happen?"
-        self.bigText = "Sure"
+        self.header = "Can I notify you\nwhen stuff happens?"
+        self.bigText = "SURE"
         self.showBack = false
         self.background = Colors.orange
         self.input = false
@@ -31,7 +31,7 @@ class AuthStepNotifications: AuthStep {
         self.parentController.notifications.register()
         
         Globals.delay(1) { () -> () in
-            callback(segue: true, skip: false)
+            callback(segue: false, skip: false)
         }
     }
     

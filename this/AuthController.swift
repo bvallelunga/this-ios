@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class AuthController: UIViewController {
 
@@ -25,7 +26,7 @@ class AuthController: UIViewController {
     
     private var stepIndex: Int = 0
     private var step: AuthStep!
-    private var steps: [AuthStep]!
+    private var steps: [AuthStep] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,12 +49,27 @@ class AuthController: UIViewController {
         self.bigButton.layer.shadowOpacity = 0.3
         self.bigButton.layer.cornerRadius = 38
         
-        self.steps = [
-            AuthStepPhone(parent: self),
-            AuthStepVerify(parent: self),
-            AuthStepUsername(parent: self),
-            AuthStepNotifications(parent: self)
-        ]
+        if User.current() != nil {
+            if self.notifications.enabled {
+                self.performSegueWithIdentifier("skip", sender: self)
+                self.notifications.register()
+                return
+            }
+        } else {
+            self.steps = [
+                AuthStepPhone(parent: self),
+                AuthStepVerify(parent: self),
+                AuthStepUsername(parent: self)
+            ]
+        }
+        
+        if !self.notifications.enabled {
+            self.steps.append(AuthStepNotifications(parent: self))
+        }
+        
+        if PHPhotoLibrary.authorizationStatus() == .NotDetermined {
+            self.steps.append(AuthStepPhotos(parent: self))
+        }
         
         self.step = self.steps[self.stepIndex]
         self.loadStep()
@@ -134,10 +150,13 @@ class AuthController: UIViewController {
     func nextStep(skip: Bool) {
         self.stepIndex += skip ? 2 : 1
         
-        if self.stepIndex < self.steps.count {
-            self.step = self.steps[self.stepIndex]
-            self.loadStep()
+        guard self.stepIndex < self.steps.count else {
+            self.performSegueWithIdentifier("next", sender: self)
+            return
         }
+        
+        self.step = self.steps[self.stepIndex]
+        self.loadStep()
     }
     
     func loadStep() {

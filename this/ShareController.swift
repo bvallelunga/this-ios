@@ -225,11 +225,21 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     }
     
     func shareTriggered() {
-        // Share For Users  
-        self.tag.invite(self.user, users: Array(self.users.selected.keys))
+        // Share For Users
+        if !self.users.selected.isEmpty {
+            self.tag.invite(self.user, users: Array(self.users.selected.keys))
+        }
         
         // Share For Contacts
         guard !self.contacts.selected.isEmpty else {
+            self.nextTriggered()
+            return
+        }
+        
+        guard MFMessageComposeViewController.canSendText() else {
+            UIAlertView(title: "Messaging Not Setup", message: "Please setup text messaging to invite your contacts.",
+                delegate: nil, cancelButtonTitle: "Okay").show()
+            
             self.nextTriggered()
             return
         }
@@ -241,10 +251,12 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
             contacts.append(contact.phone.number)
         }
         
-        if !self.images.isEmpty {
-            for image in self.images[0...min(2, self.images.count-1)] {
-                let data =  UIImageJPEGRepresentation(image, 0.5)
-                messageVC.addAttachmentData(data!, typeIdentifier: "image/jpeg", filename: "\(tag).jpg")
+        if MFMessageComposeViewController.canSendAttachments() {
+            if !self.images.isEmpty {
+                for image in self.images[0...min(2, self.images.count-1)] {
+                    let data =  UIImageJPEGRepresentation(image, 0.5)
+                    messageVC.addAttachmentData(data!, typeIdentifier: "image/jpeg", filename: "\(tag).jpg")
+                }
             }
         }
         

@@ -35,8 +35,6 @@ class TagTableController: UITableViewController {
         let tapper = UITapGestureRecognizer(target: self, action: Selector("handleSingleTap:"))
         tapper.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapper)
-        
-        self.reloadComments()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -63,7 +61,6 @@ class TagTableController: UITableViewController {
         if segue.identifier == "header" {
             self.headerController = segue.destinationViewController as? TagHeaderController
             self.headerController.view.clipsToBounds = true
-            self.headerController.updateTag(self.tag)
         }
     }
     

@@ -18,7 +18,7 @@ class AuthStep: NSObject {
     var keyboard: UIKeyboardType = .PhonePad
     var showBack: Bool = true
     var nextText: String = "NEXT"
-    var bigText: String = "SETUP"
+    var bigText: String = "SURE"
     var background: UIColor = UIColor.blackColor()
     var parentController: AuthController!
     var input: Bool = true

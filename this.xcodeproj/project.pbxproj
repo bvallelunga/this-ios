@@ -20,6 +20,7 @@
 		D32D18BF1C224B3B0097D653 /* TagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D18BE1C224B3B0097D653 /* TagController.swift */; };
 		D32D18C11C24EDC70097D653 /* TagHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D18C01C24EDC70097D653 /* TagHeaderController.swift */; };
 		D32D18C31C24F4790097D653 /* TagTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D18C21C24F4790097D653 /* TagTableController.swift */; };
+		D331CFBC1C33D0030040A8A5 /* AuthStepPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = D331CFBB1C33D0030040A8A5 /* AuthStepPhotos.swift */; };
 		D33B13DC1C2AA2A000C54DB9 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B13DB1C2AA2A000C54DB9 /* Tag.swift */; };
 		D33B13DE1C2AA2E600C54DB9 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B13DD1C2AA2E600C54DB9 /* Photo.swift */; };
 		D33B13E01C2AA36300C54DB9 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B13DF1C2AA36300C54DB9 /* Comment.swift */; };
@@ -112,6 +113,7 @@
 		D32D18BE1C224B3B0097D653 /* TagController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagController.swift; sourceTree = "<group>"; };
 		D32D18C01C24EDC70097D653 /* TagHeaderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagHeaderController.swift; sourceTree = "<group>"; };
 		D32D18C21C24F4790097D653 /* TagTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTableController.swift; sourceTree = "<group>"; };
+		D331CFBB1C33D0030040A8A5 /* AuthStepPhotos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthStepPhotos.swift; sourceTree = "<group>"; };
 		D33B13DB1C2AA2A000C54DB9 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		D33B13DD1C2AA2E600C54DB9 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		D33B13DF1C2AA36300C54DB9 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 				D3E2931F1C1C097B00925EAC /* AuthStepVerify.swift */,
 				D3E293211C1C16EA00925EAC /* AuthStepUsername.swift */,
 				D3690AE11C3357C70090380E /* AuthStepNotifications.swift */,
+				D331CFBB1C33D0030040A8A5 /* AuthStepPhotos.swift */,
 			);
 			name = Authentication;
 			sourceTree = "<group>";
@@ -717,6 +720,7 @@
 				D32D18C31C24F4790097D653 /* TagTableController.swift in Sources */,
 				D3CFC9E31C1E416000E7C5B4 /* SelectionController.swift in Sources */,
 				D394D3681C1E85B000CB0FE9 /* SelectionCameraCell.swift in Sources */,
+				D331CFBC1C33D0030040A8A5 /* AuthStepPhotos.swift in Sources */,
 				D33B13E01C2AA36300C54DB9 /* Comment.swift in Sources */,
 				D3CFC9E51C1E490800E7C5B4 /* SelectionHeader.swift in Sources */,
 				D3C958D71C2A94E700B6EE9D /* User.swift in Sources */,

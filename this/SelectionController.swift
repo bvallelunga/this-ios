@@ -109,6 +109,17 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     func getAssests(select: Bool = false) {
         self.assetsAuthorized { (authorized) -> Void in
             guard authorized else {
+                let controller = UIAlertController(title: "Photo Permissions",
+                    message: "Please enable photo permissions by going to Settings > #this > Photos",
+                    preferredStyle: .Alert)
+                
+                let button = UIAlertAction(title: "Open Settings", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+                    let url = NSURL(string: UIApplicationOpenSettingsURLString)!
+                    UIApplication.sharedApplication().openURL(url)
+                })
+                
+                controller.addAction(button)
+                self.presentViewController(controller, animated: true, completion: nil)
                 return
             }
             
@@ -153,7 +164,9 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         
         if status == .NotDetermined {
             PHPhotoLibrary.requestAuthorization({ (status) -> Void in
-                callback(authorized: status == .Authorized)
+                dispatch_async(dispatch_get_main_queue(),{
+                    callback(authorized: status == .Authorized)
+                })
             })
         } else {
             callback(authorized: status == .Authorized)
@@ -225,7 +238,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! SelectionPhotoCell
         
         if !cell.upload && self.config != nil && self.selectedOrder.count >= self.config.uploadLimit {
-            NavNotification.show("Too many photos 😉")
+            NavNotification.show("Too Many Photos 😉")
             return
         }
         
@@ -266,7 +279,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     func shareControllerShared(count: Int) {
         Globals.viewTag(self.tag) { () -> Void in
             self.reset()
-            self.navigationController?.popViewControllerAnimated(true)
+            self.navigationController?.popViewControllerAnimated(false)
         }
     }
     

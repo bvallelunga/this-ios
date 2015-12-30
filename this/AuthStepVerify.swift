@@ -47,8 +47,7 @@ class AuthStepVerify: AuthStep {
         let number = self.parentController.phoneNumber
         
         User.logInWithPhone(number, callback: { (user) -> Void in
-            let notifications = self.parentController.notifications.enabled
-            callback(segue: user != nil && notifications, skip: true)
+            callback(segue: false, skip: user != nil)
         })
     }
 

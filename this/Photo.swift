@@ -12,6 +12,7 @@ import Parse
 class Photo: PFObject, PFSubclassing {
     
     // Instance Variables
+    @NSManaged var from: String
     @NSManaged var user: User
     @NSManaged var tag: Tag
     @NSManaged var thumbnail: PFFile
@@ -29,6 +30,7 @@ class Photo: PFObject, PFSubclassing {
         let photo = Photo()
         
         photo.user = user
+        photo.from = user.name
         photo.tag = tag
         photo.expireAt = expireAt
         photo.originalCached = image

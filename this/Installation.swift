@@ -23,7 +23,7 @@ class Installation: PFInstallation {
         installation.appBuildNumber = Globals.appBuild()
         installation.appVersionBuild = Globals.appVersionBuild()
         installation.badge = 0
-        installation.saveEventually()
+        installation.saveInBackground()
     }
     
     class func setUser(user: User) {
@@ -50,6 +50,6 @@ class Installation: PFInstallation {
         let installation = Installation.currentInstallation()
         
         installation.badge = 0
-        installation.saveEventually()
+        installation.saveInBackground()
     }
 }

@@ -15,8 +15,9 @@ class Notifications: NSObject {
     var application = UIApplication.sharedApplication()
     
     override init() {
-        if self.application.respondsToSelector(Selector("isRegisteredForRemoteNotifications")) {
-            self.enabled = self.application.isRegisteredForRemoteNotifications()
+        if self.application.respondsToSelector(Selector("currentUserNotificationSettings")) {
+            let settings = self.application.currentUserNotificationSettings()!
+            self.enabled = settings.types.contains(.Alert)
         }  else {
             self.enabled = self.application.enabledRemoteNotificationTypes() != .None
         }
@@ -44,7 +45,7 @@ class Notifications: NSObject {
                 action = action.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
                 
                 switch(action) {
-                    case "tagInvite": self.handeInviteTag(wasActive, info: info)
+                    case "viewTag": self.handeViewTag(wasActive, info: info)
                     
                     default: print(action)
                 }
@@ -54,16 +55,21 @@ class Notifications: NSObject {
         Installation.clearBadge()
     }
     
-    class func handeInviteTag(wasActive: Bool, info: [NSObject : AnyObject]) {
+    class func handeViewTag(wasActive: Bool, info: [NSObject : AnyObject]) {
         let tag = Tag(withoutDataWithObjectId: info["tagID"] as? String)
-        let message = info["message"] as? String
+        
+        StateTracker.setTagNotification(tag)
+        
+        guard let message = info["message"] as? String else {
+            return
+        }
         
         if let name = info["tagName"] as? String {
             tag.name = name
         }
         
-        if wasActive && message != nil {
-            NavNotification.show(message!, color: Colors.purple, callback: { () -> Void in
+        if wasActive {
+            NavNotification.show(message, color: Colors.purple, callback: { () -> Void in
                 Globals.viewTag(tag)
             })
         } else {
@@ -71,15 +77,11 @@ class Notifications: NSObject {
         }
     }
     
-    class func sendPush(query: PFQuery, data: [NSObject : AnyObject]) {
+    class func sendPush(query: PFQuery, let data: [NSObject : AnyObject]) {
         let push = PFPush()
         
         push.setQuery(query)
         push.setData(data)
-        
-        if let message = data["message"] as? String {
-            push.setMessage(message)
-        }
     
         push.sendPushInBackground()
     }

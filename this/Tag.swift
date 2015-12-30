@@ -24,7 +24,11 @@ class Tag: PFObject, PFSubclassing {
     var photosCached: [Photo] = []
     
     var hashtag: String {
-        return "#\(name)"
+        guard self.dataAvailable else {
+            return ""
+        }
+        
+        return "#\(self.name)"
     }
     
     static func parseClassName() -> String {
@@ -59,9 +63,13 @@ class Tag: PFObject, PFSubclassing {
             let tag = Tag()
             
             tag.name = name
-            tag.saveInBackground()
-            
-            callback(tag: tag)
+            tag.saveInBackgroundWithBlock({ (success, error) -> Void in
+                if success {
+                    callback(tag: tag)
+                } else {
+                    ErrorHandler.handleParse(error)
+                }
+            })
         })
     }
     
@@ -89,19 +97,17 @@ class Tag: PFObject, PFSubclassing {
             
             // Send Push Notification
             let query = Installation.query()
-            var name = sender.fullName
-            
-            if name.isEmpty {
-                name = sender.screenname
-            }
             
             query?.whereKey("user", containedIn: users)
+            query?.whereKey("user", notEqualTo: sender)
             
             Notifications.sendPush(query!, data: [
                 "badge": "Increment",
+                "actions": "viewTag",
                 "tagID": self.objectId!,
                 "tagName": self.name,
-                "message": "\(name) invited you to \(self.hashtag)"
+                "message": "\(sender.name) invited you to \(self.hashtag)",
+                "alert": "\(sender.name) invited you to \(self.hashtag)"
             ])
         }
     }
@@ -178,7 +184,7 @@ class Tag: PFObject, PFSubclassing {
                     self.photosCached = photos
                     self.arePhotosCached = limit == nil
                 }
-                
+
                 callback(photos: self.photosCached)
             } else {
                 ErrorHandler.handleParse(error)
@@ -209,6 +215,21 @@ class Tag: PFObject, PFSubclassing {
             
             self.photosCached.append(photo)
         }
+        
+        // Send Push Notification
+        let query = Installation.query()
+        
+        query?.whereKey("user", matchesQuery: self.followers.query())
+        query?.whereKey("user", notEqualTo: user)
+        
+        Notifications.sendPush(query!, data: [
+            "badge": "Increment",
+            "actions": "viewTag",
+            "tagID": self.objectId!,
+            "tagName": self.name,
+            "message": "New photos in \(self.hashtag)",
+            "alert": "\(user.name) posted to \(self.hashtag)"
+        ])
     }
     
 }

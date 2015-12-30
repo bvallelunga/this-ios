@@ -19,7 +19,25 @@ class User: PFUser {
     @NSManaged var photo: PFFile
     
     var screenname: String {
-        return "@\(username!)"
+        guard self.dataAvailable else {
+            return ""
+        }
+        
+        return "@\(self.username!)"
+    }
+    
+    var name: String {
+        guard self.dataAvailable else {
+            return ""
+        }
+        
+        var name = self.fullName
+        
+        if name.isEmpty {
+            name = self.screenname
+        }
+        
+        return name
     }
     
     // Class Methods
@@ -47,7 +65,7 @@ class User: PFUser {
     class func logInWithPhone(number: String, callback: (user: User!) -> Void) {
         PFCloud.callFunctionInBackground("loginPhone", withParameters: [
             "phone": number
-        ]) { (response, error) -> Void in
+        ]) { (response, error) -> Void in            
             if let sessionToken = response as? String {
                 PFUser.becomeInBackground(sessionToken, block: { (pfuser, error) -> Void in
                     if let user = pfuser as? User {
@@ -59,10 +77,10 @@ class User: PFUser {
                         callback(user: nil)
                     }
                 })
-            } else if error != nil {
-                ErrorHandler.handleParse(error)
-            } else {
+            } else if error == nil {
                 callback(user: nil)
+            } else {
+                ErrorHandler.handleParse(error)
             }
         }
     }

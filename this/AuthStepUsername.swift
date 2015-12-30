@@ -20,7 +20,6 @@ class AuthStepUsername: AuthStep {
         self.header = "Chill. What\nshould I call you?"
         self.showBack = true
         self.keyboard = .Twitter
-        self.input = false
         self.background = Colors.greyBlue
         self.percent = 0.75
     }
@@ -48,7 +47,7 @@ class AuthStepUsername: AuthStep {
         let username = String(self.value.characters.dropFirst()).lowercaseString
         
         User.register(username, phone: self.parentController.phoneNumber) { (user) -> Void in
-            callback(segue: self.parentController.notifications.enabled, skip: false)
+            callback(segue: false, skip: false)
         }
     }
 

@@ -110,12 +110,12 @@ and Privacy Policy.</string>
                         <outlet property="button" destination="RKo-3T-eRM" id="0rU-8N-WcE"/>
                         <outlet property="legalLabel" destination="r00-y0-EKo" id="ZwU-VF-AaG"/>
                         <outlet property="logoLabel" destination="EMN-3T-g8x" id="2TV-FT-MNz"/>
-                        <segue destination="bn8-b4-WMi" kind="show" identifier="next" animates="NO" id="88W-UX-gWv"/>
+                        <segue destination="ARe-ja-kvx" kind="show" identifier="next" animates="NO" id="kA5-1j-uSb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="276" y="381"/>
+            <point key="canvasLocation" x="-460" y="381"/>
         </scene>
         <!--Auth Controller-->
         <scene sceneID="Dle-NL-40C">
@@ -159,7 +159,7 @@ and Privacy Policy.</string>
                                     <action selector="nextTriggered:" destination="ARe-ja-kvx" eventType="touchUpInside" id="xmy-ZC-BBd"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHANGE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="n6Q-a8-uCr">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHANGE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="n6Q-a8-uCr">
                                 <rect key="frame" x="20" y="70" width="560" height="180.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="165" id="9mP-eM-y34"/>
@@ -259,11 +259,12 @@ and Privacy Policy.</string>
                         <outlet property="stepLabel" destination="9wW-Cp-8IS" id="XOY-te-RQf"/>
                         <outlet property="textField" destination="1EW-bS-usn" id="iIR-Dx-c4I"/>
                         <segue destination="bn8-b4-WMi" kind="show" identifier="next" animates="NO" id="ClI-Kb-hWa"/>
+                        <segue destination="bn8-b4-WMi" kind="show" identifier="skip" animates="NO" id="5u8-yD-hIS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYW-kk-cdq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1006" y="-383"/>
+            <point key="canvasLocation" x="274" y="380"/>
         </scene>
         <!--Pages Controller-->
         <scene sceneID="Uv6-x6-18v">
@@ -309,7 +310,7 @@ and Privacy Policy.</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ce8-fm-snS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-448" y="381"/>
+            <point key="canvasLocation" x="-1184" y="381"/>
         </scene>
         <!--Page Controller-->
         <scene sceneID="Vjk-eB-RWM">
@@ -1121,49 +1122,76 @@ and Privacy Policy.</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1dm-hU-i8N">
                                 <rect key="frame" x="0.0" y="310" width="600" height="65"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YjL-hV-bzz">
-                                        <rect key="frame" x="15" y="10" width="175" height="45"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ppU-4B-1Kz">
+                                        <rect key="frame" x="0.0" y="0.0" width="530" height="65"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YjL-hV-bzz">
+                                                <rect key="frame" x="15" y="10" width="319" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="165" id="KAo-li-DNI"/>
+                                                    <constraint firstAttribute="width" constant="175" id="O9D-uq-eAM"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="18"/>
+                                                <state key="normal" title="FOLLOWING"/>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="KAo-li-DNI"/>
+                                                        <exclude reference="O9D-uq-eAM"/>
+                                                    </mask>
+                                                </variation>
+                                                <connections>
+                                                    <action selector="followingTriggered:" destination="cxi-M1-E8G" eventType="touchUpInside" id="uwP-Wl-RYe"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kzq-4X-7aU">
+                                                <rect key="frame" x="339" y="10" width="191" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="165" id="pBe-U7-zGn"/>
+                                                    <constraint firstAttribute="width" constant="100" id="unl-Ml-1na"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="18"/>
+                                                <state key="normal" title="INVITE"/>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="pBe-U7-zGn"/>
+                                                        <exclude reference="unl-Ml-1na"/>
+                                                    </mask>
+                                                </variation>
+                                                <connections>
+                                                    <action selector="inviteTriggered:" destination="cxi-M1-E8G" eventType="touchUpInside" id="CQN-7R-OqG"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="165" id="KAo-li-DNI"/>
-                                            <constraint firstAttribute="width" constant="175" id="O9D-uq-eAM"/>
+                                            <constraint firstItem="YjL-hV-bzz" firstAttribute="width" secondItem="ppU-4B-1Kz" secondAttribute="width" id="ADt-K7-NOa"/>
+                                            <constraint firstItem="kzq-4X-7aU" firstAttribute="top" secondItem="ppU-4B-1Kz" secondAttribute="top" constant="10" id="Its-PK-fnx"/>
+                                            <constraint firstAttribute="trailing" secondItem="kzq-4X-7aU" secondAttribute="trailing" id="Sel-wa-god"/>
+                                            <constraint firstAttribute="bottom" secondItem="YjL-hV-bzz" secondAttribute="bottom" constant="10" id="Txe-9j-7Ky"/>
+                                            <constraint firstItem="YjL-hV-bzz" firstAttribute="top" secondItem="ppU-4B-1Kz" secondAttribute="top" constant="10" id="YuS-Gd-ECg"/>
+                                            <constraint firstItem="YjL-hV-bzz" firstAttribute="leading" secondItem="ppU-4B-1Kz" secondAttribute="leading" constant="15" id="maS-eC-3Je"/>
+                                            <constraint firstItem="kzq-4X-7aU" firstAttribute="width" secondItem="YjL-hV-bzz" secondAttribute="width" multiplier="0.6" id="qwN-aJ-p8U"/>
+                                            <constraint firstAttribute="bottom" secondItem="kzq-4X-7aU" secondAttribute="bottom" constant="10" id="seX-Hx-rfu"/>
+                                            <constraint firstItem="kzq-4X-7aU" firstAttribute="leading" secondItem="YjL-hV-bzz" secondAttribute="trailing" constant="5" id="xfB-qW-dDy"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="18"/>
-                                        <state key="normal" title="FOLLOWING"/>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="KAo-li-DNI"/>
+                                                <exclude reference="ADt-K7-NOa"/>
                                             </mask>
                                         </variation>
-                                        <connections>
-                                            <action selector="followingTriggered:" destination="cxi-M1-E8G" eventType="touchUpInside" id="uwP-Wl-RYe"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kzq-4X-7aU">
-                                        <rect key="frame" x="200" y="10" width="100" height="45"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="165" id="pBe-U7-zGn"/>
-                                            <constraint firstAttribute="width" constant="100" id="unl-Ml-1na"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="18"/>
-                                        <state key="normal" title="INVITE"/>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="pBe-U7-zGn"/>
-                                            </mask>
-                                        </variation>
-                                        <connections>
-                                            <action selector="inviteTriggered:" destination="cxi-M1-E8G" eventType="touchUpInside" id="CQN-7R-OqG"/>
-                                        </connections>
-                                    </button>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srT-7e-bRg">
-                                        <rect key="frame" x="310" y="10" width="275" height="45"/>
+                                        <rect key="frame" x="540" y="10" width="45" height="45"/>
                                         <constraints>
+                                            <constraint firstAttribute="width" constant="45" id="RDr-bx-6hz"/>
+                                            <constraint firstAttribute="width" secondItem="srT-7e-bRg" secondAttribute="height" multiplier="1:1" id="dnU-8n-xBb"/>
                                             <constraint firstAttribute="width" constant="50" id="dzM-4s-oKq"/>
                                         </constraints>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="Download"/>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="RDr-bx-6hz"/>
                                                 <exclude reference="dzM-4s-oKq"/>
                                             </mask>
                                         </variation>
@@ -1175,33 +1203,20 @@ and Privacy Policy.</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="0OP-Hh-Joa"/>
-                                    <constraint firstItem="srT-7e-bRg" firstAttribute="leading" secondItem="kzq-4X-7aU" secondAttribute="trailing" constant="10" id="1w7-xe-yDZ"/>
                                     <constraint firstAttribute="bottom" secondItem="srT-7e-bRg" secondAttribute="bottom" constant="10" id="56X-9V-bsJ"/>
-                                    <constraint firstItem="srT-7e-bRg" firstAttribute="width" secondItem="YjL-hV-bzz" secondAttribute="width" multiplier="0.4" id="8Qr-lh-8BJ"/>
                                     <constraint firstAttribute="trailing" secondItem="srT-7e-bRg" secondAttribute="trailing" constant="15" id="9xe-at-SBt"/>
-                                    <constraint firstItem="srT-7e-bRg" firstAttribute="leading" secondItem="kzq-4X-7aU" secondAttribute="trailing" constant="10" id="DkJ-Tp-sLU"/>
                                     <constraint firstItem="srT-7e-bRg" firstAttribute="top" secondItem="1dm-hU-i8N" secondAttribute="top" constant="10" id="Jkl-wF-FkJ"/>
-                                    <constraint firstItem="kzq-4X-7aU" firstAttribute="leading" secondItem="YjL-hV-bzz" secondAttribute="trailing" constant="10" id="P9Y-Mc-mXS"/>
-                                    <constraint firstAttribute="bottom" secondItem="YjL-hV-bzz" secondAttribute="bottom" constant="10" id="PLz-iF-a24"/>
-                                    <constraint firstItem="YjL-hV-bzz" firstAttribute="leading" secondItem="1dm-hU-i8N" secondAttribute="leading" constant="15" id="bAz-aq-evb"/>
-                                    <constraint firstItem="YjL-hV-bzz" firstAttribute="top" secondItem="1dm-hU-i8N" secondAttribute="top" constant="10" id="iLX-XW-iNE"/>
-                                    <constraint firstItem="kzq-4X-7aU" firstAttribute="top" secondItem="1dm-hU-i8N" secondAttribute="top" constant="10" id="n7W-Q2-5IB"/>
-                                    <constraint firstAttribute="bottom" secondItem="kzq-4X-7aU" secondAttribute="bottom" constant="10" id="poa-Vn-wau"/>
-                                    <constraint firstItem="kzq-4X-7aU" firstAttribute="width" secondItem="YjL-hV-bzz" secondAttribute="width" multiplier="0.8" constant="1" id="sgh-dY-9Dw"/>
+                                    <constraint firstItem="srT-7e-bRg" firstAttribute="leading" secondItem="ppU-4B-1Kz" secondAttribute="trailing" constant="10" id="Tjb-Aa-Ej7"/>
+                                    <constraint firstAttribute="bottom" secondItem="ppU-4B-1Kz" secondAttribute="bottom" id="dNd-68-dqB"/>
+                                    <constraint firstItem="ppU-4B-1Kz" firstAttribute="leading" secondItem="1dm-hU-i8N" secondAttribute="leading" id="hm9-F8-H4n"/>
+                                    <constraint firstItem="ppU-4B-1Kz" firstAttribute="top" secondItem="1dm-hU-i8N" secondAttribute="top" id="kec-Z1-TED"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="sgh-dY-9Dw"/>
-                                        <exclude reference="1w7-xe-yDZ"/>
-                                        <exclude reference="8Qr-lh-8BJ"/>
-                                    </mask>
-                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3hb-En-b6V">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="280"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="g43-07-5zK">
-                                        <rect key="frame" x="0.0" y="-0.5" width="600" height="280"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="280"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="280" id="Hb3-Wk-Xmh"/>
@@ -1289,7 +1304,7 @@ and Privacy Policy.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eLy-SA-k4x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4844" y="1140"/>
+            <point key="canvasLocation" x="4844" y="1139.5"/>
         </scene>
         <!--Profile Header Controller-->
         <scene sceneID="srf-po-2CZ">
@@ -1436,6 +1451,7 @@ and Privacy Policy.</string>
         <image name="Download" width="700" height="700"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ClI-Kb-hWa"/>
+        <segue reference="ly5-Ec-cDj"/>
+        <segue reference="5u8-yD-hIS"/>
     </inferredMetricsTieBreakers>
 </document>

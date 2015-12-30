@@ -132,7 +132,6 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
                 options: NSStringCompareOptions.LiteralSearch, range: nil)
             
             guard !text.isEmpty else {
-                self.generateHashtag()
                 return
             }
             
@@ -161,6 +160,14 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     
     func textFieldDidBeginEditing(textField: UITextField) {
         textField.selectAll(self)
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        if let text = self.tagField.text {
+            if text.isEmpty {
+                self.generateHashtag()
+            }
+        }
     }
     
     func handleSingleTap(gesture: UITapGestureRecognizer) {
