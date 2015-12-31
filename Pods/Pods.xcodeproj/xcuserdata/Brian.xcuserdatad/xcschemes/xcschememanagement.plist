@@ -34,12 +34,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FMDB.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FormatterKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>JSQWebViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>KTBTaskQueue.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -107,12 +117,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1366D7EF35328CDF50275B36F38BF663</key>
+		<key>0EFAA48D4B78C0DB8A10E4F5B9C75093</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>1D20A55511810B10A107C81385F2FC50</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>21D7C098B238F385A775ECF4892C3AC7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -123,6 +138,11 @@
 			<true/>
 		</dict>
 		<key>233B529E4F6EE6E3DF4E23BAFD26903D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>23CF27B2BA6AC7125EFFEDA8C5AA819F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -152,17 +172,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6B7036E670DAE65462DFB018730552FA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>708E01B006A9F88B3C13711562282B5E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>A1BF58736B6CCECB5DB30E2108366143</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A285077F46E001164D5AAD27007ACD67</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -197,12 +217,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FE113CEF81C16AA59EC049ACE130BCB2</key>
+		<key>E8949630F823B9834C8357F4E53D2E3C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FE4B47764B271F30005056EE1B70ADB4</key>
+		<key>FE113CEF81C16AA59EC049ACE130BCB2</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -105,6 +105,10 @@ class TagController: UIViewController, UITextFieldDelegate {
         StateTracker.clearTagNotification(self.tag)
     }
     
+    func updateComments() {
+        self.tableController.reloadComments()
+    }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.postMessage(self)
         return true

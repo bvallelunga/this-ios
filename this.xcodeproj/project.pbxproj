@@ -72,6 +72,7 @@
 		D3E2932C1C1C279B00925EAC /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E2932B1C1C279B00925EAC /* PageController.swift */; };
 		D3E49ECD1C33ECF1003B367B /* Bariol_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3E49ECB1C33ECF1003B367B /* Bariol_Bold.ttf */; };
 		D3E49ECE1C33ECF1003B367B /* Bariol_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3E49ECC1C33ECF1003B367B /* Bariol_Regular.ttf */; };
+		D3E49ED01C34DCE4003B367B /* PhotoQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E49ECF1C34DCE4003B367B /* PhotoQueue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +170,7 @@
 		D3E2932B1C1C279B00925EAC /* PageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
 		D3E49ECB1C33ECF1003B367B /* Bariol_Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Bariol_Bold.ttf; path = Fonts/Bariol_Bold.ttf; sourceTree = SOURCE_ROOT; };
 		D3E49ECC1C33ECF1003B367B /* Bariol_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Bariol_Regular.ttf; path = Fonts/Bariol_Regular.ttf; sourceTree = SOURCE_ROOT; };
+		D3E49ECF1C34DCE4003B367B /* PhotoQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoQueue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,6 +315,7 @@
 				D3C958D61C2A94E700B6EE9D /* User.swift */,
 				D33B13DB1C2AA2A000C54DB9 /* Tag.swift */,
 				D33B13DD1C2AA2E600C54DB9 /* Photo.swift */,
+				D3E49ECF1C34DCE4003B367B /* PhotoQueue.swift */,
 				D33B13DF1C2AA36300C54DB9 /* Comment.swift */,
 				D39AB7441C1FAE2900C9E96F /* Contact.swift */,
 			);
@@ -700,6 +703,7 @@
 				D3224A6A1C1AADA3009DFA85 /* AppDelegate.swift in Sources */,
 				D370FE7B1C211CA200769EBA /* FollowingSpacerCell.swift in Sources */,
 				D31F09B21C29017600FD61A0 /* ProfileHeaderController.swift in Sources */,
+				D3E49ED01C34DCE4003B367B /* PhotoQueue.swift in Sources */,
 				D370FE731C2102FC00769EBA /* FollowingController.swift in Sources */,
 				D3E293181C1BA92900925EAC /* ProgressBar.swift in Sources */,
 				D3690AE21C3357C70090380E /* AuthStepNotifications.swift in Sources */,

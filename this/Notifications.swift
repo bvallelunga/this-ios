@@ -60,15 +60,16 @@ class Notifications: NSObject {
         
         StateTracker.setTagNotification(tag)
         
-        guard let message = info["message"] as? String else {
-            return
-        }
-        
         if let name = info["tagName"] as? String {
             tag.name = name
         }
         
         if wasActive {
+            guard let message = info["message"] as? String else {
+                Globals.commentsTag(tag)
+                return
+            }
+            
             NavNotification.show(message, color: Colors.purple, callback: { () -> Void in
                 Globals.viewTag(tag)
             })
@@ -77,13 +78,13 @@ class Notifications: NSObject {
         }
     }
     
-    class func sendPush(query: PFQuery, let data: [NSObject : AnyObject]) {
+    class func sendPush(query: PFQuery, let data: [NSObject : AnyObject]) -> BFTask {
         let push = PFPush()
         
         push.setQuery(query)
         push.setData(data)
     
-        push.sendPushInBackground()
+        return push.sendPushInBackground()
     }
     
     // Instance Methods

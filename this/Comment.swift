@@ -29,28 +29,28 @@ class Comment: PFObject, PFSubclassing {
         comment.tag = tag
         comment.user = user
         comment.from = user.screenname
-        comment.saveInBackgroundWithBlock { (success, error) -> Void in
-            if success {
-                tag.comments.addObject(comment)
-                tag.saveInBackground()
-            } else {
-                ErrorHandler.handleParse(error)
-            }
+        
+        comment.saveInBackground().continueWithSuccessBlock { (task) -> AnyObject? in
+            tag.comments.addObject(comment)
+            
+            return tag.saveInBackground()
+        }.continueWithSuccessBlock { (task) -> AnyObject? in
+            let query = Installation.query()
+            
+            query?.whereKey("user", matchesQuery: tag.followers.query())
+            query?.whereKey("user", notEqualTo: user)
+            
+            return Notifications.sendPush(query!, data: [
+                "badge": "Increment",
+                "actions": "viewTag",
+                "tagID": tag.objectId!,
+                "tagName": tag.name,
+                "alert": "\(user.name): \(message)"
+            ])
+        }.continueWithBlock { (task) -> AnyObject? in
+            ErrorHandler.handleParse(task.error)
+            return nil
         }
-        
-        // Send Push Notification
-        let query = Installation.query()
-        
-        query?.whereKey("user", matchesQuery: tag.followers.query())
-        query?.whereKey("user", notEqualTo: user)
-        
-        Notifications.sendPush(query!, data: [
-            "badge": "Increment",
-            "actions": "viewTag",
-            "tagID": tag.objectId!,
-            "tagName": tag.name,
-            "alert": "\(user.name): \(message)"
-        ])
         
         return comment
     }

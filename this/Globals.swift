@@ -106,4 +106,14 @@ class Globals: NSObject {
         }
     }
     
+    class func commentsTag(tag: Tag) {
+        guard let controller = Globals.tagController else {
+            return
+        }
+        
+        if controller.tag.objectId == tag.objectId {
+            controller.updateComments()
+        }
+    }
+    
 }

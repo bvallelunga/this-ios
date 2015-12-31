@@ -201,40 +201,51 @@ class Tag: PFObject, PFSubclassing {
         let expireAt = NSCalendar.currentCalendar()
             .dateByAddingUnit(.Day, value: timer, toDate: NSDate(), options: [])!
         
-        self.followers.addObject(user)
-        
-        for image in images {
-            let photo = Photo.create(user, image: image, tag: self, expireAt: expireAt, callback: { (photo) -> Void in
-                self.photos.addObject(photo)
-                
-                if images.last == image {
-                    self.saveInBackgroundWithBlock { (success, error) -> Void in
-                        if success {
-                            callback()
-                        } else {
-                            ErrorHandler.handleParse(error)
-                        }
-                    }
-                }
-            })
+        let photos: [Photo] = images.map { (image) -> Photo in
+            let photo = Photo.create(user, image: image, tag: self, expireAt: expireAt)
             
             self.photosCached.addObject(photo)
+            
+            return photo
         }
         
-        // Send Push Notification
-        let query = Installation.query()
-        
-        query?.whereKey("user", matchesQuery: self.followers.query())
-        query?.whereKey("user", notEqualTo: user)
-        
-        Notifications.sendPush(query!, data: [
-            "badge": "Increment",
-            "actions": "viewTag",
-            "tagID": self.objectId!,
-            "tagName": self.name,
-            "message": "New photos in \(self.hashtag)",
-            "alert": "\(user.name) posted to \(self.hashtag)"
-        ])
+        Photo.saveAllInBackground(photos).continueWithSuccessBlock { (task) -> AnyObject? in
+            self.followers.addObject(user)
+            
+            for photo in photos {
+                let data = UIImageJPEGRepresentation(photo.originalCached, 0.7)!
+                
+                self.photos.addObject(photo)
+                
+                PhotoQueue.queue.enqueueTaskWithName("photoUpload", userInfo: [
+                    "photo": photo.objectId!,
+                    "image": data.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+                ])
+            }
+
+            return self.saveInBackground()
+        }.continueWithSuccessBlock { (task) -> AnyObject? in
+            // Callback
+            callback()
+            
+            // Send Push Notification
+            let query = Installation.query()
+            
+            query?.whereKey("user", matchesQuery: self.followers.query())
+            query?.whereKey("user", notEqualTo: user)
+            
+            return Notifications.sendPush(query!, data: [
+                "badge": "Increment",
+                "actions": "viewTag",
+                "tagID": self.objectId!,
+                "tagName": self.name,
+                "message": "New photos in \(self.hashtag)",
+                "alert": "\(user.name) posted to \(self.hashtag)"
+            ])
+        }.continueWithBlock { (task) -> AnyObject? in
+            ErrorHandler.handleParse(task.error)
+            return nil
+        }
     }
     
 }

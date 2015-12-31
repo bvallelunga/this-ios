@@ -54,7 +54,7 @@ class AuthStepVerify: AuthStep {
             if ++self.trys < 2 {
                 NavNotification.show("Invalid Code 😔")
             } else {
-                NavNotification.show("Is your number correct?")
+                NavNotification.show("Is this your number?")
                 self.parentController.backTriggered(self)
                 self.trys = 0
             }

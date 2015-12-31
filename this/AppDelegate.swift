@@ -67,6 +67,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Configure Settings Panel
         StateTracker.appVersion = Globals.appVersionBuild()
         
+        // Startup Photo Queue
+        PhotoQueue.startup()
+        
         return true
     }
     

@@ -6,6 +6,11 @@ PODS:
   - CSStickyHeaderFlowLayout (0.2.10)
   - CWStatusBarNotification (2.3.3)
   - FLAnimatedImage (1.0.10)
+  - FMDB (2.5):
+    - FMDB/standard (= 2.5)
+  - FMDB/common (2.5)
+  - FMDB/standard (2.5):
+    - FMDB/common
   - FormatterKit (1.8.0):
     - FormatterKit/AddressFormatter (= 1.8.0)
     - FormatterKit/ArrayFormatter (= 1.8.0)
@@ -26,6 +31,8 @@ PODS:
   - FormatterKit/UnitOfInformationFormatter (1.8.0)
   - FormatterKit/URLRequestFormatter (1.8.0)
   - JSQWebViewController (2.0.1)
+  - KTBTaskQueue (1.0.1):
+    - FMDB (~> 2.0)
   - libPhoneNumber-iOS (0.8.10)
   - LLSimpleCamera (4.0.0)
   - Mixpanel (2.9.1):
@@ -49,6 +56,7 @@ DEPENDENCIES:
   - FLAnimatedImage (~> 1.0)
   - FormatterKit (~> 1.8)
   - JSQWebViewController (~> 2.0)
+  - KTBTaskQueue (~> 1.0)
   - libPhoneNumber-iOS (~> 0.8)
   - LLSimpleCamera (~> 4.0)
   - Mixpanel (~> 2.8)
@@ -67,8 +75,10 @@ SPEC CHECKSUMS:
   CSStickyHeaderFlowLayout: 5366582779d8b7c9ba9b9cc729c218cc23888776
   CWStatusBarNotification: 2349142e97c9f16fb8247ed3c00308cd355d334b
   FLAnimatedImage: e16a1e1cef08e4c509b47e4acbe3923f65c16135
+  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
   JSQWebViewController: 2e416ae6604676510812bbda050d63a1488003a4
+  KTBTaskQueue: cfa9fde2a0882a67f423dfe8b29c3d976358d8e7
   libPhoneNumber-iOS: 7bfd00f843fdcd82b5182b463e8eb3b27579f41d
   LLSimpleCamera: 4acecd6fabca1cb5841302ee03e03123e290af3d
   Mixpanel: 5ca24b2a05f4c77fe9bcfe7671d681d0f3f8d76f

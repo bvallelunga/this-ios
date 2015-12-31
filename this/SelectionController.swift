@@ -19,6 +19,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     SelectionHeaderDelegate, ShareControllerDelegate {
     
     private var tag: Tag!
+    private var timer: Int!
     private let manager = PHCachingImageManager()
     private var assets: [PHAsset] = []
     private var selected: [PHAsset: UIImage] = [:]
@@ -238,7 +239,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! SelectionPhotoCell
         
         if !cell.upload && self.config != nil && self.selectedOrder.count >= self.config.uploadLimit {
-            NavNotification.show("Too Many Photos 😉")
+            NavNotification.show("Isn't \(self.config.uploadLimit) photos enough?")
             return
         }
         
@@ -272,12 +273,15 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     }
     
     func shareControllerCancelled() {
-        self.reset()
         self.navigationController?.popViewControllerAnimated(true)
     }
     
     func shareControllerShared(count: Int) {
         Globals.viewTag(self.tag) { () -> Void in
+            self.tag.postImages(self.timer, user: self.user, images: Array(self.selected.values)) { () -> Void in
+                Globals.followingController?.reloadTags()
+            }
+
             self.reset()
             self.navigationController?.popViewControllerAnimated(false)
         }
@@ -306,13 +310,11 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         SVProgressHUD.show()
         
         Tag.findOrCreate(hashtag) { (tag) -> Void in
-            tag.postImages(timer, user: self.user, images: Array(self.selected.values)) { () -> Void in
-                Globals.followingController?.reloadTags()
-            }
-            
             SVProgressHUD.dismiss()
             
             self.tag = tag
+            self.timer = timer
+            
             self.performSegueWithIdentifier("share", sender: self)
         }
     }
@@ -320,14 +322,14 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     // MARK: UIImagePickerController Methods
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         UIImageWriteToSavedPhotosAlbum(image, self, "image:didFinishSavingWithError:contextInfo:", nil)
+        self.imagePickerControllerDidCancel(picker)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         self.dismissViewControllerAnimated(true) { () -> Void in
             let cell = self.collectionView?.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)) as! SelectionCameraCell
             cell.activateCamera()
         }
-    }
-    
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
 }
