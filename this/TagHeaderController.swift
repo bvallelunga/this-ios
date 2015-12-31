@@ -227,7 +227,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         self.photoViewer.delegate = self
         self.photoViewer.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Stop,
             target: self.photoViewer, action: Selector("doneButtonTapped:"))
-        self.photoViewer.rightBarButtonItem = UIBarButtonItem(title: "Flag", style: .Plain,
+        self.photoViewer.rightBarButtonItem = UIBarButtonItem(title: "FLAG", style: .Plain,
             target: self.photoViewer, action: Selector("actionButtonTapped:"))
         self.presentViewController(self.photoViewer, animated: true, completion: nil)
         
