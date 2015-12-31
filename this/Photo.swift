@@ -15,6 +15,7 @@ class Photo: PFObject, PFSubclassing {
     @NSManaged var from: String
     @NSManaged var user: User
     @NSManaged var tag: Tag
+    @NSManaged var flagged: Bool
     @NSManaged var thumbnail: PFFile
     @NSManaged var original: PFFile
     @NSManaged var expireAt: NSDate
@@ -34,6 +35,7 @@ class Photo: PFObject, PFSubclassing {
         photo.tag = tag
         photo.expireAt = expireAt
         photo.originalCached = image
+        photo.flagged = false
         
         photo.saveInBackgroundWithBlock { (success, error) -> Void in
             guard success else {
@@ -62,6 +64,11 @@ class Photo: PFObject, PFSubclassing {
     }
 
     // Instance Method
+    func flag() {
+        self.flagged = true
+        self.saveInBackground()
+    }
+    
     func fetchThumbnail(callback: (image: UIImage) -> Void) {
         guard let url = self.thumbnail.url else {
             if let image = self.originalCached {

@@ -27,6 +27,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     private var images: [Photo: UIImage] = [:]
     private var user = User.current()
     private var following: Bool!
+    private var photoViewer: NYTPhotosViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +63,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         self.photos.removeAll()
         self.collectionView.reloadData()
         
+        self.photoViewer?.performSelector(Selector("doneButtonTapped:"), withObject: self)
         
         self.tag.photos { (photos) -> Void in
             self.photos = photos
@@ -204,7 +206,6 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         
         var galleryPhotos: [GalleryPhoto] = []
         var intialPhoto: GalleryPhoto!
-        var controller: NYTPhotosViewController!
         
         for (i, photo) in self.photos.enumerate() {
             if let thumbnail = self.images[photo] {
@@ -222,13 +223,16 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         }
         
         
-        controller = NYTPhotosViewController(photos: galleryPhotos, initialPhoto: intialPhoto)
-        controller.delegate = self
-        controller.leftBarButtonItem.title = "Done"
-        self.presentViewController(controller, animated: true, completion: nil)
+        self.photoViewer = NYTPhotosViewController(photos: galleryPhotos, initialPhoto: intialPhoto)
+        self.photoViewer.delegate = self
+        self.photoViewer.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Stop,
+            target: self.photoViewer, action: Selector("doneButtonTapped:"))
+        self.photoViewer.rightBarButtonItem = UIBarButtonItem(title: "Flag", style: .Plain,
+            target: self.photoViewer, action: Selector("actionButtonTapped:"))
+        self.presentViewController(self.photoViewer, animated: true, completion: nil)
         
         if intialPhoto != nil {
-            controller.delegate?.photosViewController?(controller, didDisplayPhoto: intialPhoto,
+            self.photoViewer.delegate?.photosViewController?(self.photoViewer, didDisplayPhoto: intialPhoto,
                 atIndex: UInt(intialPhoto.indexPath.row))
         }
     }
@@ -247,16 +251,32 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     }
     
     func photosViewController(photosViewController: NYTPhotosViewController!, handleActionButtonTappedForPhoto photo: NYTPhoto!) -> Bool {
-        let galleryPhoto = photo as! GalleryPhoto
+        let controller = UIAlertController(title: "Flag Photo",
+            message: "Please confirm that this photo violates our community guidelines?",
+            preferredStyle: UIAlertControllerStyle.Alert)
         
-        galleryPhoto.photo.fetchOriginal({ (image) -> Void in
-            let text = String(format: self.config.photoMessage, String(galleryPhoto.user), self.tag.hashtag)
-            let controller = ShareGenerator.share(text, image: galleryPhoto.image)
+        controller.addAction(UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Destructive) { (action) -> Void in
+            let galleryPhoto = photo as? GalleryPhoto
             
-            photosViewController.presentViewController(controller, animated: true, completion: nil)
+            galleryPhoto!.photo.flag()
+            
+            self.tag.removeCachedPhoto(galleryPhoto!.photo)
+            self.images.removeValueForKey(galleryPhoto!.photo)
+            self.collectionView.reloadData()
+            Globals.followingController.reloadTags()
+            
+            photosViewController.performSelector(Selector("doneButtonTapped:"), withObject: self)
         })
         
+        controller.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        
+        photosViewController.presentViewController(controller, animated: true, completion: nil)
+        
         return true
+    }
+    
+    func photosViewControllerDidDismiss(photosViewController: NYTPhotosViewController!) {
+        self.photoViewer = nil
     }
     
     func photosViewController(photosViewController: NYTPhotosViewController!, referenceViewForPhoto photo: NYTPhoto!) -> UIView! {

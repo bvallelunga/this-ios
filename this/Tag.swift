@@ -21,7 +21,7 @@ class Tag: PFObject, PFSubclassing {
     @NSManaged var commentCount: Int
     
     var arePhotosCached: Bool = false
-    var photosCached: [Photo] = []
+    var photosCached: NSMutableArray = []
     
     var hashtag: String {
         guard self.dataAvailable else {
@@ -84,6 +84,10 @@ class Tag: PFObject, PFSubclassing {
     }
     
     // Instance Methods
+    func removeCachedPhoto(photo: Photo) {
+        self.photosCached.removeObjectIdenticalTo(photo)
+    }
+    
     func invite(sender: User, users: [User]) {
         for user in users {
             self.followers.addObject(user)
@@ -158,18 +162,19 @@ class Tag: PFObject, PFSubclassing {
     
     func photos(limit: Int! = nil, callback: (photos: [Photo]) -> Void) {
         if self.arePhotosCached {
-            callback(photos: self.photosCached)
+            callback(photos: Array(self.photosCached) as! [Photo])
             return
         }
         
-        if !self.photosCached.isEmpty {
-            callback(photos: self.photosCached)
+        if self.photosCached.count > 0 {
+            callback(photos: Array(self.photosCached) as! [Photo])
         }
         
         let query = self.photos.query()
         
         query.whereKeyExists("original")
         query.whereKeyExists("thumbnail")
+        query.whereKey("flagged", notEqualTo: true)
         query.whereKey("expireAt", greaterThan: NSDate())
         
         query.addAscendingOrder("createdAt")
@@ -179,13 +184,13 @@ class Tag: PFObject, PFSubclassing {
         }
         
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            if let photos = objects as? [Photo] {
+            if let photos = objects as? [Photo] {                
                 if self.photosCached.count < photos.count {
-                    self.photosCached = photos
+                    self.photosCached = NSMutableArray(array: photos)
                     self.arePhotosCached = limit == nil
                 }
 
-                callback(photos: self.photosCached)
+                callback(photos: Array(self.photosCached) as! [Photo])
             } else {
                 ErrorHandler.handleParse(error)
             }
@@ -213,7 +218,7 @@ class Tag: PFObject, PFSubclassing {
                 }
             })
             
-            self.photosCached.append(photo)
+            self.photosCached.addObject(photo)
         }
         
         // Send Push Notification
