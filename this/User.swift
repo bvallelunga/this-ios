@@ -122,7 +122,7 @@ class User: PFUser {
             "Parse ID": self.objectId!,
             "$name": self.fullName,
             "$phone": self.phone,
-            "$username": self.username!,g
+            "$username": self.username!,
             "Profile Picture": self.photo.url != nil
         ])
     }
@@ -133,7 +133,7 @@ class User: PFUser {
         
         self.saveInBackgroundWithBlock { (success, error) -> Void in
             if success {
-                Globals.imageStorage.setImage(image, forKey: self.photo.url, diskOnly: false)
+                Globals.imageDownloader.setImage(image, forURL: NSURL(string: self.photo.url!))
             } else {
                 ErrorHandler.handleParse(error)
             }

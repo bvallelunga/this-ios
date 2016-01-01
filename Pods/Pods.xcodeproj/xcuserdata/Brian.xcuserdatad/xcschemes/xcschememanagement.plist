@@ -4,16 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Alamofire.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>AlamofireImage.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -40,6 +30,11 @@
 			<false/>
 		</dict>
 		<key>FormatterKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>JMImageCache.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -79,11 +74,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>PBImageStorage.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -117,21 +107,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0EFAA48D4B78C0DB8A10E4F5B9C75093</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1D20A55511810B10A107C81385F2FC50</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>21D7C098B238F385A775ECF4892C3AC7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>230F06C649365BFB9A3B54AAE6CD35CE</key>
 		<dict>
 			<key>primary</key>
@@ -147,17 +122,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>2D516694A53893E72FE93EB36B537FF7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>30C445E6D8703D94CB06D42EB47820DE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>3C2B38B45299C2DCAFCE761BB370B1DB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>432ECC54282C84882B482CCB4CF227FC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -177,7 +152,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A1BF58736B6CCECB5DB30E2108366143</key>
+		<key>7C535947E70877E2B171723D84C69E85</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8916206496D05BB0ED7C420181F7EE6A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -217,7 +197,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E8949630F823B9834C8357F4E53D2E3C</key>
+		<key>E53D213AE4D7E03D24B573C9A9584AB0</key>
 		<dict>
 			<key>primary</key>
 			<true/>

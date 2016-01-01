@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'A2B88CD6DDBA80E150F88AD1'
-               BlueprintName = 'LLSimpleCamera'
+               BlueprintIdentifier = 'F955D810C63D7210CBF2B859'
+               BlueprintName = 'JMImageCache'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'LLSimpleCamera.framework'>
+               BuildableName = 'JMImageCache.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

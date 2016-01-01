@@ -229,6 +229,9 @@ class Tag: PFObject, PFSubclassing {
             // Callback
             callback()
             
+            // Update Mixpanel
+            Globals.mixpanel.people.increment("Photos", by: images.count)
+            
             // Send Push Notification
             let query = Installation.query()
             
@@ -243,9 +246,6 @@ class Tag: PFObject, PFSubclassing {
                 "message": "New photos in \(self.hashtag)",
                 "alert": "\(user.name) posted to \(self.hashtag)"
             ])
-            
-            // Update Mixpanel
-            Globals.mixpanel.people.increment("Photos", by: images.count)
         }.continueWithBlock { (task) -> AnyObject? in
             ErrorHandler.handleParse(task.error)
             return nil

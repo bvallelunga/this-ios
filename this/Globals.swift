@@ -6,10 +6,9 @@
 //  Copyright © 2015 Brian Vallelunga. All rights reserved.
 //
 
-import AlamofireImage
 import FormatterKit
-import PBImageStorage
 import Mixpanel
+import JMImageCache
 
 class Globals: NSObject {
     
@@ -24,13 +23,7 @@ class Globals: NSObject {
     
     static let mixpanel = Mixpanel.sharedInstance()
     static let infoDictionary = NSBundle.mainBundle().infoDictionary!
-    static let imageStorage = PBImageStorage(namespace: "imageAssets")
-    static let imageDownloader = ImageDownloader(
-        configuration: ImageDownloader.defaultURLSessionConfiguration(),
-        downloadPrioritization: .FIFO,
-        maximumActiveDownloads: 8,
-        imageCache: nil
-    )
+    static let imageDownloader = JMImageCache.sharedCache()
     
     class func delay(delay:Double, closure:()->()) {
         dispatch_after(
@@ -50,26 +43,9 @@ class Globals: NSObject {
     class func fetchImage(url: String, callback: (image: UIImage) -> Void) {
         Globals.mixpanel.timeEvent("Mobile.Fetch Photo")
         
-        let request = NSURLRequest(URL: NSURL(string: url)!)
-        
-        if let image = self.imageStorage.imageForKey(url) {
+        self.imageDownloader.imageForURL(NSURL(string: url)) { (image) -> Void in
             callback(image: image)
-            Globals.mixpanel.track("Mobile.Fetch Photo", properties: [
-                "cached": true
-            ])
-            return
-        }
-
-        self.imageDownloader.downloadImage(URLRequest: request) { response in
-            if let image: UIImage = response.result.value {
-                callback(image: image)
-                self.imageStorage.setImage(image, forKey: url, diskOnly: false)
-                Globals.mixpanel.track("Mobile.Fetch Photo", properties: [
-                    "cached": false
-                ])
-            } else {
-                print(response)
-            }
+            Globals.mixpanel.track("Mobile.Fetch Photo")
         }
     }
     

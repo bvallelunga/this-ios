@@ -49,7 +49,7 @@ class PhotoQueue: NSObject, KTBTaskQueueDelegate  {
                 return
             }
             
-            Globals.imageStorage.setImage(image, forKey: file.url, diskOnly: false)
+            Globals.imageDownloader.setImage(image, forURL: NSURL(string: file.url!))
             completion(KTBTaskStatus.Success)
         })
     }

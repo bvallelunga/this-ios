@@ -93,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidReceiveMemoryWarning(application: UIApplication) {
-        Globals.imageStorage.clearMemory()
+        Globals.imageDownloader.removeAllObjects()
     }
 
     func applicationWillEnterForeground(application: UIApplication) {

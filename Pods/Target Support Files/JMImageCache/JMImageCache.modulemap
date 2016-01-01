@@ -1,0 +1,6 @@
+framework module JMImageCache {
+  umbrella header "JMImageCache-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,6 +1,0 @@
-framework module PBImageStorage {
-  umbrella header "PBImageStorage-umbrella.h"
-
-  export *
-  module * { export * }
-}
