@@ -122,7 +122,7 @@ class User: PFUser {
             "Parse ID": self.objectId!,
             "$name": self.fullName,
             "$phone": self.phone,
-            "$username": self.username!,
+            "$username": self.username!,g
             "Profile Picture": self.photo.url != nil
         ])
     }
