@@ -32,14 +32,14 @@ class TrendingController: UITableViewController {
         
         self.refreshControl?.tintColor = UIColor.lightGrayColor()
         self.refreshControl?.addTarget(self, action: Selector("reloadTags"), forControlEvents: UIControlEvents.ValueChanged)
-        
-        // Core Setup
-        Globals.trendingController = self
-        Globals.mixpanel.track("Mobile.Tags.Trending")
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        // Core Setup
+        Globals.trendingController = self
+        Globals.mixpanel.track("Mobile.Tags.Trending")
         
         if self.date == nil || self.tags.isEmpty || NSCalendar.currentCalendar().components(.Minute, fromDate: self.date, toDate: NSDate(), options: []).minute > 10 {
             self.reloadTags()

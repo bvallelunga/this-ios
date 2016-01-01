@@ -38,14 +38,14 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
         self.refreshControl.tintColor = UIColor.lightGrayColor()
         self.refreshControl.addTarget(self, action: Selector("reloadTags"), forControlEvents: UIControlEvents.ValueChanged)
         self.collectionView?.insertSubview(self.refreshControl, atIndex: 0)
-        
-        // Core Setup
-        Globals.followingController = self
-        Globals.mixpanel.track("Mobile.Tags.Following")
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        // Core Setup
+        Globals.followingController = self
+        Globals.mixpanel.track("Mobile.Tags.Following")
         
         if self.date == nil || self.tags.isEmpty || NSCalendar.currentCalendar().components(.Minute, fromDate: self.date, toDate: NSDate(), options: []).minute > 1 {
             self.reloadTags()

@@ -54,11 +54,14 @@ class TagsController: UIViewController {
         
         // Update Containers
         self.segmentChanged(self)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
         // Core Setup
         Globals.tagsController = self
         Globals.mixpanel.track("Mobile.Tags")
-
     }
 
     // MARK: - Navigation

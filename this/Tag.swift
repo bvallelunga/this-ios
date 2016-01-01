@@ -24,7 +24,7 @@ class Tag: PFObject, PFSubclassing {
     var photosCached: NSMutableArray = []
     
     var hashtag: String {
-        guard self.dataAvailable else {
+        guard self.dataAvailable || !self.name.isEmpty else {
             return ""
         }
         

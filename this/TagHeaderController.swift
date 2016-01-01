@@ -194,7 +194,6 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         self.pageControl.numberOfPages = Int(ceil(Double(self.images.count)/12))
-        
         return self.images.count
     }
     

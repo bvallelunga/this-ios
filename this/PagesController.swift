@@ -22,9 +22,6 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set Global
-        Globals.pagesController = self
-        
         // Create Page View Controller
         self.view.backgroundColor = UIColor.clearColor()
         self.dataSource = self
@@ -58,6 +55,13 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
         self.setActiveController(self.startPage, animated: false, direction: .Forward)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Set Global
+        Globals.pagesController = self
+    }
+    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
@@ -74,18 +78,18 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
     func setActiveController(index: Int, animated: Bool = true, direction: UIPageViewControllerNavigationDirection, callback: (() -> Void)! = nil) {
         let controller = self.viewControllerAtIndex(index)
         
-        self.unlockPageView()
-        
         if self.currentPage == index && controller != nil {
             callback?()
             return
         }
         
-        self.setViewControllers([
-            self.viewControllerAtIndex(index)
-        ], direction: direction, animated: animated, completion: { (success: Bool) -> Void in
+        self.unlockPageView()
+        
+        self.setViewControllers([controller], direction: direction, animated: animated, completion: { (success: Bool) -> Void in
+            if success {
                 self.currentPage = index
                 callback?()
+            }
         })
     }
     

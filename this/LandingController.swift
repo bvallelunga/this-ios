@@ -92,10 +92,6 @@ class LandingController: UIViewController, TTTAttributedLabelDelegate {
         SVProgressHUD.setBackgroundColor(Colors.darkGrey)
         SVProgressHUD.setForegroundColor(UIColor.whiteColor())
         SVProgressHUD.setFont(UIFont(name: "Bariol-Bold", size: 22))
-        
-        // Core Setup
-        Globals.landingController = self
-        Globals.mixpanel.track("Mobile.Landing")
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -110,6 +106,10 @@ class LandingController: UIViewController, TTTAttributedLabelDelegate {
         super.viewDidAppear(animated)
         
         self.player.play()
+        
+        // Core Setup
+        Globals.landingController = self
+        Globals.mixpanel.track("Mobile.Landing")
     }
     
     override func viewDidDisappear(animated: Bool) {

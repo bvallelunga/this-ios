@@ -60,11 +60,6 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         self.loadContacts()
         self.headerController.updateNextButtonTitle(false)
         
-        Globals.mixpanel.track("Mobile.Invite", properties: [
-            "tag": self.tag.name,
-            "images": self.images.count
-        ])
-        
         Config.sharedInstance { (config) -> Void in
             self.config = config
         }
@@ -73,8 +68,13 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        Globals.pagesController.lockPageView()
         self.headerFrame = self.headerController.view.frame
+        
+        Globals.pagesController.lockPageView()
+        Globals.mixpanel.track("Mobile.Invite", properties: [
+            "tag": self.tag.name,
+            "images": self.images.count
+        ])
     }
     
     override func viewDidDisappear(animated: Bool) {

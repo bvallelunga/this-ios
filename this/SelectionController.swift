@@ -41,8 +41,6 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         self.getAssests()
         
         // Core Setup
-        Globals.selectionController = self
-        Globals.mixpanel.track("Mobile.Selection")
         Config.sharedInstance { (config) -> Void in
             self.config = config
         }
@@ -52,6 +50,9 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         super.viewDidAppear(animated)
         
         self.header?.placeholderView?.startAnimating()
+        
+        Globals.selectionController = self
+        Globals.mixpanel.track("Mobile.Selection")
     }
     
     override func viewDidDisappear(animated: Bool) {
