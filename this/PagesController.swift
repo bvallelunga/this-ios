@@ -54,10 +54,6 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
         
         self.didMoveToParentViewController(self)
         
-        // Remove Text From Back Button
-        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(-1000, -1000),
-            forBarMetrics: UIBarMetrics.Default)
-        
         // Set Start Page
         self.setActiveController(self.startPage, animated: false, direction: .Forward)
     }

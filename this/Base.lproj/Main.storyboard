@@ -47,14 +47,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="r00-y0-EKo">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="r00-y0-EKo" customClass="TTTAttributedLabel">
                                 <rect key="frame" x="20" y="540" width="560" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="0Hp-RX-eTf"/>
                                 </constraints>
-                                <string key="text">By signing up you agree to the Terms of Service 
+                                <string key="text">By signing up you agree to our Terms of Service 
 and Privacy Policy.</string>
-                                <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="13"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>

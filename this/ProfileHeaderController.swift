@@ -29,10 +29,6 @@ class ProfileHeaderController: UIViewController, UIImagePickerControllerDelegate
         self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationBar.shadowImage = UIImage()
         
-        // Remove Text From Back Button
-        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(-1000, -1000),
-            forBarMetrics: UIBarMetrics.Default)
-        
         self.avatarBorder.borderColor = UIColor(white: 0, alpha: 0.2).CGColor
         self.avatarBorder.borderWidth = 2
         

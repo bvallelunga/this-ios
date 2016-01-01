@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '9F33E9F0A40C5ADA96380380'
+               BlueprintIdentifier = 'F650B82E214DA148EFC3039A'
                BlueprintName = 'KTBTaskQueue'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'KTBTaskQueue.framework'>

@@ -49,15 +49,13 @@ class Tag: PFObject, PFSubclassing {
     class func findOrCreate(name: String, callback: (tag: Tag) -> Void) {
         let query = Tag.query()
         
-        query?.whereKey("name", equalTo: name.lowercaseString)
+        query?.whereKey("name", equalTo: name)
         
         query?.getFirstObjectInBackgroundWithBlock({ (object, error) -> Void in
             if let tag = object as? Tag {
-                callback(tag: tag)
-                return
+                callback(tag: tag); return
             } else if error?.code != PFErrorCode.ErrorObjectNotFound.rawValue {
-                ErrorHandler.handleParse(error)
-                return
+                ErrorHandler.handleParse(error); return
             }
             
             let tag = Tag()

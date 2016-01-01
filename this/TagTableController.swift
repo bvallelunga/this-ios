@@ -202,7 +202,7 @@ class TagTableController: UITableViewController {
         }
         
         let controller = UIAlertController(title: "Flag Comment",
-            message: "Please confirm that this comment violates our community guidelines?",
+            message: "Please confirm that this comment should be flagged.",
             preferredStyle: UIAlertControllerStyle.Alert)
         
         controller.addAction(UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Destructive) { (action) -> Void in

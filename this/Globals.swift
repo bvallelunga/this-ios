@@ -9,6 +9,7 @@
 import FormatterKit
 import Mixpanel
 import JMImageCache
+import JSQWebViewController
 
 class Globals: NSObject {
     
@@ -98,6 +99,44 @@ class Globals: NSObject {
         if controller.tag.objectId == tag.objectId {
             controller.updateComments()
         }
+    }
+    
+    class func presentBrowser(url: NSURL, sender: UIViewController) {
+        let controller = WebViewController(url: url)
+        let nav = UINavigationController(rootViewController: controller)
+        
+        // Configure Controller
+        controller.displaysWebViewTitle = true
+        controller.progressBar.tintColor = Colors.blue
+        controller.webView.backgroundColor = UIColor.whiteColor()
+        controller.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonSystemItem.Stop,
+            target: controller,
+            action: Selector("didTapDoneButton:"))
+        
+        // Create Text Shadow
+        let shadow = NSShadow()
+        shadow.shadowColor = UIColor(white: 0, alpha: 0.1)
+        shadow.shadowOffset = CGSizeMake(0, 1);
+        
+        // Add Bottom Border To Nav Bar
+        if let frame = controller.navigationController?.navigationBar.frame {
+            let navBorder = UIView(frame: CGRectMake(0, frame.height-1, frame.width, 1))
+            navBorder.backgroundColor = UIColor(white: 0, alpha: 0.2)
+            nav.navigationBar.addSubview(navBorder)
+        }
+        
+        // Set Colors & Fonts
+        nav.navigationBar.tintColor = UIColor.whiteColor()
+        nav.navigationBar.barTintColor = Colors.blue
+        nav.navigationBar.barStyle = .Black
+        nav.navigationBar.titleTextAttributes = [
+            NSForegroundColorAttributeName: UIColor.whiteColor(),
+            NSFontAttributeName: UIFont(name: "Bariol-Bold", size: 28)!,
+            NSShadowAttributeName: shadow
+        ]
+        
+        sender.presentViewController(nav, animated: true, completion: nil)
     }
     
 }

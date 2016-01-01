@@ -97,7 +97,8 @@ class ProfileController: UITableViewController {
     }
     
     @IBAction func signoutTriggered(sender: AnyObject) {
-        let controller = UIAlertController(title: "You Sure?", message: nil, preferredStyle: .Alert)
+        let controller = UIAlertController(title: "You Sure?",
+            message: "If you really have to leave I understand. Your account will still be here when you want to login.", preferredStyle: .Alert)
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         let save = UIAlertAction(title: "Sign Out", style: .Destructive) { (action) -> Void in
             User.logOut()
@@ -155,27 +156,20 @@ class ProfileController: UITableViewController {
     
     func FAQs() {
         let url = NSURL(string: self.config.faqsURL)
-        self.presentBrowser(url!)
+        Globals.presentBrowser(url!, sender: self)
         Globals.mixpanel.track("Mobile.Settings.FAQs")
     }
     
     func privacyPolicy() {
         let url = NSURL(string: self.config.privacyURL)
-        self.presentBrowser(url!)
+        Globals.presentBrowser(url!, sender: self)
         Globals.mixpanel.track("Mobile.Settings.Privacy Policys")
     }
     
     func termsOfService() {
         let url = NSURL(string: self.config.termsURL)
-        self.presentBrowser(url!)
+        Globals.presentBrowser(url!, sender: self)
         Globals.mixpanel.track("Mobile.Settings.TOS")
-    }
-    
-    func presentBrowser(url: NSURL) {
-        let controller = WebViewController(url: url)
-        let nav = UINavigationController(rootViewController: controller)
-        
-        self.presentViewController(nav, animated: true, completion: nil)
     }
     
     func presentShare(network: String) {

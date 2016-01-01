@@ -293,7 +293,7 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     
     func photosViewController(photosViewController: NYTPhotosViewController!, handleActionButtonTappedForPhoto photo: NYTPhoto!) -> Bool {
         let controller = UIAlertController(title: "Flag Photo",
-            message: "Please confirm that this photo violates our community guidelines?",
+            message: "Please confirm that this photo should be flagged.",
             preferredStyle: UIAlertControllerStyle.Alert)
         
         controller.addAction(UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Destructive) { (action) -> Void in

@@ -10,17 +10,24 @@ import UIKit
 import AVFoundation
 import AVKit
 import SVProgressHUD
+import TTTAttributedLabel
 
-class LandingController: UIViewController {
+class LandingController: UIViewController, TTTAttributedLabelDelegate {
     
     @IBOutlet weak var logoLabel: UILabel!
     @IBOutlet weak var button: UIButton!
-    @IBOutlet weak var legalLabel: UILabel!
+    @IBOutlet weak var legalLabel: TTTAttributedLabel!
     
     var player: AVPlayer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Check If User Is Logged In
+        if let user = User.current() {
+            self.performSegueWithIdentifier("next", sender: self)
+            Installation.setUser(user)
+        }
 
         // Setup Logo
         self.logoLabel.shadowColor = UIColor(white: 0, alpha: 0.2)
@@ -51,12 +58,31 @@ class LandingController: UIViewController {
         self.player.actionAtItemEnd = .None
         self.player.volume = 0
         
+        // Remove Text From Back Button
+        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(-1000, -1000),
+            forBarMetrics: UIBarMetrics.Default)
+        
         // Enable Movie Looping
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerRestart:"), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil)
         
-        if let user = User.current() {
-            self.performSegueWithIdentifier("next", sender: self)
-            Installation.setUser(user)
+        // Setup Legal
+        Config.sharedInstance { (config) -> Void in
+            let tos = NSURL(string: config.termsURL)
+            let privacy = NSURL(string: config.privacyURL)
+            let linkAttrs: [NSObject: AnyObject] = [
+                kCTForegroundColorAttributeName: Colors.blue,
+                NSFontAttributeName: UIFont(name: "Bariol-Bold", size: 13)!,
+            ]
+            
+            let tosRange = NSString(string: self.legalLabel.text!).rangeOfString("Terms of Service")
+            let privacyRange = NSString(string: self.legalLabel.text!).rangeOfString("Privacy Policy")
+            
+            self.legalLabel.delegate = self
+            self.legalLabel.linkAttributes = linkAttrs
+            self.legalLabel.activeLinkAttributes = linkAttrs
+            self.legalLabel.inactiveLinkAttributes = linkAttrs
+            self.legalLabel.addLinkToURL(tos, withRange: tosRange)
+            self.legalLabel.addLinkToURL(privacy, withRange: privacyRange)
         }
         
         // Setup Progress Hub
@@ -87,6 +113,10 @@ class LandingController: UIViewController {
         super.viewDidAppear(animated)
         
         self.player.pause()
+    }
+    
+    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
+        Globals.presentBrowser(url, sender: self)
     }
 
 }
