@@ -24,8 +24,13 @@ class AuthStepPhotos: AuthStep {
         self.percent = 1
     }
     
+    override func viewed() {
+        Globals.mixpanel.track("Mobile.Auth.Permissions.Photos")
+    }
+    
     override func next(callback: (segue: Bool, skip: Bool) -> Void) {
         callback(segue: true, skip: false)
+        Globals.mixpanel.track("Mobile.Auth.Permissions.Photos.Skipped")
     }
     
     override func button(callback: (segue: Bool, skip: Bool) -> Void) {
@@ -34,6 +39,8 @@ class AuthStepPhotos: AuthStep {
                 callback(segue: true, skip: false)
             })
         })
+        
+        Globals.mixpanel.track("Mobile.Auth.Permissions.Photos.Granted")
     }
     
 }

@@ -809,7 +809,7 @@ and Privacy Policy.</string>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="RcZ-nI-kE4">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="KSn-eC-yHL">
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="KSn-eC-yHL">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="uploadTriggerd:" destination="Njs-W8-ya8" id="Ov1-Eq-P4p"/>

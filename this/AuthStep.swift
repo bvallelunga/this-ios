@@ -46,4 +46,8 @@ class AuthStep: NSObject {
     func button(callback: (segue: Bool, skip: Bool) -> Void) {
     
     }
+    
+    func viewed() {
+    
+    }
 }

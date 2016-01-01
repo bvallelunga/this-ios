@@ -33,6 +33,10 @@ class AuthStepPhone: AuthStep {
         self.formatter.addOutputPattern("+### (##) ###-###", forRegExp: "^374\\d*$")
     }
     
+    override func viewed() {
+        Globals.mixpanel.track("Mobile.Auth.Phone.Enter")
+    }
+    
     override func formatValue(input: String) -> String {
         self.value = input
         

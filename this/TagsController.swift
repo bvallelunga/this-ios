@@ -22,8 +22,6 @@ class TagsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Globals.tagsController = self
-        
         // Setup Segment
         let attributes = [
             NSFontAttributeName: UIFont(name: "Bariol-Bold", size: 14)!,
@@ -60,6 +58,10 @@ class TagsController: UIViewController {
         
         // Update Containers
         self.segmentChanged(self)
+        
+        // Core Setup
+        Globals.tagsController = self
+        Globals.mixpanel.track("Mobile.Tags")
 
     }
 
@@ -84,12 +86,17 @@ class TagsController: UIViewController {
     
     @IBAction func segmentChanged(sender: AnyObject) {
         let index = self.segment.selectedSegmentIndex
+        let container = index == 0 ? "Following" : "Trending"
+        
         self.followingContainer.hidden = index != 0
         self.trendingContainer.hidden = index != 1
+        
+        Globals.mixpanel.track("Mobile.Tags.\(container).Selected")
     }
 
     @IBAction func goToSelection(sender: AnyObject) {
         Globals.pagesController.setActiveController(1, direction: .Reverse)
+        Globals.mixpanel.track("Mobile.Tags.Selection Button")
     }
     
     func viewTag(tag: Tag) {

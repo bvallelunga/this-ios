@@ -21,8 +21,6 @@ class LandingController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        Globals.landingController = self
 
         // Setup Logo
         self.logoLabel.shadowColor = UIColor(white: 0, alpha: 0.2)
@@ -61,9 +59,14 @@ class LandingController: UIViewController {
             Installation.setUser(user)
         }
         
+        // Setup Progress Hub
         SVProgressHUD.setBackgroundColor(Colors.darkGrey)
         SVProgressHUD.setForegroundColor(UIColor.whiteColor())
         SVProgressHUD.setFont(UIFont(name: "Bariol-Bold", size: 22))
+        
+        // Core Setup
+        Globals.landingController = self
+        Globals.mixpanel.track("Mobile.Landing")
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

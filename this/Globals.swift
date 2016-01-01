@@ -48,10 +48,15 @@ class Globals: NSObject {
     }
     
     class func fetchImage(url: String, callback: (image: UIImage) -> Void) {
+        Globals.mixpanel.timeEvent("Mobile.Fetch Photo")
+        
         let request = NSURLRequest(URL: NSURL(string: url)!)
         
         if let image = self.imageStorage.imageForKey(url) {
             callback(image: image)
+            Globals.mixpanel.track("Mobile.Fetch Photo", properties: [
+                "cached": true
+            ])
             return
         }
 
@@ -59,6 +64,9 @@ class Globals: NSObject {
             if let image: UIImage = response.result.value {
                 callback(image: image)
                 self.imageStorage.setImage(image, forKey: url, diskOnly: false)
+                Globals.mixpanel.track("Mobile.Fetch Photo", properties: [
+                    "cached": false
+                ])
             } else {
                 print(response)
             }

@@ -39,6 +39,9 @@ class TagController: UIViewController, UITextFieldDelegate {
         }
         
         self.updateTag(self.tag)
+        Globals.mixpanel.track("Mobile.Tag", properties: [
+            "tag": self.tag.name
+        ])
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -76,6 +79,11 @@ class TagController: UIViewController, UITextFieldDelegate {
         Globals.pagesController.setActiveController(1, direction: .Reverse) { () -> Void in
             self.navigationController?.popViewControllerAnimated(false)
         }
+        Globals.mixpanel.track("Mobile.Tag.Selection Button", properties: [
+            "tag": self.tag.name,
+            "comments": self.tableController.comments.count,
+            "images": self.tableController.headerController.photos.count
+        ])
     }
 
     @IBAction func postMessage(sender: AnyObject) {
@@ -91,6 +99,12 @@ class TagController: UIViewController, UITextFieldDelegate {
             self.tableController.tableView.reloadData()
             self.tableController.scrollToBottom()
             self.messageChanged(self)
+            
+            Globals.mixpanel.track("Mobile.Tag.Comment.Posted", properties: [
+                "tag": self.tag.name,
+                "comments": self.tableController.comments.count,
+                "images": self.tableController.headerController.photos.count
+            ])
         }
     }
     

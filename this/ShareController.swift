@@ -60,6 +60,11 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         self.loadContacts()
         self.headerController.updateNextButtonTitle(false)
         
+        Globals.mixpanel.track("Mobile.Invite", properties: [
+            "tag": self.tag.name,
+            "images": self.images.count
+        ])
+        
         Config.sharedInstance { (config) -> Void in
             self.config = config
         }
@@ -201,6 +206,10 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
             } else {
                 self.users.selected.removeValueForKey(user)
             }
+            
+            Globals.mixpanel.track("Mobile.Invite.User.\(cell.share ? "S": "Des")elected", properties: [
+                "tag": self.tag.name
+            ])
         } else {
             let contact = self.contacts.filtered[indexPath.row]
             
@@ -209,19 +218,40 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
             } else {
                 self.contacts.selected.removeValueForKey(contact)
             }
+            
+            Globals.mixpanel.track("Mobile.Invite.Contact.\(cell.share ? "S": "Des")elected", properties: [
+                "tag": self.tag.name
+            ])
         }
         
         self.headerController.updateNextButtonTitle(!self.users.selected.isEmpty || !self.contacts.selected.isEmpty)
     }
     
     func backTriggered() {
+        let count = self.users.selected.count + self.contacts.selected.count
         self.delegate.shareControllerCancelled()
+        
+        Globals.mixpanel.track("Mobile.Invite.Cancelled", properties: [
+            "contacts": self.contacts.selected.count,
+            "users": self.users.selected.count,
+            "total": count,
+            "tag": self.tag.name,
+            "images": self.images.count
+        ])
     }
     
     func nextTriggered() {
         let count = self.users.selected.count + self.contacts.selected.count
         
         self.delegate.shareControllerShared(count)
+        
+        Globals.mixpanel.track("Mobile.Invite.Shared", properties: [
+            "contacts": self.contacts.selected.count,
+            "users": self.users.selected.count,
+            "total": count,
+            "tag": self.tag.name,
+            "images": self.images.count
+        ])
     }
     
     func shareTriggered() {
@@ -300,6 +330,13 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
             }
         }
         
+        Globals.mixpanel.track("Mobile.Invite.Search", properties: [
+            "tag": self.tag.name,
+            "characters": NSString(string: text).length,
+            "search": text,
+            "images": self.images.count
+        ])
+        
         self.tableView.reloadData()
     }
     
@@ -316,6 +353,13 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         let numbers = self.contacts.raw.map({ $0.phone.e164 })
         
         self.tag.suggested(numbers) { (users) -> Void in
+            Globals.mixpanel.track("Mobile.Invite.Contacts.Fetched", properties: [
+                "contacts": self.contacts.raw.count,
+                "users": users.count,
+                "tag": self.tag.name,
+                "images": self.images.count
+            ])
+            
             self.users.raw = users
             self.intersectionsUsersContacts()
             self.filterBySearch("")

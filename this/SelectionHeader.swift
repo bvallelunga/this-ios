@@ -152,10 +152,12 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     
     @IBAction func goToFollowing(sender: AnyObject) {
         Globals.pagesController.setActiveController(2, direction: .Forward)
+        Globals.mixpanel.track("Mobile.Selection.Following Button")
     }
 
     @IBAction func goToSettings(sender: AnyObject) {
         Globals.pagesController.setActiveController(0, direction: .Reverse)
+        Globals.mixpanel.track("Mobile.Selection.Settings Button")
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
@@ -188,6 +190,8 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
             self.tagField.text = name
             self.checkArrow()
         }
+        
+        Globals.mixpanel.track("Mobile.Selection.Tag.Random")
     }
     
     func reset() {
@@ -199,6 +203,11 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     func setTimer(index: Int) {
         self.timer = self.timers[index]
         self.timerButton.setTitle(self.timer.title, forState: .Normal)
+        
+        Globals.mixpanel.track("Mobile.Selection.Tag.Timer Changed", properties: [
+            "days": self.timer.timer,
+            "title": self.timer.title
+        ])
     }
     
     func imagesSelected(images: [UIImage]) {

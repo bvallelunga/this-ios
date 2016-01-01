@@ -16,6 +16,7 @@ class Comment: PFObject, PFSubclassing {
     @NSManaged var tag: Tag
     @NSManaged var message: String
     @NSManaged var from: String
+    @NSManaged var flagged: Bool
     
     static func parseClassName() -> String {
         return "Comment"
@@ -28,6 +29,7 @@ class Comment: PFObject, PFSubclassing {
         comment.message = message
         comment.tag = tag
         comment.user = user
+        comment.flagged = false
         comment.from = user.screenname
         
         comment.saveInBackground().continueWithSuccessBlock { (task) -> AnyObject? in
@@ -53,6 +55,12 @@ class Comment: PFObject, PFSubclassing {
         }
         
         return comment
+    }
+    
+    // Instance Methods
+    func flag() {
+        self.flagged = true
+        self.saveInBackground()
     }
 
 }

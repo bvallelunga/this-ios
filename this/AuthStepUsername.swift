@@ -24,6 +24,10 @@ class AuthStepUsername: AuthStep {
         self.percent = 0.75
     }
     
+    override func viewed() {
+        Globals.mixpanel.track("Mobile.Auth.Username")
+    }
+    
     override func formatValue(input: String) -> String {
         self.value = input.stringByReplacingOccurrencesOfString(" ", withString: "",
             options: NSStringCompareOptions.LiteralSearch, range: nil)
@@ -47,6 +51,7 @@ class AuthStepUsername: AuthStep {
         let username = String(self.value.characters.dropFirst()).lowercaseString
         
         User.register(username, phone: self.parentController.phoneNumber) { (user) -> Void in
+            Globals.mixpanel.track("Mobile.Auth.Registered")
             callback(segue: false, skip: false)
         }
     }

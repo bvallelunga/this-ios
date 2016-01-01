@@ -23,8 +23,6 @@ class ProfileController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Globals.profileController = self
-        
         self.edgesForExtendedLayout = .None
         self.navigationController?.navigationBarHidden = true
         self.tableView.backgroundColor = Colors.offWhite
@@ -36,6 +34,9 @@ class ProfileController: UITableViewController {
         
         self.nameLabel.text = self.user.fullName
         
+        // Core Setup
+        Globals.profileController = self
+        Globals.mixpanel.track("Mobile.Settings")
         Config.sharedInstance { (config) -> Void in
             self.config = config
         }
@@ -106,6 +107,7 @@ class ProfileController: UITableViewController {
         controller.addAction(save)
         
         self.presentViewController(controller, animated: true, completion: nil)
+        Globals.mixpanel.track("Mobile.Settings.Logged Out")
     }
     
     func updateName() {
@@ -119,6 +121,7 @@ class ProfileController: UITableViewController {
                 
                 self.headerController.updateHeader()
                 self.tableView.reloadData()
+                Globals.mixpanel.track("Mobile.Settings.Full Name.Updated")
             }
         }
         
@@ -137,29 +140,35 @@ class ProfileController: UITableViewController {
     func rateApp() {
         let url = NSURL(string: "itms-apps://itunes.apple.com/app/id\(self.config.itunesId)")
         UIApplication.sharedApplication().openURL(url!)
+        Globals.mixpanel.track("Mobile.Settings.Rate App")
     }
     
     func shareFacebook() {
         self.presentShare("facebook")
+        Globals.mixpanel.track("Mobile.Settings.Share.Facebook")
     }
     
     func shareTwitter() {
         self.presentShare("twitter")
+        Globals.mixpanel.track("Mobile.Settings.Share.Twitter")
     }
     
     func FAQs() {
         let url = NSURL(string: self.config.faqsURL)
         self.presentBrowser(url!)
+        Globals.mixpanel.track("Mobile.Settings.FAQs")
     }
     
     func privacyPolicy() {
         let url = NSURL(string: self.config.privacyURL)
         self.presentBrowser(url!)
+        Globals.mixpanel.track("Mobile.Settings.Privacy Policys")
     }
     
     func termsOfService() {
         let url = NSURL(string: self.config.termsURL)
         self.presentBrowser(url!)
+        Globals.mixpanel.track("Mobile.Settings.TOS")
     }
     
     func presentBrowser(url: NSURL) {

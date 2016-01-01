@@ -25,6 +25,10 @@ class AuthStepVerify: AuthStep {
         self.percent = 0.5
     }
     
+    override func viewed() {
+        Globals.mixpanel.track("Mobile.Auth.Phone.Verify")
+    }
+    
     override func formatValue(input: String) -> String {
         self.value = input.stringByReplacingOccurrencesOfString(" ", withString: "",
             options: NSStringCompareOptions.LiteralSearch, range: nil)
@@ -51,6 +55,8 @@ class AuthStepVerify: AuthStep {
             options: NSStringCompareOptions.LiteralSearch, range: nil)
         
         guard self.parentController.phoneVerify == input else {
+            Globals.mixpanel.track("Mobile.Auth.Phone.Verify.Invalid Code")
+            
             if ++self.trys < 2 {
                 NavNotification.show("Invalid Code 😔")
             } else {
@@ -63,6 +69,10 @@ class AuthStepVerify: AuthStep {
         }
         
         User.logInWithPhone(number, callback: { (user) -> Void in
+            if user != nil {
+                Globals.mixpanel.track("Mobile.Auth.Logged In")
+            }
+            
             callback(segue: false, skip: user != nil)
         })
     }

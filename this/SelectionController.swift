@@ -32,18 +32,20 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Globals.selectionController = self
-        
-        Config.sharedInstance { (config) -> Void in
-            self.config = config
-        }
-        
         // Navigation Controller
         self.navigationController?.navigationBarHidden = true
         self.edgesForExtendedLayout = .None
         
+        // Setup Colletion View
         self.setupCollectionView()
         self.getAssests()
+        
+        // Core Setup
+        Globals.selectionController = self
+        Globals.mixpanel.track("Mobile.Selection")
+        Config.sharedInstance { (config) -> Void in
+            self.config = config
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -117,10 +119,12 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
                 let button = UIAlertAction(title: "Open Settings", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
                     let url = NSURL(string: UIApplicationOpenSettingsURLString)!
                     UIApplication.sharedApplication().openURL(url)
+                    Globals.mixpanel.track("Mobile.Selection.Settings Opened")
                 })
                 
                 controller.addAction(button)
                 self.presentViewController(controller, animated: true, completion: nil)
+                Globals.mixpanel.track("Mobile.Selection.Needs Permissions")
                 return
             }
             
@@ -157,6 +161,9 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
             }
             
             self.collectionView?.reloadData()
+            Globals.mixpanel.track("Mobile.Selection.Photos.Fetched", properties: [
+                "photos": self.assets.count
+            ])
         }
     }
     
@@ -230,6 +237,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
             imagePicker.sourceType = .Camera
             imagePicker.mediaTypes = ["public.image"]
             self.presentViewController(imagePicker, animated: true, completion: nil)
+            Globals.mixpanel.track("Mobile.Selection.Camera.Shown")
             return
         }
         
@@ -248,10 +256,12 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         
         if cell.upload {
             self.cellSelected(asset)
+            Globals.mixpanel.track("Mobile.Selection.Photo.Selected")
         } else  {
             self.selectedOrder.removeObject(asset)
             self.selected.removeValueForKey(asset)
             self.updateHeader()
+            Globals.mixpanel.track("Mobile.Selection.Photo.Deselected")
         }
     }
     
@@ -274,6 +284,12 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     
     func shareControllerCancelled() {
         self.navigationController?.popViewControllerAnimated(true)
+        
+        Globals.mixpanel.track("Mobile.Selection.Tag.Cancel", properties: [
+            "tag": self.tag.name,
+            "timer": self.timer,
+            "photos": self.selected.count
+        ])
     }
     
     func shareControllerShared(count: Int) {
@@ -284,6 +300,12 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
 
             self.reset()
             self.navigationController?.popViewControllerAnimated(false)
+            
+            Globals.mixpanel.track("Mobile.Selection.Tag.Post", properties: [
+                "tag": self.tag.name,
+                "timer": self.timer,
+                "photos": self.selected.count
+            ])
         }
     }
     
@@ -309,6 +331,8 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     func updateTags(hashtag: String, timer: Int) {
         SVProgressHUD.show()
         
+        Globals.mixpanel.timeEvent("Mobile.Selection.Tag.FindOrCreate")
+        
         Tag.findOrCreate(hashtag) { (tag) -> Void in
             SVProgressHUD.dismiss()
             
@@ -316,6 +340,10 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
             self.timer = timer
             
             self.performSegueWithIdentifier("share", sender: self)
+            
+            Globals.mixpanel.track("Mobile.Selection.Tag.FindOrCreate", properties: [
+                "tag": self.tag.name
+            ])
         }
     }
     
@@ -323,6 +351,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         UIImageWriteToSavedPhotosAlbum(image, self, "image:didFinishSavingWithError:contextInfo:", nil)
         self.imagePickerControllerDidCancel(picker)
+        Globals.mixpanel.track("Mobile.Selection.Camera.Photo Taken")
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {

@@ -23,6 +23,7 @@ class ErrorHandler {
             
         case PFErrorCode.ErrorUsernameTaken.rawValue:
             NavNotification.show("Username Taken 😢")
+            Globals.mixpanel.track("Mobile.Auth.Register.Username Taken")
             
         default: print(error)
         }
@@ -30,7 +31,6 @@ class ErrorHandler {
     
     private class func handleInvalidSessionTokenError() {
         User.logOut()
-        
-        print("force logout")
+        Globals.mixpanel.track("Mobile.Auth.Force Logout")
     }
 }

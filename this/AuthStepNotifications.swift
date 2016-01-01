@@ -23,12 +23,18 @@ class AuthStepNotifications: AuthStep {
         self.percent = 1
     }
     
+    override func viewed() {
+        Globals.mixpanel.track("Mobile.Auth.Permissions.Notifications")
+    }
+    
     override func next(callback: (segue: Bool, skip: Bool) -> Void) {
         callback(segue: true, skip: false)
+        Globals.mixpanel.track("Mobile.Auth.Permissions.Notifications.Skipped")
     }
     
     override func button(callback: (segue: Bool, skip: Bool) -> Void) {
         self.parentController.notifications.register()
+        Globals.mixpanel.track("Mobile.Auth.Permissions.Notifications.Granted")
         
         Globals.delay(1) { () -> () in
             callback(segue: false, skip: false)

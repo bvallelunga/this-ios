@@ -19,11 +19,11 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
     @IBOutlet weak var collectionView: UICollectionView!
     
     var tag: Tag!
+    var photos: [Photo] = []
     
     private var config: Config!
     private var layout = TagCollectionLayout()
     private var downloadMode: Bool = false
-    private var photos: [Photo] = []
     private var images: [Photo: UIImage] = [:]
     private var user = User.current()
     private var following: Bool!
@@ -74,11 +74,22 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
                     self.collectionView.reloadData()
                 })
             }
+            
+            Globals.mixpanel.track("Mobile.Tag.Photos.Fetched", properties: [
+                "tag": self.tag.name,
+                "photos": photos.count
+            ])
         }
         
         self.tag.isUserFollowing(self.user) { (following) -> Void in
             self.following = following
             self.updateFollowingButton()
+            
+            Globals.mixpanel.track("Mobile.Tag.isFollowing", properties: [
+                "tag": self.tag.name,
+                "images": self.photos.count,
+                "following": following
+            ])
         }
     }
     
@@ -109,6 +120,11 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         
         if self.downloadMode {
             NavNotification.show("Tap Photos To Download", color: Colors.blue, duration: 1.5, vibrate: false)
+            
+            Globals.mixpanel.track("Mobile.Tag.Download Button", properties: [
+                "tag": self.tag.name,
+                "images": self.photos.count
+            ])
         }
     }
     
@@ -122,6 +138,11 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         controller.backButton = "CANCEL"
         
         self.presentViewController(controller, animated: true, completion: nil)
+        
+        Globals.mixpanel.track("Mobile.Tag.Invite Button", properties: [
+            "tag": self.tag.name,
+            "images": self.photos.count
+        ])
     }
 
     @IBAction func followingTriggered(sender: AnyObject) {
@@ -147,6 +168,12 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
         
         self.following = following
         self.updateFollowingButton()
+        
+        Globals.mixpanel.track("Mobile.Tag.Following.Changed", properties: [
+            "tag": self.tag.name,
+            "images": self.photos.count,
+            "following": following
+        ])
     }
     
     func shareControllerCancelled() {
@@ -201,6 +228,11 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
                 cell.finishedDownload()
             })
             
+            Globals.mixpanel.track("Mobile.Tag.Photo.Downloaded", properties: [
+                "tag": self.tag.name,
+                "photos": self.photos.count
+            ])
+            
             return
         }
         
@@ -222,7 +254,6 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
             }
         }
         
-        
         self.photoViewer = NYTPhotosViewController(photos: galleryPhotos, initialPhoto: intialPhoto)
         self.photoViewer.delegate = self
         self.photoViewer.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Stop,
@@ -235,6 +266,11 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
             self.photoViewer.delegate?.photosViewController?(self.photoViewer, didDisplayPhoto: intialPhoto,
                 atIndex: UInt(intialPhoto.indexPath.row))
         }
+        
+        Globals.mixpanel.track("Mobile.Tag.Gallery.Opened", properties: [
+            "tag": self.tag.name,
+            "photos": self.photos.count
+        ])
     }
     
     func photosViewController(photosViewController: NYTPhotosViewController!, didDisplayPhoto photo: NYTPhoto!, atIndex photoIndex: UInt) {
@@ -248,6 +284,11 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
             galleryPhoto.image = image
             photosViewController.updateImageForPhoto(photo)
         })
+        
+        Globals.mixpanel.track("Mobile.Tag.Gallery.Photo.Viewed", properties: [
+            "tag": self.tag.name,
+            "photos": self.photos.count
+        ])
     }
     
     func photosViewController(photosViewController: NYTPhotosViewController!, handleActionButtonTappedForPhoto photo: NYTPhoto!) -> Bool {
@@ -266,6 +307,11 @@ class TagHeaderController: UIViewController, UICollectionViewDelegate,
             Globals.followingController.reloadTags()
             
             photosViewController.performSelector(Selector("doneButtonTapped:"), withObject: self)
+            
+            Globals.mixpanel.track("Mobile.Tag.Gallery.Photo.Flagged", properties: [
+                "tag": self.tag.name,
+                "photos": self.photos.count
+            ])
         })
         
         controller.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))

@@ -37,6 +37,7 @@ class PhotoQueue: NSObject, KTBTaskQueueDelegate  {
         let photo = Photo(withoutDataWithObjectId: task.userInfo["photo"] as? String)
         
         let data = NSData(base64EncodedString: task.userInfo["image"] as! String, options: .IgnoreUnknownCharacters)!
+        let image = UIImage(data: data)
         let file = PFFile(name: "image.jpeg", data: data)!
 
         photo.original = file
@@ -48,6 +49,7 @@ class PhotoQueue: NSObject, KTBTaskQueueDelegate  {
                 return
             }
             
+            Globals.imageStorage.setImage(image, forKey: file.url, diskOnly: false)
             completion(KTBTaskStatus.Success)
         })
     }

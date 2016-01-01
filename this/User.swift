@@ -50,7 +50,7 @@ class User: PFUser {
         
         Globals.landingController.navigationController?.popToRootViewControllerAnimated(false)
     }
-    
+
     class func verifyNumber(number: String) -> String {
         let code = String(Globals.random(4))
         
@@ -71,6 +71,7 @@ class User: PFUser {
                     if let user = pfuser as? User {
                         callback(user: user)
                         Installation.setUser(user)
+                        user.updateMixpanel()
                     } else if error != nil {
                         ErrorHandler.handleParse(error)
                     } else {
@@ -96,6 +97,7 @@ class User: PFUser {
             if success {
                 callback(user: user)
                 Installation.setUser(user)
+                user.updateMixpanel()
             } else {
                 ErrorHandler.handleParse(error)
             }
@@ -103,8 +105,30 @@ class User: PFUser {
     }
     
     // Instance Methods
+    override func saveInBackground() -> BFTask {
+        return super.saveInBackground().continueWithSuccessBlock({ (task) -> AnyObject? in
+            self.updateMixpanel()
+            return true
+        })
+    }
+    
+    override func saveInBackgroundWithBlock(block: PFBooleanResultBlock?) {
+        super.saveInBackgroundWithBlock(block)
+        self.updateMixpanel()
+    }
+    
+    func updateMixpanel() {
+        Globals.mixpanel.people.set([
+            "Parse ID": self.objectId!,
+            "$name": self.fullName,
+            "$phone": self.phone,
+            "$username": self.username!,
+            "Profile Picture": self.photo.url != nil
+        ])
+    }
+    
     func uploadPhoto(image: UIImage) {
-        let data = UIImageJPEGRepresentation(image, 0.7)
+        let data = UIImageJPEGRepresentation(image, 0.5)
         self.photo = PFFile(name: "image.jpeg", data: data!)!
         
         self.saveInBackgroundWithBlock { (success, error) -> Void in

@@ -149,6 +149,7 @@ class Tag: PFObject, PFSubclassing {
     func comments(callback: (comments: [Comment]) -> Void) {
         let query = self.comments.query()
         
+        query.whereKey("flagged", notEqualTo: true)
         query.addAscendingOrder("createdAt")
         
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
@@ -242,6 +243,9 @@ class Tag: PFObject, PFSubclassing {
                 "message": "New photos in \(self.hashtag)",
                 "alert": "\(user.name) posted to \(self.hashtag)"
             ])
+            
+            // Update Mixpanel
+            Globals.mixpanel.people.increment("Photos", by: images.count)
         }.continueWithBlock { (task) -> AnyObject? in
             ErrorHandler.handleParse(task.error)
             return nil

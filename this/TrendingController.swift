@@ -19,8 +19,6 @@ class TrendingController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        Globals.trendingController = self
 
         // Setup Table
         let cellNib = UINib(nibName: "TrendingTableCell", bundle: NSBundle.mainBundle())
@@ -34,6 +32,10 @@ class TrendingController: UITableViewController {
         
         self.refreshControl?.tintColor = UIColor.lightGrayColor()
         self.refreshControl?.addTarget(self, action: Selector("reloadTags"), forControlEvents: UIControlEvents.ValueChanged)
+        
+        // Core Setup
+        Globals.trendingController = self
+        Globals.mixpanel.track("Mobile.Tags.Trending")
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -50,6 +52,10 @@ class TrendingController: UITableViewController {
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
             self.date = NSDate()
+            
+            Globals.mixpanel.track("Mobile.Tags.Trending.Tags.Fetched", properties: [
+                "tags": tags.count
+            ])
         }
     }
 
@@ -69,6 +75,7 @@ class TrendingController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if self.tags.count > indexPath.row {
             self.parent.viewTag(self.tags[indexPath.row])
+            Globals.mixpanel.timeEvent("Mobile.Tags.Trending.Tag.Selected")
         }
     }
 

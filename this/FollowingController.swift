@@ -22,8 +22,6 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Globals.followingController = self
-        
         // Setup Background
         self.view.backgroundColor = UIColor.clearColor()
         self.collectionView?.backgroundColor = UIColor.clearColor()
@@ -40,6 +38,10 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
         self.refreshControl.tintColor = UIColor.lightGrayColor()
         self.refreshControl.addTarget(self, action: Selector("reloadTags"), forControlEvents: UIControlEvents.ValueChanged)
         self.collectionView?.insertSubview(self.refreshControl, atIndex: 0)
+        
+        // Core Setup
+        Globals.followingController = self
+        Globals.mixpanel.track("Mobile.Tags.Following")
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -56,6 +58,12 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
             self.collectionView?.reloadData()
             self.refreshControl.endRefreshing()
             self.date = NSDate()
+            
+            Globals.mixpanel.people.set("Following", to: tags.count)
+            
+            Globals.mixpanel.track("Mobile.Tags.Following.Tags.Fetched", properties: [
+                "tags": tags.count
+            ])
         }
     }
 
@@ -106,6 +114,7 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
     
     func tagCellTapped(tag: Tag) {
         self.parent.viewTag(tag)
+        Globals.mixpanel.timeEvent("Mobile.Tags.Following.Tag.Selected")
     }
 
 }

@@ -14,14 +14,14 @@ class TagTableController: UITableViewController {
     @IBOutlet weak var headerContainer: UIView!
     @IBOutlet var emptyContainer: UIView!
     
-    private var headerController: TagHeaderController!
+    var headerController: TagHeaderController!
+    var tag: Tag!
+    var comments: [Comment] = []
+    
     private var headerFrame: CGRect!
     private var keyboardActive: Bool = false
     private var user = User.current()
     private var commentHeights: [NSIndexPath: CGFloat] = [:]
-    
-    var tag: Tag!
-    var comments: [Comment] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +35,10 @@ class TagTableController: UITableViewController {
         let tapper = UITapGestureRecognizer(target: self, action: Selector("handleSingleTap:"))
         tapper.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapper)
+        
+        let press = UILongPressGestureRecognizer(target: self, action: Selector("handleLongPress:"))
+        press.minimumPressDuration = 1
+        self.tableView.addGestureRecognizer(press)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -86,6 +90,11 @@ class TagTableController: UITableViewController {
         self.tag.comments { (comments) -> Void in
             self.comments = comments
             self.tableView.reloadData()
+            
+            Globals.mixpanel.track("Mobile.Tag.Comments.Fetched", properties: [
+                "tag": self.tag.name,
+                "comments": comments.count
+            ])
         }
     }
     
@@ -183,6 +192,33 @@ class TagTableController: UITableViewController {
     
     func handleSingleTap(gesture: UITapGestureRecognizer) {
         Globals.pagesController.view.endEditing(true)
+    }
+    
+    func handleLongPress(gesture: UILongPressGestureRecognizer) {
+        let point = gesture.locationInView(self.tableView)
+        
+        guard let indexPath = self.tableView.indexPathForRowAtPoint(point) else {
+            return
+        }
+        
+        let controller = UIAlertController(title: "Flag Comment",
+            message: "Please confirm that this comment violates our community guidelines?",
+            preferredStyle: UIAlertControllerStyle.Alert)
+        
+        controller.addAction(UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Destructive) { (action) -> Void in
+            self.comments[indexPath.row].flag()
+            self.comments.removeAtIndex(indexPath.row)
+            self.tableView.reloadData()
+            
+            Globals.mixpanel.track("Mobile.Tag.Comment.Flagged", properties: [
+                "tag": self.tag.name,
+                "comments": self.comments.count
+            ])
+        })
+        
+        controller.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        
+        self.presentViewController(controller, animated: true, completion: nil)
     }
 
 }
