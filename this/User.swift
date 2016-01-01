@@ -48,6 +48,9 @@ class User: PFUser {
     override class func logOut() {
         super.logOut()
         
+        Globals.mixpanel.track("Mobile.User.Logout")
+        Globals.mixpanel.reset()
+        
         Globals.landingController.navigationController?.popToRootViewControllerAnimated(false)
     }
 
@@ -71,6 +74,7 @@ class User: PFUser {
                     if let user = pfuser as? User {
                         callback(user: user)
                         Installation.setUser(user)
+                        user.identifyMixpanel()
                         user.updateMixpanel()
                     } else if error != nil {
                         ErrorHandler.handleParse(error)
@@ -97,6 +101,7 @@ class User: PFUser {
             if success {
                 callback(user: user)
                 Installation.setUser(user)
+                user.aliasMixpanel()
                 user.updateMixpanel()
             } else {
                 ErrorHandler.handleParse(error)
@@ -115,6 +120,14 @@ class User: PFUser {
     override func saveInBackgroundWithBlock(block: PFBooleanResultBlock?) {
         super.saveInBackgroundWithBlock(block)
         self.updateMixpanel()
+    }
+    
+    func identifyMixpanel() {
+        Globals.mixpanel.identify(self.objectId)
+    }
+    
+    func aliasMixpanel() {
+        Globals.mixpanel.createAlias(self.objectId, forDistinctID: Globals.mixpanel.distinctId)
     }
     
     func updateMixpanel() {

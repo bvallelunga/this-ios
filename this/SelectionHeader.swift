@@ -168,6 +168,8 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         if let text = self.tagField.text {
             if text.isEmpty {
                 self.generateHashtag()
+            } else {
+                Globals.mixpanel.timeEvent("Mobile.Selection.Tag.Changed")
             }
         }
     }
@@ -185,13 +187,15 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         self.hashtag = ""
         self.tagField.text = ""
         
+        Globals.mixpanel.timeEvent("Mobile.Selection.Tag.Random")
+        
         Tag.random { (name) -> Void in
             self.hashtag = name
             self.tagField.text = name
             self.checkArrow()
+            
+            Globals.mixpanel.track("Mobile.Selection.Tag.Random")
         }
-        
-        Globals.mixpanel.track("Mobile.Selection.Tag.Random")
     }
     
     func reset() {

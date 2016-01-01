@@ -26,7 +26,10 @@ class LandingController: UIViewController, TTTAttributedLabelDelegate {
         // Check If User Is Logged In
         if let user = User.current() {
             self.performSegueWithIdentifier("next", sender: self)
+            
             Installation.setUser(user)
+            user.identifyMixpanel()
+            user.updateMixpanel()
         }
 
         // Setup Logo

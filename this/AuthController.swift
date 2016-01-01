@@ -49,9 +49,7 @@ class AuthController: UIViewController {
         self.bigButton.layer.shadowOpacity = 0.3
         self.bigButton.layer.cornerRadius = 38
         
-        if let user = User.current() {
-            user.updateMixpanel()
-        } else {
+        if User.current() == nil {
             self.steps = [
                 AuthStepPhone(parent: self),
                 AuthStepVerify(parent: self),
