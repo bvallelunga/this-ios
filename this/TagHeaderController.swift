@@ -93,7 +93,7 @@ class TagHeaderController: UIViewController, ShareControllerDelegate {
         let controller = storyBoard.instantiateViewControllerWithIdentifier("ShareController") as! ShareController
         
         controller.delegate = self
-        controller.images = Array(self.pageController.images.keys)
+        controller.images = self.pageController.images
         controller.tag = self.tag
         controller.backButton = "CANCEL"
         

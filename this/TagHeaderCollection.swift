@@ -57,7 +57,7 @@ class TagHeaderCollection: UICollectionViewController, UICollectionViewDelegateF
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! TagCollectionCell
         let index = indexPath.row + (12 * self.page)
-        let image = Array(self.parent.images.keys)[index]
+        let image = self.parent.images[index]
         
         cell.imageView.image = image
         cell.downloadMode(self.parent.downloadMode)

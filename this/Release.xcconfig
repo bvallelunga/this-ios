@@ -6,8 +6,8 @@
 //  Copyright © 2015 Brian Vallelunga. All rights reserved.
 //
 
-PARSE_APPLICATION_ID = G9TbuDcsjrgciofmxTpEShjpMbwc0u09ZEBLh8C0
-PARSE_CLIENT_KEY = oobWelAqGAuFr6GJRb6rOCJby8Fc2gCyLow2FMVO
+PARSE_APPLICATION_ID = DrwfnCBGAiNlj1eSKBfJqH2Qy4ndFgDhiior4Bgg
+PARSE_CLIENT_KEY = dEy72Wc1hSw03XZdhlwJ0RS28ukUsl2M2bSdym9X
 PARSE_PROJECT = release
 
 MIXPANEL_TOKEN = bc3c6f37a64e5d306aceca64672244be

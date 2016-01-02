@@ -13,8 +13,8 @@ class TagHeaderPages: UIPageViewController, UIPageViewControllerDataSource,
     UIPageViewControllerDelegate, NYTPhotosViewControllerDelegate {
     
     var tag: Tag!
-    var photos: [Photo] = []
-    var images: [UIImage: Photo] = [:]
+    var images: [UIImage] = []
+    var photos: [UIImage: Photo] = [:]
     var downloadMode = false
     var parent: TagHeaderController!
     
@@ -47,11 +47,14 @@ class TagHeaderPages: UIPageViewController, UIPageViewControllerDataSource,
         self.photoViewer?.performSegueWithIdentifier("doneButtonTapped", sender: self)
         
         self.tag.photos { (photos) -> Void in
-            self.photos = photos
-            
             for photo in photos {
                 photo.fetchThumbnail({ (image) -> Void in
-                    self.images[image] = photo
+                    guard self.photos[image] == nil else {
+                        return
+                    }
+                    
+                    self.images.append(image)
+                    self.photos[image] = photo
                     self.reloadPages()
                 })
             }
@@ -150,7 +153,7 @@ class TagHeaderPages: UIPageViewController, UIPageViewControllerDataSource,
     func cellDownload(cell: TagCollectionCell, index: Int) {
         cell.startDownload()
         
-        let photo = self.photos[index]
+        let photo = self.photos[self.images[index]]!
         
         photo.fetchOriginal({ (image) -> Void in
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
@@ -167,8 +170,8 @@ class TagHeaderPages: UIPageViewController, UIPageViewControllerDataSource,
         var galleryPhotos: [GalleryPhoto] = []
         var intialPhoto: GalleryPhoto!
         
-        for (i, image) in self.images.keys.enumerate() {
-            if let photo = self.images[image] {
+        for (i, image) in self.images.enumerate() {
+            if let photo = self.photos[image] {
                 let galleryPhoto = GalleryPhoto(placeholder: image, user: photo.from,
                     postedAt: Globals.intervalDate(photo.createdAt!), hashtag: self.tag.hashtag)
                 
@@ -231,7 +234,7 @@ class TagHeaderPages: UIPageViewController, UIPageViewControllerDataSource,
             galleryPhoto!.photo.flag()
             
             self.tag.removeCachedPhoto(galleryPhoto!.photo)
-            self.images.removeValueForKey(galleryPhoto!.placeholderImage!)
+            self.images.removeAtIndex(galleryPhoto!.indexPath.row)
             self.reloadPages()
             Globals.followingController.reloadTags()
             
