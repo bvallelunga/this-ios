@@ -49,7 +49,6 @@
 		D39AB74A1C1FFBDC00C9E96F /* TrendingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39AB7491C1FFBDC00C9E96F /* TrendingController.swift */; };
 		D39AB74C1C1FFE9100C9E96F /* TrendingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39AB74B1C1FFE9100C9E96F /* TrendingTableCell.xib */; };
 		D39AB74E1C1FFEB100C9E96F /* TrendingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39AB74D1C1FFEB100C9E96F /* TrendingTableCell.swift */; };
-		D3C2D2FD1C27B0E1002F0241 /* TagCollectionLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C2D2FC1C27B0E1002F0241 /* TagCollectionLayout.m */; };
 		D3C2D2FF1C27BDB6002F0241 /* TagCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C2D2FE1C27BDB6002F0241 /* TagCollectionCell.swift */; };
 		D3C958D71C2A94E700B6EE9D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C958D61C2A94E700B6EE9D /* User.swift */; };
 		D3C958D91C2A979700B6EE9D /* StateTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C958D81C2A979700B6EE9D /* StateTracker.swift */; };
@@ -73,6 +72,8 @@
 		D3E49ECD1C33ECF1003B367B /* Bariol_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3E49ECB1C33ECF1003B367B /* Bariol_Bold.ttf */; };
 		D3E49ECE1C33ECF1003B367B /* Bariol_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3E49ECC1C33ECF1003B367B /* Bariol_Regular.ttf */; };
 		D3E49ED01C34DCE4003B367B /* PhotoQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E49ECF1C34DCE4003B367B /* PhotoQueue.swift */; };
+		D3EAAD321C374587000AC019 /* TagHeaderCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EAAD311C374587000AC019 /* TagHeaderCollection.swift */; };
+		D3EAAD341C374AA5000AC019 /* TagHeaderPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EAAD331C374AA5000AC019 /* TagHeaderPages.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,8 +145,6 @@
 		D39AB74B1C1FFE9100C9E96F /* TrendingTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrendingTableCell.xib; sourceTree = "<group>"; };
 		D39AB74D1C1FFEB100C9E96F /* TrendingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingTableCell.swift; sourceTree = "<group>"; };
 		D3C2D2FA1C27B0E1002F0241 /* #this-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "#this-Bridging-Header.h"; sourceTree = "<group>"; };
-		D3C2D2FB1C27B0E1002F0241 /* TagCollectionLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagCollectionLayout.h; sourceTree = "<group>"; };
-		D3C2D2FC1C27B0E1002F0241 /* TagCollectionLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagCollectionLayout.m; sourceTree = "<group>"; };
 		D3C2D2FE1C27BDB6002F0241 /* TagCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionCell.swift; sourceTree = "<group>"; };
 		D3C958D41C2A8C0C00B6EE9D /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		D3C958D51C2A8C1700B6EE9D /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -171,6 +170,8 @@
 		D3E49ECB1C33ECF1003B367B /* Bariol_Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Bariol_Bold.ttf; path = Fonts/Bariol_Bold.ttf; sourceTree = SOURCE_ROOT; };
 		D3E49ECC1C33ECF1003B367B /* Bariol_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Bariol_Regular.ttf; path = Fonts/Bariol_Regular.ttf; sourceTree = SOURCE_ROOT; };
 		D3E49ECF1C34DCE4003B367B /* PhotoQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoQueue.swift; sourceTree = "<group>"; };
+		D3EAAD311C374587000AC019 /* TagHeaderCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagHeaderCollection.swift; sourceTree = "<group>"; };
+		D3EAAD331C374AA5000AC019 /* TagHeaderPages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagHeaderPages.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,9 +289,9 @@
 				D32D18BE1C224B3B0097D653 /* TagController.swift */,
 				D32D18C21C24F4790097D653 /* TagTableController.swift */,
 				D32D18C01C24EDC70097D653 /* TagHeaderController.swift */,
+				D3EAAD331C374AA5000AC019 /* TagHeaderPages.swift */,
+				D3EAAD311C374587000AC019 /* TagHeaderCollection.swift */,
 				D3C2D2FE1C27BDB6002F0241 /* TagCollectionCell.swift */,
-				D3C2D2FB1C27B0E1002F0241 /* TagCollectionLayout.h */,
-				D3C2D2FC1C27B0E1002F0241 /* TagCollectionLayout.m */,
 			);
 			name = Tag;
 			sourceTree = "<group>";
@@ -710,7 +711,6 @@
 				D33B13E41C2AA58800C54DB9 /* Config.swift in Sources */,
 				D3E293201C1C097B00925EAC /* AuthStepVerify.swift in Sources */,
 				D3C2D2FF1C27BDB6002F0241 /* TagCollectionCell.swift in Sources */,
-				D3C2D2FD1C27B0E1002F0241 /* TagCollectionLayout.m in Sources */,
 				D370FE6B1C200DCF00769EBA /* TagsController.swift in Sources */,
 				D30B18C01C218DFB004A4C7C /* TrendingCollectionCell.swift in Sources */,
 				D370FE701C20E68F00769EBA /* NavNotification.swift in Sources */,
@@ -743,9 +743,11 @@
 				D3CFC9E51C1E490800E7C5B4 /* SelectionHeader.swift in Sources */,
 				D3C958D71C2A94E700B6EE9D /* User.swift in Sources */,
 				D33B13E21C2AA47200C54DB9 /* Installation.swift in Sources */,
+				D3EAAD341C374AA5000AC019 /* TagHeaderPages.swift in Sources */,
 				D3E293061C1B7DFC00925EAC /* LandingController.swift in Sources */,
 				D39AB7411C1F8A9800C9E96F /* ShareController.swift in Sources */,
 				D3D240481C27FC5F00917AE3 /* ShareGenerator.swift in Sources */,
+				D3EAAD321C374587000AC019 /* TagHeaderCollection.swift in Sources */,
 				D33B13E81C2AB61000C54DB9 /* ErrorHandler.swift in Sources */,
 				D3E2932A1C1C277600925EAC /* PagesController.swift in Sources */,
 				D3E2931E1C1BBE3000925EAC /* AuthStepPhone.swift in Sources */,

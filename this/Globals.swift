@@ -80,7 +80,7 @@ class Globals: NSObject {
     }
     
     class func viewTag(tag: Tag, animated: Bool = true, callback: (() -> Void)! = nil) {
-        self.pagesController.setActiveController(2, animated: animated, direction: .Forward) { () -> Void in
+        self.pagesController?.setActiveController(2, animated: animated, direction: .Forward) { () -> Void in
             Globals.delay(0.25, closure: { () -> () in
                 if self.tagController != nil {
                     self.tagController.updateTag(tag)

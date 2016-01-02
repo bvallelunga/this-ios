@@ -6,6 +6,8 @@
 //  Copyright © 2015 Brian Vallelunga. All rights reserved.
 //
 
+import Foundation
+
 class StateTracker: NSObject {
     
     static var defaults = NSUserDefaults.standardUserDefaults()

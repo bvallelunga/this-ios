@@ -82,7 +82,7 @@ class TagController: UIViewController, UITextFieldDelegate {
         Globals.mixpanel.track("Mobile.Tag.Selection Button", properties: [
             "tag": self.tag.name,
             "comments": self.tableController.comments.count,
-            "images": self.tableController.headerController.photos.count
+            "images": self.tag.photoCount
         ])
     }
 
@@ -103,7 +103,7 @@ class TagController: UIViewController, UITextFieldDelegate {
             Globals.mixpanel.track("Mobile.Tag.Comment.Posted", properties: [
                 "tag": self.tag.name,
                 "comments": self.tableController.comments.count,
-                "images": self.tableController.headerController.photos.count
+                "images": self.tag.photoCount
             ])
         }
     }
@@ -115,7 +115,7 @@ class TagController: UIViewController, UITextFieldDelegate {
     func updateTag(tag: Tag) {
         self.tag = tag
         self.title = tag.hashtag
-        self.tableController.updateTag(tag)
+        self.tableController?.updateTag(tag)
         StateTracker.clearTagNotification(self.tag)
     }
     

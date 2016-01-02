@@ -6,6 +6,8 @@
 //  Copyright © 2015 Brian Vallelunga. All rights reserved.
 //
 
+import Foundation
+
 extension Int {
     init(_ range: Range<Int> ) {
         let delta = range.startIndex < 0 ? abs(range.startIndex) : 0

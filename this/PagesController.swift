@@ -11,7 +11,7 @@ import UIKit
 class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIScrollViewDelegate {
     
     // MARK: Instance Variables
-    var controllers = Dictionary<Int, PageController>()
+    var controllers: [Int: PageController] = [:]
     var currentPage = -1
     private var startPage = 1
     private let pages = 3

@@ -101,7 +101,7 @@ class TagTableController: UITableViewController {
     func updateTag(tag: Tag) {
         self.tag = tag
         self.reloadComments()
-        self.headerController.updateTag(tag)
+        self.headerController?.updateTag(tag)
     }
     
     
