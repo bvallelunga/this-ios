@@ -1118,6 +1118,32 @@ and Privacy Policy.</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qH7-m5-yq6">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="310"/>
+                                <subviews>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aha-sv-fbm">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="310"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="310" id="bA3-3B-cj5"/>
+                                        </constraints>
+                                        <connections>
+                                            <segue destination="rTH-Zw-lK2" kind="embed" identifier="pagesContainer" id="FXL-FB-2kc"/>
+                                        </connections>
+                                    </containerView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="aha-sv-fbm" secondAttribute="trailing" id="483-Av-YZ8"/>
+                                    <constraint firstItem="aha-sv-fbm" firstAttribute="centerY" secondItem="qH7-m5-yq6" secondAttribute="centerY" id="Lhu-zd-B51"/>
+                                    <constraint firstItem="aha-sv-fbm" firstAttribute="centerY" secondItem="qH7-m5-yq6" secondAttribute="centerY" id="dey-L4-vPl"/>
+                                    <constraint firstItem="aha-sv-fbm" firstAttribute="leading" secondItem="qH7-m5-yq6" secondAttribute="leading" id="tzc-ac-6Ri"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="dey-L4-vPl"/>
+                                    </mask>
+                                </variation>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1dm-hU-i8N">
                                 <rect key="frame" x="0.0" y="310" width="600" height="65"/>
                                 <subviews>
@@ -1211,32 +1237,6 @@ and Privacy Policy.</string>
                                     <constraint firstItem="ppU-4B-1Kz" firstAttribute="top" secondItem="1dm-hU-i8N" secondAttribute="top" id="kec-Z1-TED"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qH7-m5-yq6">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="310"/>
-                                <subviews>
-                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aha-sv-fbm">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="310"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="310" id="bA3-3B-cj5"/>
-                                        </constraints>
-                                        <connections>
-                                            <segue destination="rTH-Zw-lK2" kind="embed" identifier="pagesContainer" id="FXL-FB-2kc"/>
-                                        </connections>
-                                    </containerView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="aha-sv-fbm" secondAttribute="trailing" id="483-Av-YZ8"/>
-                                    <constraint firstItem="aha-sv-fbm" firstAttribute="centerY" secondItem="qH7-m5-yq6" secondAttribute="centerY" id="Lhu-zd-B51"/>
-                                    <constraint firstItem="aha-sv-fbm" firstAttribute="centerY" secondItem="qH7-m5-yq6" secondAttribute="centerY" id="dey-L4-vPl"/>
-                                    <constraint firstItem="aha-sv-fbm" firstAttribute="leading" secondItem="qH7-m5-yq6" secondAttribute="leading" id="tzc-ac-6Ri"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="dey-L4-vPl"/>
-                                    </mask>
-                                </variation>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.13725490200000001" green="0.1215686275" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1245,9 +1245,17 @@ and Privacy Policy.</string>
                             <constraint firstAttribute="trailingMargin" secondItem="1dm-hU-i8N" secondAttribute="trailing" constant="-20" id="OF1-7z-reg"/>
                             <constraint firstItem="1dm-hU-i8N" firstAttribute="top" secondItem="qH7-m5-yq6" secondAttribute="bottom" id="Scx-d8-seg"/>
                             <constraint firstAttribute="trailing" secondItem="qH7-m5-yq6" secondAttribute="trailing" id="TZ9-P8-b0Q"/>
+                            <constraint firstItem="qH7-m5-yq6" firstAttribute="top" secondItem="3jg-9C-C90" secondAttribute="bottom" id="ZAE-gx-RMM"/>
                             <constraint firstItem="qH7-m5-yq6" firstAttribute="top" secondItem="3jg-9C-C90" secondAttribute="bottom" id="akD-Yv-jIZ"/>
+                            <constraint firstItem="qH7-m5-yq6" firstAttribute="top" secondItem="I7d-du-gr6" secondAttribute="top" id="nPL-Ie-B6W"/>
                             <constraint firstItem="1dm-hU-i8N" firstAttribute="leading" secondItem="I7d-du-gr6" secondAttribute="leadingMargin" constant="-20" id="zbw-Yu-qLA"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ZAE-gx-RMM"/>
+                                <exclude reference="akD-Yv-jIZ"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="downloadButton" destination="srT-7e-bRg" id="fQ6-NX-eoe"/>

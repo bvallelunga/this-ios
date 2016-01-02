@@ -33,53 +33,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "125"
             endingLineNumber = "125">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "_this.TrendingTableCell.makeSpacer (_this.TrendingTableCell)() -&gt; ()"
-                  moduleName = "#this"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Brian/Sites/%23this/iOS/this/TrendingTableCell.swift"
-                  timestampString = "473413313.609873"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "125"
-                  endingLineNumber = "125"
-                  offsetFromSymbolStart = "640">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "_this.TrendingTableCell.pulse (_this.TrendingTableCell)(Swift.Bool) -&gt; ()"
-                  moduleName = "#this"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Brian/Sites/%23this/iOS/this/TrendingTableCell.swift"
-                  timestampString = "473413313.610131"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "125"
-                  endingLineNumber = "125"
-                  offsetFromSymbolStart = "28">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "function signature specialization &lt;Arg[0] = Owned To Guaranteed&gt; of _this.TrendingTableCell.updateTag (_this.TrendingTableCell)(_this.Tag) -&gt; ()"
-                  moduleName = "#this"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Brian/Sites/%23this/iOS/this/TrendingTableCell.swift"
-                  timestampString = "473413313.610317"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "125"
-                  endingLineNumber = "125"
-                  offsetFromSymbolStart = "1220">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
