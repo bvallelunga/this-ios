@@ -51,10 +51,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PhotoQueue.startup()
         
         // Startup Fabric
-        #if RELEASE
+        #if DEBUG
             Fabric.sharedSDK().debug = true
-            Fabric.with([Crashlytics.self])
         #endif
+        
+        Fabric.with([Crashlytics.self])
         
         // Setup Mixpanel
         let mixpanel = Mixpanel.sharedInstanceWithToken(Globals.mixpanelToken())

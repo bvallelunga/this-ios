@@ -17,11 +17,14 @@ class AuthStepUsername: AuthStep {
         self.placeholder = "@username"
         self.title = "USERNAME"
         self.nextText = "SIGN UP"
-        self.header = "Chill. What\nshould I call you?"
         self.showBack = true
         self.keyboard = .Twitter
         self.background = Colors.greyBlue
         self.percent = 0.75
+    }
+    
+    override func header() -> String {
+        return "Chill. What\nshould I call you?"
     }
     
     override func viewed() {

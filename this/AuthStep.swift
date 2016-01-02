@@ -13,7 +13,6 @@ class AuthStep: NSObject {
     var value: String = ""
     var placeholder: String = ""
     var title: String = ""
-    var header: String = ""
     var percent: CGFloat = 0
     var keyboard: UIKeyboardType = .PhonePad
     var showBack: Bool = true
@@ -27,6 +26,10 @@ class AuthStep: NSObject {
         self.init()
         
         self.parentController = parent
+    }
+    
+    func header() -> String {
+        return ""
     }
     
     func formatValue(input: String) -> String {

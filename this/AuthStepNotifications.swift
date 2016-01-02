@@ -15,12 +15,15 @@ class AuthStepNotifications: AuthStep {
         
         self.title = "NOTIFICATION PERMISSIONS"
         self.nextText = "SKIP"
-        self.header = "Can I notify you\nwhen stuff happens?"
         self.bigText = "SURE"
         self.showBack = false
         self.background = Colors.orange
         self.input = false
         self.percent = 1
+    }
+    
+    override func header() -> String {
+        return "Can I notify you\nwhen stuff happens?"
     }
     
     override func viewed() {

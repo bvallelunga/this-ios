@@ -54,15 +54,19 @@ class User: PFUser {
         Globals.landingController.navigationController?.popToRootViewControllerAnimated(false)
     }
 
-    class func verifyNumber(number: String) -> String {
+    class func verifyNumber(number: String, callback: (code: String, username: String!) -> Void) {
         let code = String(Globals.random(4))
         
         PFCloud.callFunctionInBackground("verifyPhone", withParameters: [
             "phone": number,
             "code": code
-        ])
-        
-        return code
+        ]) { (response, error) -> Void in
+            if error == nil {
+                callback(code: code, username: response as? String)
+            } else {
+                ErrorHandler.handleParse(error)
+            }
+        }
     }
     
     class func logInWithPhone(number: String, callback: (user: User!) -> Void) {
@@ -74,7 +78,6 @@ class User: PFUser {
                     if let user = pfuser as? User {
                         callback(user: user)
                         Installation.setUser(user)
-                        user.identifyMixpanel()
                         user.updateMixpanel()
                     } else if error != nil {
                         ErrorHandler.handleParse(error)
@@ -101,7 +104,6 @@ class User: PFUser {
             if success {
                 callback(user: user)
                 Installation.setUser(user)
-                user.aliasMixpanel()
                 user.updateMixpanel()
             } else {
                 ErrorHandler.handleParse(error)
@@ -122,21 +124,18 @@ class User: PFUser {
         self.updateMixpanel()
     }
     
-    func identifyMixpanel() {
-        Globals.mixpanel.identify(self.objectId)
-    }
-    
-    func aliasMixpanel() {
-        Globals.mixpanel.createAlias(self.objectId, forDistinctID: Globals.mixpanel.distinctId)
-    }
-    
     func updateMixpanel() {
         Globals.mixpanel.people.set([
             "Parse ID": self.objectId!,
-            "$name": self.fullName,
+            "$name": self.name,
             "$phone": self.phone,
             "$username": self.username!,
             "Profile Picture": self.photo.url != nil
+        ])
+        
+        Globals.mixpanel.registerSuperProperties([
+            "User ID": self.objectId!,
+            "User": self.name
         ])
     }
     

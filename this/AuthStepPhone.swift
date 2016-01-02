@@ -20,7 +20,6 @@ class AuthStepPhone: AuthStep {
         
         self.value = "+1 "
         self.title = "ACCOUNT"
-        self.header = "Hey, can I\nget your number?"
         self.showBack = false
         self.keyboard = .PhonePad
         self.background = Colors.offBlue
@@ -31,6 +30,10 @@ class AuthStepPhone: AuthStep {
         self.formatter.addOutputPattern("+# (###) ###-##-##", forRegExp: "^7[0-689]\\d*$")
         self.formatter.addOutputPattern("+## (###) ########", forRegExp: "^49\\d*$")
         self.formatter.addOutputPattern("+### (##) ###-###", forRegExp: "^374\\d*$")
+    }
+    
+    override func header() -> String {
+        return "Hey, can I\nget your number?"
     }
     
     override func viewed() {
@@ -55,10 +58,13 @@ class AuthStepPhone: AuthStep {
             let number = try phoneUtil.parseWithPhoneCarrierRegion(self.value)
             let e164 = try phoneUtil.format(number, numberFormat: .E164)
             
-            self.parentController.phoneNumber = e164
-            self.parentController.phoneVerify = User.verifyNumber(e164)
-            
-            callback(segue: false, skip: false)
+            User.verifyNumber(e164, callback: { (code, username) -> Void in
+                self.parentController.phoneNumber = e164
+                self.parentController.phoneVerify = code
+                self.parentController.phoneUsername = username
+                
+                callback(segue: false, skip: false)
+            })
         } catch let error as NSError  {
             print(error.description)
         }

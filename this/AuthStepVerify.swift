@@ -18,11 +18,18 @@ class AuthStepVerify: AuthStep {
         self.value = ""
         self.placeholder = "• • • •"
         self.title = "TEXT VERIFICATION"
-        self.header = "Did I get it right?\nI sent you a code."
         self.showBack = true
         self.keyboard = .NumberPad
         self.background = Colors.purple
         self.percent = 0.5
+    }
+    
+    override func header() -> String {
+        if let name = self.parentController.phoneUsername {
+            return "Hey \(name)!\nI sent you a code."
+        }
+        
+        return "Did I get it right?\nI sent you a code."
     }
     
     override func viewed() {

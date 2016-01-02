@@ -16,12 +16,15 @@ class AuthStepPhotos: AuthStep {
         
         self.title = "PHOTO PERMISSIONS"
         self.nextText = "SKIP"
-        self.header = "Last thing.\nCan we share pictures?"
         self.bigText = "ABSOLUTELY"
         self.showBack = false
         self.background = Colors.green
         self.input = false
         self.percent = 1
+    }
+    
+    override func header() -> String {
+        return "Last thing.\nCan we share pictures?"
     }
     
     override func viewed() {

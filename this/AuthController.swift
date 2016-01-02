@@ -22,6 +22,7 @@ class AuthController: UIViewController {
     
     var phoneNumber = ""
     var phoneVerify = ""
+    var phoneUsername: String!
     var notifications = Notifications()
     
     private var stepIndex: Int = -1
@@ -156,7 +157,7 @@ class AuthController: UIViewController {
     
     func loadStep() {
         self.stepLabel.text = self.step.title
-        self.headerLabel.text = self.step.header
+        self.headerLabel.text = self.step.header()
         self.textField.placeholder = self.step.placeholder
         self.textField.text = self.step.formatValue(self.step.value)
         self.textField.keyboardType = self.step.keyboard

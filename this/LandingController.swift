@@ -22,15 +22,6 @@ class LandingController: UIViewController, TTTAttributedLabelDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Check If User Is Logged In
-        if let user = User.current() {
-            self.performSegueWithIdentifier("next", sender: self)
-            
-            Installation.setUser(user)
-            user.identifyMixpanel()
-            user.updateMixpanel()
-        }
 
         // Setup Logo
         self.logoLabel.shadowColor = UIColor(white: 0, alpha: 0.2)
@@ -49,6 +40,13 @@ class LandingController: UIViewController, TTTAttributedLabelDelegate {
         self.button.layer.shadowOpacity = 0.3
         
         // Setup Movie
+        do {
+            try AVAudioSession.sharedInstance()
+                .setCategory(AVAudioSessionCategoryAmbient, withOptions: [])
+        } catch _ {
+        
+        }
+        
         let videoURL = NSBundle.mainBundle().URLForResource("VideoBackground", withExtension: "mp4")
         let playerItem = AVPlayerItem(asset: AVAsset(URL: videoURL!))
         self.player = AVPlayer(playerItem: playerItem)
@@ -92,6 +90,17 @@ class LandingController: UIViewController, TTTAttributedLabelDelegate {
         SVProgressHUD.setBackgroundColor(Colors.darkGrey)
         SVProgressHUD.setForegroundColor(UIColor.whiteColor())
         SVProgressHUD.setFont(UIFont(name: "Bariol-Bold", size: 22))
+        
+        // Set Landing Controller
+        Globals.landingController = self
+        
+        // Check If User Is Logged In
+        if let user = User.current() {
+            self.performSegueWithIdentifier("next", sender: self)
+            
+            Installation.setUser(user)
+            user.updateMixpanel()
+        }
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -108,7 +117,6 @@ class LandingController: UIViewController, TTTAttributedLabelDelegate {
         self.player.play()
         
         // Core Setup
-        Globals.landingController = self
         Globals.mixpanel.track("Mobile.Landing")
     }
     
