@@ -176,7 +176,7 @@ class Tag: PFObject, PFSubclassing {
         query.whereKey("flagged", notEqualTo: true)
         query.whereKey("expireAt", greaterThan: NSDate())
         
-        query.addAscendingOrder("createdAt")
+        query.addDescendingOrder("createdAt")
         
         if limit != nil {
             query.limit = limit
@@ -203,7 +203,7 @@ class Tag: PFObject, PFSubclassing {
         let photos: [Photo] = images.map { (image) -> Photo in
             let photo = Photo.create(user, image: image, tag: self, expireAt: expireAt)
             
-            self.photosCached.addObject(photo)
+            self.photosCached.insertObject(photo, atIndex: 0)
             
             return photo
         }

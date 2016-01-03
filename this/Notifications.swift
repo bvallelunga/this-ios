@@ -60,10 +60,6 @@ class Notifications: NSObject {
         
         StateTracker.setTagNotification(tag)
         
-        if let name = info["tagName"] as? String {
-            tag.name = name
-        }
-        
         if wasActive {
             guard let message = info["message"] as? String else {
                 Globals.commentsTag(tag)

@@ -96,7 +96,7 @@ class TagHeaderPages: UIPageViewController, UIPageViewControllerDataSource,
     
     // MARK: Page View Controller Data Source
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return self.pages
+        return self.pages > 1 ? self.pages : 0
     }
     
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
