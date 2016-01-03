@@ -60,7 +60,7 @@ class FollowingTagCell: UICollectionViewCell {
             self.images.removeAll()
                         
             for photo in photos {
-                photo.fetchThumbnail({ (image) -> Void in
+                photo.fetchThumbnail(callback: { (image) -> Void in
                     self.images.append(image)
                     
                     if photo == photos.first {

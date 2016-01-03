@@ -171,8 +171,6 @@ class Tag: PFObject, PFSubclassing {
         
         let query = self.photos.query()
         
-        query.whereKeyExists("original")
-        query.whereKeyExists("thumbnail")
         query.whereKey("flagged", notEqualTo: true)
         query.whereKey("expireAt", greaterThan: NSDate())
         
@@ -211,6 +209,8 @@ class Tag: PFObject, PFSubclassing {
         Photo.saveAllInBackground(photos).continueWithSuccessBlock { (task) -> AnyObject? in
             self.followers.addObject(user)
             
+            StateTracker.setTagPhotos(self, increment: photos.count)
+            
             for photo in photos {
                 let data = UIImageJPEGRepresentation(photo.originalCached, 0.7)!
                 
@@ -218,7 +218,8 @@ class Tag: PFObject, PFSubclassing {
                 
                 PhotoQueue.queue.enqueueTaskWithName("photoUpload", userInfo: [
                     "photo": photo.objectId!,
-                    "image": data.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+                    "image": data.base64EncodedStringWithOptions(.Encoding64CharacterLineLength),
+                    "tag": self.objectId!
                 ])
             }
 
@@ -230,20 +231,7 @@ class Tag: PFObject, PFSubclassing {
             // Update Mixpanel
             Globals.mixpanel.people.increment("Photos", by: images.count)
             
-            // Send Push Notification
-            let query = Installation.query()
-            
-            query?.whereKey("user", matchesQuery: self.followers.query())
-            query?.whereKey("user", notEqualTo: user)
-            
-            return Notifications.sendPush(query!, data: [
-                "badge": "Increment",
-                "actions": "viewTag",
-                "tagID": self.objectId!,
-                "tagName": self.name,
-                "message": "New photos in \(self.hashtag)",
-                "alert": "\(user.name) posted to \(self.hashtag)"
-            ])
+            return true
         }.continueWithBlock { (task) -> AnyObject? in
             ErrorHandler.handleParse(task.error)
             return nil

@@ -39,6 +39,12 @@ class TagTableController: UITableViewController {
         let press = UILongPressGestureRecognizer(target: self, action: Selector("handleLongPress:"))
         press.minimumPressDuration = 1
         self.tableView.addGestureRecognizer(press)
+        
+        // Add Refresh
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.tintColor = UIColor.lightGrayColor()
+        self.refreshControl?.addTarget(self, action: Selector("reloadTag"), forControlEvents: .ValueChanged)
+        self.tableView.addSubview(self.refreshControl!)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -68,6 +74,11 @@ class TagTableController: UITableViewController {
         }
     }
     
+    func reloadTag() {
+        Globals.tagController.updateTag(self.tag)
+        self.refreshControl?.endRefreshing()
+    }
+    
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         if self.keyboardActive {
             return
@@ -86,7 +97,7 @@ class TagTableController: UITableViewController {
         self.headerController.view.frame = rect
     }
     
-    func reloadComments() {
+    func reloadComments() {        
         self.tag.comments { (comments) -> Void in
             self.comments = comments
             self.tableView.reloadData()
@@ -147,6 +158,7 @@ class TagTableController: UITableViewController {
         
         cell.textLabel?.attributedText = self.buildText(comment.from, message: comment.message)
         cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.lineBreakMode = .ByWordWrapping
         
         return cell
     }

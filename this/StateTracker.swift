@@ -39,6 +39,21 @@ class StateTracker: NSObject {
         }
     }
     
+    static var tagPhotosUpload: [String: Int] {
+        get {
+            guard let notifications = self.defaults.valueForKey("tagPhotosUpload") as? [String: Int] else {
+                return [:]
+            }
+        
+            return notifications
+        }
+        
+        set (val) {
+            self.defaults.setValue(val, forKey: "tagPhotosUpload")
+            self.save()
+        }
+    }
+    
     // Class Methods
     class func save() {
         self.defaults.synchronize()
@@ -72,6 +87,32 @@ class StateTracker: NSObject {
         }
         
         guard let count = self.tagNotifications[id] else {
+            return 0
+        }
+        
+        return count
+    }
+    
+    class func setTagPhotos(tag: Tag, increment: Int) {
+        guard let id = tag.objectId else {
+            return
+        }
+        
+        var count = self.tagPhotosUpload[id]
+        
+        if count == nil {
+            count = 0
+        }
+        
+        self.tagPhotosUpload[id] = max(0, count! + increment)
+    }
+    
+    class func countTagPhotos(tag: Tag) -> Int {
+        guard let id = tag.objectId else {
+            return 0
+        }
+        
+        guard let count = self.tagPhotosUpload[id] else {
             return 0
         }
         

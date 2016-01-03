@@ -46,10 +46,18 @@ class Photo: PFObject, PFSubclassing {
         self.saveInBackground()
     }
     
-    func fetchThumbnail(callback: (image: UIImage) -> Void) {
+    func fetchThumbnail(var backoff: Int = 5, callback: (image: UIImage) -> Void) {
         guard let url = self.thumbnail.url else {
             if let image = self.originalCached {
                 callback(image: image)
+            } else {
+                Globals.delay(Double(backoff), closure: { () -> () in
+                    self.fetchInBackgroundWithBlock({ (_, _) -> Void in
+                        backoff += 5
+                        
+                        self.fetchThumbnail(backoff, callback: callback)
+                    })
+                })
             }
             
             return
@@ -58,10 +66,18 @@ class Photo: PFObject, PFSubclassing {
         Globals.fetchImage(url, callback: callback)
     }
     
-    func fetchOriginal(callback: (image: UIImage) -> Void) {
+    func fetchOriginal(var backoff: Int = 5, callback: (image: UIImage) -> Void) {
         guard let url = self.original.url else {
             if let image = self.originalCached {
                 callback(image: image)
+            } else {
+                Globals.delay(Double(backoff), closure: { () -> () in
+                    self.fetchInBackgroundWithBlock({ (_, _) -> Void in
+                        backoff += 5
+                        
+                        self.fetchThumbnail(backoff, callback: callback)
+                    })
+                })
             }
             
             return

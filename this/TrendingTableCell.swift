@@ -62,7 +62,7 @@ class TrendingTableCell: UITableViewCell, UICollectionViewDelegate, UICollection
             self.images.removeAll()
             
             for photo in photos {
-                photo.fetchThumbnail({ (image) -> Void in
+                photo.fetchThumbnail(callback: { (image) -> Void in
                     self.images.append(image)
                     self.collectionView.reloadData()
                 })

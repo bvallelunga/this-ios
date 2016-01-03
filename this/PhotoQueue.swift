@@ -35,6 +35,7 @@ class PhotoQueue: NSObject, KTBTaskQueueDelegate  {
     // Instance Method
     func taskQueue(queue: KTBTaskQueue!, executeTask task: KTBTask!, completion: KTBTaskCompletionBlock!) {
         let photo = Photo(withoutDataWithObjectId: task.userInfo["photo"] as? String)
+        let tag = Tag(withoutDataWithObjectId: task.userInfo["tag"] as? String)
         
         let data = NSData(base64EncodedString: task.userInfo["image"] as! String, options: .IgnoreUnknownCharacters)!
         let image = UIImage(data: data)
@@ -49,9 +50,37 @@ class PhotoQueue: NSObject, KTBTaskQueueDelegate  {
                 return
             }
             
+            if StateTracker.countTagNotification(tag) == 1 {
+                self.sendTagPush(tag, user: User.current())
+            }
+            
+            StateTracker.setTagPhotos(tag, increment: -1)
             Globals.imageDownloader.setImage(image, forURL: NSURL(string: file.url!))
             completion(KTBTaskStatus.Success)
         })
+    }
+    
+    func sendTagPush(tag: Tag, user: User) {
+        let query = Installation.query()
+        
+        query?.whereKey("user", matchesQuery: tag.followers.query())
+        query?.whereKey("user", notEqualTo: user)
+        
+        tag.fetchInBackgroundWithBlock { (_, error) -> Void in
+            guard error == nil else {
+                ErrorHandler.handleParse(error)
+                return
+            }
+            
+            Notifications.sendPush(query!, data: [
+                "badge": "Increment",
+                "actions": "viewTag",
+                "tagID": tag.objectId!,
+                "tagName": tag.name,
+                "message": "New photos in \(tag.hashtag)",
+                "alert": "\(user.name) posted to \(tag.hashtag)"
+            ])
+        }
     }
 
 }

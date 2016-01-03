@@ -48,7 +48,7 @@ class TagHeaderPages: UIPageViewController, UIPageViewControllerDataSource,
         
         self.tag.photos { (photos) -> Void in
             for photo in photos {
-                photo.fetchThumbnail({ (image) -> Void in
+                photo.fetchThumbnail(callback: { (image) -> Void in
                     guard self.photos[image] == nil else {
                         return
                     }
@@ -155,10 +155,10 @@ class TagHeaderPages: UIPageViewController, UIPageViewControllerDataSource,
         
         let photo = self.photos[self.images[index]]!
         
-        photo.fetchOriginal({ (image) -> Void in
+        photo.fetchOriginal { (image) -> Void in
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             cell.finishedDownload()
-        })
+        }
         
         Globals.mixpanel.track("Mobile.Tag.Photo.Downloaded", properties: [
             "tag": self.tag.name,
@@ -212,10 +212,10 @@ class TagHeaderPages: UIPageViewController, UIPageViewControllerDataSource,
         
         let galleryPhoto = photo as! GalleryPhoto
         
-        galleryPhoto.photo.fetchOriginal({ (image) -> Void in
+        galleryPhoto.photo.fetchOriginal { (image) -> Void in
             galleryPhoto.image = image
             photosViewController.updateImageForPhoto(photo)
-        })
+        }
         
         Globals.mixpanel.track("Mobile.Tag.Gallery.Photo.Viewed", properties: [
             "tag": self.tag.name,
