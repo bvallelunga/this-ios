@@ -16,8 +16,7 @@ class ProfileController: UITableViewController {
     private var headerController: ProfileHeaderController!
     private var user = User.current()
     private var config: Config!
-    
-    @IBOutlet weak var signoutButton: UIButton!
+
     @IBOutlet weak var nameLabel: UILabel!
     
     override func viewDidLoad() {
@@ -27,10 +26,6 @@ class ProfileController: UITableViewController {
         self.navigationController?.navigationBarHidden = true
         self.tableView.backgroundColor = Colors.offWhite
         self.tableView.separatorColor = Colors.whiteGrey
-        
-        self.signoutButton.backgroundColor = Colors.red
-        self.signoutButton.tintColor = UIColor.whiteColor()
-        self.signoutButton.layer.cornerRadius = 6
         
         self.nameLabel.text = self.user.fullName
         
@@ -94,21 +89,6 @@ class ProfileController: UITableViewController {
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 50
-    }
-    
-    @IBAction func signoutTriggered(sender: AnyObject) {
-        let controller = UIAlertController(title: "You Sure?",
-            message: "If you really have to leave I understand. Your account will still be here when you want to login.", preferredStyle: .Alert)
-        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        let save = UIAlertAction(title: "Sign Out", style: .Destructive) { (action) -> Void in
-            User.logOut()
-        }
-        
-        controller.addAction(cancel)
-        controller.addAction(save)
-        
-        self.presentViewController(controller, animated: true, completion: nil)
-        Globals.mixpanel.track("Mobile.Settings.Logged Out")
     }
     
     func updateName() {

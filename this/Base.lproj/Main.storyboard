@@ -32,6 +32,7 @@
             <string>Bariol-Regular</string>
             <string>Bariol-Regular</string>
             <string>Bariol-Regular</string>
+            <string>Bariol-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -343,27 +344,14 @@ and Privacy Policy.</string>
                                 <segue destination="Hyq-uP-HpV" kind="embed" identifier="header" id="Kbs-qZ-rKN"/>
                             </connections>
                         </containerView>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="qFa-LH-0dw">
-                            <rect key="frame" x="0.0" y="605.5" width="600" height="70"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3bR-Wp-Iyr">
-                                    <rect key="frame" x="30" y="5" width="540" height="35"/>
-                                    <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="22"/>
-                                    <state key="normal" title="Sign Out"/>
-                                    <connections>
-                                        <action selector="signoutTriggered:" destination="drl-m4-1EO" eventType="touchUpInside" id="DO6-Zx-6Da"/>
-                                    </connections>
-                                </button>
-                            </subviews>
+                        <containerView key="tableFooterView" opaque="NO" contentMode="scaleToFill" id="uQg-E7-bL9">
+                            <rect key="frame" x="0.0" y="605.5" width="600" height="150"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="bottom" secondItem="3bR-Wp-Iyr" secondAttribute="bottom" constant="20" id="8rY-lv-T85"/>
-                                <constraint firstItem="3bR-Wp-Iyr" firstAttribute="width" secondItem="qFa-LH-0dw" secondAttribute="width" multiplier="0.9" id="aWf-dV-Fcr"/>
-                                <constraint firstItem="3bR-Wp-Iyr" firstAttribute="centerX" secondItem="qFa-LH-0dw" secondAttribute="centerX" id="b3f-dP-Ntw"/>
-                                <constraint firstItem="3bR-Wp-Iyr" firstAttribute="top" secondItem="qFa-LH-0dw" secondAttribute="top" id="uwR-kg-sEV"/>
-                            </constraints>
-                        </view>
+                            <connections>
+                                <segue destination="PDM-9J-vDD" kind="embed" identifier="footer" id="qyT-bV-66y"/>
+                            </connections>
+                        </containerView>
                         <sections>
                             <tableViewSection headerTitle="About Me" id="Bso-wg-59Z">
                                 <cells>
@@ -513,7 +501,6 @@ and Privacy Policy.</string>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="nameLabel" destination="vNQ-CI-7Qf" id="Sbg-AO-gph"/>
-                        <outlet property="signoutButton" destination="3bR-Wp-Iyr" id="tze-x5-Yjn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0wS-dv-Maj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1393,7 +1380,64 @@ and Privacy Policy.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IRh-Z4-C9Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3344" y="-383"/>
+            <point key="canvasLocation" x="3344" y="-528"/>
+        </scene>
+        <!--Profile Footer Controller-->
+        <scene sceneID="jaV-38-Xk8">
+            <objects>
+                <viewController id="PDM-9J-vDD" customClass="ProfileFooterController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iTX-gp-YNO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vYq-Hg-cT2">
+                                <rect key="frame" x="30" y="10" width="540" height="52"/>
+                                <color key="backgroundColor" red="0.58182673429319376" green="0.17535787469835931" blue="0.14632660304301073" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="F94-HH-YkP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="22"/>
+                                <state key="normal" title="Sign Out">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="signoutTriggered:" destination="PDM-9J-vDD" eventType="touchUpInside" id="5an-Rf-CIO"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZC-PA-8Gt">
+                                <rect key="frame" x="20" y="62" width="560" height="58"/>
+                                <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vYq-Hg-cT2" firstAttribute="width" secondItem="iTX-gp-YNO" secondAttribute="width" multiplier="0.9" id="DN4-0d-mFG"/>
+                            <constraint firstItem="xZC-PA-8Gt" firstAttribute="trailing" secondItem="iTX-gp-YNO" secondAttribute="trailingMargin" id="ILe-GS-wZQ"/>
+                            <constraint firstItem="xZC-PA-8Gt" firstAttribute="leading" secondItem="iTX-gp-YNO" secondAttribute="leadingMargin" id="Mm4-5R-JCB"/>
+                            <constraint firstItem="xZC-PA-8Gt" firstAttribute="top" secondItem="vYq-Hg-cT2" secondAttribute="bottom" id="QDv-Ba-yBV"/>
+                            <constraint firstItem="vYq-Hg-cT2" firstAttribute="leading" secondItem="iTX-gp-YNO" secondAttribute="leadingMargin" id="gLl-Av-Fb9"/>
+                            <constraint firstItem="vYq-Hg-cT2" firstAttribute="top" secondItem="iTX-gp-YNO" secondAttribute="topMargin" constant="10" id="i19-mY-ve7"/>
+                            <constraint firstItem="vYq-Hg-cT2" firstAttribute="centerX" secondItem="iTX-gp-YNO" secondAttribute="centerX" id="mst-uk-aTe"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="xZC-PA-8Gt" secondAttribute="bottom" constant="30" id="xrG-MW-Fl0"/>
+                            <constraint firstItem="vYq-Hg-cT2" firstAttribute="trailing" secondItem="iTX-gp-YNO" secondAttribute="trailingMargin" id="yCf-GE-wtg"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="gLl-Av-Fb9"/>
+                                <exclude reference="yCf-GE-wtg"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="signoutButton" destination="vYq-Hg-cT2" id="jpf-KH-Vuf"/>
+                        <outlet property="versionLabel" destination="xZC-PA-8Gt" id="6s1-nX-uSM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h9B-us-yP5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3344" y="-233"/>
         </scene>
     </scenes>
     <resources>

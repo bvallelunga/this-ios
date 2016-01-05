@@ -62,7 +62,7 @@ class Globals: NSObject {
     }
     
     class func appVersionBuild() -> String {
-        return "\(self.appVersion()) - \(self.appBuild())"
+        return "\(self.appVersion()) (\(self.appBuild()))"
     }
     
     class func appBuild() -> String {

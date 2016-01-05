@@ -74,6 +74,7 @@
 		D3E49ED01C34DCE4003B367B /* PhotoQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E49ECF1C34DCE4003B367B /* PhotoQueue.swift */; };
 		D3EAAD321C374587000AC019 /* TagHeaderCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EAAD311C374587000AC019 /* TagHeaderCollection.swift */; };
 		D3EAAD341C374AA5000AC019 /* TagHeaderPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EAAD331C374AA5000AC019 /* TagHeaderPages.swift */; };
+		D3EAAD361C3BA4BB000AC019 /* ProfileFooterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EAAD351C3BA4BB000AC019 /* ProfileFooterController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,6 +173,7 @@
 		D3E49ECF1C34DCE4003B367B /* PhotoQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoQueue.swift; sourceTree = "<group>"; };
 		D3EAAD311C374587000AC019 /* TagHeaderCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagHeaderCollection.swift; sourceTree = "<group>"; };
 		D3EAAD331C374AA5000AC019 /* TagHeaderPages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagHeaderPages.swift; sourceTree = "<group>"; };
+		D3EAAD351C3BA4BB000AC019 /* ProfileFooterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFooterController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 			children = (
 				D31F09AF1C2900C900FD61A0 /* ProfileController.swift */,
 				D31F09B11C29017600FD61A0 /* ProfileHeaderController.swift */,
+				D3EAAD351C3BA4BB000AC019 /* ProfileFooterController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -733,6 +736,7 @@
 				D3E2932C1C1C279B00925EAC /* PageController.swift in Sources */,
 				D3E293151C1BA61400925EAC /* AuthController.swift in Sources */,
 				D3E293121C1BA4FE00925EAC /* Colors.swift in Sources */,
+				D3EAAD361C3BA4BB000AC019 /* ProfileFooterController.swift in Sources */,
 				D33B13E61C2AADE900C54DB9 /* Int+Range.swift in Sources */,
 				D31F09B01C2900C900FD61A0 /* ProfileController.swift in Sources */,
 				D32D18C31C24F4790097D653 /* TagTableController.swift in Sources */,
