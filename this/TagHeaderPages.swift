@@ -29,7 +29,7 @@ class TagHeaderPages: UIPageViewController, UIPageViewControllerDataSource,
         
         self.dataSource = self
         self.delegate = self
-        self.view.backgroundColor = UIColor.clearColor()
+        self.view.backgroundColor = Colors.darkGrey
         
         for controller in self.view.subviews {
             if let scrollView = controller as? UIScrollView {
