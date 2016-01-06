@@ -146,7 +146,10 @@ class Tag: PFObject, PFSubclassing {
     
     func comments(callback: (comments: [Comment]) -> Void) {
         let query = self.comments.query()
+        let expireAt = NSCalendar.currentCalendar()
+            .dateByAddingUnit(.Day, value: -7, toDate: NSDate(), options: [])!
         
+        query.whereKey("createdAt", greaterThan: expireAt)
         query.whereKey("flagged", notEqualTo: true)
         query.addAscendingOrder("createdAt")
         
