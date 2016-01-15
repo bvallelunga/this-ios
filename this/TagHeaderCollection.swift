@@ -17,7 +17,11 @@ class TagHeaderCollection: UICollectionViewController, UICollectionViewDelegateF
     var count: Int = 0
     
     convenience init() {
-        self.init(collectionViewLayout: UICollectionViewFlowLayout())
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 2
+        layout.minimumLineSpacing = 6
+        
+        self.init(collectionViewLayout: layout)
     }
 
     override func viewDidLoad() {
@@ -27,22 +31,13 @@ class TagHeaderCollection: UICollectionViewController, UICollectionViewDelegateF
         self.collectionView?.backgroundColor = UIColor.clearColor()
         self.collectionView?.scrollEnabled = false
         self.collectionView?.pagingEnabled = false
-        self.collectionView?.contentInset = UIEdgeInsetsMake(10, 10, 10, 10)
+        self.collectionView?.contentInset = UIEdgeInsetsMake(10, 10, 0, 10)
         self.collectionView!.registerClass(TagCollectionCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
 
     // MARK: UICollectionViewDataSource
-
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 10
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 10
     }
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -50,13 +45,15 @@ class TagHeaderCollection: UICollectionViewController, UICollectionViewDelegateF
     }
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let size = self.collectionView!.frame.size.width/4 - 15
+        let number = self.parent.rows
+        let length = self.collectionView!.frame.size.height
+        let size = length/CGFloat(number) - CGFloat(4 * (number - 1))
         return CGSizeMake(size, size)
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! TagCollectionCell
-        let index = indexPath.row + (12 * self.page)
+        let index = indexPath.row + (self.parent.grid * self.page)
         let image = self.parent.images[index]
         
         cell.imageView.image = image
@@ -68,7 +65,7 @@ class TagHeaderCollection: UICollectionViewController, UICollectionViewDelegateF
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! TagCollectionCell
         
-        let index = indexPath.row + (12 * self.page)
+        let index = indexPath.row + (self.parent.grid * self.page)
         
         if self.parent.downloadMode {
             self.parent.cellDownload(cell, index: index)

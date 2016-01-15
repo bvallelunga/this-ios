@@ -136,19 +136,19 @@ class ProfileController: UITableViewController {
     
     func FAQs() {
         let url = NSURL(string: self.config.faqsURL)
-        Globals.presentBrowser(url!, sender: self)
+        Globals.presentBrowser(url!, title: "FAQs", sender: self)
         Globals.mixpanel.track("Mobile.Settings.FAQs")
     }
     
     func privacyPolicy() {
         let url = NSURL(string: self.config.privacyURL)
-        Globals.presentBrowser(url!, sender: self)
+        Globals.presentBrowser(url!, title: "Privacy Policy", sender: self)
         Globals.mixpanel.track("Mobile.Settings.Privacy Policys")
     }
     
     func termsOfService() {
         let url = NSURL(string: self.config.termsURL)
-        Globals.presentBrowser(url!, sender: self)
+        Globals.presentBrowser(url!, title: "Terms of Service", sender: self)
         Globals.mixpanel.track("Mobile.Settings.TOS")
     }
     

@@ -105,8 +105,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        Globals.landingController?.player.play()
-        Globals.selectionController?.getAssests()
     }
 
     func applicationDidBecomeActive(application: UIApplication) {

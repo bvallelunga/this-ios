@@ -18,7 +18,8 @@ class LandingController: UIViewController, TTTAttributedLabelDelegate {
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var legalLabel: TTTAttributedLabel!
     
-    var player: AVPlayer!
+    private var player: AVPlayer!
+    private var config: Config!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +79,7 @@ class LandingController: UIViewController, TTTAttributedLabelDelegate {
             let tosRange = NSString(string: self.legalLabel.text!).rangeOfString("Terms of Service")
             let privacyRange = NSString(string: self.legalLabel.text!).rangeOfString("Privacy Policy")
             
+            self.config = config
             self.legalLabel.delegate = self
             self.legalLabel.linkAttributes = linkAttrs
             self.legalLabel.activeLinkAttributes = linkAttrs
@@ -101,6 +103,13 @@ class LandingController: UIViewController, TTTAttributedLabelDelegate {
             Installation.setUser(user)
             user.updateMixpanel()
         }
+        
+        // Application Became Active
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "applicationDidBecomeActive:",
+            name: UIApplicationDidBecomeActiveNotification,
+            object: nil)
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -126,8 +135,20 @@ class LandingController: UIViewController, TTTAttributedLabelDelegate {
         self.player.pause()
     }
     
+    func applicationDidBecomeActive(notification: NSNotification) {
+        if (self.navigationController?.topViewController == self) {
+            self.player.play()
+        }
+    }
+    
     func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
-        Globals.presentBrowser(url, sender: self)
+        var title = "Terms of Service"
+        
+        if url.absoluteString == config.privacyURL {
+            title = "Privacy Policy"
+        }
+        
+        Globals.presentBrowser(url, title: title, sender: self)
     }
 
 }

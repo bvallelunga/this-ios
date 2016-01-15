@@ -44,6 +44,13 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         Config.sharedInstance { (config) -> Void in
             self.config = config
         }
+        
+        // Application Became Active
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "applicationDidBecomeActive:",
+            name: UIApplicationDidBecomeActiveNotification,
+            object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -180,6 +187,10 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         } else {
             callback(authorized: status == .Authorized)
         }
+    }
+    
+    func applicationDidBecomeActive(notification: NSNotification) {
+        self.getAssests()
     }
 
     // MARK: UICollectionViewDataSource

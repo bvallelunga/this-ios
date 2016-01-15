@@ -106,12 +106,12 @@ class Globals: NSObject {
         }
     }
     
-    class func presentBrowser(url: NSURL, sender: UIViewController) {
+    class func presentBrowser(url: NSURL, title: String, sender: UIViewController) {
         let controller = WebViewController(url: url)
         let nav = UINavigationController(rootViewController: controller)
         
         // Configure Controller
-        controller.displaysWebViewTitle = true
+        controller.displaysWebViewTitle = false
         controller.progressBar.tintColor = Colors.blue
         controller.webView.backgroundColor = UIColor.whiteColor()
         controller.navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -142,6 +142,7 @@ class Globals: NSObject {
         ]
         
         sender.presentViewController(nav, animated: true, completion: nil)
+        controller.title = title
     }
     
 }

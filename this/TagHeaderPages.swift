@@ -17,6 +17,9 @@ class TagHeaderPages: UIPageViewController, UIPageViewControllerDataSource,
     var photos: [UIImage: Photo] = [:]
     var downloadMode = false
     var parent: TagHeaderController!
+    var columns = 3
+    var rows = 3
+    var grid: Int!
     
     private var pages = 0
     private var page = 0
@@ -27,6 +30,7 @@ class TagHeaderPages: UIPageViewController, UIPageViewControllerDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.grid = self.rows * self.columns
         self.dataSource = self
         self.delegate = self
         self.view.backgroundColor = Colors.darkGrey
@@ -68,7 +72,7 @@ class TagHeaderPages: UIPageViewController, UIPageViewControllerDataSource,
     
     func reloadPages() {
         var count = self.images.count
-        self.pages = Int(ceil(Double(self.images.count)/12))
+        self.pages = Int(ceil(Double(self.images.count)/Double(self.grid)))
         
         for var i = 0; i < self.pages; i++ {
             var controller: TagHeaderCollection!
@@ -81,7 +85,7 @@ class TagHeaderPages: UIPageViewController, UIPageViewControllerDataSource,
             }
         
             controller.page = i
-            controller.count = min(12, count)
+            controller.count = min(self.grid, count)
             controller.parent = self
             controller.collectionView?.reloadData()
             count -= controller.count
@@ -259,9 +263,10 @@ class TagHeaderPages: UIPageViewController, UIPageViewControllerDataSource,
     
     func photosViewController(photosViewController: NYTPhotosViewController!, referenceViewForPhoto photo: NYTPhoto!) -> UIView! {
         let galleryPhoto = photo as! GalleryPhoto
-        let page = Int(floor(Double(galleryPhoto.indexPath.row)/12))
+        
+        let page = Int(floor(Double(galleryPhoto.indexPath.row)/Double(self.grid)))
         let controller = self.controllers[page]
-        let indexPath = NSIndexPath(forRow: galleryPhoto.indexPath.row % 12, inSection: 0)
+        let indexPath = NSIndexPath(forRow: galleryPhoto.indexPath.row % self.grid, inSection: 0)
         
         self.setViewControllers([controller], direction: .Forward, animated: false, completion: nil)
         

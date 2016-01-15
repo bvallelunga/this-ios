@@ -54,6 +54,13 @@ class TagsController: UIViewController {
         
         // Update Containers
         self.segmentChanged(self)
+        
+        // Application Became Active
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "applicationDidBecomeActive:",
+            name: UIApplicationDidBecomeActiveNotification,
+            object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -101,6 +108,13 @@ class TagsController: UIViewController {
     func viewTag(tag: Tag) {
         self.tag = tag
         self.performSegueWithIdentifier("next", sender: self)
+    }
+    
+    func applicationDidBecomeActive(notification: NSNotification) {
+        if (self.navigationController?.topViewController == self) {
+            self.followingController.reloadTags()
+            self.trendingController.reloadTags()
+        }
     }
 
 }

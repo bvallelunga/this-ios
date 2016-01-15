@@ -33,6 +33,7 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     private var hashtag: String = ""
     private var arrowAnimation = CABasicAnimation(keyPath: "transform")
     private var timer: SelectionTimer!
+    private var timerIndex: Int!
     private var timers: [SelectionTimer] = [
         SelectionTimer(title: "1 day", timer: 1),
         SelectionTimer(title: "2 days", timer: 2),
@@ -113,17 +114,7 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     }
     
     @IBAction func changeTimer(sender: AnyObject) {
-        let sheet = UIAlertController(title: "When should your photos auto delete?",
-            message: nil, preferredStyle: .ActionSheet)
-        
-        for (i, timer) in self.timers.enumerate() {
-            let action = UIAlertAction(title: timer.title, style: .Default) { (action) in
-                self.setTimer(i)
-            }
-            sheet.addAction(action)
-        }
-        
-        Globals.selectionController.presentViewController(sheet, animated: true, completion: nil)
+        self.setTimer(self.timerIndex + 1)
     }
     
     @IBAction func tagChanged(sender: AnyObject) {
@@ -204,8 +195,13 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         self.setTimer(2)
     }
     
-    func setTimer(index: Int) {
+    func setTimer(var index: Int) {
+        if index >= self.timers.count {
+            index = 0
+        }
+        
         self.timer = self.timers[index]
+        self.timerIndex = index
         self.timerButton.setTitle(self.timer.title, forState: .Normal)
         
         Globals.mixpanel.track("Mobile.Selection.Tag.Timer Changed", properties: [

@@ -26,7 +26,7 @@ class ProfileFooterController: UIViewController {
     
     @IBAction func signoutTriggered(sender: AnyObject) {
         let controller = UIAlertController(title: "You Sure?",
-            message: "If you really have to leave I understand. Your account will still be here when you want to login.", preferredStyle: .Alert)
+            message: "If you really have to leave I understand. Your account will still be here when you come back.", preferredStyle: .Alert)
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         let save = UIAlertAction(title: "Sign Out", style: .Destructive) { (action) -> Void in
             User.logOut()
