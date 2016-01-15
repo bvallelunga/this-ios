@@ -11,7 +11,6 @@ import UIKit
 class TagHeaderProfileCell: UICollectionViewCell {
     
     var imageView = UIImageView()
-    var label = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,17 +37,7 @@ class TagHeaderProfileCell: UICollectionViewCell {
         self.imageView.contentMode = .ScaleAspectFill
         self.imageView.backgroundColor = Colors.lightGrey
         self.imageView.layer.cornerRadius = self.imageView.frame.width/2
-        
-        self.label.frame = self.imageView.frame
-        self.label.layer.cornerRadius = self.label.frame.width/2
-        self.label.font = UIFont(name: "Bariol-Bold", size: 45)
-        self.label.textColor = UIColor.whiteColor()
-        self.label.textAlignment = .Center
-        self.label.backgroundColor = UIColor.whiteColor()
-        self.label.text = ""
-        self.label.adjustsFontSizeToFitWidth = true
-        
-        self.addSubview(self.label)
+
         self.addSubview(self.imageView)
     }
     

@@ -14,7 +14,7 @@ class TagHeaderProfiles: UICollectionView, UICollectionViewDataSource, UICollect
 
     private var hashtag: Tag!
     private var users: [User] = []
-    private var images: [User: UIImage!] = [:]
+    private var images: [User: UIImage] = [:]
     
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
@@ -35,10 +35,6 @@ class TagHeaderProfiles: UICollectionView, UICollectionViewDataSource, UICollect
         tag.followers { (users) -> Void in
             for user in users {
                 guard user.photo.url != nil else {
-                    self.users.append(user)
-                    self.images[user] = nil
-                    self.reloadData()
-                    
                     return
                 }
                 
@@ -72,8 +68,6 @@ class TagHeaderProfiles: UICollectionView, UICollectionViewDataSource, UICollect
         let user = self.users[indexPath.row]
         
         cell.imageView.image = self.images[user]
-        cell.label.text = user.screenname
-    
         
         return cell
     }

@@ -73,15 +73,16 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
     }
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return max(tags.count, 6)
+        return max(self.tags.count, self.tags.isEmpty ? 0 : 6)
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     
-        if tags.count <= indexPath.row {
+        if self.tags.count <= indexPath.row {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(spacerIdentifier, forIndexPath: indexPath) as! FollowingSpacerCell
-            cell.backgroundColor = Colors.tiles[indexPath.row]
-            cell.alpha = 0.15
+            
+            cell.backgroundColor = Colors.lightGrey
+            cell.alpha = 0.2
             return cell
         }
         
