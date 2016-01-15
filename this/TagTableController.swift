@@ -18,8 +18,8 @@ class TagTableController: UITableViewController {
     var tag: Tag!
     var comments: [Comment] = []
     
-    private var headerFrame: CGRect!
-    private var keyboardActive: Bool = false
+    private var headerFrame = CGRect.zero
+    private var keyboardActive = false
     private var user = User.current()
     private var commentHeights: [NSIndexPath: CGFloat] = [:]
 
@@ -124,6 +124,7 @@ class TagTableController: UITableViewController {
         self.headerContainer.frame.size.height = 0
         self.headerContainer.alpha = 0
         self.tableView.tableHeaderView = self.tableView.tableHeaderView
+        self.tableView.tableFooterView = self.tableView.tableFooterView
     }
     
     func keyboardDidHide() {
@@ -133,6 +134,7 @@ class TagTableController: UITableViewController {
         self.headerController.view.frame = self.headerFrame
         self.headerContainer.alpha = 1
         self.tableView.tableHeaderView = self.tableView.tableHeaderView
+        self.tableView.tableFooterView = self.tableView.tableFooterView
     }
 
     // MARK: - Table view data source

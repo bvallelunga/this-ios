@@ -68,7 +68,6 @@ class TagsController: UIViewController {
         
         // Core Setup
         Globals.tagsController = self
-        Globals.mixpanel.track("Mobile.Tags")
     }
 
     // MARK: - Navigation
@@ -97,12 +96,11 @@ class TagsController: UIViewController {
         self.followingContainer.hidden = index != 0
         self.trendingContainer.hidden = index != 1
         
-        Globals.mixpanel.track("Mobile.Tags.\(container).Selected")
+        Globals.mixpanel.track("Mobile.\(container).Selected")
     }
 
     @IBAction func goToSelection(sender: AnyObject) {
         Globals.pagesController.setActiveController(1, direction: .Reverse)
-        Globals.mixpanel.track("Mobile.Tags.Selection Button")
     }
     
     func viewTag(tag: Tag) {

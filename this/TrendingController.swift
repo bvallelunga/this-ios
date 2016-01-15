@@ -39,7 +39,7 @@ class TrendingController: UITableViewController {
         
         // Core Setup
         Globals.trendingController = self
-        Globals.mixpanel.track("Mobile.Tags.Trending")
+        Globals.mixpanel.track("Mobile.Trending")
         
         if self.date == nil || self.tags.isEmpty || NSCalendar.currentCalendar().components(.Minute, fromDate: self.date, toDate: NSDate(), options: []).minute > 10 {
             self.reloadTags()
@@ -53,7 +53,7 @@ class TrendingController: UITableViewController {
             self.refreshControl?.endRefreshing()
             self.date = NSDate()
             
-            Globals.mixpanel.track("Mobile.Tags.Trending.Tags.Fetched", properties: [
+            Globals.mixpanel.track("Mobile.Trending.Tags.Fetched", properties: [
                 "tags": tags.count
             ])
         }
@@ -75,7 +75,7 @@ class TrendingController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if self.tags.count > indexPath.row {
             self.parent.viewTag(self.tags[indexPath.row])
-            Globals.mixpanel.timeEvent("Mobile.Tags.Trending.Tag.Selected")
+            Globals.mixpanel.timeEvent("Mobile.Trending.Tag.Selected")
         }
     }
 

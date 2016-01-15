@@ -17,6 +17,8 @@
 		D3224A741C1AADA3009DFA85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3224A721C1AADA3009DFA85 /* LaunchScreen.storyboard */; };
 		D3224A7F1C1AADA3009DFA85 /* thisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3224A7E1C1AADA3009DFA85 /* thisTests.swift */; };
 		D3224A8A1C1AADA3009DFA85 /* thisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3224A891C1AADA3009DFA85 /* thisUITests.swift */; };
+		D32D131C1C488ED20054B25A /* TagHeaderProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D131B1C488ED20054B25A /* TagHeaderProfiles.swift */; };
+		D32D131E1C48926B0054B25A /* TagHeaderProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D131D1C48926B0054B25A /* TagHeaderProfileCell.swift */; };
 		D32D18BF1C224B3B0097D653 /* TagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D18BE1C224B3B0097D653 /* TagController.swift */; };
 		D32D18C11C24EDC70097D653 /* TagHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D18C01C24EDC70097D653 /* TagHeaderController.swift */; };
 		D32D18C31C24F4790097D653 /* TagTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D18C21C24F4790097D653 /* TagTableController.swift */; };
@@ -113,6 +115,8 @@
 		D3224A851C1AADA3009DFA85 /* thisUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = thisUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3224A891C1AADA3009DFA85 /* thisUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = thisUITests.swift; sourceTree = "<group>"; };
 		D3224A8B1C1AADA3009DFA85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D32D131B1C488ED20054B25A /* TagHeaderProfiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagHeaderProfiles.swift; sourceTree = "<group>"; };
+		D32D131D1C48926B0054B25A /* TagHeaderProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagHeaderProfileCell.swift; sourceTree = "<group>"; };
 		D32D18BE1C224B3B0097D653 /* TagController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagController.swift; sourceTree = "<group>"; };
 		D32D18C01C24EDC70097D653 /* TagHeaderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagHeaderController.swift; sourceTree = "<group>"; };
 		D32D18C21C24F4790097D653 /* TagTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTableController.swift; sourceTree = "<group>"; };
@@ -295,6 +299,8 @@
 				D3EAAD331C374AA5000AC019 /* TagHeaderPages.swift */,
 				D3EAAD311C374587000AC019 /* TagHeaderCollection.swift */,
 				D3C2D2FE1C27BDB6002F0241 /* TagCollectionCell.swift */,
+				D32D131B1C488ED20054B25A /* TagHeaderProfiles.swift */,
+				D32D131D1C48926B0054B25A /* TagHeaderProfileCell.swift */,
 			);
 			name = Tag;
 			sourceTree = "<group>";
@@ -752,6 +758,8 @@
 				D39AB7411C1F8A9800C9E96F /* ShareController.swift in Sources */,
 				D3D240481C27FC5F00917AE3 /* ShareGenerator.swift in Sources */,
 				D3EAAD321C374587000AC019 /* TagHeaderCollection.swift in Sources */,
+				D32D131C1C488ED20054B25A /* TagHeaderProfiles.swift in Sources */,
+				D32D131E1C48926B0054B25A /* TagHeaderProfileCell.swift in Sources */,
 				D33B13E81C2AB61000C54DB9 /* ErrorHandler.swift in Sources */,
 				D3E2932A1C1C277600925EAC /* PagesController.swift in Sources */,
 				D3E2931E1C1BBE3000925EAC /* AuthStepPhone.swift in Sources */,

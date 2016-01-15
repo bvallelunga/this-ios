@@ -45,7 +45,7 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
         
         // Core Setup
         Globals.followingController = self
-        Globals.mixpanel.track("Mobile.Tags.Following")
+        Globals.mixpanel.track("Mobile.Following")
         
         if self.date == nil || self.tags.isEmpty || NSCalendar.currentCalendar().components(.Minute, fromDate: self.date, toDate: NSDate(), options: []).minute > 1 {
             self.reloadTags()
@@ -61,7 +61,7 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
             
             Globals.mixpanel.people.set("Following", to: tags.count)
             
-            Globals.mixpanel.track("Mobile.Tags.Following.Tags.Fetched", properties: [
+            Globals.mixpanel.track("Mobile.Following.Tags.Fetched", properties: [
                 "tags": tags.count
             ])
         }
@@ -114,7 +114,7 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
     
     func tagCellTapped(tag: Tag) {
         self.parent.viewTag(tag)
-        Globals.mixpanel.timeEvent("Mobile.Tags.Following.Tag.Selected")
+        Globals.mixpanel.timeEvent("Mobile.Following.Tag.Selected")
     }
 
 }

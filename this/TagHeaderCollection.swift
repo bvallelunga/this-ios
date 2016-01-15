@@ -19,7 +19,7 @@ class TagHeaderCollection: UICollectionViewController, UICollectionViewDelegateF
     convenience init() {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 2
-        layout.minimumLineSpacing = 6
+        layout.minimumLineSpacing = 4
         
         self.init(collectionViewLayout: layout)
     }
@@ -31,8 +31,8 @@ class TagHeaderCollection: UICollectionViewController, UICollectionViewDelegateF
         self.collectionView?.backgroundColor = UIColor.clearColor()
         self.collectionView?.scrollEnabled = false
         self.collectionView?.pagingEnabled = false
-        self.collectionView?.contentInset = UIEdgeInsetsMake(10, 10, 0, 10)
-        self.collectionView!.registerClass(TagCollectionCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView?.contentInset = UIEdgeInsetsMake(15, 10, 0, 10)
+        self.collectionView?.registerClass(TagCollectionCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
 
     // MARK: UICollectionViewDataSource
@@ -44,10 +44,11 @@ class TagHeaderCollection: UICollectionViewController, UICollectionViewDelegateF
         return self.count
     }
 
+    // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let number = self.parent.rows
-        let length = self.collectionView!.frame.size.height
-        let size = length/CGFloat(number) - CGFloat(4 * (number - 1))
+        let number = self.parent.columns
+        let length = self.collectionView!.frame.size.width - 25
+        let size = length/CGFloat(number) - CGFloat(2 * (number - 1))
         return CGSizeMake(size, size)
     }
     

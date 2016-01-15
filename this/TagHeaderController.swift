@@ -13,6 +13,7 @@ class TagHeaderController: UIViewController, ShareControllerDelegate {
     @IBOutlet weak var followingButton: UIButton!
     @IBOutlet weak var inviteButton: UIButton!
     @IBOutlet weak var downloadButton: UIButton!
+    @IBOutlet weak var followersCollection: TagHeaderProfiles!
     
     var tag: Tag!
     var downloadMode: Bool = false
@@ -49,6 +50,7 @@ class TagHeaderController: UIViewController, ShareControllerDelegate {
         self.tag = tag
         
         self.pageController.updateTag(tag)
+        self.followersCollection.updateTag(tag)
         
         self.tag.isUserFollowing(self.user) { (following) -> Void in
             self.following = following

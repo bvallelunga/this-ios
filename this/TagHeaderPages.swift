@@ -17,7 +17,7 @@ class TagHeaderPages: UIPageViewController, UIPageViewControllerDataSource,
     var photos: [UIImage: Photo] = [:]
     var downloadMode = false
     var parent: TagHeaderController!
-    var columns = 3
+    var columns = 4
     var rows = 3
     var grid: Int!
     

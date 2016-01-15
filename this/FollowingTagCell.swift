@@ -111,7 +111,7 @@ class FollowingTagCell: UICollectionViewCell {
         self.imageTimer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self,
             selector: Selector("cycleImage"), userInfo: nil, repeats: true)
         
-        Globals.mixpanel.timeEvent("Mobile.Tags.Following.Tag.Photo Cycle")
+        Globals.mixpanel.timeEvent("Mobile.Following.Tag.Photo Cycle")
     }
     
     func stopCycling() {
@@ -123,7 +123,7 @@ class FollowingTagCell: UICollectionViewCell {
         self.tagLabel.alpha = 1
         self.badgeLabel.alpha = 1
         
-        Globals.mixpanel.track("Mobile.Tags.Following.Tag.Photo Cycle", properties: [
+        Globals.mixpanel.track("Mobile.Following.Tag.Photo Cycle", properties: [
             "images": self.images.count,
             "tag": self.hashtag.name
         ])

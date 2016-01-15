@@ -162,6 +162,18 @@ class Tag: PFObject, PFSubclassing {
         }
     }
     
+    func followers(callback: (users: [User]) -> Void) {
+        let query = self.followers.query()
+        
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if let users = objects as? [User] {
+                callback(users: users)
+            } else {
+                ErrorHandler.handleParse(error)
+            }
+        }
+    }
+    
     func photos(limit: Int! = nil, callback: (photos: [Photo]) -> Void) {
         if self.arePhotosCached {
             callback(photos: Array(self.photosCached) as! [Photo])
