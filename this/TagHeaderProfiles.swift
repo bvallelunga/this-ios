@@ -34,12 +34,11 @@ class TagHeaderProfiles: UICollectionView, UICollectionViewDataSource, UICollect
         
         tag.followers { (users) -> Void in
             for user in users {
-                guard user.photo.url != nil else {
-                    return
-                }
+                self.users.append(user)
+                self.images[user] = nil
+                self.reloadData()
                 
                 user.fetchPhoto({ (image) -> Void in
-                    self.users.append(user)
                     self.images[user] = image
                     self.reloadData()
                 })
@@ -67,7 +66,7 @@ class TagHeaderProfiles: UICollectionView, UICollectionViewDataSource, UICollect
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! TagHeaderProfileCell
         let user = self.users[indexPath.row]
         
-        cell.imageView.image = self.images[user]
+        cell.setImage(self.images[user])
         
         return cell
     }

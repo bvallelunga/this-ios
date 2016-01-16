@@ -306,7 +306,10 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     
     func shareControllerShared(count: Int) {
         Globals.viewTag(self.tag) { () -> Void in
+            let tag = self.tag
+            
             self.tag.postImages(self.timer, user: self.user, images: Array(self.selected.values)) { () -> Void in
+                Globals.viewTag(tag)
                 Globals.followingController?.reloadTags()
             }
 
