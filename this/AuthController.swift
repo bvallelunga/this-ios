@@ -50,6 +50,8 @@ class AuthController: UIViewController {
         self.bigButton.layer.shadowOpacity = 0.3
         self.bigButton.layer.cornerRadius = 38
         
+        self.nextButton.setTitleColor(UIColor(white: 1, alpha: 0.5), forState: .Disabled)
+        
         if User.current() == nil {
             self.steps = [
                 AuthStepPhone(parent: self),
@@ -139,7 +141,6 @@ class AuthController: UIViewController {
         if let text = self.textField.text {
             self.textField.text = self.step.formatValue(text)
             self.nextButton.enabled = self.step.isValid(self.step.value)
-            self.nextButton.alpha = self.nextButton.enabled ? 1 : 0.5;
         }
     }
     
@@ -166,7 +167,6 @@ class AuthController: UIViewController {
         self.backButton.hidden = !self.step.showBack
         self.nextButton.setTitle(self.step.nextText, forState: .Normal)
         self.nextButton.enabled = self.step.isValid(self.step.value)
-        self.nextButton.alpha = self.nextButton.enabled ? 1 : 0.5;
         self.bigButton.hidden = self.step.input
         self.bigButton.setTitle(self.step.bigText, forState: .Normal)
         

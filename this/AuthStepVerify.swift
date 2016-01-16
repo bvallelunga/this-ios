@@ -75,12 +75,16 @@ class AuthStepVerify: AuthStep {
             return
         }
         
+        self.parentController.nextButton.enabled = false
+        
         User.logInWithPhone(number, callback: { (user) -> Void in
             if user != nil {
                 Globals.mixpanel.track("Mobile.Auth.Logged In")
             }
             
             callback(segue: false, skip: user != nil)
+        }, hasError: { () -> Void in
+            self.parentController.nextButton.enabled = true
         })
     }
 

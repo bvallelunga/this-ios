@@ -53,10 +53,14 @@ class AuthStepUsername: AuthStep {
     override func next(callback: (segue: Bool, skip: Bool) -> Void) {
         let username = String(self.value.characters.dropFirst()).lowercaseString
         
-        User.register(username, phone: self.parentController.phoneNumber) { (user) -> Void in
+        self.parentController.nextButton.enabled = false
+        
+        User.register(username, phone: self.parentController.phoneNumber, callback: { (user) -> Void in
             Globals.mixpanel.track("Mobile.Auth.Registered")
             callback(segue: false, skip: false)
-        }
+        }, hasError: { () -> Void in
+            self.parentController.nextButton.enabled = true
+        })
     }
 
 }

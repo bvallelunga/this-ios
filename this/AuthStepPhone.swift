@@ -58,14 +58,19 @@ class AuthStepPhone: AuthStep {
             let number = try phoneUtil.parseWithPhoneCarrierRegion(self.value)
             let e164 = try phoneUtil.format(number, numberFormat: .E164)
             
+            self.parentController.nextButton.enabled = false
+            
             User.verifyNumber(e164, callback: { (code, username) -> Void in
                 self.parentController.phoneNumber = e164
                 self.parentController.phoneVerify = code
                 self.parentController.phoneUsername = username
                 
                 callback(segue: false, skip: false)
+            }, hasError: { () -> Void in
+                self.parentController.nextButton.enabled = true
             })
         } catch let error as NSError  {
+            self.parentController.nextButton.enabled = true
             print(error.description)
         }
     }

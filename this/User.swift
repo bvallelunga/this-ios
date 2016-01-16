@@ -54,7 +54,7 @@ class User: PFUser {
         Globals.landingController.navigationController?.popToRootViewControllerAnimated(false)
     }
 
-    class func verifyNumber(number: String, callback: (code: String, username: String!) -> Void) {
+    class func verifyNumber(number: String, callback: (code: String, username: String!) -> Void, hasError: () -> Void) {
         let code = String(Globals.random(4))
         
         PFCloud.callFunctionInBackground("verifyPhone", withParameters: [
@@ -64,12 +64,13 @@ class User: PFUser {
             if error == nil {
                 callback(code: code, username: response as? String)
             } else {
+                hasError()
                 ErrorHandler.handleParse(error)
             }
         }
     }
     
-    class func logInWithPhone(number: String, callback: (user: User!) -> Void) {
+    class func logInWithPhone(number: String, callback: (user: User!) -> Void, hasError: () -> Void) {
         PFCloud.callFunctionInBackground("loginPhone", withParameters: [
             "phone": number
         ]) { (response, error) -> Void in            
@@ -88,12 +89,13 @@ class User: PFUser {
             } else if error == nil {
                 callback(user: nil)
             } else {
+                hasError()
                 ErrorHandler.handleParse(error)
             }
         }
     }
     
-    class func register(username: String, phone: String, callback: (user: User) -> Void) {
+    class func register(username: String, phone: String, callback: (user: User) -> Void, hasError: () -> Void) {
         let user = User()
         
         user.username = username
@@ -106,6 +108,7 @@ class User: PFUser {
                 Installation.setUser(user)
                 user.updateMixpanel()
             } else {
+                hasError()
                 ErrorHandler.handleParse(error)
             }
         }
