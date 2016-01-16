@@ -117,13 +117,14 @@ class LandingController: UIViewController, TTTAttributedLabelDelegate {
     }
     
     func playerRestart(notification: NSNotification) {
-        self.player.currentItem?.seekToTime(kCMTimeZero)
+        self.player?.currentItem?.seekToTime(kCMTimeZero)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.player.play()
+        // Play
+        self.player?.play()
         
         // Core Setup
         Globals.mixpanel.track("Mobile.Landing")
@@ -132,12 +133,12 @@ class LandingController: UIViewController, TTTAttributedLabelDelegate {
     override func viewDidDisappear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.player.pause()
+        self.player?.pause()
     }
     
     func applicationDidBecomeActive(notification: NSNotification) {
         if (self.navigationController?.topViewController == self) {
-            self.player.play()
+            self.player?.play()
         }
     }
     

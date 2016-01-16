@@ -114,6 +114,7 @@ class Globals: NSObject {
         controller.displaysWebViewTitle = false
         controller.progressBar.tintColor = Colors.blue
         controller.webView.backgroundColor = UIColor.whiteColor()
+        controller.navigationItem.rightBarButtonItem = nil
         controller.navigationItem.leftBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: UIBarButtonSystemItem.Stop,
             target: controller,
@@ -133,11 +134,11 @@ class Globals: NSObject {
         
         // Set Colors & Fonts
         nav.navigationBar.tintColor = UIColor.whiteColor()
-        nav.navigationBar.barTintColor = Colors.blue
+        nav.navigationBar.barTintColor = Colors.lightGrey
         nav.navigationBar.barStyle = .Black
         nav.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.whiteColor(),
-            NSFontAttributeName: UIFont(name: "Bariol-Bold", size: 28)!,
+            NSFontAttributeName: UIFont(name: "Bariol-Bold", size: 26)!,
             NSShadowAttributeName: shadow
         ]
         
