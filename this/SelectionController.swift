@@ -16,10 +16,8 @@ private let cameraIdentifier = "camera"
 
 class SelectionController: UICollectionViewController, UICollectionViewDelegateFlowLayout,
     UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-    SelectionHeaderDelegate, ShareControllerDelegate {
+    SelectionHeaderDelegate {
     
-    private var tag: Tag!
-    private var timer: Int!
     private let manager = PHCachingImageManager()
     private var assets: [PHAsset] = []
     private var selected: [PHAsset: UIImage] = [:]
@@ -66,21 +64,6 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         super.viewDidAppear(animated)
         
         self.header?.placeholderView?.stopAnimating()
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "share" {
-            let controller = segue.destinationViewController as? ShareController
-            var images: [UIImage] = []
-            
-            for asset in self.selectedOrder {
-                images.append(self.selected[asset as! PHAsset]!)
-            }
-            
-            controller?.tag = self.tag
-            controller?.images = images
-            controller?.delegate = self
-        }
     }
     
     func setupCollectionView() {
@@ -294,36 +277,6 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
         }
     }
     
-    func shareControllerCancelled() {
-        self.navigationController?.popViewControllerAnimated(true)
-        
-        Globals.mixpanel.track("Mobile.Selection.Tag.Cancel", properties: [
-            "tag": self.tag.name,
-            "timer": self.timer,
-            "photos": self.selected.count
-        ])
-    }
-    
-    func shareControllerShared(count: Int) {
-        Globals.viewTag(self.tag) { () -> Void in
-            let tag = self.tag
-            
-            self.tag.postImages(self.timer, user: self.user, images: Array(self.selected.values)) { () -> Void in
-                Globals.viewTag(tag)
-                Globals.followingController?.reloadTags()
-            }
-
-            self.reset()
-            self.navigationController?.popViewControllerAnimated(false)
-            
-            Globals.mixpanel.track("Mobile.Selection.Tag.Post", properties: [
-                "tag": self.tag.name,
-                "timer": self.timer,
-                "photos": self.selected.count
-            ])
-        }
-    }
-    
     func setHashtag(tag: String) {
         self.header.setHashtag(tag)
     }
@@ -345,20 +298,28 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     // MARK: SelectionHeader Methods
     func updateTags(hashtag: String, timer: Int) {
         SVProgressHUD.show()
-        
         Globals.mixpanel.timeEvent("Mobile.Selection.Tag.FindOrCreate")
         
         Tag.findOrCreate(hashtag) { (tag) -> Void in
-            SVProgressHUD.dismiss()
-            
-            self.tag = tag
-            self.timer = timer
-            
-            self.performSegueWithIdentifier("share", sender: self)
-            
             Globals.mixpanel.track("Mobile.Selection.Tag.FindOrCreate", properties: [
-                "tag": self.tag.name
+                "tag": tag.name
             ])
+            
+            tag.postImages(timer, user: self.user, images: Array(self.selected.values), callback: { () -> Void in
+                SVProgressHUD.dismiss()
+                
+                Globals.viewTag(tag, callback: { () -> Void in
+                    self.reset()
+                })
+                
+                Globals.mixpanel.track("Mobile.Selection.Tag.Post", properties: [
+                    "tag": tag.name,
+                    "timer": timer,
+                    "photos": self.selected.count
+                ])
+            }, hasError: { () -> Void in
+                SVProgressHUD.dismiss()
+            })
         }
     }
     

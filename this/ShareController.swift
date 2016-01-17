@@ -14,6 +14,7 @@ private let reuseIdentifier = "cell"
 protocol ShareControllerDelegate {
     func shareControllerCancelled()
     func shareControllerShared(count: Int)
+    func shareControllerInviteCompelete()
 }
 
 class ShareController: UITableViewController, ShareHeaderControllerDelegate,
@@ -162,7 +163,9 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         
         if indexPath.section == 0 {
             let user = self.users.filtered[indexPath.row]
+            
             cell.share = self.users.selected[user] != nil
+            cell.updateUser(user, index: indexPath.row)
             
             if !user.fullName.isEmpty {
                 cell.textLabel?.text = user.fullName
@@ -183,8 +186,9 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
             }
             
             cell.textLabel?.text = contact.name
-            cell.detailTextLabel?.text = "\(label)\(number)"
+            cell.detailTextLabel?.text = "\(label.uppercaseString)\(number)"
             cell.share = self.contacts.selected[contact] != nil
+            cell.updateUser(nil, index: indexPath.row)
         }
         
         cell.updateAccessory()
@@ -257,7 +261,9 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     func shareTriggered() {
         // Share For Users
         if !self.users.selected.isEmpty {
-            self.tag.invite(self.user, users: Array(self.users.selected.keys))
+            self.tag.invite(self.user, users: Array(self.users.selected.keys), callback: { Void in
+                self.delegate.shareControllerInviteCompelete()
+            })
         }
         
         // Share For Contacts

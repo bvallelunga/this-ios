@@ -543,9 +543,6 @@ and Privacy Policy.</string>
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="F8P-TR-n8Y"/>
-                    <connections>
-                        <segue destination="ya2-Fe-zhm" kind="show" identifier="share" id="gAb-YA-w6I"/>
-                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sW5-6w-Mne" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

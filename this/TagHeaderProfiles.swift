@@ -45,7 +45,7 @@ class TagHeaderProfiles: UICollectionView, UICollectionViewDataSource, UICollect
             }
         }
     }
-
+    
     
     // MARK: UICollectionViewDataSource
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -66,7 +66,7 @@ class TagHeaderProfiles: UICollectionView, UICollectionViewDataSource, UICollect
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! TagHeaderProfileCell
         let user = self.users[indexPath.row]
         
-        cell.setImage(self.images[user])
+        cell.setImage(self.images[user], index: indexPath.row)
         
         return cell
     }

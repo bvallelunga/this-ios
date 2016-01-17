@@ -61,13 +61,8 @@ class Tag: PFObject, PFSubclassing {
             let tag = Tag()
             
             tag.name = name
-            tag.saveInBackgroundWithBlock({ (success, error) -> Void in
-                if success {
-                    callback(tag: tag)
-                } else {
-                    ErrorHandler.handleParse(error)
-                }
-            })
+            tag.saveInBackground()
+            callback(tag: tag)
         })
     }
     
@@ -86,7 +81,7 @@ class Tag: PFObject, PFSubclassing {
         self.photosCached.removeObjectIdenticalTo(photo)
     }
     
-    func invite(sender: User, users: [User]) {
+    func invite(sender: User, users: [User], callback: () -> Void) {
         for user in users {
             self.followers.addObject(user)
         }
@@ -96,6 +91,9 @@ class Tag: PFObject, PFSubclassing {
                 ErrorHandler.handleParse(error)
                 return
             }
+            
+            // Callback
+            callback()
             
             // Send Push Notification
             let query = Installation.query()
@@ -209,46 +207,49 @@ class Tag: PFObject, PFSubclassing {
         }
     }
     
-    func postImages(timer: Int, user: User, images: [UIImage], callback: () -> Void) {
+    func postImages(timer: Int, user: User, images: [UIImage], callback: () -> Void, hasError: () -> Void) {
         let expireAt = NSCalendar.currentCalendar()
             .dateByAddingUnit(.Day, value: timer, toDate: NSDate(), options: [])!
         
         let photos: [Photo] = images.map { (image) -> Photo in
-            let photo = Photo.create(user, image: image, tag: self, expireAt: expireAt)
+            let photo = Photo.create(user, image: image, expireAt: expireAt)
             
             self.photosCached.insertObject(photo, atIndex: 0)
+            self.photos.addObject(photo)
             
             return photo
         }
         
         Photo.saveAllInBackground(photos).continueWithSuccessBlock { (task) -> AnyObject? in
-            self.followers.addObject(user)
-            
             StateTracker.setTagPhotos(self, increment: photos.count)
-            
-            for photo in photos {
-                let data = UIImageJPEGRepresentation(photo.originalCached, 0.7)!
-                
-                self.photos.addObject(photo)
-                
-                PhotoQueue.queue.enqueueTaskWithName("photoUpload", userInfo: [
-                    "photo": photo.objectId!,
-                    "image": data.base64EncodedStringWithOptions(.Encoding64CharacterLineLength),
-                    "tag": self.objectId!
-                ])
-            }
 
+            self.followers.addObject(user)
             return self.saveInBackground()
         }.continueWithSuccessBlock { (task) -> AnyObject? in
             // Callback
-            callback()
+            Globals.delay(0, closure: callback)
             
             // Update Mixpanel
             Globals.mixpanel.people.increment("Photos", by: images.count)
             
+            // Add To Photo Queue
+            for photo in photos {
+                let data = UIImageJPEGRepresentation(photo.originalCached, 0.7)
+                
+                PhotoQueue.queue.enqueueTaskWithName("photoUpload", userInfo: [
+                    "photo": photo.objectId!,
+                    "image": data!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength),
+                    "tag": self.objectId!
+                ])
+            }
+            
             return true
         }.continueWithBlock { (task) -> AnyObject? in
-            ErrorHandler.handleParse(task.error)
+            if let error = task.error {
+                Globals.delay(0, closure: hasError)
+                ErrorHandler.handleParse(error)
+            }
+            
             return nil
         }
     }

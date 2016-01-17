@@ -27,12 +27,11 @@ class Photo: PFObject, PFSubclassing {
     }
     
     // Class Methods
-    class func create(user: User, image: UIImage, tag: Tag, expireAt: NSDate) -> Photo {
+    class func create(user: User, image: UIImage, expireAt: NSDate) -> Photo {
         let photo = Photo()
         
         photo.user = user
         photo.from = user.name
-        photo.tag = tag
         photo.expireAt = expireAt
         photo.originalCached = image
         photo.flagged = false

@@ -19,6 +19,7 @@ class ShareHeaderController: UIViewController, UISearchBarDelegate {
     var tag: Tag!
     var backText: String!
     var delegate: ShareHeaderControllerDelegate!
+    static var text = NSAttributedString(string: "Invite your friends\nto post to ")
     
     @IBOutlet weak var stepLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
@@ -32,7 +33,14 @@ class ShareHeaderController: UIViewController, UISearchBarDelegate {
         self.view.backgroundColor = Colors.red
         self.stepLabel.textColor = UIColor(white: 0, alpha: 0.5)
         self.headerLabel.textColor = UIColor.whiteColor()
-        self.headerLabel.text = "Invite your friends\nto post to \(self.tag.hashtag)"
+        
+        let tagString = NSMutableAttributedString(string: self.tag.hashtag, attributes: [
+            NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue
+        ])
+        
+        tagString.insertAttributedString(ShareHeaderController.text, atIndex: 0)
+        
+        self.headerLabel.attributedText = tagString
         
         // Configure Search Bar
         self.searchBar.delegate = self

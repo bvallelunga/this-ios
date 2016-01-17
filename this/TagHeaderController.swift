@@ -145,4 +145,8 @@ class TagHeaderController: UIViewController, ShareControllerDelegate {
     func shareControllerShared(count: Int) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    func shareControllerInviteCompelete() {
+        self.followersCollection.updateTag(self.tag)
+    }
 }

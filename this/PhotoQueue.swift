@@ -43,6 +43,7 @@ class PhotoQueue: NSObject, KTBTaskQueueDelegate  {
 
         photo.original = file
         photo.thumbnail = file
+        photo.tag = tag
         
         photo.saveInBackgroundWithBlock({ (success, error) -> Void in
             guard success else {

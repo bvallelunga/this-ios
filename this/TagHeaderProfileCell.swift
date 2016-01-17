@@ -17,7 +17,7 @@ class TagHeaderProfileCell: UICollectionViewCell {
         "😭😪😥😰😅😓😩😫😨😱😠😡😤😖😆😋😷😎😴😵😲😟" +
         "😦😧😈👿😮😬😐😕😯😶😇😏😑👲👳👮👷💂👶👦👧👨" +
         "👩👴👵👱👼👸😺😸😻😽😼🙀😿😹😾👹👺🙈🙉🙊💀👽💩🔥"
-    ).characters.map { String($0) }
+    ).characters.map { String($0) }.shuffle()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,8 +33,6 @@ class TagHeaderProfileCell: UICollectionViewCell {
     
     func setup() {
         self.backgroundColor = Colors.darkGrey
-        self.clipsToBounds = true
-        self.layer.masksToBounds = true
         self.layer.cornerRadius = self.frame.width/2
         self.layer.borderWidth = 1
         
@@ -42,23 +40,31 @@ class TagHeaderProfileCell: UICollectionViewCell {
         self.imageView.contentMode = .ScaleAspectFill
         self.imageView.backgroundColor = UIColor.clearColor()
         self.imageView.layer.cornerRadius = self.bounds.width/2
+        self.imageView.clipsToBounds = true
         
         self.label.frame = self.imageView.frame
-        self.label.font = UIFont.systemFontOfSize(35)
+        self.label.font = UIFont.systemFontOfSize(50)
+        self.label.adjustsFontSizeToFitWidth = true
+        self.label.minimumScaleFactor = 0.1
+        self.label.numberOfLines = 1
         self.label.textAlignment = .Center
-        self.label.text = TagHeaderProfileCell.emojis[
-            Int(arc4random_uniform(UInt32(TagHeaderProfileCell.emojis.count)))
-        ]
         
         self.addSubview(self.label)
         self.addSubview(self.imageView)
     }
     
-    func setImage(image: UIImage!) {
+    func setImage(image: UIImage!, var index: Int) {
         self.imageView.image = image
         
-        self.backgroundColor = image == nil ? Colors.offWhite : Colors.lightGrey
-        self.layer.borderColor = (image == nil ? Colors.whiteGrey : Colors.darkGrey).CGColor
+        if index >= TagHeaderProfileCell.emojis.count {
+            index = index - TagHeaderProfileCell.emojis.count
+        }
+        
+        self.label.text = TagHeaderProfileCell.emojis[index]
+        
+        self.clipsToBounds = image != nil
+        self.backgroundColor = image == nil ? UIColor.clearColor(): Colors.lightGrey
+        self.layer.borderColor = (image == nil ? UIColor.clearColor() : Colors.darkGrey).CGColor
     }
     
 }
