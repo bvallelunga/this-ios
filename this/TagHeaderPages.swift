@@ -145,7 +145,10 @@ class TagHeaderPages: UIPageViewController, UIPageViewControllerDataSource,
         self.reloadPages()
         
         if self.downloadMode {
-            NavNotification.show("Tap Photos To Download", color: Colors.blue, duration: 1.5, vibrate: false)
+            if !StateTracker.tagTapDownloadShown {
+                NavNotification.show("Tap Photos To Download", color: Colors.blue, duration: 1.5, vibrate: false)
+                StateTracker.tagTapDownloadShown = true
+            }
             
             Globals.mixpanel.track("Mobile.Tag.Download Button", properties: [
                 "tag": self.tag.name,

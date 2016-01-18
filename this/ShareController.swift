@@ -32,16 +32,20 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         var selected: [Contact: Bool] = [:]
     }
     
+    @IBOutlet weak var headerContainer: UIView!
+    
     var tag: Tag!
     var backButton = "BACK"
     var images: [UIImage] = []
     var headerFrame: CGRect!
     var contacts: Contacts = Contacts()
     var users: Users = Users()
+    var friends: Users = Users()
     var delegate: ShareControllerDelegate!
     var headerController: ShareHeaderController!
     var user = User.current()
     var config: Config!
+    var messageImage: UIImage!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +67,13 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         
         Config.sharedInstance { (config) -> Void in
             self.config = config
+        }
+        
+        if MFMessageComposeViewController.canSendAttachments() {
+            if !self.images.isEmpty {
+                let images = Array(self.images.shuffle()[0...min(4, self.images.count-1)])
+                self.messageImage = self.collageImage(CGRect(x: 0, y: 0, width: 1000, height: 1000), images: images)
+            }
         }
     }
     
@@ -103,10 +114,23 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         
         if self.tableView.contentOffset.y < 0 {
             delta = fabs(min(0, self.tableView.contentOffset.y))
+            
+            rect.origin.y -= delta
+            rect.size.height += delta
+        } else if rect.height - self.tableView.contentOffset.y - 45 <= 21  {
+            delta = fabs(max(0, fabs(rect.height - self.tableView.contentOffset.y - 66)))
+            
+            rect.origin.y += delta
+            
+            if self.tableView.tableHeaderView != nil {
+                self.tableView.tableHeaderView = UIView(frame: rect)
+                self.view.addSubview(self.headerContainer)
+            }
+        } else if self.tableView.tableHeaderView == nil {
+            self.headerContainer.removeFromSuperview()
+            self.tableView.tableHeaderView = self.headerContainer
+            self.tableView.contentInset = UIEdgeInsetsZero
         }
-        
-        rect.origin.y -= delta
-        rect.size.height += delta
         
         self.headerController.view.frame = rect
     }
@@ -117,23 +141,31 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? self.users.filtered.count : self.contacts.filtered.count
+        switch section {
+            case 0: return self.users.filtered.count
+            case 1: return self.friends.filtered.count
+            default: return self.contacts.filtered.count
+        }
     }
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
+        switch section {
+            case 0: return self.users.filtered.isEmpty ? 0.1 : 20
+            case 1: return self.friends.filtered.isEmpty ? 0.1 : 20
+            default: return 1
+        }
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (section == 0 && self.users.filtered.isEmpty) || (section == 1 && self.contacts.filtered.isEmpty) {
-            return 0
+        switch section {
+            case 0: return self.users.filtered.isEmpty ? 0.1 : 40
+            case 1: return self.friends.filtered.isEmpty ? 0.1 : 40
+            default: return self.contacts.filtered.isEmpty ? 0.1 : 40
         }
-        
-        return 40
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -142,9 +174,11 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 && !self.users.filtered.isEmpty {
-            return "SUGGESTED FRIENDS"
-        } else if section == 1 && !self.contacts.filtered.isEmpty {
-            return "CONTACTS LIST"
+            return "PEOPLE"
+        } else if section == 1 && !self.friends.filtered.isEmpty {
+            return "FRIENDS"
+        } else if section == 2 && !self.contacts.filtered.isEmpty {
+            return "CONTACTS"
         }
         
         return nil
@@ -161,10 +195,12 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! ShareTableCell
         
-        if indexPath.section == 0 {
-            let user = self.users.filtered[indexPath.row]
+        if indexPath.section < 2 {
+            let users = indexPath.section == 0 ? self.users.filtered : self.friends.filtered
+            let selected = indexPath.section == 0 ? self.users.selected : self.friends.selected
+            let user = users[indexPath.row]
             
-            cell.share = self.users.selected[user] != nil
+            cell.share = selected[user] != nil
             cell.updateUser(user, index: indexPath.row)
             
             if !user.fullName.isEmpty {
@@ -214,6 +250,18 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
             Globals.mixpanel.track("Mobile.Invite.User.\(cell.share ? "S": "Des")elected", properties: [
                 "tag": self.tag.name
             ])
+        } else if indexPath.section == 1 {
+            let user = self.friends.filtered[indexPath.row]
+            
+            if cell.share {
+                self.friends.selected[user] = true
+            } else {
+                self.friends.selected.removeValueForKey(user)
+            }
+            
+            Globals.mixpanel.track("Mobile.Invite.Friend.\(cell.share ? "S": "Des")elected", properties: [
+                "tag": self.tag.name
+            ])
         } else {
             let contact = self.contacts.filtered[indexPath.row]
             
@@ -228,16 +276,24 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
             ])
         }
         
-        self.headerController.updateNextButtonTitle(!self.users.selected.isEmpty || !self.contacts.selected.isEmpty)
+        self.headerController.updateNextButtonTitle(
+            !self.users.selected.isEmpty ||
+            !self.friends.selected.isEmpty ||
+            !self.contacts.selected.isEmpty
+        )
     }
     
     func backTriggered() {
-        let count = self.users.selected.count + self.contacts.selected.count
+        let count = self.users.selected.count +
+                    self.contacts.selected.count +
+                    self.friends.selected.count
+        
         self.delegate.shareControllerCancelled()
         
         Globals.mixpanel.track("Mobile.Invite.Cancelled", properties: [
             "contacts": self.contacts.selected.count,
             "users": self.users.selected.count,
+            "friends": self.friends.selected.count,
             "total": count,
             "tag": self.tag.name,
             "images": self.images.count
@@ -245,13 +301,16 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     }
     
     func nextTriggered() {
-        let count = self.users.selected.count + self.contacts.selected.count
+        let count = self.users.selected.count +
+                    self.contacts.selected.count +
+                    self.friends.selected.count
         
         self.delegate.shareControllerShared(count)
         
         Globals.mixpanel.track("Mobile.Invite.Shared", properties: [
             "contacts": self.contacts.selected.count,
             "users": self.users.selected.count,
+            "friends": self.friends.selected.count,
             "total": count,
             "tag": self.tag.name,
             "images": self.images.count
@@ -260,8 +319,10 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     
     func shareTriggered() {
         // Share For Users
-        if !self.users.selected.isEmpty {
-            self.tag.invite(self.user, users: Array(self.users.selected.keys), callback: { Void in
+        let users = Array(self.users.selected.keys) + Array(self.friends.selected.keys)
+        
+        if !users.isEmpty {
+            self.tag.invite(self.user, users: users, callback: { Void in
                 self.delegate.shareControllerInviteCompelete()
             })
         }
@@ -287,13 +348,9 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
             contacts.append(contact.phone.number)
         }
         
-        if MFMessageComposeViewController.canSendAttachments() {
-            if !self.images.isEmpty {
-                for image in self.images[0...min(2, self.images.count-1)] {
-                    let data =  UIImageJPEGRepresentation(image, 0.5)
-                    messageVC.addAttachmentData(data!, typeIdentifier: "image/jpeg", filename: "\(tag).jpg")
-                }
-            }
+        if let image = self.messageImage {
+            let data =  UIImageJPEGRepresentation(image, 0.5)
+            messageVC.addAttachmentData(data!, typeIdentifier: "image/jpeg", filename: "\(self.tag).jpg")
         }
         
         messageVC.recipients = contacts
@@ -305,27 +362,39 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     
     func filterBySearch(var text: String) {
         let numberSet = NSCharacterSet.decimalDigitCharacterSet().invertedSet
+        let alphaNumberSet = NSCharacterSet.alphanumericCharacterSet().invertedSet
         let number = text.componentsSeparatedByCharactersInSet(numberSet).joinWithSeparator("")
         
         if text.isEmpty {
-            self.users.filtered = self.users.raw
+            self.users.filtered = Array(self.users.selected.keys)
+            self.friends.filtered = self.friends.raw
             self.contacts.filtered = self.contacts.raw
         } else {
-            self.users.filtered.removeAll()
+            self.friends.filtered.removeAll()
             self.contacts.filtered.removeAll()
             
             text = text.lowercaseString
+                .componentsSeparatedByCharactersInSet(alphaNumberSet)
+                .joinWithSeparator("")
             
-            for user in self.users.raw {
+            // Users
+            User.find(text, callback: { (users) -> Void in
+                self.users.filtered = users
+                self.tableView.reloadData()
+            })
+            
+            // Friends
+            for user in self.friends.raw {
                 let containsName = NSString(string: user.fullName.lowercaseString).containsString(text)
                 let containsPhone = NSString(string: user.phone).containsString(number)
                 let containsUsername = NSString(string: user.username!).containsString(text)
                 
                 if containsName || containsPhone || containsUsername {
-                    self.users.filtered.append(user)
+                    self.friends.filtered.append(user)
                 }
             }
             
+            // Contacts
             for contact in self.contacts.raw {
                 let containsName = NSString(string: contact.name.lowercaseString).containsString(text)
                 let containsPhone = NSString(string: contact.phone.e164).containsString(number)
@@ -366,7 +435,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
                 "images": self.images.count
             ])
             
-            self.users.raw = users
+            self.friends.raw = users
             self.intersectionsUsersContacts()
             self.filterBySearch("")
         }
@@ -379,7 +448,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
             contacts[contact.phone.e164] = i
         }
         
-        for user in self.users.raw {
+        for user in self.friends.raw {
             if let i = contacts[user.phone] {
                 contacts.removeValueForKey(user.phone)
                 self.contacts.raw.removeAtIndex(i)
@@ -395,4 +464,37 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         }
     }
 
+    
+    func collageImage(rect: CGRect, var images: [UIImage]) -> UIImage {
+        if images.count == 1 {
+            return images[0]
+        }
+        
+        UIGraphicsBeginImageContextWithOptions(rect.size, false,  UIScreen.mainScreen().scale)
+        
+        let nrofColumns: Int = 2
+        let nrOfRows: Int = (images.count)/nrofColumns
+        let remainingPics: Int = min(0, images.count - (nrofColumns * nrOfRows))
+        
+        images.removeRange(Range(start: 0, end: remainingPics))
+        
+        let w: CGFloat = rect.width/CGFloat(nrofColumns)
+        let h = rect.height/CGFloat(nrOfRows)
+        var colNr = 0
+        var rowNr = 0
+        for var i=0; i<images.count; ++i {
+            images[i].drawInRectAspectFill(CGRectMake(CGFloat(colNr)*w,CGFloat(rowNr)*h,w,h))
+            
+            if i == nrofColumns || ((i % nrofColumns) == 0 && i > nrofColumns) {
+                ++rowNr
+                colNr = 0
+            } else {
+                ++colNr
+            }
+        }
+        
+        let outputImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return outputImage
+    }
 }

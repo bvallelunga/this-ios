@@ -17,6 +17,7 @@ class ProfileController: UITableViewController {
     private var user = User.current()
     private var config: Config!
 
+    @IBOutlet weak var headerContainer: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     
     override func viewDidLoad() {
@@ -52,17 +53,30 @@ class ProfileController: UITableViewController {
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         var delta: CGFloat = 0
         var rect = self.headerFrame
+        let statusBar = UIApplication.sharedApplication().statusBarFrame.height
         
         if self.tableView.contentOffset.y < 0 {
             delta = fabs(min(0, self.tableView.contentOffset.y))
+            
+            rect.origin.y -= delta
+            rect.size.height += delta
+        } else if rect.height - self.tableView.contentOffset.y <= statusBar  {
+            delta = fabs(max(0, fabs(rect.height - self.tableView.contentOffset.y - statusBar)))
+            
+            rect.origin.y += delta
+            
+            if self.tableView.tableHeaderView != nil {
+                self.tableView.tableHeaderView = UIView(frame: rect)
+                self.view.addSubview(self.headerContainer)
+            }
+        } else if self.tableView.tableHeaderView == nil {
+            self.headerContainer.removeFromSuperview()
+            self.tableView.tableHeaderView = self.headerContainer
+            self.tableView.contentInset = UIEdgeInsetsZero
         }
-        
-        rect.origin.y -= delta
-        rect.size.height += delta
         
         self.headerController.view.frame = rect
     }
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         

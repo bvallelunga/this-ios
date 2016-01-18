@@ -500,6 +500,7 @@ and Privacy Policy.</string>
                     <navigationItem key="navigationItem" id="2KT-4h-kdT"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="headerContainer" destination="cj9-uA-tSZ" id="RIz-Fc-CM7"/>
                         <outlet property="nameLabel" destination="vNQ-CI-7Qf" id="Sbg-AO-gph"/>
                     </connections>
                 </tableViewController>
@@ -594,6 +595,9 @@ and Privacy Policy.</string>
                             <outlet property="delegate" destination="ya2-Fe-zhm" id="8Ff-A3-24u"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="headerContainer" destination="cb9-SL-Jmt" id="uLa-Jf-Vvc"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UE6-hY-c1D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -819,7 +823,7 @@ and Privacy Policy.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <containerView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" id="Qsn-Df-6gA">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="435"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <connections>
                                 <segue destination="cxi-M1-E8G" kind="embed" identifier="header" id="EGU-ne-ZpE"/>
@@ -827,7 +831,7 @@ and Privacy Policy.</string>
                         </containerView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="cell" textLabel="fbh-ij-inS" style="IBUITableViewCellStyleDefault" id="4Xk-zr-Vzx">
-                                <rect key="frame" x="0.0" y="463" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="428" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Xk-zr-Vzx" id="d3U-BK-buI">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -1014,7 +1018,7 @@ and Privacy Policy.</string>
                                     <constraint firstAttribute="height" constant="2" id="atb-l7-uB2"/>
                                 </constraints>
                             </view>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Search by name, number or @username" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJf-fn-IJc">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Search by @username, name, or number" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJf-fn-IJc">
                                 <rect key="frame" x="0.0" y="265" width="600" height="45"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1099,32 +1103,17 @@ and Privacy Policy.</string>
                         <viewControllerLayoutGuide type="bottom" id="pcP-lq-Rah"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="I7d-du-gr6">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="435"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aha-sv-fbm">
-                                <rect key="frame" x="0.0" y="-5" width="600" height="305"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="305" id="DOs-vN-gfD"/>
-                                    <constraint firstAttribute="height" constant="310" id="bA3-3B-cj5"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="bA3-3B-cj5"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <segue destination="rTH-Zw-lK2" kind="embed" identifier="pagesContainer" id="FXL-FB-2kc"/>
-                                </connections>
-                            </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vWN-Kh-5Ht">
-                                <rect key="frame" x="0.0" y="360" width="600" height="75"/>
+                                <rect key="frame" x="0.0" y="335" width="600" height="65"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pWf-RI-13Q" customClass="TagHeaderProfiles" customModule="_this" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="15" width="600" height="50"/>
+                                        <rect key="frame" x="0.0" y="15" width="600" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="tZl-F8-V3b"/>
+                                            <constraint firstAttribute="height" constant="40" id="tZl-F8-V3b"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bM2-Lm-qoO">
                                             <size key="itemSize" width="50" height="50"/>
@@ -1134,7 +1123,7 @@ and Privacy Policy.</string>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="XvS-Ez-D2S">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <rect key="frame" x="0.0" y="-5" width="50" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -1154,31 +1143,13 @@ and Privacy Policy.</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1dm-hU-i8N">
-                                <rect key="frame" x="0.0" y="300" width="600" height="60"/>
+                                <rect key="frame" x="0.0" y="280" width="600" height="55"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ppU-4B-1Kz">
-                                        <rect key="frame" x="0.0" y="0.0" width="535" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="517" height="55"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YjL-hV-bzz">
-                                                <rect key="frame" x="10" y="0.0" width="325" height="45"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="165" id="KAo-li-DNI"/>
-                                                    <constraint firstAttribute="width" constant="175" id="O9D-uq-eAM"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="18"/>
-                                                <state key="normal" title="FOLLOWING"/>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="KAo-li-DNI"/>
-                                                        <exclude reference="O9D-uq-eAM"/>
-                                                    </mask>
-                                                </variation>
-                                                <connections>
-                                                    <action selector="followingTriggered:" destination="cxi-M1-E8G" eventType="touchUpInside" id="uwP-Wl-RYe"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kzq-4X-7aU">
-                                                <rect key="frame" x="340" y="0.0" width="195" height="45"/>
+                                                <rect key="frame" x="329" y="0.0" width="188" height="43"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="165" id="pBe-U7-zGn"/>
                                                     <constraint firstAttribute="width" constant="100" id="unl-Ml-1na"/>
@@ -1195,18 +1166,36 @@ and Privacy Policy.</string>
                                                     <action selector="inviteTriggered:" destination="cxi-M1-E8G" eventType="touchUpInside" id="CQN-7R-OqG"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YjL-hV-bzz">
+                                                <rect key="frame" x="10" y="0.0" width="313" height="43"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="165" id="KAo-li-DNI"/>
+                                                    <constraint firstAttribute="width" constant="175" id="O9D-uq-eAM"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="18"/>
+                                                <state key="normal" title="FOLLOWING"/>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="KAo-li-DNI"/>
+                                                        <exclude reference="O9D-uq-eAM"/>
+                                                    </mask>
+                                                </variation>
+                                                <connections>
+                                                    <action selector="followingTriggered:" destination="cxi-M1-E8G" eventType="touchUpInside" id="uwP-Wl-RYe"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="YjL-hV-bzz" firstAttribute="width" secondItem="ppU-4B-1Kz" secondAttribute="width" id="ADt-K7-NOa"/>
                                             <constraint firstItem="kzq-4X-7aU" firstAttribute="top" secondItem="ppU-4B-1Kz" secondAttribute="top" id="Its-PK-fnx"/>
                                             <constraint firstAttribute="trailing" secondItem="kzq-4X-7aU" secondAttribute="trailing" id="Sel-wa-god"/>
-                                            <constraint firstAttribute="bottom" secondItem="YjL-hV-bzz" secondAttribute="bottom" constant="15" id="Txe-9j-7Ky"/>
+                                            <constraint firstAttribute="bottom" secondItem="YjL-hV-bzz" secondAttribute="bottom" constant="12" id="Txe-9j-7Ky"/>
                                             <constraint firstItem="YjL-hV-bzz" firstAttribute="top" secondItem="ppU-4B-1Kz" secondAttribute="top" id="YuS-Gd-ECg"/>
                                             <constraint firstItem="YjL-hV-bzz" firstAttribute="leading" secondItem="ppU-4B-1Kz" secondAttribute="leading" constant="10" id="maS-eC-3Je"/>
                                             <constraint firstItem="kzq-4X-7aU" firstAttribute="width" secondItem="YjL-hV-bzz" secondAttribute="width" multiplier="0.6" id="qwN-aJ-p8U"/>
-                                            <constraint firstAttribute="bottom" secondItem="kzq-4X-7aU" secondAttribute="bottom" constant="15" id="seX-Hx-rfu"/>
-                                            <constraint firstItem="kzq-4X-7aU" firstAttribute="leading" secondItem="YjL-hV-bzz" secondAttribute="trailing" constant="5" id="xfB-qW-dDy"/>
+                                            <constraint firstAttribute="bottom" secondItem="kzq-4X-7aU" secondAttribute="bottom" constant="12" id="seX-Hx-rfu"/>
+                                            <constraint firstItem="kzq-4X-7aU" firstAttribute="leading" secondItem="YjL-hV-bzz" secondAttribute="trailing" constant="6" id="xfB-qW-dDy"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -1215,7 +1204,7 @@ and Privacy Policy.</string>
                                         </variation>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srT-7e-bRg">
-                                        <rect key="frame" x="545" y="0.0" width="45" height="45"/>
+                                        <rect key="frame" x="537" y="0.0" width="43" height="43"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="45" id="RDr-bx-6hz"/>
                                             <constraint firstAttribute="width" secondItem="srT-7e-bRg" secondAttribute="height" multiplier="1:1" id="dnU-8n-xBb"/>
@@ -1236,16 +1225,31 @@ and Privacy Policy.</string>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="0OP-Hh-Joa"/>
-                                    <constraint firstAttribute="bottom" secondItem="srT-7e-bRg" secondAttribute="bottom" constant="15" id="56X-9V-bsJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="srT-7e-bRg" secondAttribute="trailing" constant="10" id="9xe-at-SBt"/>
+                                    <constraint firstAttribute="height" constant="55" id="0OP-Hh-Joa"/>
+                                    <constraint firstAttribute="bottom" secondItem="srT-7e-bRg" secondAttribute="bottom" constant="12" id="56X-9V-bsJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="srT-7e-bRg" secondAttribute="trailing" constant="20" id="9xe-at-SBt"/>
                                     <constraint firstItem="srT-7e-bRg" firstAttribute="top" secondItem="1dm-hU-i8N" secondAttribute="top" id="Jkl-wF-FkJ"/>
-                                    <constraint firstItem="srT-7e-bRg" firstAttribute="leading" secondItem="ppU-4B-1Kz" secondAttribute="trailing" constant="10" id="Tjb-Aa-Ej7"/>
+                                    <constraint firstItem="srT-7e-bRg" firstAttribute="leading" secondItem="ppU-4B-1Kz" secondAttribute="trailing" constant="20" id="Tjb-Aa-Ej7"/>
                                     <constraint firstAttribute="bottom" secondItem="ppU-4B-1Kz" secondAttribute="bottom" id="dNd-68-dqB"/>
                                     <constraint firstItem="ppU-4B-1Kz" firstAttribute="leading" secondItem="1dm-hU-i8N" secondAttribute="leading" id="hm9-F8-H4n"/>
                                     <constraint firstItem="ppU-4B-1Kz" firstAttribute="top" secondItem="1dm-hU-i8N" secondAttribute="top" id="kec-Z1-TED"/>
                                 </constraints>
                             </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aha-sv-fbm">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="280"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="280" id="DOs-vN-gfD"/>
+                                    <constraint firstAttribute="height" constant="310" id="bA3-3B-cj5"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="bA3-3B-cj5"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <segue destination="rTH-Zw-lK2" kind="embed" identifier="pagesContainer" id="FXL-FB-2kc"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="0.13725490200000001" green="0.1215686275" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1283,7 +1287,7 @@ and Privacy Policy.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eLy-SA-k4x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4844" y="1136.5"/>
+            <point key="canvasLocation" x="4844" y="1136"/>
         </scene>
         <!--Tag Header Pages-->
         <scene sceneID="yn4-rh-7ND">

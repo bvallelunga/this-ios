@@ -23,9 +23,9 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
     private var selected: [PHAsset: UIImage] = [:]
     private var selectedOrder: NSMutableArray = []
     private var date: NSDate!
-    private var header: SelectionHeader!
     private var config: Config!
     private var user = User.current()
+    var header: SelectionHeader!
     
     override func viewDidLoad() {
         super.viewDidLoad()

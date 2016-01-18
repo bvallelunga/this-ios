@@ -51,11 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PhotoQueue.startup()
         
         // Startup Fabric
-        #if DEBUG
-            Fabric.sharedSDK().debug = true
+        #if RELEASE
+            Fabric.with([Crashlytics.self])
         #endif
-        
-        Fabric.with([Crashlytics.self])
         
         // Setup Mixpanel
         let mixpanel = Mixpanel.sharedInstanceWithToken(Globals.mixpanelToken())
@@ -110,6 +108,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         Installation.clearBadge()
+        
+        Config.update { (config) -> Void in
+            Globals.selectionController.header.updateHeaderGif()
+        }
     }
 
     func applicationWillTerminate(application: UIApplication) {

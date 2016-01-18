@@ -70,5 +70,11 @@ class TagHeaderProfiles: UICollectionView, UICollectionViewDataSource, UICollect
         
         return cell
     }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let user = self.users[indexPath.row]
+        
+        NavNotification.show(user.screenname, color: Colors.lightGrey, vibrate: false, duration: 1.5)
+    }
 
 }

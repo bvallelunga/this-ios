@@ -54,6 +54,21 @@ class StateTracker: NSObject {
         }
     }
     
+    static var tagTapDownloadShown: Bool {
+        get {
+            guard let shown = self.defaults.valueForKey("tagTapDownloadShown") as? Bool else {
+                return false
+            }
+            
+            return shown
+        }
+        
+        set (val) {
+            self.defaults.setValue(val, forKey: "tagTapDownloadShown")
+            self.save()
+        }
+    }
+    
     // Class Methods
     class func save() {
         self.defaults.synchronize()

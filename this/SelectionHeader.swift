@@ -30,6 +30,7 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var timerImage: UIImageView!
     
+    private var gifURL: String! = ""
     private var hashtag: String = ""
     private var arrowAnimation = CABasicAnimation(keyPath: "transform")
     private var timer: SelectionTimer!
@@ -111,6 +112,30 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         self.addGestureRecognizer(tapper)
         
         self.reset()
+        self.updateHeaderGif()
+    }
+    
+    func updateHeaderGif() {
+        Config.sharedInstance { (config) -> Void in
+            guard let urlString = config.headerGif.url else {
+                return
+            }
+            
+            guard urlString != self.gifURL else {
+                return
+            }
+            
+            guard let url = NSURL(string: urlString) else {
+                return
+            }
+            
+            guard let data = NSData(contentsOfURL: url) else {
+                return
+            }
+            
+            self.placeholderView.animatedImage = FLAnimatedImage(animatedGIFData: data)
+            self.gifURL = urlString
+        }
     }
     
     @IBAction func changeTimer(sender: AnyObject) {

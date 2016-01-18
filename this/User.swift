@@ -114,6 +114,27 @@ class User: PFUser {
         }
     }
     
+    class func find(text: String, callback: (users: [User]) -> Void) {
+        let usernameQuery = User.query()!
+        let nameQuery = User.query()!
+        let phoneQuery = User.query()!
+        let queries: [PFQuery] = [usernameQuery, nameQuery, phoneQuery]
+        let regex = ".*\(text).*"
+        
+        usernameQuery.whereKey("username", matchesRegex: regex, modifiers: "i")
+        nameQuery.whereKey("fullName", matchesRegex: regex, modifiers: "i")
+        phoneQuery.whereKey("phone", matchesRegex: regex, modifiers: "i")
+        
+        PFQuery.orQueryWithSubqueries(queries).findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if let users = objects as? [User] {
+                callback(users: users)
+            } else {
+                ErrorHandler.handleParse(error)
+            }
+        }
+    
+    }
+    
     // Instance Methods
     override func saveInBackground() -> BFTask {
         return super.saveInBackground().continueWithSuccessBlock({ (task) -> AnyObject? in
