@@ -101,6 +101,7 @@ class TagsController: UIViewController {
 
     @IBAction func goToSelection(sender: AnyObject) {
         Globals.pagesController.setActiveController(1, direction: .Reverse)
+        Globals.mixpanel.track("Mobile.Tags.Go To Selection")
     }
     
     func viewTag(tag: Tag) {

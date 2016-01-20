@@ -129,12 +129,13 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
                 return
             }
             
-            guard let data = NSData(contentsOfURL: url) else {
-                return
-            }
-            
-            self.placeholderView.animatedImage = FLAnimatedImage(animatedGIFData: data)
-            self.gifURL = urlString
+            NSURLConnection.sendAsynchronousRequest(NSURLRequest(URL: url), queue: NSOperationQueue(),
+                completionHandler: { (response, data, error) -> Void in
+                if error != nil {
+                    self.placeholderView.animatedImage = FLAnimatedImage(animatedGIFData: data)
+                    self.gifURL = urlString
+                }
+            })
         }
     }
     
@@ -143,6 +144,8 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     }
     
     @IBAction func tagChanged(sender: AnyObject) {
+        let alphaNumberSet = NSCharacterSet.alphanumericCharacterSet().invertedSet
+        
         if var text = self.tagField.text {
             text = text.stringByReplacingOccurrencesOfString(" ", withString: "",
                 options: NSStringCompareOptions.LiteralSearch, range: nil)
@@ -151,9 +154,9 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
                 return
             }
             
-            if text[0] != "#" {
-                text = "#" + text
-            }
+            text = "#" + text.lowercaseString
+                .componentsSeparatedByCharactersInSet(alphaNumberSet)
+                .joinWithSeparator("")
             
             self.tagField.text = text
             self.hashtag = text
@@ -168,12 +171,12 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     
     @IBAction func goToFollowing(sender: AnyObject) {
         Globals.pagesController.setActiveController(2, direction: .Forward)
-        Globals.mixpanel.track("Mobile.Selection.Following Button")
+        Globals.mixpanel.track("Mobile.Selection.Go To Tags")
     }
 
     @IBAction func goToSettings(sender: AnyObject) {
         Globals.pagesController.setActiveController(0, direction: .Reverse)
-        Globals.mixpanel.track("Mobile.Selection.Settings Button")
+        Globals.mixpanel.track("Mobile.Selection.Go To Settings")
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {

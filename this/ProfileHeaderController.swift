@@ -52,6 +52,7 @@ class ProfileHeaderController: UIViewController, UIImagePickerControllerDelegate
     
     @IBAction func goToSelection(sender: AnyObject) {
         Globals.pagesController.setActiveController(1, direction: .Forward)
+        Globals.mixpanel.track("Mobile.Settings.Go To Selection")
     }
 
     @IBAction func changeAvatar(sender: AnyObject) {

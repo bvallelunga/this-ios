@@ -32,6 +32,8 @@ class AuthStepUsername: AuthStep {
     }
     
     override func formatValue(input: String) -> String {
+        let alphaNumberSet = NSCharacterSet.alphanumericCharacterSet().invertedSet
+        
         self.value = input.stringByReplacingOccurrencesOfString(" ", withString: "",
             options: NSStringCompareOptions.LiteralSearch, range: nil)
         
@@ -39,11 +41,11 @@ class AuthStepUsername: AuthStep {
             return ""
         }
         
-        if self.value[0] != "@" {
-            self.value = "@" + self.value
-        }
+        self.value = "@" + self.value.lowercaseString
+            .componentsSeparatedByCharactersInSet(alphaNumberSet)
+            .joinWithSeparator("")
         
-        return self.value.lowercaseString
+        return self.value
     }
     
     override func isValid(input: String) -> Bool {
@@ -51,7 +53,7 @@ class AuthStepUsername: AuthStep {
     }
     
     override func next(callback: (segue: Bool, skip: Bool) -> Void) {
-        let username = String(self.value.characters.dropFirst()).lowercaseString
+        let username = String(self.value.characters.dropFirst())
         
         self.parentController.nextButton.enabled = false
         

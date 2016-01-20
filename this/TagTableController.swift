@@ -79,6 +79,24 @@ class TagTableController: UITableViewController {
         self.refreshControl?.endRefreshing()
     }
     
+    func updateTag(tag: Tag) {
+        self.tag = tag
+        self.reloadComments()
+        self.headerController?.updateTag(tag)
+    }
+    
+    func reloadComments() {
+        self.tag.comments { (comments) -> Void in
+            self.comments = comments
+            self.tableView.reloadData()
+            
+            Globals.mixpanel.track("Mobile.Tag.Comments.Fetched", properties: [
+                "tag": self.tag.name,
+                "comments": comments.count
+            ])
+        }
+    }
+    
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         if self.keyboardActive {
             return
@@ -96,25 +114,7 @@ class TagTableController: UITableViewController {
         
         self.headerController.view.frame = rect
     }
-    
-    func reloadComments() {        
-        self.tag.comments { (comments) -> Void in
-            self.comments = comments
-            self.tableView.reloadData()
-            
-            Globals.mixpanel.track("Mobile.Tag.Comments.Fetched", properties: [
-                "tag": self.tag.name,
-                "comments": comments.count
-            ])
-        }
-    }
-    
-    func updateTag(tag: Tag) {
-        self.tag = tag
-        self.reloadComments()
-        self.headerController?.updateTag(tag)
-    }
-    
+   
     
     // MARK: NSNotificationCenter
     func keyboardDidShow(notification: NSNotification) {

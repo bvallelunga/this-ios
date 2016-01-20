@@ -71,6 +71,7 @@ class Tag: PFObject, PFSubclassing {
             if let tags = objects as? [Tag] {
                 callback(tags: tags)
             } else {
+                callback(tags: [])
                 ErrorHandler.handleParse(error)
             }
         }
@@ -123,6 +124,7 @@ class Tag: PFObject, PFSubclassing {
             if let users = objects as? [User] {
                 callback(users: users)
             } else {
+                callback(users: [])
                 ErrorHandler.handleParse(error)
             }
         }
@@ -155,6 +157,7 @@ class Tag: PFObject, PFSubclassing {
             if let comments = objects as? [Comment] {
                 callback(comments: comments)
             } else {
+                callback(comments: [])
                 ErrorHandler.handleParse(error)
             }
         }
@@ -167,6 +170,7 @@ class Tag: PFObject, PFSubclassing {
             if let users = objects as? [User] {
                 callback(users: users)
             } else {
+                callback(users: [])
                 ErrorHandler.handleParse(error)
             }
         }
@@ -202,6 +206,7 @@ class Tag: PFObject, PFSubclassing {
 
                 callback(photos: Array(self.photosCached) as! [Photo])
             } else {
+                callback(photos: [])
                 ErrorHandler.handleParse(error)
             }
         }

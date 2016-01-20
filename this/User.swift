@@ -185,10 +185,13 @@ class User: PFUser {
     }
     
     func following(callback: (tags: [Tag]) -> Void) {
-        PFCloud.callFunctionInBackground("following", withParameters: nil) { (objects, error) -> Void in
+        PFCloud.callFunctionInBackground("following", withParameters: [
+            "user": self.objectId!
+        ]) { (objects, error) -> Void in
             if let tags = objects as? [Tag] {
                 callback(tags: tags)
             } else {
+                callback(tags: [])
                 ErrorHandler.handleParse(error)
             }
         }

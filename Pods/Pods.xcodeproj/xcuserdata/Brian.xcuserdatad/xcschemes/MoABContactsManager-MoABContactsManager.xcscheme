@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '225B3E0C697DD2012C54489E'
+               BlueprintIdentifier = '0D479FFF5C07835346842090'
                BlueprintName = 'MoABContactsManager-MoABContactsManager'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'MoABContactsManager.bundle'>

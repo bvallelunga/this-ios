@@ -38,9 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId(credentials[0], clientKey: credentials[1])
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
-        // Update Config
-        Config.update(nil)
-        
         // Create Installation
         Installation.startup()
         
@@ -110,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Installation.clearBadge()
         
         Config.update { (config) -> Void in
-            Globals.selectionController.header.updateHeaderGif()
+            Globals.selectionController?.header?.updateHeaderGif()
         }
     }
 
