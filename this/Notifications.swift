@@ -9,7 +9,7 @@
 import Parse
 import Mixpanel
 
-class Notifications: NSObject {
+class Notification: NSObject {
     
     var enabled = false
     var application = UIApplication.sharedApplication()
