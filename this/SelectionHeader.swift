@@ -112,7 +112,10 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         self.addGestureRecognizer(tapper)
         
         self.reset()
-        self.updateHeaderGif()
+        
+        Globals.delay(60) { () -> () in
+            self.updateHeaderGif()
+        }
     }
     
     func updateHeaderGif() {
@@ -131,10 +134,14 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
             
             NSURLConnection.sendAsynchronousRequest(NSURLRequest(URL: url), queue: NSOperationQueue(),
                 completionHandler: { (response, data, error) -> Void in
-                if error != nil {
+                guard error == nil else {
+                    return
+                }
+                
+                Globals.delay(0, closure: { () -> () in
                     self.placeholderView.animatedImage = FLAnimatedImage(animatedGIFData: data)
                     self.gifURL = urlString
-                }
+                })
             })
         }
     }
