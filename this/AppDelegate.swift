@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Comment.registerSubclass()
         Installation.registerSubclass()
         User.registerSubclass()
+        Pending.registerSubclass()
         
         ParseCrashReporting.enable()
         Parse.enableLocalDatastore()
