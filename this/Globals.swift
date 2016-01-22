@@ -74,6 +74,24 @@ class Globals: NSObject {
         return self.infoDictionary["CFBundleShortVersionString"] as! String
     }
     
+    class func suffixNumber(var number: Int) -> String {
+        let sign = (number < 0) ? "-" : ""
+        
+        number = abs(number)
+        
+        if (number < 1000) {
+            return "\(sign)\(number)";
+        }
+        
+        let exp:Int = Int(log10(Double(number)) / log10(1000));
+        
+        let units:[String] = ["K","M","G","T","P","E"];
+        
+        let roundedNum:Int = Int(round(Double(10 * number) / pow(1000.0, Double(exp))) / Double(10.0));
+        
+        return "\(sign)\(roundedNum)\(units[exp-1])";
+    }
+    
     class func random(digits: Int) -> Int {
         let min = Int(pow(Double(10), Double(digits-1))) - 1
         let max = Int(pow(Double(10), Double(digits))) - 1

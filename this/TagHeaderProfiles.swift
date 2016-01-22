@@ -33,7 +33,7 @@ class TagHeaderProfiles: UICollectionView, UICollectionViewDataSource, UICollect
         self.reloadData()
         
         tag.followers { (users) -> Void in
-            for user in users {
+            for user in users[0...min(30, users.count-1)] {
                 self.users.append(user)
                 self.images[user] = nil
                 self.reloadData()
@@ -53,7 +53,7 @@ class TagHeaderProfiles: UICollectionView, UICollectionViewDataSource, UICollect
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.users.count
+        return self.users.count + 1
     }
     
     // MARK: UICollectionViewDelegate
@@ -64,17 +64,27 @@ class TagHeaderProfiles: UICollectionView, UICollectionViewDataSource, UICollect
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! TagHeaderProfileCell
-        let user = self.users[indexPath.row]
         
-        cell.setImage(self.images[user], index: indexPath.row)
+        guard indexPath.row > 0 else {
+            cell.setCounter(self.users.count)
+            return cell
+        }
+        
+        let user = self.users[indexPath.row - 1]
+        
+        cell.setImage(self.images[user], index: indexPath.row - 1)
         
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let user = self.users[indexPath.row]
+        var text = "\(self.users.count) followers"
         
-        NavNotification.show(user.screenname, color: Colors.lightGrey, vibrate: false, duration: 1.5)
+        if indexPath.row > 0 {
+            text = self.users[indexPath.row - 1].screenname
+        }
+        
+        NavNotification.show(text, color: Colors.lightGrey, vibrate: false, duration: 1)
     }
 
 }

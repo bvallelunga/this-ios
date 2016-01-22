@@ -43,7 +43,7 @@ class TagHeaderProfileCell: UICollectionViewCell {
         self.imageView.clipsToBounds = true
         
         self.label.frame = self.imageView.frame
-        self.label.font = UIFont.systemFontOfSize(50)
+        self.label.textColor = UIColor.whiteColor()
         self.label.adjustsFontSizeToFitWidth = true
         self.label.minimumScaleFactor = 0.1
         self.label.numberOfLines = 1
@@ -51,6 +51,12 @@ class TagHeaderProfileCell: UICollectionViewCell {
         
         self.addSubview(self.label)
         self.addSubview(self.imageView)
+    }
+    
+    func setCounter(count: Int) {
+        self.setImage(UIImage(), index: 0)
+        self.label.font = UIFont(name: "Bariol-Bold", size: 20)
+        self.label.text = Globals.suffixNumber(count)
     }
     
     func setImage(image: UIImage!, var index: Int) {
@@ -61,6 +67,7 @@ class TagHeaderProfileCell: UICollectionViewCell {
         }
         
         self.label.text = TagHeaderProfileCell.emojis[index]
+        self.label.font = UIFont.systemFontOfSize(32)
         
         self.clipsToBounds = image != nil
         self.backgroundColor = image == nil ? UIColor.clearColor(): Colors.lightGrey
