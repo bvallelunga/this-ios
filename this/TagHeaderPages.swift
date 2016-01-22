@@ -210,6 +210,32 @@ class TagHeaderPages: UIPageViewController, UIPageViewControllerDataSource,
             "photos": self.photos.count
         ])
     }
+    
+    func flagPhoto(photo: Photo, index: Int) {
+        photo.flag()
+        self.removePhoto(photo, index: index)
+        
+        Globals.mixpanel.track("Mobile.Tag.Photo.Flagged", properties: [
+            "tag": self.tag.name,
+            "photos": self.photos.count
+        ])
+    }
+    
+    func deletePhoto(photo: Photo, index: Int) {
+        photo.deleteInBackground()
+        self.removePhoto(photo, index: index)
+        
+        Globals.mixpanel.track("Mobile.Tag.Photo.Deleted", properties: [
+            "tag": self.tag.name,
+            "photos": self.photos.count
+        ])
+    }
+    
+    func removePhoto(photo: Photo, index: Int) {
+        self.tag.removeCachedPhoto(photo)
+        self.images.removeAtIndex(index)
+        self.reloadPages()
+    }
 
     // Photo Gallery Methods
     func photosViewController(photosViewController: NYTPhotosViewController!, didDisplayPhoto photo: NYTPhoto!, atIndex photoIndex: UInt) {
@@ -231,26 +257,16 @@ class TagHeaderPages: UIPageViewController, UIPageViewControllerDataSource,
     }
     
     func photosViewController(photosViewController: NYTPhotosViewController!, handleActionButtonTappedForPhoto photo: NYTPhoto!) -> Bool {
-        let controller = UIAlertController(title: "Flag Photo",
+        let controller = UIAlertController(title: "Flag Photo?",
             message: "Please confirm that this photo should be flagged.",
             preferredStyle: UIAlertControllerStyle.Alert)
         
         controller.addAction(UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Destructive) { (action) -> Void in
             let galleryPhoto = photo as? GalleryPhoto
             
-            galleryPhoto!.photo.flag()
-            
-            self.tag.removeCachedPhoto(galleryPhoto!.photo)
-            self.images.removeAtIndex(galleryPhoto!.indexPath.row)
-            self.reloadPages()
-            Globals.followingController.reloadTags()
+            self.flagPhoto(galleryPhoto!.photo, index: galleryPhoto!.indexPath.row)
             
             photosViewController.performSelector(Selector("doneButtonTapped:"), withObject: self)
-            
-            Globals.mixpanel.track("Mobile.Tag.Gallery.Photo.Flagged", properties: [
-                "tag": self.tag.name,
-                "photos": self.photos.count
-            ])
         })
         
         controller.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))

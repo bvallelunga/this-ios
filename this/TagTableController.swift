@@ -215,7 +215,7 @@ class TagTableController: UITableViewController {
             return
         }
         
-        let controller = UIAlertController(title: "Flag Comment",
+        let controller = UIAlertController(title: "Flag Comment?",
             message: "Please confirm that this comment should be flagged.",
             preferredStyle: UIAlertControllerStyle.Alert)
         

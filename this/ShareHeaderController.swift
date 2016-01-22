@@ -33,6 +33,7 @@ class ShareHeaderController: UIViewController, UISearchBarDelegate {
         self.view.backgroundColor = Colors.red
         self.stepLabel.textColor = UIColor(white: 0, alpha: 0.5)
         self.headerLabel.textColor = UIColor.whiteColor()
+        self.nextButton.setTitleColor(UIColor(white: 1, alpha: 0.5), forState: .Disabled)
         
         let tagString = NSMutableAttributedString(string: self.tag.hashtag, attributes: [
             NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue
@@ -67,7 +68,7 @@ class ShareHeaderController: UIViewController, UISearchBarDelegate {
     }
     
     func updateNextButtonTitle(selection: Bool) {
-        self.nextButton.setTitle(selection ? "SHARE" : "SKIP", forState: .Normal)
+        self.nextButton.enabled = selection
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {

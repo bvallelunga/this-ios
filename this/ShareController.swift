@@ -35,7 +35,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     @IBOutlet weak var headerContainer: UIView!
     
     var tag: Tag!
-    var backButton = "BACK"
+    var backButton = "CANCEL"
     var images: [UIImage] = []
     var headerFrame: CGRect!
     var contacts: Contacts = Contacts()

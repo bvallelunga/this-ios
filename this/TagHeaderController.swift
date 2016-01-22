@@ -91,13 +91,11 @@ class TagHeaderController: UIViewController, ShareControllerDelegate {
     }
     
     @IBAction func inviteTriggered(sender: AnyObject) {
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyBoard.instantiateViewControllerWithIdentifier("ShareController") as! ShareController
+        let controller = Globals.storyboard.instantiateViewControllerWithIdentifier("ShareController") as! ShareController
         
         controller.delegate = self
         controller.images = self.pageController.images
         controller.tag = self.tag
-        controller.backButton = "CANCEL"
         
         self.presentViewController(controller, animated: true, completion: nil)
         

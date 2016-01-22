@@ -24,6 +24,7 @@ class Globals: NSObject {
     
     static let mixpanel = Mixpanel.sharedInstance()
     static let infoDictionary = NSBundle.mainBundle().infoDictionary!
+    static let storyboard = UIStoryboard(name: "Main", bundle: nil)
     static let imageDownloader = JMImageCache.sharedCache()
     
     class func delay(delay:Double, closure:()->()) {
