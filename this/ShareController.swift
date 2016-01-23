@@ -17,8 +17,8 @@ protocol ShareControllerDelegate {
     func shareControllerInviteCompelete()
 }
 
-class ShareController: UITableViewController, ShareHeaderControllerDelegate,
-    MFMessageComposeViewControllerDelegate {
+class ShareController: UIViewController, UITableViewDataSource, UITableViewDelegate,
+    ShareHeaderControllerDelegate, MFMessageComposeViewControllerDelegate {
     
     struct Users {
         var raw: [User] = []
@@ -33,6 +33,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     }
     
     @IBOutlet weak var headerContainer: UIView!
+    @IBOutlet weak var tableView: UITableView!
     
     var tag: Tag!
     var backButton = "CANCEL"
@@ -46,21 +47,23 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     var user = User.current()
     var config: Config!
     var messageImage: UIImage!
+    var keyboardActive = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.edgesForExtendedLayout = .None
         self.view.backgroundColor = UIColor.whiteColor()
         self.tableView.backgroundColor = UIColor.whiteColor()
-        self.edgesForExtendedLayout = .None
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         self.tableView.separatorColor = UIColor(red:0.97, green:0.97, blue:0.97, alpha:1)
+        self.tableView.delaysContentTouches = false
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         
         let tapper = UITapGestureRecognizer(target: self, action: Selector("handleSingleTap:"))
         tapper.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(tapper)
-        
-        self.tableView.delaysContentTouches = false
+        self.tableView.addGestureRecognizer(tapper)
         
         self.loadContacts()
         self.headerController.updateNextButtonTitle(false)
@@ -82,6 +85,11 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         
         self.headerFrame = self.headerController.view.frame
         
+        // Register for keyboard notifications
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(self, selector: Selector("keyboardDidShow:"), name:UIKeyboardWillShowNotification, object: nil)
+        notificationCenter.addObserver(self, selector: Selector("keyboardDidHide"), name:UIKeyboardWillHideNotification, object: nil)
+        
         Globals.pagesController.lockPageView()
         Globals.mixpanel.track("Mobile.Invite", properties: [
             "tag": self.tag.name,
@@ -93,6 +101,11 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         super.viewDidAppear(animated)
         
         Globals.pagesController.unlockPageView()
+        
+        // Unregister for keyboard notifications
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.removeObserver(self, name:UIKeyboardWillShowNotification, object: nil)
+        notificationCenter.removeObserver(self, name:UIKeyboardWillHideNotification, object: nil)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -108,31 +121,45 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         return .LightContent
     }
     
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
         var delta: CGFloat = 0
         var rect = self.headerFrame
+        
+        guard !self.keyboardActive else {
+            return
+        }
         
         if self.tableView.contentOffset.y < 0 {
             delta = fabs(min(0, self.tableView.contentOffset.y))
             
             rect.origin.y -= delta
             rect.size.height += delta
-        } else if rect.height - self.tableView.contentOffset.y - 45 <= 21  {
-            delta = fabs(max(0, fabs(rect.height - self.tableView.contentOffset.y - 66)))
-            
-            rect.origin.y += delta
-            
-            if self.tableView.tableHeaderView != nil {
-                self.tableView.tableHeaderView = UIView(frame: rect)
-                self.view.addSubview(self.headerContainer)
-            }
-        } else if self.tableView.tableHeaderView == nil {
-            self.headerContainer.removeFromSuperview()
-            self.tableView.tableHeaderView = self.headerContainer
-            self.tableView.contentInset = UIEdgeInsetsZero
         }
         
         self.headerController.view.frame = rect
+    }
+    
+    // MARK: NSNotificationCenter
+    func keyboardDidShow(notification: NSNotification) {
+        let userInfo = NSDictionary(dictionary: notification.userInfo!)
+        let rect = (userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue).CGRectValue()
+        
+        self.keyboardActive = true
+        self.tableView.contentInset.top = 66
+        self.tableView.contentInset.bottom = rect.size.height
+        self.tableView.tableHeaderView = nil
+        self.view.addSubview(self.headerContainer)
+        self.headerController.searchBar.becomeFirstResponder()
+        self.headerContainer.frame.origin.y = 66 - self.headerFrame.height
+    }
+    
+    func keyboardDidHide() {
+        self.keyboardActive = false
+        self.tableView.contentInset.top = 0
+        self.headerContainer.removeFromSuperview()
+        
+        self.tableView.tableHeaderView = self.headerContainer
+        self.headerContainer.frame = self.headerFrame
     }
     
     func handleSingleTap(gesture: UITapGestureRecognizer) {
@@ -140,11 +167,11 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
     }
     
     // MARK: - Table view data source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 3
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
             case 0: return self.users.filtered.count
             case 1: return self.friends.filtered.count
@@ -152,7 +179,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         }
     }
     
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
             case 0: return self.users.filtered.isEmpty ? 0.1 : 20
             case 1: return self.friends.filtered.isEmpty ? 0.1 : 20
@@ -160,7 +187,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         }
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
             case 0: return self.users.filtered.isEmpty ? 0.1 : 40
             case 1: return self.friends.filtered.isEmpty ? 0.1 : 40
@@ -168,11 +195,11 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         }
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 70
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 && !self.users.filtered.isEmpty {
             return "PEOPLE"
         } else if section == 1 && !self.friends.filtered.isEmpty {
@@ -184,15 +211,21 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         return nil
     }
     
-    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         
         header.contentView.backgroundColor = UIColor.whiteColor()
         header.textLabel?.font = UIFont(name: "Bariol-Bold", size: 20)
         header.textLabel?.textColor = UIColor(red:0.67, green:0.67, blue:0.67, alpha:1)
     }
+    
+    func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        let footer = view as! UITableViewHeaderFooterView
+        
+        footer.contentView.backgroundColor = UIColor.whiteColor()
+    }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! ShareTableCell
         
         if indexPath.section < 2 {
@@ -232,7 +265,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! ShareTableCell
         
         cell.share = !cell.share

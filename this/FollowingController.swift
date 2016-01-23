@@ -85,7 +85,7 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
         return 1
     }
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {        
         return max(self.tags.count, 6)
     }
 

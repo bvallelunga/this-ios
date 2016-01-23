@@ -65,7 +65,7 @@ class TrendingTableCell: UITableViewCell, UICollectionViewDelegate, UICollection
         self.tagLabel.backgroundColor = Colors.lightGrey
         self.followersLabel.hidden = true
         self.iconImage.hidden = true
-        self.contentView.alpha = 0.15
+        self.contentView.alpha = 0.3
         self.images.removeAll()
         self.collectionView.reloadData()
     }

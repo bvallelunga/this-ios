@@ -25,14 +25,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="474" height="326"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nw-K5-q6W">
-                        <rect key="frame" x="0.0" y="286" width="474" height="40"/>
+                        <rect key="frame" x="0.0" y="276" width="474" height="50"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="4h3-GL-pkC"/>
+                            <constraint firstAttribute="height" constant="50" id="6hN-aX-bXz"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="26"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="4h3-GL-pkC"/>
+                            </mask>
+                        </variation>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="DEM-oe-9WN">
                         <rect key="frame" x="10" y="10" width="30" height="30"/>
@@ -51,6 +57,7 @@
             <color key="backgroundColor" red="0.13725490196078433" green="0.12156862745098039" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="GTt-UA-87d" secondAttribute="bottom" id="5qv-JL-1n6"/>
+                <constraint firstItem="1nw-K5-q6W" firstAttribute="top" secondItem="p4q-wv-rn0" secondAttribute="top" id="820-u0-tsl"/>
                 <constraint firstItem="1nw-K5-q6W" firstAttribute="top" secondItem="GTt-UA-87d" secondAttribute="bottom" id="Ari-FM-YdS"/>
                 <constraint firstItem="GTt-UA-87d" firstAttribute="leading" secondItem="p4q-wv-rn0" secondAttribute="leading" id="Ge6-j8-39B"/>
                 <constraint firstAttribute="bottom" secondItem="GTt-UA-87d" secondAttribute="bottom" id="NQX-52-M0Y"/>
@@ -65,8 +72,9 @@
             <size key="customSize" width="474" height="326"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="NQX-52-M0Y"/>
+                    <exclude reference="820-u0-tsl"/>
                     <exclude reference="Ari-FM-YdS"/>
+                    <exclude reference="NQX-52-M0Y"/>
                 </mask>
             </variation>
             <connections>
