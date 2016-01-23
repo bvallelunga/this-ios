@@ -377,10 +377,8 @@ class ShareController: UIViewController, UITableViewDataSource, UITableViewDeleg
         }
         
         let messageVC = MFMessageComposeViewController()
-        var contacts: [String] = []
-        
-        for contact in self.contacts.selected.keys {
-            contacts.append(contact.phone.number)
+        let contacts: [String] = self.contacts.selected.keys.map { (contact) -> String in
+            return contact.phone.number
         }
         
         if let image = self.messageImage {
