@@ -16,6 +16,7 @@ class TrendingCollectionCell: UICollectionViewCell {
         super.init(frame: frame)
         
         self.backgroundView = self.imageView
+        self.backgroundColor = Colors.lightGrey
     }
 
     required init?(coder aDecoder: NSCoder) {

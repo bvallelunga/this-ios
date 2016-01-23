@@ -23,8 +23,4 @@ class Colors: NSObject {
     static let offWhite = UIColor(red:0.99, green:0.99, blue:0.99, alpha:1)
     static let whiteGrey = UIColor(red:0.85, green:0.85, blue:0.85, alpha:1)
     
-    static let tiles = [
-        orange, purple, blue, red, green, yellow, orange, purple
-    ]
-    
 }

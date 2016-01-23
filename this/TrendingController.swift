@@ -15,6 +15,7 @@ class TrendingController: UITableViewController {
     var parent: TagsController!
     
     private var tags: [Tag] = []
+    private var images: [Tag: [UIImage]] = [:]
     private var date: NSDate!
 
     override func viewDidLoad() {
@@ -53,6 +54,19 @@ class TrendingController: UITableViewController {
             self.refreshControl?.endRefreshing()
             self.date = NSDate()
             
+            for tag in tags {
+                self.images[tag] = []
+                
+                tag.photos(8) { (photos) -> Void in
+                    for photo in photos {
+                        photo.fetchThumbnail(callback: { (image) -> Void in
+                            self.images[tag]?.append(image)
+                            self.tableView.reloadData()
+                        })
+                    }
+                }
+            }
+            
             Globals.mixpanel.track("Mobile.Trending.Tags.Fetched", properties: [
                 "tags": tags.count
             ])
@@ -85,7 +99,8 @@ class TrendingController: UITableViewController {
         if self.tags.count <= indexPath.row {
             cell.makeSpacer()
         } else {
-            cell.updateTag(self.tags[indexPath.row])
+            let tag = self.tags[indexPath.row]
+            cell.updateTag(tag, images: self.images[tag]!)
         }
         
         return cell

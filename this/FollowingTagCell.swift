@@ -46,29 +46,15 @@ class FollowingTagCell: UICollectionViewCell {
         self.addGestureRecognizer(gesture)
     }
     
-    func updateTag(tag: Tag) {
+    func updateTag(tag: Tag, images: [UIImage]) {
         let count = StateTracker.countTagNotification(tag)
         
         self.hashtag = tag
+        self.images = images
         self.tagLabel.text = tag.hashtag
+        self.imageView.image = images.first
         self.badgeLabel.hidden = count == 0
         self.badgeLabel.text = String(count)
-        self.images.removeAll()
-        self.imageView.image = nil
-        
-        tag.photos(8) { (photos) -> Void in
-            self.images.removeAll()
-                        
-            for photo in photos {
-                photo.fetchThumbnail(callback: { (image) -> Void in
-                    self.images.append(image)
-                    
-                    if photo == photos.first {
-                        self.imageView.image = image
-                    }
-                })
-            }
-        }
     }
     
     func tapped(gesture: UITapGestureRecognizer) {

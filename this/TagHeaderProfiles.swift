@@ -53,10 +53,18 @@ class TagHeaderProfiles: UICollectionView, UICollectionViewDataSource, UICollect
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard !self.users.isEmpty else {
+            return 0
+        }
+        
         return self.users.count + 1
     }
     
     // MARK: UICollectionViewDelegate
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 15
+    }
+    
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let size = self.frame.size.height
         return CGSizeMake(size, size)

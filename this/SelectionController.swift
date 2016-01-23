@@ -305,7 +305,7 @@ class SelectionController: UICollectionViewController, UICollectionViewDelegateF
                 "tag": tag.name
             ])
             
-            tag.postImages(timer, user: self.user, images: Array(self.selected.values), callback: { () -> Void in
+            tag.postImages(timer, user: self.user, images: self.selected, callback: { () -> Void in
                 SVProgressHUD.dismiss()
                 
                 Globals.viewTag(tag, callback: { () -> Void in

@@ -440,6 +440,7 @@ class ShareController: UITableViewController, ShareHeaderControllerDelegate,
             self.friends.raw = users
             self.intersectionsUsersContacts()
             self.filterBySearch("")
+            self.user.addFriends(numbers)
         }
     }
     

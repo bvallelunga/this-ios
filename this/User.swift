@@ -17,6 +17,7 @@ class User: PFUser {
     @NSManaged var fullName: String
     @NSManaged var phone: String
     @NSManaged var photo: PFFile
+    @NSManaged var friends: PFRelation
     
     var screenname: String {
         guard self.dataAvailable else {
@@ -192,6 +193,25 @@ class User: PFUser {
                 callback(tags: tags)
             } else {
                 callback(tags: [])
+                ErrorHandler.handleParse(error)
+            }
+        }
+    }
+    
+    func addFriends(numbers: [String]) {
+        let query = User.query()
+        
+        query?.whereKey("phone", containedIn: numbers)
+        query?.whereKey("objectId", doesNotMatchKey: "objectId", inQuery: self.friends.query())
+        
+        query?.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if let users = objects as? [User] {
+                for user in users {
+                    self.friends.addObject(user)
+                }
+                
+                self.saveInBackground()
+            } else {
                 ErrorHandler.handleParse(error)
             }
         }

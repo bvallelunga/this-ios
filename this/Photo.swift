@@ -19,6 +19,7 @@ class Photo: PFObject, PFSubclassing {
     @NSManaged var thumbnail: PFFile
     @NSManaged var original: PFFile
     @NSManaged var expireAt: NSDate
+    @NSManaged var location: PFGeoPoint
     
     var originalCached: UIImage!
     

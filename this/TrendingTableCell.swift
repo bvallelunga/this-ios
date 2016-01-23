@@ -46,28 +46,17 @@ class TrendingTableCell: UITableViewCell, UICollectionViewDelegate, UICollection
         self.layout.sectionInset = UIEdgeInsetsZero
     }
     
-    func updateTag(tag: Tag) {
+    func updateTag(tag: Tag, images: [UIImage]) {
         self.spacer = false
         self.hashtag = tag
+        self.images = images
         self.contentView.alpha = 1
         self.tagLabel.text = tag.hashtag
         self.followersLabel.text = "\(tag.followerCount)"
         self.followersLabel.hidden = false
         self.iconImage.hidden = false
         self.tagLabel.backgroundColor = UIColor.clearColor()
-        self.images.removeAll()
         self.collectionView.reloadData()
-        
-        tag.photos(8) { (photos) -> Void in
-            self.images.removeAll()
-            
-            for photo in photos {
-                photo.fetchThumbnail(callback: { (image) -> Void in
-                    self.images.append(image)
-                    self.collectionView.reloadData()
-                })
-            }
-        }
     }
     
     func makeSpacer() {
@@ -94,12 +83,6 @@ class TrendingTableCell: UITableViewCell, UICollectionViewDelegate, UICollection
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! TrendingCollectionCell
-        
-        if self.spacer {
-            cell.backgroundColor = Colors.tiles[indexPath.row]
-        } else {
-            cell.backgroundColor = Colors.lightGrey
-        }
         
         if self.images.count <= indexPath.row {
             cell.imageView.image = nil

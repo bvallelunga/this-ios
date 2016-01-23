@@ -8,6 +8,8 @@
 
 import UIKit
 import Parse
+import Photos
+import CoreLocation
 
 class Tag: PFObject, PFSubclassing {
     
@@ -200,11 +202,8 @@ class Tag: PFObject, PFSubclassing {
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if let photos = objects as? [Photo] {                
                 if self.photosCached.count < photos.count {
-                    self.photosCached = NSMutableArray(array: photos)
-                    self.arePhotosCached = limit == nil
+                    callback(photos: photos)
                 }
-
-                callback(photos: Array(self.photosCached) as! [Photo])
             } else {
                 callback(photos: [])
                 ErrorHandler.handleParse(error)
@@ -212,12 +211,16 @@ class Tag: PFObject, PFSubclassing {
         }
     }
     
-    func postImages(timer: Int, user: User, images: [UIImage], callback: () -> Void, hasError: () -> Void) {
+    func postImages(timer: Int, user: User, images: [PHAsset: UIImage], callback: () -> Void, hasError: () -> Void) {
         let expireAt = NSCalendar.currentCalendar()
             .dateByAddingUnit(.Day, value: timer, toDate: NSDate(), options: [])!
         
-        let photos: [Photo] = images.map { (image) -> Photo in
+        let photos: [Photo] = images.map { (asset, image) -> Photo in
             let photo = Photo.create(user, image: image, expireAt: expireAt)
+            
+            if let location = asset.location {
+                photo.location = PFGeoPoint(location: location)
+            }
             
             self.photosCached.insertObject(photo, atIndex: 0)
             self.photos.addObject(photo)

@@ -14,6 +14,7 @@ private let spacerIdentifier = "spacer"
 class FollowingController: UICollectionViewController, UICollectionViewDelegateFlowLayout, FollowingTagCellDelegate {
     
     private var tags: [Tag] = []
+    private var images: [Tag: [UIImage]] = [:]
     private var refreshControl: UIRefreshControl!
     private var user = User.current()
     private var date: NSDate!
@@ -59,8 +60,20 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
             self.refreshControl.endRefreshing()
             self.date = NSDate()
             
-            Globals.mixpanel.people.set("Following", to: tags.count)
+            for tag in tags {
+                self.images[tag] = []
+                
+                tag.photos(8) { (photos) -> Void in
+                    for photo in photos {
+                        photo.fetchThumbnail(callback: { (image) -> Void in
+                            self.images[tag]?.append(image)
+                            self.collectionView?.reloadData()
+                        })
+                    }
+                }
+            }
             
+            Globals.mixpanel.people.set("Following", to: tags.count)
             Globals.mixpanel.track("Mobile.Following.Tags.Fetched", properties: [
                 "tags": tags.count
             ])
@@ -87,10 +100,11 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
         }
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(tagIdentifier, forIndexPath: indexPath) as! FollowingTagCell
+        let tag = self.tags[indexPath.row]
         
         cell.alpha = 1
         cell.delegate = self
-        cell.updateTag(self.tags[indexPath.row])
+        cell.updateTag(tag, images: self.images[tag]!)
         
         return cell
     }
