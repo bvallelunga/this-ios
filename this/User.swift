@@ -198,6 +198,22 @@ class User: PFUser {
         }
     }
     
+    func photos(callback: (photos: [Photo]) -> Void) {
+        let query = Photo.query()
+        
+        query?.whereKey("user", equalTo: self)
+        query?.whereKey("flagged", notEqualTo: true)
+        query?.whereKeyExists("original")
+        
+        query?.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if let photos = objects as? [Photo] {
+                callback(photos: photos)
+            } else {
+                ErrorHandler.handleParse(error)
+            }
+        }
+    }
+    
     func addFriends(numbers: [String]) {
         let query = User.query()
         

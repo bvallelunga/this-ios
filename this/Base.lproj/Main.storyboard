@@ -549,6 +549,35 @@ and Privacy Policy.</string>
             </objects>
             <point key="canvasLocation" x="2536" y="381"/>
         </scene>
+        <!--Profile Controller-->
+        <scene sceneID="t8n-dN-C3b">
+            <objects>
+                <collectionViewController storyboardIdentifier="ProfileController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FyP-Z3-nKc" customClass="ProfileController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="y6i-ft-cZ3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewLayout key="collectionViewLayout" id="wmp-Jm-lq1" customClass="CSStickyHeaderFlowLayout"/>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="uhz-g2-o1q">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="FyP-Z3-nKc" id="aA4-7u-Ny2"/>
+                            <outlet property="delegate" destination="FyP-Z3-nKc" id="mi6-Kk-YRg"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wcR-ji-wTo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2528" y="-2038"/>
+        </scene>
         <!--Share Controller-->
         <scene sceneID="esq-DH-KiB">
             <objects>
@@ -843,22 +872,30 @@ and Privacy Policy.</string>
                             </connections>
                         </containerView>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="cell" textLabel="fbh-ij-inS" style="IBUITableViewCellStyleDefault" id="4Xk-zr-Vzx">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="cell" id="4Xk-zr-Vzx" customClass="TagTableCell" customModule="_this" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="428" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Xk-zr-Vzx" id="d3U-BK-buI">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fbh-ij-inS">
-                                            <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XOP-UI-CYr" customClass="TTTAttributedLabel">
+                                            <rect key="frame" x="10" y="0.0" width="580" height="43.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="XOP-UI-CYr" firstAttribute="leading" secondItem="d3U-BK-buI" secondAttribute="leading" constant="10" id="Htj-r2-W3N"/>
+                                        <constraint firstItem="XOP-UI-CYr" firstAttribute="top" secondItem="d3U-BK-buI" secondAttribute="top" id="JHw-Ap-SeE"/>
+                                        <constraint firstAttribute="bottom" secondItem="XOP-UI-CYr" secondAttribute="bottom" id="Knf-X9-bYC"/>
+                                        <constraint firstAttribute="trailing" secondItem="XOP-UI-CYr" secondAttribute="trailing" constant="10" id="xWv-fn-2RO"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="label" destination="XOP-UI-CYr" id="Kc8-uR-sYo"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

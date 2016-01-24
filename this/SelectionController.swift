@@ -14,9 +14,8 @@ import CSStickyHeaderFlowLayout
 private let photoIdentifier = "photo"
 private let cameraIdentifier = "camera"
 
-class SelectionController: UICollectionViewController, UICollectionViewDelegateFlowLayout,
-    UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-    SelectionHeaderDelegate {
+class SelectionController: UICollectionViewController, UIImagePickerControllerDelegate,
+    UINavigationControllerDelegate, SelectionHeaderDelegate {
     
     private let manager = PHCachingImageManager()
     private var assets: [PHAsset] = []

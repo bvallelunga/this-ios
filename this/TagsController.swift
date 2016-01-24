@@ -68,6 +68,14 @@ class TagsController: UIViewController {
         
         // Core Setup
         Globals.tagsController = self
+        Globals.pagesController.unlockPageView()
+        
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        Globals.pagesController.lockPageView()
     }
 
     // MARK: - Navigation

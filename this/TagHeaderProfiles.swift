@@ -13,6 +13,7 @@ private let reuseIdentifier = "Cell"
 class TagHeaderProfiles: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     private var hashtag: Tag!
+    private var userCount = 0
     private var users: [User] = []
     private var images: [User: UIImage] = [:]
     
@@ -33,6 +34,8 @@ class TagHeaderProfiles: UICollectionView, UICollectionViewDataSource, UICollect
         self.reloadData()
         
         tag.followers { (users) -> Void in
+            self.userCount = users.count
+            
             for user in users[0...min(30, users.count-1)] {
                 self.users.append(user)
                 self.images[user] = nil
@@ -86,13 +89,15 @@ class TagHeaderProfiles: UICollectionView, UICollectionViewDataSource, UICollect
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        var text = "\(self.users.count) followers"
-        
-        if indexPath.row > 0 {
-            text = self.users[indexPath.row - 1].screenname
+        guard indexPath.row > 0 else {
+            NavNotification.show("\(self.userCount) follower\(self.userCount != 1 ? "s": "")",
+                color: Colors.lightGrey, vibrate: false, duration: 1)
+            return
         }
         
-        NavNotification.show(text, color: Colors.lightGrey, vibrate: false, duration: 1)
+        let controller = Globals.storyboard.instantiateViewControllerWithIdentifier("ProfileController") as! ProfileController
+        controller.user = self.users[indexPath.row - 1]
+        Globals.tagController.navigationController?.pushViewController(controller, animated: true)
     }
 
 }

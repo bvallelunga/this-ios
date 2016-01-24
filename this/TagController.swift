@@ -48,7 +48,6 @@ class TagController: UIViewController, UITextFieldDelegate {
         super.viewDidAppear(animated)
         
         Globals.tagController = self
-        Globals.pagesController.lockPageView()
         
         // Register for keyboard notifications
         let notificationCenter = NSNotificationCenter.defaultCenter()
@@ -60,7 +59,6 @@ class TagController: UIViewController, UITextFieldDelegate {
         super.viewDidAppear(animated)
         
         Globals.tagController = nil
-        Globals.pagesController.unlockPageView()
         
         // Unregister for keyboard notifications
         let notificationCenter = NSNotificationCenter.defaultCenter()

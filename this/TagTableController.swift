@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import TTTAttributedLabel
 
-class TagTableController: UITableViewController {
-    
+class TagTableController: UITableViewController, TTTAttributedLabelDelegate {
     
     @IBOutlet weak var headerContainer: UIView!
     @IBOutlet var emptyContainer: UIView!
@@ -155,12 +155,23 @@ class TagTableController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! TagTableCell
         let comment = self.comments[indexPath.row]
+        let message = self.buildText(comment.from, message: comment.message)
+        let linkAttrs: [NSObject: AnyObject] = [
+            kCTForegroundColorAttributeName: Colors.greyBlue,
+            NSFontAttributeName: UIFont(name: "Bariol-Bold", size: 20)!,
+        ]
+        let range = NSString(string: message).rangeOfString(comment.from)
         
-        cell.textLabel?.attributedText = self.buildText(comment.from, message: comment.message)
-        cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.lineBreakMode = .ByWordWrapping
+        cell.label.delegate = self
+        cell.label.linkAttributes = linkAttrs
+        cell.label.activeLinkAttributes = linkAttrs
+        cell.label.inactiveLinkAttributes = linkAttrs
+        cell.label.text = self.buildText(comment.from, message: comment.message) as String
+        cell.label.numberOfLines = 0
+        cell.label.lineBreakMode = .ByWordWrapping
+        cell.label.addLinkToURL(NSURL(string: "this://\(comment.user.objectId!)"), withRange: range)
         
         return cell
     }
@@ -174,7 +185,7 @@ class TagTableController: UITableViewController {
         let message = self.buildText(comment.from, message: comment.message)
         let maxLabelSize = CGSizeMake(tableView.frame.width, 400)
         let options = NSStringDrawingOptions.UsesLineFragmentOrigin
-        let bounds = message.boundingRectWithSize(maxLabelSize, options: options, context: nil)
+        let bounds = message.boundingRectWithSize(maxLabelSize, options: options, attributes: nil, context: nil)
         let height = bounds.size.height + 20
         self.commentHeights[indexPath] = height
         
@@ -190,18 +201,8 @@ class TagTableController: UITableViewController {
         self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
     }
     
-    func buildText(user: String, message: String) -> NSAttributedString {
-        let text = NSMutableAttributedString(string: user, attributes: [
-            NSFontAttributeName: UIFont(name: "Bariol-Bold", size: 20)!,
-            NSForegroundColorAttributeName: Colors.greyBlue
-        ])
-        
-        text.appendAttributedString(NSAttributedString(string: " " + message, attributes: [
-            NSFontAttributeName: UIFont(name: "Bariol", size: 20)!,
-            NSForegroundColorAttributeName: UIColor.blackColor()
-        ]))
-        
-        return text
+    func buildText(user: String, message: String) -> NSString {
+        return user + " " + message
     }
     
     func handleSingleTap(gesture: UITapGestureRecognizer) {
@@ -233,6 +234,13 @@ class TagTableController: UITableViewController {
         controller.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         
         self.presentViewController(controller, animated: true, completion: nil)
+    }
+    
+    
+    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {        
+        let controller = Globals.storyboard.instantiateViewControllerWithIdentifier("ProfileController") as! ProfileController
+        controller.user = User(withoutDataWithObjectId: url.host)
+        Globals.tagController.navigationController?.pushViewController(controller, animated: true)
     }
 
 }
