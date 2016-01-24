@@ -174,10 +174,10 @@
                             <action selector="changeTimer:" destination="OVO-P5-zWt" eventType="touchUpInside" id="kL6-6g-Irf"/>
                         </connections>
                     </button>
-                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cnT-R8-n78">
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cnT-R8-n78">
                         <rect key="frame" x="0.0" y="120" width="436" height="300"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XyF-VT-pFS" customClass="TagListView" customModule="TagListView">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XyF-VT-pFS" customClass="TagListView" customModule="TagListView">
                                 <rect key="frame" x="18" y="8" width="406" height="16"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>

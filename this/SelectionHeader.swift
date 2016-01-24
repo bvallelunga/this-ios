@@ -117,6 +117,7 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         self.tagList.marginY = 10
         self.tagList.paddingX = 10
         self.tagList.paddingY = 8
+        self.tagListScroll.hidden = true
         
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
@@ -202,8 +203,6 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
             text = text.stringByReplacingOccurrencesOfString(" ", withString: "",
                 options: NSStringCompareOptions.LiteralSearch, range: nil)
             
-            self.toggleTagList(text.isEmpty)
-            
             guard !text.isEmpty else {
                 return
             }
@@ -236,6 +235,10 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     func toggleTagList(show: Bool, animate: Bool = true) {
         let alpha: CGFloat = show ? 0 : 1
         
+        guard show == self.tagListScroll.hidden else {
+            return
+        }
+        
         if show {
             self.fetchTags()
         }
@@ -255,11 +258,17 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     
     func textFieldDidBeginEditing(textField: UITextField) {
         textField.selectAll(self)
+        self.toggleTagList(true)
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        self.toggleTagList(false)
     }
     
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         self.setHashtag(title)
         self.toggleTagList(false)
+        self.tagField.resignFirstResponder()
     }
     
     func setHashtag(tag: String) {
