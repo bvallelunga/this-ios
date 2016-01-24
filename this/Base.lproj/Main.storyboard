@@ -553,7 +553,7 @@ and Privacy Policy.</string>
         <scene sceneID="t8n-dN-C3b">
             <objects>
                 <collectionViewController storyboardIdentifier="ProfileController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FyP-Z3-nKc" customClass="ProfileController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="y6i-ft-cZ3">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" id="y6i-ft-cZ3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewLayout key="collectionViewLayout" id="wmp-Jm-lq1" customClass="CSStickyHeaderFlowLayout"/>
@@ -576,7 +576,7 @@ and Privacy Policy.</string>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wcR-ji-wTo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2528" y="-2038"/>
+            <point key="canvasLocation" x="2528" y="-1964"/>
         </scene>
         <!--Share Controller-->
         <scene sceneID="esq-DH-KiB">

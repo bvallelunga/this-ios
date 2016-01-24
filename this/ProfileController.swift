@@ -16,6 +16,7 @@ class ProfileController: UICollectionViewController, NYTPhotosViewControllerDele
     var user: User!
     private var photos: [Photo] = []
     private var images: [Photo: UIImage] = [:]
+    private var spinner: UIActivityIndicatorView!
     private var photoViewer: NYTPhotosViewController!
 
     override func viewDidLoad() {
@@ -38,10 +39,28 @@ class ProfileController: UICollectionViewController, NYTPhotosViewControllerDele
         self.collectionView?.delegate = self
         self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, 0)
         
+        // Add Spinner
+        self.spinner = UIActivityIndicatorView(frame: CGRectMake(0, 0, 20, 20))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.spinner)
+        
         self.loadImages()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        Globals.pagesController.lockPageView()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        Globals.pagesController.unlockPageView()
+    }
+    
     func loadImages() {
+        self.spinner.startAnimating()
+        
         self.user.fetchIfNeededInBackgroundWithBlock { (user, error) -> Void in
             guard error == nil else {
                 return
@@ -53,6 +72,7 @@ class ProfileController: UICollectionViewController, NYTPhotosViewControllerDele
         self.user.photos { (photos) -> Void in
             self.photos = photos
             self.collectionView?.reloadData()
+            self.spinner.stopAnimating()
             
             for photo in photos {
                 photo.fetchThumbnail(callback: { (image) -> Void in
