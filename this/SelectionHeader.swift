@@ -133,7 +133,7 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         }
     }
     
-    func fetchTags() {        
+    func fetchTags() {
         Tag.nearby { (tags) -> Void in
             for tag in tags {
                 if self.tags[tag.hashtag] == nil {
@@ -216,6 +216,11 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     }
 
     @IBAction func uploadPhotos(sender: AnyObject) {
+        guard !self.hashtag.isEmpty else {
+            self.toggleTagList(true)
+            return
+        }
+        
         let hashtag = String(self.hashtag.characters.dropFirst())
         self.delegate.updateTags(hashtag, timer: self.timer.timer)
     }
@@ -278,7 +283,7 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         self.imagesSelected([])
         self.setHashtag("")
         self.setTimer(2)
-        self.toggleTagList(true, animate: false)
+        self.toggleTagList(false, animate: false)
     }
     
     func setTimer(var index: Int) {
@@ -308,8 +313,7 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     }
     
     func checkArrow() {
-        let tagLength = NSString(string: self.hashtag).length
-        let enabled = !self.images.isEmpty && tagLength > 1
+        let enabled = !self.images.isEmpty
         
         if enabled != self.arrowButton.enabled {
             self.arrowButton.enabled = enabled
