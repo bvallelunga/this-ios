@@ -121,5 +121,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Want to find hashtags near you?</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Want to find hashtags near you?</string>
 </dict>
 </plist>

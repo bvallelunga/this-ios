@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -72,7 +73,7 @@
                             <action selector="goToFollowing:" destination="OVO-P5-zWt" eventType="touchUpInside" id="mcS-8z-0k4"/>
                         </connections>
                     </button>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#this" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tBc-If-Uhi">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#this" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tBc-If-Uhi" customClass="TextField" customModule="_this" customModuleProvider="target">
                         <rect key="frame" x="63" y="35" width="310" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="EMu-kb-UaD"/>
@@ -173,6 +174,33 @@
                             <action selector="changeTimer:" destination="OVO-P5-zWt" eventType="touchUpInside" id="kL6-6g-Irf"/>
                         </connections>
                     </button>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cnT-R8-n78">
+                        <rect key="frame" x="0.0" y="120" width="436" height="300"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XyF-VT-pFS" customClass="TagListView" customModule="TagListView">
+                                <rect key="frame" x="18" y="8" width="406" height="16"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="XyF-VT-pFS" secondAttribute="bottom" id="9OW-Se-r9M"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="XyF-VT-pFS" secondAttribute="bottom" id="BzM-N0-aKd"/>
+                            <constraint firstItem="XyF-VT-pFS" firstAttribute="leading" secondItem="cnT-R8-n78" secondAttribute="leadingMargin" constant="10" id="MX1-Ze-GWm"/>
+                            <constraint firstItem="XyF-VT-pFS" firstAttribute="top" secondItem="cnT-R8-n78" secondAttribute="topMargin" id="VRu-0C-rVv"/>
+                            <constraint firstItem="XyF-VT-pFS" firstAttribute="top" secondItem="cnT-R8-n78" secondAttribute="top" id="YLm-iB-n1I"/>
+                            <constraint firstAttribute="trailing" secondItem="XyF-VT-pFS" secondAttribute="trailing" id="aPu-Zf-tk2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XyF-VT-pFS" secondAttribute="trailing" constant="10" id="bWG-9s-1NT"/>
+                            <constraint firstItem="XyF-VT-pFS" firstAttribute="leading" secondItem="cnT-R8-n78" secondAttribute="leading" id="zUm-55-Qgd"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="9OW-Se-r9M"/>
+                                <exclude reference="YLm-iB-n1I"/>
+                                <exclude reference="aPu-Zf-tk2"/>
+                                <exclude reference="zUm-55-Qgd"/>
+                            </mask>
+                        </variation>
+                    </scrollView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -187,11 +215,13 @@
                 <constraint firstItem="fVK-ks-aT8" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" constant="20" id="AAL-8Z-fBi"/>
                 <constraint firstItem="0c0-RK-aHc" firstAttribute="centerY" secondItem="EcJ-03-fEE" secondAttribute="centerY" id="Csf-PF-edq"/>
                 <constraint firstItem="sEE-QU-oI6" firstAttribute="centerY" secondItem="OVO-P5-zWt" secondAttribute="centerY" id="Hdj-ca-ntX"/>
+                <constraint firstAttribute="trailing" secondItem="cnT-R8-n78" secondAttribute="trailing" id="ISF-ME-KJE"/>
                 <constraint firstAttribute="trailing" secondItem="1i5-Lz-ZAT" secondAttribute="trailing" constant="20" id="OdC-R6-pep"/>
                 <constraint firstItem="sEE-QU-oI6" firstAttribute="top" secondItem="uv0-dZ-e3e" secondAttribute="bottom" id="Q0X-TJ-0wJ"/>
                 <constraint firstAttribute="trailing" secondItem="uv0-dZ-e3e" secondAttribute="trailing" constant="8" id="QEu-XV-Ndb"/>
                 <constraint firstAttribute="trailing" secondItem="0c0-RK-aHc" secondAttribute="trailing" constant="20" id="SPF-wl-kTJ"/>
                 <constraint firstItem="2tu-ng-h4x" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" constant="8" id="SQU-qW-YSf"/>
+                <constraint firstItem="cnT-R8-n78" firstAttribute="top" secondItem="uv0-dZ-e3e" secondAttribute="bottom" constant="25" id="VE6-4t-zmx"/>
                 <constraint firstItem="tBc-If-Uhi" firstAttribute="top" secondItem="OVO-P5-zWt" secondAttribute="top" constant="35" id="VPL-bK-xqa"/>
                 <constraint firstAttribute="bottom" secondItem="1i5-Lz-ZAT" secondAttribute="bottom" constant="20" id="Z9n-fg-id5"/>
                 <constraint firstItem="EcJ-03-fEE" firstAttribute="top" secondItem="OVO-P5-zWt" secondAttribute="top" constant="35" id="Zs5-bI-RwL"/>
@@ -206,11 +236,13 @@
                 <constraint firstItem="tBc-If-Uhi" firstAttribute="leading" secondItem="EcJ-03-fEE" secondAttribute="trailing" constant="8" id="ftK-l5-wVZ"/>
                 <constraint firstItem="tBc-If-Uhi" firstAttribute="top" secondItem="OVO-P5-zWt" secondAttribute="top" constant="35" id="gKK-jl-j97"/>
                 <constraint firstItem="2tu-ng-h4x" firstAttribute="top" secondItem="xYA-3x-S0m" secondAttribute="bottom" id="kFf-bv-gIh"/>
+                <constraint firstItem="cnT-R8-n78" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" id="kPg-J7-6Bb"/>
                 <constraint firstItem="sEE-QU-oI6" firstAttribute="centerX" secondItem="OVO-P5-zWt" secondAttribute="centerX" id="oee-Au-BAy"/>
                 <constraint firstItem="sEE-QU-oI6" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" id="okf-gN-HUU"/>
                 <constraint firstItem="uv0-dZ-e3e" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" constant="8" id="q44-zN-zJQ"/>
                 <constraint firstItem="EcJ-03-fEE" firstAttribute="leading" secondItem="OVO-P5-zWt" secondAttribute="leading" constant="20" id="rSW-dp-cCj"/>
                 <constraint firstItem="HKK-Hn-PVx" firstAttribute="centerY" secondItem="fVK-ks-aT8" secondAttribute="centerY" id="sWc-05-yTZ"/>
+                <constraint firstAttribute="bottom" secondItem="cnT-R8-n78" secondAttribute="bottom" id="tHE-SQ-hmu"/>
                 <constraint firstItem="0c0-RK-aHc" firstAttribute="top" secondItem="OVO-P5-zWt" secondAttribute="top" constant="35" id="v51-CV-nio"/>
                 <constraint firstItem="uv0-dZ-e3e" firstAttribute="top" secondItem="tBc-If-Uhi" secondAttribute="bottom" id="vpq-51-0zH"/>
                 <constraint firstItem="fVK-ks-aT8" firstAttribute="height" secondItem="HKK-Hn-PVx" secondAttribute="height" id="y00-6Q-dM6"/>
@@ -241,6 +273,8 @@
                 <outlet property="placeholderView" destination="xYA-3x-S0m" id="aH8-cs-zAf"/>
                 <outlet property="tagField" destination="tBc-If-Uhi" id="Zbz-2d-qc2"/>
                 <outlet property="tagLabel" destination="uv0-dZ-e3e" id="UHy-vV-y2l"/>
+                <outlet property="tagList" destination="XyF-VT-pFS" id="81Z-wV-D6V"/>
+                <outlet property="tagListScroll" destination="cnT-R8-n78" id="nmO-SK-jse"/>
                 <outlet property="timerButton" destination="HKK-Hn-PVx" id="WbB-7v-7sQ"/>
                 <outlet property="timerImage" destination="fVK-ks-aT8" id="DKM-d8-zL5"/>
             </connections>

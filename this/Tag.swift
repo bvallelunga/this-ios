@@ -79,6 +79,49 @@ class Tag: PFObject, PFSubclassing {
         }
     }
     
+    class func friends(user: User, callback: (tags: [Tag]) -> Void) {
+        let query = Tag.query()
+        let photoQuery = Photo.query()
+        
+        photoQuery?.whereKey("flagged", notEqualTo: true)
+        photoQuery?.whereKey("expireAt", greaterThan: NSDate())
+        photoQuery?.whereKey("user", matchesQuery: user.friends.query())
+        query?.whereKey("photos", matchesQuery: photoQuery!)
+        
+        query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+            if let tags = objects as? [Tag] {
+                callback(tags: tags)
+            } else {
+                ErrorHandler.handleParse(error)
+            }
+        })
+    }
+    
+    class func nearby(callback: (tags: [Tag]) -> Void) {
+        let query = Tag.query()
+        let photoQuery = Photo.query()
+        
+        PFGeoPoint.geoPointForCurrentLocationInBackground { (object, error) -> Void in
+            guard let point: PFGeoPoint = object else {
+                ErrorHandler.handleParse(error)
+                return
+            }
+            
+            photoQuery?.whereKey("flagged", notEqualTo: true)
+            photoQuery?.whereKey("expireAt", greaterThan: NSDate())
+            photoQuery?.whereKey("location", nearGeoPoint: point, withinMiles: 5)
+            query?.whereKey("photos", matchesQuery: photoQuery!)
+            
+            query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+                if let tags = objects as? [Tag] {
+                    callback(tags: tags)
+                } else {
+                    ErrorHandler.handleParse(error)
+                }
+            })
+        }
+    }
+    
     // Instance Methods
     func removeCachedPhoto(photo: Photo) {
         self.photosCached.removeObjectIdenticalTo(photo)

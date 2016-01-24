@@ -8,6 +8,7 @@
 
 import UIKit
 import FLAnimatedImage
+import TagListView
 
 protocol SelectionHeaderDelegate {
     func updateTags(hashtag: String, timer: Int)
@@ -19,17 +20,20 @@ struct SelectionTimer {
 }
 
 class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
-    UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate {
+    UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, TagListViewDelegate {
     
     @IBOutlet weak var placeholderView: FLAnimatedImageView!
     @IBOutlet weak var placeholderLabel: UILabel!
-    @IBOutlet weak var tagField: UITextField!
+    @IBOutlet weak var tagField: TextField!
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var arrowButton: UIButton!
     @IBOutlet weak var timerButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var timerImage: UIImageView!
+    @IBOutlet weak var tagList: TagListView!
+    @IBOutlet weak var tagListScroll: UIScrollView!
     
+    private var user = User.current()
     private var gifURL: String! = ""
     private var hashtag: String = ""
     private var arrowAnimation = CABasicAnimation(keyPath: "transform")
@@ -101,20 +105,61 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         self.timerImage.layer.shadowOpacity = 0.1
         self.timerImage.layer.shadowRadius = 0
         
+        self.tagList.backgroundColor = UIColor.clearColor()
+        self.tagList.borderWidth = 1
+        self.tagList.borderColor = UIColor(white: 0, alpha: 0.10)
+        self.tagList.tagBackgroundColor = UIColor(white: 0, alpha: 0.15)
+        self.tagList.textColor = UIColor.whiteColor()
+        self.tagList.delegate = self
+        self.tagList.cornerRadius = 15
+        self.tagList.textFont = UIFont(name: "Bariol-Bold", size: 20)!
+        self.tagList.marginX = 8
+        self.tagList.marginY = 10
+        self.tagList.paddingX = 10
+        self.tagList.paddingY = 8
+        
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.backgroundColor = UIColor.clearColor()
         self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 20)
         self.collectionView.registerClass(SelectionPhotoCell.self, forCellWithReuseIdentifier: "cell")
         
-        let tapper = UITapGestureRecognizer(target: self, action: Selector("handleSingleTap:"))
-        tapper.cancelsTouchesInView = false
-        self.addGestureRecognizer(tapper)
-        
         self.reset()
         
         Globals.delay(60) { () -> () in
             self.updateHeaderGif()
+        }
+    }
+    
+    func fetchTags() {
+        var cache: [String: Bool] = [:]
+        self.tagList.removeAllTags()
+        
+        Tag.nearby { (tags) -> Void in
+            for tag in tags {
+                if cache[tag.hashtag] == nil {
+                    self.tagList.addTag(tag.hashtag)
+                    cache[tag.hashtag] = true
+                }
+            }
+        }
+        
+        Tag.friends(self.user) { (tags) -> Void in
+            for tag in tags {
+                if cache[tag.hashtag] == nil {
+                    self.tagList.addTag(tag.hashtag)
+                    cache[tag.hashtag] = true
+                }
+            }
+        }
+        
+        self.user.following { (tags) -> Void in
+            for tag in tags {
+                if cache[tag.hashtag] == nil {
+                    self.tagList.addTag(tag.hashtag)
+                    cache[tag.hashtag] = true
+                }
+            }
         }
     }
     
@@ -157,6 +202,8 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
             text = text.stringByReplacingOccurrencesOfString(" ", withString: "",
                 options: NSStringCompareOptions.LiteralSearch, range: nil)
             
+            self.toggleTagList(text.isEmpty)
+            
             guard !text.isEmpty else {
                 return
             }
@@ -186,22 +233,33 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         Globals.mixpanel.track("Mobile.Selection.Go To Settings")
     }
     
+    func toggleTagList(show: Bool, animate: Bool = true) {
+        let alpha: CGFloat = show ? 0 : 1
+        
+        if show {
+            self.fetchTags()
+        }
+        
+        UIView.animateWithDuration(animate ? 0.25 : 0, animations: { () -> Void in
+            self.placeholderView.alpha = alpha
+            self.placeholderLabel.alpha = alpha
+            self.timerImage.alpha = alpha
+            self.timerButton.alpha = alpha
+            self.collectionView.alpha = alpha
+            self.arrowButton.alpha = alpha
+            self.tagListScroll.alpha = 1 - alpha
+        }) { (success) -> Void in
+            self.tagListScroll.hidden = !show
+        }
+    }
+    
     func textFieldDidBeginEditing(textField: UITextField) {
         textField.selectAll(self)
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
-        if let text = self.tagField.text {
-            if text.isEmpty {
-                self.generateHashtag()
-            } else {
-                Globals.mixpanel.timeEvent("Mobile.Selection.Tag.Changed")
-            }
-        }
-    }
-    
-    func handleSingleTap(gesture: UITapGestureRecognizer) {
-        self.endEditing(true)
+    func tagPressed(title: String, tagView: TagView, sender: TagListView) {
+        self.setHashtag(title)
+        self.toggleTagList(false)
     }
     
     func setHashtag(tag: String) {
@@ -209,25 +267,11 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         self.tagField.text = tag
     }
     
-    func generateHashtag() {
-        self.hashtag = ""
-        self.tagField.text = ""
-        
-        Globals.mixpanel.timeEvent("Mobile.Selection.Tag.Random")
-        
-        Tag.random { (name) -> Void in
-            self.hashtag = name
-            self.tagField.text = name
-            self.checkArrow()
-            
-            Globals.mixpanel.track("Mobile.Selection.Tag.Random")
-        }
-    }
-    
     func reset() {
         self.imagesSelected([])
-        self.generateHashtag()
+        self.setHashtag("")
         self.setTimer(2)
+        self.toggleTagList(true, animate: false)
     }
     
     func setTimer(var index: Int) {
@@ -297,4 +341,13 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         
         return cell
     }
+}
+
+class TextField: UITextField {
+    
+    override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
+        UIMenuController.sharedMenuController().menuVisible = false
+        return false
+    }
+    
 }
