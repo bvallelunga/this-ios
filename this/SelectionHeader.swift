@@ -33,6 +33,7 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     @IBOutlet weak var tagList: TagListView!
     @IBOutlet weak var tagListScroll: UIScrollView!
     
+    private var tags: [String: Bool] = [:]
     private var user = User.current()
     private var gifURL: String! = ""
     private var hashtag: String = ""
@@ -132,33 +133,30 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         }
     }
     
-    func fetchTags() {
-        var cache: [String: Bool] = [:]
-        self.tagList.removeAllTags()
-        
+    func fetchTags() {        
         Tag.nearby { (tags) -> Void in
             for tag in tags {
-                if cache[tag.hashtag] == nil {
+                if self.tags[tag.hashtag] == nil {
                     self.tagList.addTag(tag.hashtag)
-                    cache[tag.hashtag] = true
+                    self.tags[tag.hashtag] = true
                 }
             }
         }
         
         Tag.friends(self.user) { (tags) -> Void in
             for tag in tags {
-                if cache[tag.hashtag] == nil {
+                if self.tags[tag.hashtag] == nil {
                     self.tagList.addTag(tag.hashtag)
-                    cache[tag.hashtag] = true
+                    self.tags[tag.hashtag] = true
                 }
             }
         }
         
         self.user.following { (tags) -> Void in
             for tag in tags {
-                if cache[tag.hashtag] == nil {
+                if self.tags[tag.hashtag] == nil {
                     self.tagList.addTag(tag.hashtag)
-                    cache[tag.hashtag] = true
+                    self.tags[tag.hashtag] = true
                 }
             }
         }
