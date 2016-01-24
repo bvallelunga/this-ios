@@ -10,10 +10,10 @@ import UIKit
 import Social
 import JSQWebViewController
 
-class ProfileController: UITableViewController {
+class SettingsController: UITableViewController {
 
     private var headerFrame: CGRect!
-    private var headerController: ProfileHeaderController!
+    private var headerController: SettingsHeaderController!
     private var user = User.current()
     private var config: Config!
 
@@ -31,7 +31,7 @@ class ProfileController: UITableViewController {
         self.nameLabel.text = self.user.fullName
         
         // Core Setup
-        Globals.profileController = self
+        Globals.settingsController = self
         Globals.mixpanel.track("Mobile.Settings")
         Config.sharedInstance { (config) -> Void in
             self.config = config
@@ -41,12 +41,14 @@ class ProfileController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.headerFrame = self.headerController.view.frame
+        if self.headerFrame == nil {
+            self.headerFrame = self.headerController.view.frame
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "header" {
-            self.headerController = segue.destinationViewController as? ProfileHeaderController
+            self.headerController = segue.destinationViewController as? SettingsHeaderController
         }
     }
     

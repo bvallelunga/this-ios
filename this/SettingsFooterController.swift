@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileFooterController: UIViewController {
+class SettingsFooterController: UIViewController {
 
     @IBOutlet weak var signoutButton: UIButton!
     @IBOutlet weak var versionLabel: UILabel!

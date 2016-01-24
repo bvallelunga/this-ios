@@ -61,10 +61,6 @@ class ShareController: UIViewController, UITableViewDataSource, UITableViewDeleg
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        let tapper = UITapGestureRecognizer(target: self, action: Selector("handleSingleTap:"))
-        tapper.cancelsTouchesInView = false
-        self.tableView.addGestureRecognizer(tapper)
-        
         self.loadContacts()
         self.headerController.updateNextButtonTitle(false)
         
@@ -83,7 +79,9 @@ class ShareController: UIViewController, UITableViewDataSource, UITableViewDeleg
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.headerFrame = self.headerController.view.frame
+        if self.headerFrame == nil {
+            self.headerFrame = self.headerController.view.frame
+        }
         
         // Register for keyboard notifications
         let notificationCenter = NSNotificationCenter.defaultCenter()
@@ -143,6 +141,14 @@ class ShareController: UIViewController, UITableViewDataSource, UITableViewDeleg
     func keyboardDidShow(notification: NSNotification) {
         let userInfo = NSDictionary(dictionary: notification.userInfo!)
         let rect = (userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue).CGRectValue()
+        let indexPath = NSIndexPath(forRow: 0, inSection: { _ -> Int in
+            switch(true) {
+                case !self.users.filtered.isEmpty: return 0
+                case !self.friends.filtered.isEmpty: return 1
+                case !self.contacts.filtered.isEmpty: return 2
+            default: return -1
+            }
+        }())
         
         self.keyboardActive = true
         self.tableView.contentInset.top = 66
@@ -151,19 +157,20 @@ class ShareController: UIViewController, UITableViewDataSource, UITableViewDeleg
         self.view.addSubview(self.headerContainer)
         self.headerController.searchBar.becomeFirstResponder()
         self.headerContainer.frame.origin.y = 66 - self.headerFrame.height
+        
+        if indexPath.section > -1 {
+            self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
+        }
     }
     
-    func keyboardDidHide() {
+    func keyboardDidHide() {        
         self.keyboardActive = false
         self.tableView.contentInset.top = 0
+        self.tableView.contentInset.bottom = 0
         self.headerContainer.removeFromSuperview()
         
         self.tableView.tableHeaderView = self.headerContainer
         self.headerContainer.frame = self.headerFrame
-    }
-    
-    func handleSingleTap(gesture: UITapGestureRecognizer) {
-        self.view.endEditing(true)
     }
     
     // MARK: - Table view data source
@@ -183,7 +190,7 @@ class ShareController: UIViewController, UITableViewDataSource, UITableViewDeleg
         switch section {
             case 0: return self.users.filtered.isEmpty ? 0.1 : 20
             case 1: return self.friends.filtered.isEmpty ? 0.1 : 20
-            default: return 1
+            default: return 0.1
         }
     }
     
@@ -214,7 +221,8 @@ class ShareController: UIViewController, UITableViewDataSource, UITableViewDeleg
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         
-        header.contentView.backgroundColor = UIColor.whiteColor()
+        header.backgroundView = nil
+        header.contentView.backgroundColor = UIColor.clearColor()
         header.textLabel?.font = UIFont(name: "Bariol-Bold", size: 20)
         header.textLabel?.textColor = UIColor(red:0.67, green:0.67, blue:0.67, alpha:1)
     }
@@ -222,7 +230,8 @@ class ShareController: UIViewController, UITableViewDataSource, UITableViewDeleg
     func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         let footer = view as! UITableViewHeaderFooterView
         
-        footer.contentView.backgroundColor = UIColor.whiteColor()
+        footer.backgroundView = nil
+        footer.contentView.backgroundColor = UIColor.clearColor()
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

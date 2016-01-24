@@ -329,10 +329,10 @@ and Privacy Policy.</string>
             </objects>
             <point key="canvasLocation" x="1760" y="-383"/>
         </scene>
-        <!--Profile Controller-->
+        <!--Settings Controller-->
         <scene sceneID="QfU-eI-IcN">
             <objects>
-                <tableViewController id="drl-m4-1EO" customClass="ProfileController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="drl-m4-1EO" customClass="SettingsController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="ruv-OJ-tfB">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -561,9 +561,9 @@ and Privacy Policy.</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dX8-dy-Fwp">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="dX8-dy-Fwp">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <containerView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" id="8aR-Il-laq">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="310"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -573,7 +573,7 @@ and Privacy Policy.</string>
                                 </containerView>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="T6H-H0-Ih3" detailTextLabel="XLh-L8-uYm" style="IBUITableViewCellStyleSubtitle" id="FfS-0O-HWS" customClass="ShareTableCell" customModule="_this" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="338" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="359.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FfS-0O-HWS" id="PQc-lr-Jn6">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -614,7 +614,7 @@ and Privacy Policy.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VkM-VY-Eh6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3344" y="381"/>
+            <point key="canvasLocation" x="2528" y="-1151"/>
         </scene>
         <!--Page Controller-->
         <scene sceneID="0gd-ve-Zbe">
@@ -1105,7 +1105,7 @@ and Privacy Policy.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A8C-x0-sYT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4094" y="380.5"/>
+            <point key="canvasLocation" x="3278" y="-1152"/>
         </scene>
         <!--Tag Header Controller-->
         <scene sceneID="xJ1-gW-w08">
@@ -1310,10 +1310,10 @@ and Privacy Policy.</string>
             </objects>
             <point key="canvasLocation" x="5547" y="1141"/>
         </scene>
-        <!--Profile Header Controller-->
+        <!--Settings Header Controller-->
         <scene sceneID="srf-po-2CZ">
             <objects>
-                <viewController id="Hyq-uP-HpV" customClass="ProfileHeaderController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Hyq-uP-HpV" customClass="SettingsHeaderController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cMf-Xq-Qff"/>
                         <viewControllerLayoutGuide type="bottom" id="JJg-XA-F1h"/>
@@ -1450,10 +1450,10 @@ and Privacy Policy.</string>
             </objects>
             <point key="canvasLocation" x="3344" y="-528"/>
         </scene>
-        <!--Profile Footer Controller-->
+        <!--Settings Footer Controller-->
         <scene sceneID="jaV-38-Xk8">
             <objects>
-                <viewController id="PDM-9J-vDD" customClass="ProfileFooterController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PDM-9J-vDD" customClass="SettingsFooterController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="S4H-oK-dOE"/>
                         <viewControllerLayoutGuide type="bottom" id="lhj-2I-aG6"/>

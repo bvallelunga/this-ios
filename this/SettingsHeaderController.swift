@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileHeaderController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SettingsHeaderController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var avatarButton: UIButton!

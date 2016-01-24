@@ -18,7 +18,7 @@ class Globals: NSObject {
     static var selectionController: SelectionController!
     static var tagsController: TagsController!
     static var tagController: TagController!
-    static var profileController: ProfileController!
+    static var settingsController: SettingsController!
     static var followingController: FollowingController!
     static var trendingController: TrendingController!
     
