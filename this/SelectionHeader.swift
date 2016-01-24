@@ -216,12 +216,13 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     }
 
     @IBAction func uploadPhotos(sender: AnyObject) {
-        guard !self.hashtag.isEmpty else {
+        let hashtag = String(self.hashtag.characters.dropFirst())
+        
+        guard !hashtag.isEmpty else {
             self.toggleTagList(true)
             return
         }
         
-        let hashtag = String(self.hashtag.characters.dropFirst())
         self.delegate.updateTags(hashtag, timer: self.timer.timer)
     }
     
@@ -265,6 +266,10 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
+        if self.hashtag == "#" {
+            self.setHashtag("")
+        }
+        
         self.toggleTagList(false)
     }
     
