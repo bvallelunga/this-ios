@@ -36,12 +36,9 @@ class TagHeaderProfiles: UICollectionView, UICollectionViewDataSource, UICollect
         tag.followers { (users) -> Void in
             self.userCount = users.count
             
-            for user in users[0...min(30, users.count-1)] {
-                self.users.append(user)
-                self.images[user] = nil
-                self.reloadData()
-                
+            for user in users[0...min(30, users.count-1)] {                
                 user.fetchPhoto({ (image) -> Void in
+                    self.users.append(user)
                     self.images[user] = image
                     self.reloadData()
                 })
