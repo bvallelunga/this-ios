@@ -17,7 +17,7 @@ protocol SelectionCameraControllerDelegate {
 class SelectionCameraController: UIViewController {
     
     var delegate: SelectionCameraControllerDelegate!
-    var cameraView: LLSimpleCamera!
+    private var cameraView: LLSimpleCamera!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +56,8 @@ class SelectionCameraController: UIViewController {
         self.view.addSubview(overlay)
         self.view.addSubview(closeButton)
         
-        let tap = UITapGestureRecognizer(target: self, action: Selector("tap:"))
-        tap.numberOfTapsRequired = 1
+        let tap = UILongPressGestureRecognizer(target: self, action: Selector("tap:"))
+        tap.minimumPressDuration = 0.02
         overlay.addGestureRecognizer(tap)
         
         let doubleTap = UITapGestureRecognizer(target: self, action: Selector("doubleTap:"))
@@ -67,13 +67,29 @@ class SelectionCameraController: UIViewController {
         tap.requireGestureRecognizerToFail(doubleTap)
     }
     
+    func flash() {
+        let view = UIView(frame: self.view.bounds)
+        view.backgroundColor = UIColor.whiteColor()
+        self.view.addSubview(view)
+        
+        Globals.delay(0.2) { () -> () in
+            view.removeFromSuperview()
+        }
+    }
+    
     func close() {
         self.delegate.cameraDismiss()
     }
     
-    func tap(gesture: UITapGestureRecognizer) {
+    func tap(gesture: UILongPressGestureRecognizer) {
+        guard gesture.state == UIGestureRecognizerState.Ended else {
+            return
+        }
+        
+        self.flash()
+        
         self.cameraView.capture({ (camera, image, meta, error) -> Void in
-            self.delegate.cameraDismiss()
+            camera.start()
             
             if image != nil {
                 self.delegate.cameraTaken(image)
