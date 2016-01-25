@@ -286,7 +286,7 @@ and Privacy Policy.</string>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="NDF-22-uoU" kind="relationship" relationship="rootViewController" id="ffx-jt-fwr"/>
+                        <segue destination="ALm-AV-OBV" kind="relationship" relationship="rootViewController" id="UPt-bW-qk1"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sul-gx-xCQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -509,45 +509,60 @@ and Privacy Policy.</string>
             <point key="canvasLocation" x="2528" y="-383"/>
         </scene>
         <!--Selection Controller-->
-        <scene sceneID="xc7-ik-lk9">
+        <scene sceneID="o0r-YJ-nXu">
             <objects>
-                <collectionViewController id="NDF-22-uoU" customClass="SelectionController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" dataMode="prototypes" id="jsO-tk-8jh">
+                <viewController id="ALm-AV-OBV" customClass="SelectionController" customModule="_this" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zXK-Mb-j4O"/>
+                        <viewControllerLayoutGuide type="bottom" id="WBS-M9-WJo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="amf-DA-cb8">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <collectionViewLayout key="collectionViewLayout" id="Whc-Ib-VVe" customClass="CSStickyHeaderFlowLayout"/>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="camera" id="Qc6-2b-1qk">
-                                <rect key="frame" x="0.0" y="0.0" width="86" height="78"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="86" height="78"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <size key="customSize" width="86" height="78"/>
-                            </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photo" id="ysS-FQ-NcZ" customClass="SelectionPhotoCell" customModule="_this" customModuleProvider="target">
-                                <rect key="frame" x="103" y="0.0" width="86" height="78"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="86" height="78"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <size key="customSize" width="86" height="78"/>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="NDF-22-uoU" id="JNy-QC-bMR"/>
-                            <outlet property="delegate" destination="NDF-22-uoU" id="MCx-je-h1F"/>
-                        </connections>
-                    </collectionView>
-                    <navigationItem key="navigationItem" id="F8P-TR-n8Y"/>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sW5-6w-Mne" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="b5R-4x-rxW">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <collectionViewLayout key="collectionViewLayout" id="3P9-QX-jEv" customClass="CSStickyHeaderFlowLayout"/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="camera" id="KIV-Lj-70a" customClass="SelectionCameraCell" customModule="_this" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="86" height="78"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="86" height="78"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <size key="customSize" width="86" height="78"/>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photo" id="tLv-bN-2o0" customClass="SelectionPhotoCell" customModule="_this" customModuleProvider="target">
+                                        <rect key="frame" x="103" y="0.0" width="86" height="78"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="86" height="78"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <size key="customSize" width="86" height="78"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WBS-M9-WJo" firstAttribute="top" secondItem="b5R-4x-rxW" secondAttribute="bottom" id="EWa-Qu-2UM"/>
+                            <constraint firstItem="b5R-4x-rxW" firstAttribute="top" secondItem="amf-DA-cb8" secondAttribute="top" id="H16-cm-CxI"/>
+                            <constraint firstItem="b5R-4x-rxW" firstAttribute="leading" secondItem="amf-DA-cb8" secondAttribute="leading" id="lV9-dD-3cw"/>
+                            <constraint firstAttribute="trailing" secondItem="b5R-4x-rxW" secondAttribute="trailing" id="oSt-Ud-tUS"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="OJ0-eb-kJN"/>
+                    <connections>
+                        <outlet property="collectionView" destination="b5R-4x-rxW" id="qP3-jv-dZ3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xt7-SF-4nZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2536" y="381"/>
+            <point key="canvasLocation" x="2528" y="380"/>
         </scene>
         <!--Profile Controller-->
         <scene sceneID="t8n-dN-C3b">

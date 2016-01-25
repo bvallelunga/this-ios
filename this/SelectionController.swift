@@ -14,17 +14,20 @@ import CSStickyHeaderFlowLayout
 private let photoIdentifier = "photo"
 private let cameraIdentifier = "camera"
 
-class SelectionController: UICollectionViewController, UIImagePickerControllerDelegate,
-    UINavigationControllerDelegate, SelectionHeaderDelegate {
+class SelectionController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,
+    SelectionCameraControllerDelegate, SelectionHeaderDelegate {
     
+    var header: SelectionHeader!
     private let manager = PHCachingImageManager()
     private var assets: [PHAsset] = []
     private var selected: [PHAsset: UIImage] = [:]
     private var selectedOrder: NSMutableArray = []
-    private var date: NSDate!
     private var config: Config!
     private var user = User.current()
-    var header: SelectionHeader!
+    private var date = NSCalendar.currentCalendar()
+        .dateByAddingUnit(.Day, value: -30, toDate: NSDate(), options: [])!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,10 +123,7 @@ class SelectionController: UICollectionViewController, UIImagePickerControllerDe
             
             let options = PHFetchOptions()
             
-            if self.date != nil {
-                options.predicate = NSPredicate(format: "creationDate > %@", self.date)
-            }
-            
+            options.predicate = NSPredicate(format: "creationDate > %@", self.date)
             options.sortDescriptors = [
                 NSSortDescriptor(key: "creationDate", ascending: true)
             ]
@@ -176,15 +176,15 @@ class SelectionController: UICollectionViewController, UIImagePickerControllerDe
     }
 
     // MARK: UICollectionViewDataSource
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.assets.count + 1
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         if indexPath.row > 0 {
             let asset = self.assets[indexPath.row-1]
@@ -214,7 +214,7 @@ class SelectionController: UICollectionViewController, UIImagePickerControllerDe
         return cell
     }
     
-    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "header", forIndexPath: indexPath) as! SelectionHeader
         
         cell.delegate = self
@@ -223,18 +223,17 @@ class SelectionController: UICollectionViewController, UIImagePickerControllerDe
         return cell
     }
     
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // Show Camera
-        if indexPath.row == 0 {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = .Camera
-            imagePicker.mediaTypes = ["public.image"]
-            self.presentViewController(imagePicker, animated: true, completion: nil)
+        guard indexPath.row > 0 else {
+            let controller = SelectionCameraController()
+            controller.delegate = self
+            
+            self.presentViewController(controller, animated: false, completion: nil)
+            Globals.pagesController.lockPageView()
             Globals.mixpanel.track("Mobile.Selection.Camera.Shown")
             return
         }
-        
         
         // Toggle Library Image
         let asset = self.assets[indexPath.row-1]
@@ -290,7 +289,7 @@ class SelectionController: UICollectionViewController, UIImagePickerControllerDe
         self.header.imagesSelected(images)
     }
     
-    func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
+    func imageSaved(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
         self.getAssests(true)
     }
     
@@ -322,18 +321,15 @@ class SelectionController: UICollectionViewController, UIImagePickerControllerDe
         }
     }
     
-    // MARK: UIImagePickerController Methods
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
-        UIImageWriteToSavedPhotosAlbum(image, self, "image:didFinishSavingWithError:contextInfo:", nil)
-        self.imagePickerControllerDidCancel(picker)
-        Globals.mixpanel.track("Mobile.Selection.Camera.Photo Taken")
+    // MARK: SelectionCameraController
+    func cameraDismiss() {
+        Globals.pagesController.unlockPageView()
+        self.dismissViewControllerAnimated(false, completion: nil)
     }
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        self.dismissViewControllerAnimated(true) { () -> Void in
-            let cell = self.collectionView?.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)) as! SelectionCameraCell
-            cell.activateCamera()
-        }
+    func cameraTaken(image: UIImage) {
+        UIImageWriteToSavedPhotosAlbum(image, self, "imageSaved:didFinishSavingWithError:contextInfo:", nil)
+        Globals.mixpanel.track("Mobile.Selection.Camera.Photo Taken")
     }
 
 }
