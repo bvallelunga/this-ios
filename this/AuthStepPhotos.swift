@@ -24,7 +24,7 @@ class AuthStepPhotos: AuthStep {
     }
     
     override func header() -> String {
-        return "Last thing.\nCan we share pictures?"
+        return "Last thing.\nCan we share photos?"
     }
     
     override func viewed() {
