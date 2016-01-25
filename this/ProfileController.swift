@@ -74,6 +74,18 @@ class ProfileController: UICollectionViewController, NYTPhotosViewControllerDele
             self.collectionView?.reloadData()
             self.spinner.stopAnimating()
             
+            guard !photos.isEmpty else {
+                let label = UILabel()
+                
+                label.text = "No Photos"
+                label.font = UIFont(name: "Bariol-Bold", size: 32)
+                label.textColor = UIColor.grayColor()
+                label.textAlignment = .Center
+                
+                self.collectionView?.backgroundView = label
+                return
+            }
+            
             for photo in photos {
                 photo.fetchThumbnail(callback: { (image) -> Void in
                     self.images[photo] = image
