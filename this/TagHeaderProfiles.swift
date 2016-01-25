@@ -83,7 +83,7 @@ class TagHeaderProfiles: UICollectionView, UICollectionViewDataSource, UICollect
         
         let user = self.users[indexPath.row - 1]
         
-        cell.setImage(self.images[user], index: indexPath.row - 1)
+        cell.setImage(self.images[user])
         
         return cell
     }

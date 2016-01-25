@@ -58,12 +58,12 @@ class ShareTableCell: UITableViewCell {
         self.photoView.hidden = false
         
         guard user.photo.url != nil else {
-            self.photoView.setImage(nil, index: index)
+            self.photoView.setImage(nil)
             return
         }
         
         user.fetchPhoto { (image) -> Void in
-            self.photoView.setImage(image, index: index)
+            self.photoView.setImage(image)
         }
     }
 

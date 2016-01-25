@@ -53,6 +53,7 @@
 		D39AB74E1C1FFEB100C9E96F /* TrendingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39AB74D1C1FFEB100C9E96F /* TrendingTableCell.swift */; };
 		D3BD85BB1C548DE100B5E0B5 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BD85BA1C548DE100B5E0B5 /* ProfileController.swift */; };
 		D3BD85BF1C54AC0200B5E0B5 /* TagTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BD85BE1C54AC0200B5E0B5 /* TagTableCell.swift */; };
+		D3BD85C11C55B0C800B5E0B5 /* SelectionCameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BD85C01C55B0C800B5E0B5 /* SelectionCameraController.swift */; };
 		D3C2D2FF1C27BDB6002F0241 /* TagCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C2D2FE1C27BDB6002F0241 /* TagCollectionCell.swift */; };
 		D3C958D71C2A94E700B6EE9D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C958D61C2A94E700B6EE9D /* User.swift */; };
 		D3C958D91C2A979700B6EE9D /* StateTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C958D81C2A979700B6EE9D /* StateTracker.swift */; };
@@ -156,6 +157,7 @@
 		D39AB74D1C1FFEB100C9E96F /* TrendingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingTableCell.swift; sourceTree = "<group>"; };
 		D3BD85BA1C548DE100B5E0B5 /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		D3BD85BE1C54AC0200B5E0B5 /* TagTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTableCell.swift; sourceTree = "<group>"; };
+		D3BD85C01C55B0C800B5E0B5 /* SelectionCameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionCameraController.swift; sourceTree = "<group>"; };
 		D3C2D2FA1C27B0E1002F0241 /* #this-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "#this-Bridging-Header.h"; sourceTree = "<group>"; };
 		D3C2D2FE1C27BDB6002F0241 /* TagCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionCell.swift; sourceTree = "<group>"; };
 		D3C958D41C2A8C0C00B6EE9D /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 				D3CFC9E41C1E490800E7C5B4 /* SelectionHeader.swift */,
 				D35AF9001C1E70ED0024D7E3 /* SelectionPhotoCell.swift */,
 				D394D3671C1E85B000CB0FE9 /* SelectionCameraCell.swift */,
+				D3BD85C01C55B0C800B5E0B5 /* SelectionCameraController.swift */,
 				D35AF8F51C1E4E610024D7E3 /* SelectionHeader.xib */,
 			);
 			name = Selection;
@@ -751,6 +754,7 @@
 				D31F09B21C29017600FD61A0 /* SettingsHeaderController.swift in Sources */,
 				D3E49ED01C34DCE4003B367B /* PhotoQueue.swift in Sources */,
 				D370FE731C2102FC00769EBA /* FollowingController.swift in Sources */,
+				D3BD85C11C55B0C800B5E0B5 /* SelectionCameraController.swift in Sources */,
 				D3E293181C1BA92900925EAC /* ProgressBar.swift in Sources */,
 				D3690AE21C3357C70090380E /* AuthStepNotifications.swift in Sources */,
 				D39AB74A1C1FFBDC00C9E96F /* TrendingController.swift in Sources */,

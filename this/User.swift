@@ -202,6 +202,7 @@ class User: PFUser {
         let query = Photo.query()
         
         query?.whereKey("user", equalTo: self)
+        query?.whereKey("expireAt", greaterThan: NSDate())
         query?.whereKey("flagged", notEqualTo: true)
         query?.whereKeyExists("original")
         
