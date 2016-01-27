@@ -349,7 +349,7 @@ class ShareController: UIViewController, UITableViewDataSource, UITableViewDeleg
         
         self.delegate.shareControllerShared(count)
         
-        Pending.batchCreate(Array(self.contacts.selected.keys), tag: self.tag)
+        Pending.batchCreate(self.user, contacts: Array(self.contacts.selected.keys), tag: self.tag)
         
         Globals.mixpanel.track("Mobile.Invite.Shared", properties: [
             "contacts": self.contacts.selected.count,

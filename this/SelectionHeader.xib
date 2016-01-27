@@ -10,6 +10,7 @@
         <mutableArray key="Bariol_Bold.ttf">
             <string>Bariol-Bold</string>
             <string>Bariol-Bold</string>
+            <string>Bariol-Bold</string>
         </mutableArray>
         <mutableArray key="Bariol_Regular.ttf">
             <string>Bariol-Regular</string>
@@ -153,8 +154,8 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Timer" translatesAutoresizingMaskIntoConstraints="NO" id="fVK-ks-aT8">
-                        <rect key="frame" x="20" y="366" width="30" height="25"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Timer" translatesAutoresizingMaskIntoConstraints="NO" id="fVK-ks-aT8">
+                        <rect key="frame" x="20" y="365" width="30" height="25"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="bzV-Ol-imb"/>
@@ -174,20 +175,40 @@
                             <action selector="changeTimer:" destination="OVO-P5-zWt" eventType="touchUpInside" id="kL6-6g-Irf"/>
                         </connections>
                     </button>
-                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cnT-R8-n78">
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cnT-R8-n78">
                         <rect key="frame" x="0.0" y="120" width="436" height="300"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XyF-VT-pFS" customClass="TagListView" customModule="TagListView">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBL-mh-K7m">
+                                <rect key="frame" x="89.5" y="113" width="258" height="74"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="PkP-tS-Npe"/>
+                                </constraints>
+                                <string key="text">Give your photos 
+a hashtag!</string>
+                                <fontDescription key="fontDescription" name="Bariol-Bold" family="Bariol" pointSize="37"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="PkP-tS-Npe"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XyF-VT-pFS" customClass="TagListView" customModule="TagListView">
                                 <rect key="frame" x="18" y="8" width="406" height="16"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="XyF-VT-pFS" secondAttribute="bottom" id="9OW-Se-r9M"/>
+                            <constraint firstAttribute="height" constant="300" id="Arh-iB-etM"/>
                             <constraint firstAttribute="bottomMargin" secondItem="XyF-VT-pFS" secondAttribute="bottom" id="BzM-N0-aKd"/>
+                            <constraint firstItem="wBL-mh-K7m" firstAttribute="centerY" secondItem="cnT-R8-n78" secondAttribute="centerY" id="HVf-vR-Bm2"/>
                             <constraint firstItem="XyF-VT-pFS" firstAttribute="leading" secondItem="cnT-R8-n78" secondAttribute="leadingMargin" constant="10" id="MX1-Ze-GWm"/>
+                            <constraint firstItem="wBL-mh-K7m" firstAttribute="centerX" secondItem="cnT-R8-n78" secondAttribute="centerX" id="Tr8-d3-3b3"/>
                             <constraint firstItem="XyF-VT-pFS" firstAttribute="top" secondItem="cnT-R8-n78" secondAttribute="topMargin" id="VRu-0C-rVv"/>
                             <constraint firstItem="XyF-VT-pFS" firstAttribute="top" secondItem="cnT-R8-n78" secondAttribute="top" id="YLm-iB-n1I"/>
+                            <constraint firstAttribute="width" constant="436" id="YsN-zB-Iua"/>
                             <constraint firstAttribute="trailing" secondItem="XyF-VT-pFS" secondAttribute="trailing" id="aPu-Zf-tk2"/>
                             <constraint firstAttribute="trailingMargin" secondItem="XyF-VT-pFS" secondAttribute="trailing" constant="10" id="bWG-9s-1NT"/>
                             <constraint firstItem="XyF-VT-pFS" firstAttribute="leading" secondItem="cnT-R8-n78" secondAttribute="leading" id="zUm-55-Qgd"/>
@@ -274,6 +295,7 @@
                 <outlet property="tagField" destination="tBc-If-Uhi" id="Zbz-2d-qc2"/>
                 <outlet property="tagLabel" destination="uv0-dZ-e3e" id="UHy-vV-y2l"/>
                 <outlet property="tagList" destination="XyF-VT-pFS" id="81Z-wV-D6V"/>
+                <outlet property="tagListGuide" destination="wBL-mh-K7m" id="BM2-e4-7Qf"/>
                 <outlet property="tagListScroll" destination="cnT-R8-n78" id="nmO-SK-jse"/>
                 <outlet property="timerButton" destination="HKK-Hn-PVx" id="WbB-7v-7sQ"/>
                 <outlet property="timerImage" destination="fVK-ks-aT8" id="DKM-d8-zL5"/>

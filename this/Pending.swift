@@ -13,18 +13,20 @@ class Pending: PFObject, PFSubclassing {
     // Instance Variables
     @NSManaged var phone: String
     @NSManaged var tag: Tag
+    @NSManaged var user: User
     
     static func parseClassName() -> String {
         return "Pending"
     }
     
     // Class Methods
-    class func batchCreate(contacts: [Contact], tag: Tag) {
+    class func batchCreate(user: User, contacts: [Contact], tag: Tag) {
         let pendings = contacts.map { (contact) -> Pending in
             let pending = Pending()
             
             pending.phone = contact.phone.e164
             pending.tag = tag
+            pending.user = user
             
             return pending
         }

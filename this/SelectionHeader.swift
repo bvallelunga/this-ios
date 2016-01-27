@@ -32,6 +32,7 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     @IBOutlet weak var timerImage: UIImageView!
     @IBOutlet weak var tagList: TagListView!
     @IBOutlet weak var tagListScroll: UIScrollView!
+    @IBOutlet weak var tagListGuide: UILabel!
     
     private var tags: [String: Bool] = [:]
     private var user = User.current()
@@ -120,6 +121,10 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         self.tagList.paddingY = 8
         self.tagListScroll.hidden = true
         
+        self.tagListGuide.textColor = UIColor(white: 0, alpha: 0.15)
+        self.tagListGuide.shadowColor = UIColor.whiteColor()
+        self.tagListGuide.shadowOffset = CGSizeMake(0, 2)
+        
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.backgroundColor = UIColor.clearColor()
@@ -141,6 +146,8 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
                     self.tags[tag.hashtag] = true
                 }
             }
+            
+            self.tagListGuide.hidden = !tags.isEmpty
         }
         
         Tag.friends(self.user) { (tags) -> Void in
@@ -150,6 +157,8 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
                     self.tags[tag.hashtag] = true
                 }
             }
+            
+            self.tagListGuide.hidden = !tags.isEmpty
         }
         
         self.user.following { (tags) -> Void in
@@ -159,6 +168,8 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
                     self.tags[tag.hashtag] = true
                 }
             }
+            
+            self.tagListGuide.hidden = !tags.isEmpty
         }
     }
     
