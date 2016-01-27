@@ -21,6 +21,13 @@ typedef enum : NSUInteger {
     LLCameraFlashAuto
 } LLCameraFlash;
 
+typedef enum : NSUInteger {
+    // The default state has to be off
+    LLCameraMirrorOff,
+    LLCameraMirrorOn,
+    LLCameraMirrorAuto
+} LLCameraMirror;
+
 extern NSString *const LLSimpleCameraErrorDomain;
 typedef enum : NSUInteger {
     LLSimpleCameraErrorCodeCameraPermission = 10,
@@ -53,9 +60,19 @@ typedef enum : NSUInteger {
 @property (nonatomic, readonly) LLCameraFlash flash;
 
 /**
+ * Camera mirror mode.
+ */
+@property (nonatomic) LLCameraMirror mirror;
+
+/**
  * Position of the camera.
  */
 @property (nonatomic) LLCameraPosition position;
+
+/**
+ * White balance mode. Default is: AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance
+ */
+@property (nonatomic) AVCaptureWhiteBalanceMode whiteBalanceMode;
 
 /**
  * Boolean value to indicate if the video is enabled.
@@ -66,6 +83,16 @@ typedef enum : NSUInteger {
  * Boolean value to indicate if the camera is recording a video at the current moment.
  */
 @property (nonatomic, getter=isRecording) BOOL recording;
+
+/**
+ * Boolean value to indicate if zooming is enabled.
+ */
+@property (nonatomic, getter=isZoomingEnabled) BOOL zoomingEnabled;
+
+/**
+ * Float value to set maximum scaling factor
+ */
+@property (nonatomic, assign) CGFloat maxScale;
 
 /**
  * Fixess the orientation after the image is captured is set to Yes.

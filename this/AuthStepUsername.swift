@@ -49,7 +49,7 @@ class AuthStepUsername: AuthStep {
     }
     
     override func isValid(input: String) -> Bool {
-        return NSString(string: input).length > 4
+        return NSString(string: input).length > 1
     }
     
     override func next(callback: (segue: Bool, skip: Bool) -> Void) {

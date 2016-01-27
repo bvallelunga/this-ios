@@ -14,57 +14,67 @@ protocol SelectionCameraControllerDelegate {
     func cameraTaken(image: UIImage)
 }
 
-class SelectionCameraController: UIViewController {
+class SelectionCameraController: UIViewController, UIGestureRecognizerDelegate {
     
     var delegate: SelectionCameraControllerDelegate!
-    private var cameraView: LLSimpleCamera!
+    var cameraView: LLSimpleCamera!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let overlay = UIView(frame: self.view.bounds)
-        let closeButton = UIButton(frame: CGRectMake(20, 30, 44, 44))
-        let instructions = UILabel(frame: CGRectMake(self.view.frame.width/2-90, self.view.frame.height-100, 180, 50))
+        let bounds = self.view.bounds
+        let overlay = UIView(frame: bounds)
+        let bottom = UILabel(frame: CGRectMake(0, bounds.height-55, bounds.width, 35))
+        let instructions = UILabel(frame: CGRectMake(bounds.width/2-80, bounds.height-100, 160, 45))
         
-        closeButton.backgroundColor = Colors.lightGrey
-        closeButton.tintColor = UIColor.whiteColor()
-        closeButton.setTitle("X", forState: .Normal)
-        closeButton.titleLabel?.font = UIFont(name: "Bariol-Bold", size: 22)
-        closeButton.layer.cornerRadius = 22
-        closeButton.layer.masksToBounds = true
-        closeButton.layer.borderWidth = 2
-        closeButton.layer.borderColor = UIColor(white: 0, alpha: 0.4).CGColor
-        closeButton.addTarget(self, action: Selector("close"), forControlEvents: UIControlEvents.AllEvents)
+        bottom.textColor = UIColor.whiteColor()
+        bottom.text = "HOLD TO SWAP CAMERA"
+        bottom.font = UIFont(name: "Bariol-Bold", size: 18)
+        bottom.textAlignment = .Center
+        bottom.shadowColor = UIColor(white: 0, alpha: 0.7)
+        bottom.shadowOffset = CGSize(width: 0, height: 1)
         
-        instructions.backgroundColor = Colors.lightGrey
+        instructions.backgroundColor = UIColor.blackColor()
         instructions.textColor = UIColor.whiteColor()
-        instructions.text = "Tap To Capture"
+        instructions.text = "Double Tap"
         instructions.font = UIFont(name: "Bariol-Bold", size: 22)
-        instructions.layer.cornerRadius = 26
+        instructions.layer.cornerRadius = 23
         instructions.layer.masksToBounds = true
         instructions.textAlignment = .Center
         instructions.layer.borderWidth = 1
         instructions.layer.borderColor = UIColor(white: 0, alpha: 0.4).CGColor
         
-        self.cameraView = LLSimpleCamera(quality: AVCaptureSessionPresetPhoto, position: LLCameraPositionRear, videoEnabled: false)
+        self.cameraView = LLSimpleCamera(quality: AVCaptureSessionPresetPhoto, position: LLCameraPositionFront, videoEnabled: false)
         self.cameraView.tapToFocus = false
-        self.cameraView.start()
+        self.cameraView.updateFlashMode(LLCameraFlashAuto)
         
         self.view.backgroundColor = UIColor.blackColor()
         self.view.addSubview(self.cameraView.view)
         self.view.addSubview(instructions)
+        self.view.addSubview(bottom)
         self.view.addSubview(overlay)
-        self.view.addSubview(closeButton)
         
-        let tap = UILongPressGestureRecognizer(target: self, action: Selector("tap:"))
-        tap.minimumPressDuration = 0.02
-        overlay.addGestureRecognizer(tap)
+        let closeCamera = UITapGestureRecognizer(target: self, action: Selector("closeCamera:"))
+        closeCamera.numberOfTapsRequired = 1
+        overlay.addGestureRecognizer(closeCamera)
         
-        let doubleTap = UITapGestureRecognizer(target: self, action: Selector("doubleTap:"))
-        doubleTap.numberOfTapsRequired = 2
-        overlay.addGestureRecognizer(doubleTap)
+        let takePhoto = UITapGestureRecognizer(target: self, action: Selector("takePhoto:"))
+        takePhoto.numberOfTapsRequired = 2
+        overlay.addGestureRecognizer(takePhoto)
         
-        tap.requireGestureRecognizerToFail(doubleTap)
+        let switchCamera = UILongPressGestureRecognizer(target: self, action: Selector("switchCamera:"))
+        switchCamera.minimumPressDuration = 0.25
+        overlay.addGestureRecognizer(switchCamera)
+        
+        closeCamera.requireGestureRecognizerToFail(takePhoto)
+        
+        Globals.delay(5) { () -> () in
+            bottom.text = "TAP TO CLOSE"
+        }
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
     
     func flash() {
@@ -77,15 +87,11 @@ class SelectionCameraController: UIViewController {
         }
     }
     
-    func close() {
+    func closeCamera(gesture: UITapGestureRecognizer) {
         self.delegate.cameraDismiss()
     }
     
-    func tap(gesture: UILongPressGestureRecognizer) {
-        guard gesture.state == UIGestureRecognizerState.Ended else {
-            return
-        }
-        
+    func takePhoto(gesture: UITapGestureRecognizer) {
         self.flash()
         
         self.cameraView.capture({ (camera, image, meta, error) -> Void in
@@ -97,7 +103,11 @@ class SelectionCameraController: UIViewController {
         }, exactSeenImage: true)
     }
     
-    func doubleTap(gesture: UITapGestureRecognizer) {
+    func switchCamera(gesture: UITapGestureRecognizer) {
+        guard gesture.state == UIGestureRecognizerState.Began else {
+            return
+        }
+        
         self.cameraView.togglePosition()
     }
 

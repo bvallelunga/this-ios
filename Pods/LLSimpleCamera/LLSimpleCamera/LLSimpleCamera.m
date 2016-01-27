@@ -10,7 +10,7 @@
 #import <ImageIO/CGImageProperties.h>
 #import "UIImage+FixOrientation.h"
 
-@interface LLSimpleCamera () <AVCaptureFileOutputRecordingDelegate>
+@interface LLSimpleCamera () <AVCaptureFileOutputRecordingDelegate, UIGestureRecognizerDelegate>
 @property (strong, nonatomic) UIView *preview;
 @property (strong, nonatomic) AVCaptureStillImageOutput *stillImageOutput;
 @property (strong, nonatomic) AVCaptureSession *session;
@@ -23,6 +23,9 @@
 @property (strong, nonatomic) CALayer *focusBoxLayer;
 @property (strong, nonatomic) CAAnimation *focusBoxAnimation;
 @property (strong, nonatomic) AVCaptureMovieFileOutput *movieFileOutput;
+@property (strong, nonatomic) UIPinchGestureRecognizer *pinchGesture;
+@property (nonatomic, assign) CGFloat beginGestureScale;
+@property (nonatomic, assign) CGFloat effectiveScale;
 @property (nonatomic, copy) void (^didRecord)(LLSimpleCamera *camera, NSURL *outputFileUrl, NSError *error);
 @end
 
@@ -46,17 +49,37 @@ NSString *const LLSimpleCameraErrorDomain = @"LLSimpleCameraErrorDomain";
 {
     self = [super initWithNibName:nil bundle:nil];
     if(self) {
-        _cameraQuality = quality;
-        _position = position;
-        _fixOrientationAfterCapture = NO;
-        _tapToFocus = YES;
-        _useDeviceOrientation = NO;
-        _flash = LLCameraFlashOff;
-        _videoEnabled = videoEnabled;
-        _recording = NO;
+        [self setupWithQuality:quality position:position videoEnabled:videoEnabled];
     }
     
     return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        [self setupWithQuality:AVCaptureSessionPresetHigh
+                      position:LLCameraPositionRear
+                  videoEnabled:YES];
+    }
+    return self;
+}
+
+- (void)setupWithQuality:(NSString *)quality
+                position:(LLCameraPosition)position
+            videoEnabled:(BOOL)videoEnabled
+{
+    _cameraQuality = quality;
+    _position = position;
+    _fixOrientationAfterCapture = NO;
+    _tapToFocus = YES;
+    _useDeviceOrientation = NO;
+    _flash = LLCameraFlashOff;
+    _mirror = LLCameraMirrorAuto;
+    _videoEnabled = videoEnabled;
+    _recording = NO;
+    _zoomingEnabled = YES;
+    _effectiveScale = 1.0f;
 }
 
 - (void)viewDidLoad
@@ -76,19 +99,65 @@ NSString *const LLSimpleCameraErrorDomain = @"LLSimpleCameraErrorDomain";
     [self.tapGesture setDelaysTouchesEnded:NO];
     [self.preview addGestureRecognizer:self.tapGesture];
     
+    //pinch to zoom
+    if (_zoomingEnabled) {
+        self.pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchGesture:)];
+        self.pinchGesture.delegate = self;
+        [self.preview addGestureRecognizer:self.pinchGesture];
+    }
+    
     // add focus box to view
     [self addDefaultFocusBox];
+}
+
+#pragma mark Pinch Delegate
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    if ( [gestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]] ) {
+        _beginGestureScale = _effectiveScale;
+    }
+    return YES;
+}
+
+- (void)handlePinchGesture:(UIPinchGestureRecognizer *)recognizer
+{
+    BOOL allTouchesAreOnThePreviewLayer = YES;
+    NSUInteger numTouches = [recognizer numberOfTouches], i;
+    for ( i = 0; i < numTouches; ++i ) {
+        CGPoint location = [recognizer locationOfTouch:i inView:self.preview];
+        CGPoint convertedLocation = [self.preview.layer convertPoint:location fromLayer:self.view.layer];
+        if ( ! [self.preview.layer containsPoint:convertedLocation] ) {
+            allTouchesAreOnThePreviewLayer = NO;
+            break;
+        }
+    }
+    
+    if (allTouchesAreOnThePreviewLayer) {
+        _effectiveScale = _beginGestureScale * recognizer.scale;
+        if (_effectiveScale < 1.0f)
+            _effectiveScale = 1.0f;
+        if (_effectiveScale > _videoCaptureDevice.activeFormat.videoMaxZoomFactor)
+            _effectiveScale = _videoCaptureDevice.activeFormat.videoMaxZoomFactor;
+        NSError *error = nil;
+        if ([_videoCaptureDevice lockForConfiguration:&error]) {
+            [_videoCaptureDevice rampToVideoZoomFactor:_effectiveScale withRate:100];
+            [_videoCaptureDevice unlockForConfiguration];
+        }
+        else {
+            NSLog(@"%@", error);
+        }
+    }
 }
 
 #pragma mark - Camera
 
 - (void)attachToViewController:(UIViewController *)vc withFrame:(CGRect)frame
 {
-    [vc.view addSubview:self.view];
     [vc addChildViewController:self];
+    self.view.frame = frame;
+    [vc.view addSubview:self.view];
     [self didMoveToParentViewController:vc];
-    
-    vc.view.frame = frame;
 }
 
 - (void)start
@@ -205,7 +274,10 @@ NSString *const LLSimpleCameraErrorDomain = @"LLSimpleCameraErrorDomain";
             }
         }
         
+        // continiously adjust white balance
+        self.whiteBalanceMode = AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance;
         
+        // image output
         self.stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
         NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
         [self.stillImageOutput setOutputSettings:outputSettings];
@@ -411,6 +483,8 @@ NSString *const LLSimpleCameraErrorDomain = @"LLSimpleCameraErrorDomain";
         _flash = LLCameraFlashOff;
     }
     
+    _effectiveScale = 1.0f;
+    
     // trigger block
     if(self.onDeviceChange) {
         self.onDeviceChange(self, videoCaptureDevice);
@@ -461,6 +535,67 @@ NSString *const LLSimpleCameraErrorDomain = @"LLSimpleCameraErrorDomain";
     else {
         return NO;
     }
+}
+
+- (void)setWhiteBalanceMode:(AVCaptureWhiteBalanceMode)whiteBalanceMode
+{
+    // continiously adjust white balance
+    if ([_videoCaptureDevice isWhiteBalanceModeSupported: AVCaptureWhiteBalanceModeLocked]) {
+        if ([_videoCaptureDevice lockForConfiguration:nil]) {
+            [_videoCaptureDevice setWhiteBalanceMode:whiteBalanceMode];
+            [_videoCaptureDevice unlockForConfiguration];
+        }
+    }
+}
+
+- (void)setMirror:(LLCameraMirror)mirror
+{
+    _mirror = mirror;
+
+    if(!self.session) {
+        return;
+    }
+
+    AVCaptureConnection *videoConnection = [_movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
+    AVCaptureConnection *pictureConnection = [_stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
+
+    switch (mirror) {
+        case LLCameraMirrorOff: {
+            if ([videoConnection isVideoMirroringSupported]) {
+                [videoConnection setVideoMirrored:NO];
+            }
+            
+            if ([pictureConnection isVideoMirroringSupported]) {
+                [pictureConnection setVideoMirrored:NO];
+            }
+            break;
+        }
+
+        case LLCameraMirrorOn: {
+            if ([videoConnection isVideoMirroringSupported]) {
+                [videoConnection setVideoMirrored:YES];
+            }
+            
+            if ([pictureConnection isVideoMirroringSupported]) {
+                [pictureConnection setVideoMirrored:YES];
+            }
+            break;
+        }
+
+        case LLCameraMirrorAuto: {
+            BOOL shouldMirror = (_position == LLCameraPositionFront);
+            if ([videoConnection isVideoMirroringSupported]) {
+                [videoConnection setVideoMirrored:shouldMirror];
+            }
+            
+            if ([pictureConnection isVideoMirroringSupported]) {
+                [pictureConnection setVideoMirrored:shouldMirror];
+            }
+            break;
+        }
+    }
+
+    return;
 }
 
 - (LLCameraPosition)togglePosition
@@ -527,6 +662,8 @@ NSString *const LLSimpleCameraErrorDomain = @"LLSimpleCameraErrorDomain";
     
     self.videoCaptureDevice = device;
     self.videoDeviceInput = videoInput;
+
+    [self setMirror:_mirror];
 }
 
 

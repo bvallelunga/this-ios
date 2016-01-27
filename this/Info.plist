@@ -32,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>4</string>
+	<string>5</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -77,6 +77,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Want to find hashtags near you?</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Want to find hashtags near you?</string>
 	<key>ParseApplicationID</key>
 	<string>${PARSE_APPLICATION_ID}</string>
 	<key>ParseClientKey</key>
@@ -121,9 +125,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Want to find hashtags near you?</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Want to find hashtags near you?</string>
 </dict>
 </plist>

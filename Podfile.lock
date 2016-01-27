@@ -1,16 +1,14 @@
 PODS:
-  - Bolts/Tasks (1.5.0)
-  - Crashlytics (3.4.1):
-    - Fabric (~> 1.6.0)
+  - Bolts/Tasks (1.6.0)
+  - Crashlytics (3.6.0):
+    - Fabric (~> 1.6.3)
   - CSStickyHeaderFlowLayout (0.2.10)
-  - CWStatusBarNotification (2.3.3)
-  - Fabric (1.6.1)
+  - CWStatusBarNotification (2.3.4)
+  - Fabric (1.6.4)
   - FLAnimatedImage (1.0.10)
-  - FMDB (2.5):
-    - FMDB/standard (= 2.5)
-  - FMDB/common (2.5)
-  - FMDB/standard (2.5):
-    - FMDB/common
+  - FMDB (2.6):
+    - FMDB/standard (= 2.6)
+  - FMDB/standard (2.6)
   - FormatterKit (1.8.0):
     - FormatterKit/AddressFormatter (= 1.8.0)
     - FormatterKit/ArrayFormatter (= 1.8.0)
@@ -35,13 +33,13 @@ PODS:
   - KTBTaskQueue (1.0.1):
     - FMDB (~> 2.0)
   - libPhoneNumber-iOS (0.8.10)
-  - LLSimpleCamera (4.0.0)
+  - LLSimpleCamera (4.2.0)
   - Mixpanel (2.9.1):
     - Mixpanel/Mixpanel (= 2.9.1)
   - Mixpanel/Mixpanel (2.9.1)
   - MoABContactsManager (1.0.5)
   - NYTPhotoViewer (0.1.2)
-  - Parse (1.11.0):
+  - Parse (1.12.0):
     - Bolts/Tasks (~> 1.5)
   - ParseCrashReporting (1.9.2):
     - Bolts/Tasks (~> 1.5)
@@ -74,23 +72,23 @@ DEPENDENCIES:
   - TTTAttributedLabel (~> 1.13)
 
 SPEC CHECKSUMS:
-  Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
-  Crashlytics: 41574a245bc6ae10c55d57f385ebd2004e5bee05
+  Bolts: f52a250053bb517ca874523c3913776359ab3def
+  Crashlytics: e4e8d02914f2608fbc7bf42b1a7af838b0db67a2
   CSStickyHeaderFlowLayout: 5366582779d8b7c9ba9b9cc729c218cc23888776
-  CWStatusBarNotification: 2349142e97c9f16fb8247ed3c00308cd355d334b
-  Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
+  CWStatusBarNotification: 3fec41edcb0ae3677d9febfcb9632d8bdf52294c
+  Fabric: ed41fd62173c6bdea24ab02c9d7707161eabb750
   FLAnimatedImage: e16a1e1cef08e4c509b47e4acbe3923f65c16135
-  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
+  FMDB: c1968bab3ab0aed38f66cb778ae1e7fa9a652b6e
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
   JMImageCache: fac25eb168a25b29ac130fee6a6b17ea463c1d86
   JSQWebViewController: 2e416ae6604676510812bbda050d63a1488003a4
   KTBTaskQueue: cfa9fde2a0882a67f423dfe8b29c3d976358d8e7
   libPhoneNumber-iOS: 7bfd00f843fdcd82b5182b463e8eb3b27579f41d
-  LLSimpleCamera: 4acecd6fabca1cb5841302ee03e03123e290af3d
+  LLSimpleCamera: ed7813ce4827ff3e34c6af159c99b5b56e54d1c6
   Mixpanel: 5ca24b2a05f4c77fe9bcfe7671d681d0f3f8d76f
   MoABContactsManager: e3e208d64c41db8ff542d48264ee531140dad821
   NYTPhotoViewer: 874a57dd833238b52ab2e8d1c827356c763626c3
-  Parse: 886af46a0a677402f6374bb97ac212e795f70afe
+  Parse: de2c52a9a1421b91ae7594ab8ce191afd184f19b
   ParseCrashReporting: 33b760facc649d4fd99eef8f35dcda6a406099e5
   SHSPhoneComponent: 4cec0653a150ad63cbc52b0c8b29ce2d3c9c26f0
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1

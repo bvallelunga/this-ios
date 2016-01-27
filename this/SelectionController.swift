@@ -226,10 +226,16 @@ class SelectionController: UIViewController, UICollectionViewDataSource, UIColle
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // Show Camera
         guard indexPath.row > 0 else {
+            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! SelectionCameraCell
             let controller = SelectionCameraController()
+            
+            cell.cameraView.stop()
             controller.delegate = self
             
-            self.presentViewController(controller, animated: false, completion: nil)
+            self.presentViewController(controller, animated: false, completion: { () -> Void in
+                controller.cameraView.start()
+            })
+            
             Globals.pagesController.lockPageView()
             Globals.mixpanel.track("Mobile.Selection.Camera.Shown")
             return
@@ -324,7 +330,11 @@ class SelectionController: UIViewController, UICollectionViewDataSource, UIColle
     // MARK: SelectionCameraController
     func cameraDismiss() {
         Globals.pagesController.unlockPageView()
-        self.dismissViewControllerAnimated(false, completion: nil)
+        self.dismissViewControllerAnimated(false) { () -> Void in
+            let cell = self.collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)) as? SelectionCameraCell
+            
+            cell?.cameraView.start()
+        }
     }
     
     func cameraTaken(image: UIImage) {
