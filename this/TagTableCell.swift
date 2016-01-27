@@ -33,7 +33,7 @@ class TagTableCell: UITableViewCell, TTTAttributedLabelDelegate {
         self.label.numberOfLines = 0
         self.label.font = UIFont(name: "Bariol", size: 20)
         self.label.textColor = UIColor.blackColor()
-        self.label.lineBreakMode = .ByWordWrapping
+        self.label.lineBreakMode = .ByCharWrapping
     }
     
     func updateComment(comment: Comment) {
@@ -46,6 +46,13 @@ class TagTableCell: UITableViewCell, TTTAttributedLabelDelegate {
         
         self.label.setText(text)
         self.label.addLink(link)
+    }
+    
+    func attributedLabel(label: TTTAttributedLabel!, didLongPressLinkWithURL url: NSURL!, atPoint point: CGPoint) {
+        if url.scheme != "this" {
+            let controller = ShareGenerator.share(url.absoluteString, image: nil)
+            Globals.tagController.presentViewController(controller, animated: true, completion: nil)
+        }
     }
     
     func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {

@@ -130,6 +130,10 @@ class TagController: UIViewController, UITextFieldDelegate {
     
     // MARK: NSNotificationCenter
     func keyboardDidShow(notification: NSNotification) {
+        guard self.presentedViewController == nil else {
+            return
+        }
+        
         let userInfo = NSDictionary(dictionary: notification.userInfo!)
         let rect = (userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue).CGRectValue()
         
@@ -142,6 +146,10 @@ class TagController: UIViewController, UITextFieldDelegate {
     }
     
     func keyboardDidHide() {
+        guard self.presentedViewController == nil else {
+            return
+        }
+        
         self.bottomConstraint.constant = 0
         self.view.layoutIfNeeded()
     }

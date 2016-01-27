@@ -12,7 +12,7 @@ import JSQWebViewController
 
 class SettingsController: UITableViewController {
 
-    private var headerFrame: CGRect!
+    private var headerFrame = CGRect.zero
     private var headerController: SettingsHeaderController!
     private var user = User.current()
     private var config: Config!
@@ -41,7 +41,7 @@ class SettingsController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        if self.headerFrame == nil {
+        if self.headerFrame == CGRect.zero {
             self.headerFrame = self.headerController.view.frame
         }
     }

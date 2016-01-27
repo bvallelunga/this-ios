@@ -50,7 +50,9 @@ class TagTableController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.headerFrame = self.headerContainer.frame
+        if self.headerFrame == CGRect.zero {
+            self.headerFrame = self.headerController.view.frame
+        }
         
         // Register for keyboard notifications
         let notificationCenter = NSNotificationCenter.defaultCenter()
@@ -118,6 +120,10 @@ class TagTableController: UITableViewController {
     
     // MARK: NSNotificationCenter
     func keyboardDidShow(notification: NSNotification) {
+        guard self.presentedViewController == nil else {
+            return
+        }
+        
         self.keyboardActive = true
         
         self.headerController.view.frame.size.height = 0
@@ -128,6 +134,10 @@ class TagTableController: UITableViewController {
     }
     
     func keyboardDidHide() {
+        guard self.presentedViewController == nil else {
+            return
+        }
+        
         self.keyboardActive = false
         
         self.headerContainer.frame = self.headerFrame
