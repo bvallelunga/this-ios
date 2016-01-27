@@ -774,7 +774,7 @@ and Privacy Policy.</string>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Have something to say?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KqA-VR-I2W">
                                         <rect key="frame" x="10" y="5" width="520" height="40"/>
                                         <fontDescription key="fontDescription" name="Bariol-Regular" family="Bariol" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="yes" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="yes" keyboardType="twitter" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <action selector="messageChanged:" destination="Njs-W8-ya8" eventType="editingChanged" id="gPp-VG-2UV"/>
                                         </connections>
