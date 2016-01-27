@@ -139,6 +139,8 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     }
     
     func fetchTags() {
+        var count = 0
+        
         Tag.nearby { (tags) -> Void in
             for tag in tags {
                 if self.tags[tag.hashtag] == nil {
@@ -147,7 +149,8 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
                 }
             }
             
-            self.tagListGuide.hidden = !tags.isEmpty
+            count += tags.count
+            self.tagListGuide.hidden = count > 0
         }
         
         Tag.friends(self.user) { (tags) -> Void in
@@ -158,7 +161,8 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
                 }
             }
             
-            self.tagListGuide.hidden = !tags.isEmpty
+            count += tags.count
+            self.tagListGuide.hidden = count > 0
         }
         
         self.user.following { (tags) -> Void in
@@ -169,7 +173,8 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
                 }
             }
             
-            self.tagListGuide.hidden = !tags.isEmpty
+            count += tags.count
+            self.tagListGuide.hidden = count > 0
         }
     }
     
