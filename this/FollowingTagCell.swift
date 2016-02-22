@@ -20,7 +20,6 @@ class FollowingTagCell: UICollectionViewCell {
     
     var delegate: FollowingTagCellDelegate!
     private var currentImage: Int = 0
-    private var imageTimer: NSTimer!
     private var images: [UIImage] = []
     var hashtag: Tag!
     
@@ -44,6 +43,11 @@ class FollowingTagCell: UICollectionViewCell {
         
         let gesture = UITapGestureRecognizer(target: self, action: Selector("tapped:"))
         self.addGestureRecognizer(gesture)
+        
+        Globals.delay(Double(Globals.random(1, max: 4))) { () -> () in
+            NSTimer.scheduledTimerWithTimeInterval(1.5, target: self,
+                selector: Selector("cycleImage"), userInfo: nil, repeats: true)
+        }
     }
     
     func updateTag(tag: Tag, images: [UIImage]) {
@@ -62,24 +66,6 @@ class FollowingTagCell: UICollectionViewCell {
         self.badgeLabel.hidden = true
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
-        
-        self.startCycling()
-    }
-    
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
-        
-        self.stopCycling()
-    }
-    
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        super.touchesCancelled(touches, withEvent: event)
-        
-        self.stopCycling()
-    }
-    
     func cycleImage() {
         if !self.images.isEmpty {
             if ++self.currentImage >= self.images.count {
@@ -88,30 +74,5 @@ class FollowingTagCell: UICollectionViewCell {
             
             self.imageView.image = self.images[self.currentImage]
         }
-    }
-    
-    func startCycling() {
-        self.tagLabel.alpha = 0
-        self.badgeLabel.alpha = 0
-        
-        self.imageTimer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self,
-            selector: Selector("cycleImage"), userInfo: nil, repeats: true)
-        
-        Globals.mixpanel.timeEvent("Mobile.Following.Tag.Photo Cycle")
-    }
-    
-    func stopCycling() {
-        if self.imageTimer != nil {
-            self.imageTimer.invalidate()
-            self.imageTimer = nil
-        }
-        
-        self.tagLabel.alpha = 1
-        self.badgeLabel.alpha = 1
-        
-        Globals.mixpanel.track("Mobile.Following.Tag.Photo Cycle", properties: [
-            "images": self.images.count,
-            "tag": self.hashtag.name
-        ])
     }
 }

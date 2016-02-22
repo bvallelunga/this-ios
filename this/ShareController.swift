@@ -350,6 +350,7 @@ class ShareController: UIViewController, UITableViewDataSource, UITableViewDeleg
         self.delegate.shareControllerShared(count)
         
         Pending.batchCreate(self.user, contacts: Array(self.contacts.selected.keys), tag: self.tag)
+        self.user.addFriends(Array(self.users.selected.keys))
         
         Globals.mixpanel.track("Mobile.Invite.Shared", properties: [
             "contacts": self.contacts.selected.count,
@@ -480,7 +481,7 @@ class ShareController: UIViewController, UITableViewDataSource, UITableViewDeleg
             self.friends.raw = users
             self.intersectionsUsersContacts()
             self.filterBySearch("")
-            self.user.addFriends(numbers)
+            self.user.addNumbers(numbers)
         }
     }
     

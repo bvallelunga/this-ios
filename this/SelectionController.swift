@@ -15,13 +15,13 @@ private let photoIdentifier = "photo"
 private let cameraIdentifier = "camera"
 
 class SelectionController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,
-    SelectionCameraControllerDelegate, SelectionHeaderDelegate {
+    ShareControllerDelegate, SelectionHeaderDelegate {
     
     var header: SelectionHeader!
+    private var tag: Tag!
     private let manager = PHCachingImageManager()
     private var assets: [PHAsset] = []
     private var selected: [PHAsset: UIImage] = [:]
-    private var selectedOrder: NSMutableArray = []
     private var config: Config!
     private var user = User.current()
     private var date = NSCalendar.currentCalendar()
@@ -56,16 +56,9 @@ class SelectionController: UIViewController, UICollectionViewDataSource, UIColle
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.header?.placeholderView?.startAnimating()
         
         Globals.selectionController = self
         Globals.mixpanel.track("Mobile.Selection")
-    }
-    
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.header?.placeholderView?.stopAnimating()
     }
     
     func setupCollectionView() {
@@ -74,8 +67,8 @@ class SelectionController: UIViewController, UICollectionViewDataSource, UIColle
         let headerNib = UINib(nibName: "SelectionHeader", bundle: NSBundle.mainBundle())
         
         if let layout = self.collectionView?.collectionViewLayout as? CSStickyHeaderFlowLayout {
-            layout.parallaxHeaderReferenceSize = CGSizeMake(size.width, size.height - (itemSize * 2))
-            layout.parallaxHeaderMinimumReferenceSize = CGSizeMake(size.width, size.height - (itemSize * 2))
+            layout.parallaxHeaderReferenceSize = CGSizeMake(size.width, size.height - (itemSize * 0.5))
+            layout.parallaxHeaderMinimumReferenceSize = CGSizeMake(size.width, size.height - (itemSize * 0.5))
             layout.itemSize = CGSizeMake(itemSize, itemSize)
             layout.minimumInteritemSpacing = 1
             layout.minimumLineSpacing = 1
@@ -97,12 +90,12 @@ class SelectionController: UIViewController, UICollectionViewDataSource, UIColle
     
     func reset() {
         self.selected.removeAll()
-        self.selectedOrder.removeAllObjects()
         self.collectionView?.reloadData()
         self.header.reset()
+        self.tag = nil
     }
     
-    func getAssests(select: Bool = false) {
+    func getAssests() {
         self.assetsAuthorized { (authorized) -> Void in
             guard authorized else {
                 let controller = UIAlertController(title: "Photo Permissions",
@@ -133,10 +126,6 @@ class SelectionController: UIViewController, UICollectionViewDataSource, UIColle
             results.enumerateObjectsUsingBlock { (object, _, _) in
                 if let asset = object as? PHAsset {
                     self.assets.insert(asset, atIndex: 0)
-                    
-                    if select {
-                        self.cellSelected(asset, force: true)
-                    }
                 }
             }
             
@@ -181,36 +170,29 @@ class SelectionController: UIViewController, UICollectionViewDataSource, UIColle
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.assets.count + 1
+        return self.assets.count
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        if indexPath.row > 0 {
-            let asset = self.assets[indexPath.row-1]
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(photoIdentifier,
-                forIndexPath: indexPath) as! SelectionPhotoCell
-            let options = PHImageRequestOptions()
-            
-            options.deliveryMode = .Opportunistic
-            
-            cell.upload = self.selected[asset] != nil
-            cell.layer.borderColor = Colors.green.CGColor
-            cell.layer.borderWidth = cell.upload ? 5 : 0
-            
-            cell.tag = Int(self.manager.requestImageForAsset(asset,
-                targetSize: cell.frame.size,
-                contentMode: .AspectFill,
-                options: options) { (result, _) in
-                    cell.imageView.image = result
-            })
-            
-            return cell
-        }
+        let asset = self.assets[indexPath.row]
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(photoIdentifier,
+            forIndexPath: indexPath) as! SelectionPhotoCell
+        let options = PHImageRequestOptions()
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cameraIdentifier,
-            forIndexPath: indexPath) as! SelectionCameraCell
-    
+        options.deliveryMode = .Opportunistic
+        
+        cell.upload = self.selected[asset] != nil
+        cell.layer.borderColor = Colors.green.CGColor
+        cell.layer.borderWidth = cell.upload ? 5 : 0
+        
+        cell.tag = Int(self.manager.requestImageForAsset(asset,
+            targetSize: cell.frame.size,
+            contentMode: .AspectFill,
+            options: options) { (result, _) in
+                cell.imageView.image = result
+        })
+
         return cell
     }
     
@@ -224,28 +206,11 @@ class SelectionController: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        // Show Camera
-        guard indexPath.row > 0 else {
-            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! SelectionCameraCell
-            let controller = SelectionCameraController()
-            
-            cell.cameraView.stop()
-            controller.delegate = self
-            
-            self.presentViewController(controller, animated: false, completion: { () -> Void in
-                controller.cameraView.start()
-            })
-            
-            Globals.pagesController.lockPageView()
-            Globals.mixpanel.track("Mobile.Selection.Camera.Shown")
-            return
-        }
-        
         // Toggle Library Image
-        let asset = self.assets[indexPath.row-1]
+        let asset = self.assets[indexPath.row]
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! SelectionPhotoCell
         
-        if !cell.upload && self.config != nil && self.selectedOrder.count >= self.config.uploadLimit {
+        if !cell.upload && self.config != nil && self.selected.count >= self.config.uploadLimit {
             NavNotification.show("Isn't \(self.config.uploadLimit) photos enough?")
             return
         }
@@ -256,10 +221,13 @@ class SelectionController: UIViewController, UICollectionViewDataSource, UIColle
         if cell.upload {
             self.cellSelected(asset)
             Globals.mixpanel.track("Mobile.Selection.Photo.Selected")
-        } else  {
-            self.selectedOrder.removeObject(asset)
+        } else {
+            if let image = self.selected[asset] {
+                self.header.images.removeObject(image)
+                self.header.updateCollection()
+            }
+            
             self.selected.removeValueForKey(asset)
-            self.updateHeader()
             Globals.mixpanel.track("Mobile.Selection.Photo.Deselected")
         }
     }
@@ -270,9 +238,9 @@ class SelectionController: UIViewController, UICollectionViewDataSource, UIColle
         
         self.manager.requestImageDataForAsset(asset, options: options) { (imageData, dataUTI, orientation, info) -> Void in
             if let image = UIImage(data: imageData!) {
-                self.selectedOrder.insertObject(asset, atIndex: 0)
+                self.header.images.insertObject(image, atIndex: 0)
                 self.selected[asset] = image
-                self.updateHeader()
+                self.header.updateCollection()
                 
                 if force {
                     self.collectionView?.reloadData()
@@ -285,61 +253,71 @@ class SelectionController: UIViewController, UICollectionViewDataSource, UIColle
         self.header.setHashtag(tag)
     }
     
-    func updateHeader() {
-        var images: [UIImage] = []
-        
-        for asset in self.selectedOrder {
-            images.append(self.selected[asset as! PHAsset]!)
-        }
-        
-        self.header.imagesSelected(images)
+    // MARK: ShareController Methods
+    func shareControllerCancelled() {
+        self.shareControllerInviteCompelete()
     }
     
-    func imageSaved(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
-        self.getAssests(true)
+    func shareControllerInviteCompelete() {
+        self.dismissViewControllerAnimated(true) { () -> Void in
+            Globals.viewTag(self.tag, callback: { () -> Void in
+                self.reset()
+            })
+        }
+    }
+    
+    func shareControllerShared(count: Int) {
+        
     }
     
     // MARK: SelectionHeader Methods
-    func updateTags(hashtag: String, timer: Int) {
+    func removeImage(image: UIImage) {
+        let assets = (self.selected.filter { $0.1 == image }).map { $0.0 }
+        
+        if !assets.isEmpty {
+            self.selected.removeValueForKey(assets[0])
+        }
+    }
+    
+    func updateTags(images: [UIImage], hashtag: String, timer: Int) {
         SVProgressHUD.show()
         Globals.mixpanel.timeEvent("Mobile.Selection.Tag.FindOrCreate")
         
         Tag.findOrCreate(hashtag) { (tag) -> Void in
-            Globals.mixpanel.track("Mobile.Selection.Tag.FindOrCreate", properties: [
-                "tag": tag.name
-            ])
+            SVProgressHUD.dismiss()
             
-            tag.postImages(timer, user: self.user, images: self.selected, callback: { () -> Void in
-                SVProgressHUD.dismiss()
-                
-                Globals.viewTag(tag, callback: { () -> Void in
-                    self.reset()
-                })
-                
+            let controller = Globals.storyboard.instantiateViewControllerWithIdentifier("ShareController") as! ShareController
+            controller.delegate = self
+            controller.images = images
+            controller.tag = tag
+            controller.backButton = "SKIP"
+            
+            self.tag = tag
+            self.presentViewController(controller, animated: true, completion: nil)
+            
+            var postImages = [UIImage: PHAsset]()
+            
+            for image in images {
+                postImages[image] = PHAsset()
+            }
+            
+            for (asset, image) in self.selected {
+                postImages[image] = asset
+            }
+            
+            print(postImages.count)
+            
+            tag.postImages(timer, user: self.user, images: postImages, callback: { () -> Void in
                 Globals.mixpanel.track("Mobile.Selection.Tag.Post", properties: [
                     "tag": tag.name,
                     "timer": timer,
                     "photos": self.selected.count
                 ])
-            }, hasError: { () -> Void in
-                SVProgressHUD.dismiss()
-            })
-        }
-    }
-    
-    // MARK: SelectionCameraController
-    func cameraDismiss() {
-        Globals.pagesController.unlockPageView()
-        self.dismissViewControllerAnimated(false) { () -> Void in
-            let cell = self.collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)) as? SelectionCameraCell
+            }, hasError: nil)
             
-            cell?.cameraView.start()
+            Globals.mixpanel.track("Mobile.Selection.Tag.FindOrCreate", properties: [
+                "tag": tag.name
+            ])
         }
     }
-    
-    func cameraTaken(image: UIImage) {
-        UIImageWriteToSavedPhotosAlbum(image, self, "imageSaved:didFinishSavingWithError:contextInfo:", nil)
-        Globals.mixpanel.track("Mobile.Selection.Camera.Photo Taken")
-    }
-
 }

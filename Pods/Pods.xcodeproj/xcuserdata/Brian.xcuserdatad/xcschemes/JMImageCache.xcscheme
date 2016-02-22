@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '0722B18591F458B6EA75DDFF'
+               BlueprintIdentifier = 'D40C308AF24B68B741E73AD2'
                BlueprintName = 'JMImageCache'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'JMImageCache.framework'>

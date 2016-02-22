@@ -19,7 +19,7 @@ class ShareHeaderController: UIViewController, UISearchBarDelegate {
     var tag: Tag!
     var backText: String!
     var delegate: ShareHeaderControllerDelegate!
-    static var text = NSAttributedString(string: "Invite your friends\nto post to ")
+    static var text = NSAttributedString(string: "\nis only fun with friends!")
     
     @IBOutlet weak var stepLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
@@ -39,7 +39,7 @@ class ShareHeaderController: UIViewController, UISearchBarDelegate {
             NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue
         ])
         
-        tagString.insertAttributedString(ShareHeaderController.text, atIndex: 0)
+        tagString.appendAttributedString(ShareHeaderController.text)
         
         self.headerLabel.attributedText = tagString
         

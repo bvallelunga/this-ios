@@ -215,7 +215,15 @@ class User: PFUser {
         }
     }
     
-    func addFriends(numbers: [String]) {
+    func addFriends(users: [User]) {
+        for user in users {
+            self.friends.addObject(user)
+        }
+        
+        self.saveInBackground()
+    }
+    
+    func addNumbers(numbers: [String]) {
         let query = User.query()
         
         query?.whereKey("phone", containedIn: numbers)

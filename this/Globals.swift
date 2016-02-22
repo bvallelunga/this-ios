@@ -36,6 +36,10 @@ class Globals: NSObject {
             dispatch_get_main_queue(), closure)
     }
     
+    class func random(min: Int, max:Int) -> Int {
+        return min + Int(arc4random_uniform(UInt32(max - min + 1)))
+    }
+    
     class func intervalDate(date: NSDate) -> String {
         let timeInterval = TTTTimeIntervalFormatter()
         let interval = NSDate().timeIntervalSinceDate(date)

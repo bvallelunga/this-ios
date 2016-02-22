@@ -254,11 +254,11 @@ class Tag: PFObject, PFSubclassing {
         }
     }
     
-    func postImages(timer: Int, user: User, images: [PHAsset: UIImage], callback: () -> Void, hasError: () -> Void) {
+    func postImages(timer: Int, user: User, images: [UIImage: PHAsset], callback: () -> Void, hasError: (() -> Void)!) {
         let expireAt = NSCalendar.currentCalendar()
             .dateByAddingUnit(.Day, value: timer, toDate: NSDate(), options: [])!
         
-        let photos: [Photo] = images.map { (asset, image) -> Photo in
+        let photos: [Photo] = images.map { (image, asset) -> Photo in
             let photo = Photo.create(user, image: image, expireAt: expireAt)
             
             if let location = asset.location {
@@ -297,7 +297,10 @@ class Tag: PFObject, PFSubclassing {
             return true
         }.continueWithBlock { (task) -> AnyObject? in
             if let error = task.error {
-                Globals.delay(0, closure: hasError)
+                if hasError != nil {
+                    Globals.delay(0, closure: hasError)
+                }
+                
                 ErrorHandler.handleParse(error)
             }
             
