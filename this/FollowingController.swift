@@ -11,7 +11,7 @@ import UIKit
 private let tagIdentifier = "tag"
 private let spacerIdentifier = "spacer"
 
-class FollowingController: UICollectionViewController, UICollectionViewDelegateFlowLayout, FollowingTagCellDelegate {
+class FollowingController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     private var tags: [Tag] = []
     private var images: [Tag: [UIImage]] = [:]
@@ -103,10 +103,15 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
         let tag = self.tags[indexPath.row]
         
         cell.alpha = 1
-        cell.delegate = self
         cell.updateTag(tag, images: self.images[tag]!)
         
         return cell
+    }
+    
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let tag = self.tags[indexPath.row]
+        self.parent.viewTag(tag)
+        Globals.mixpanel.timeEvent("Mobile.Following.Tag.Selected")
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
@@ -125,11 +130,6 @@ class FollowingController: UICollectionViewController, UICollectionViewDelegateF
         let size = self.view.frame.size
         
         return CGSizeMake(size.width/2 - 0.5, size.height/3 - 1)
-    }
-    
-    func tagCellTapped(tag: Tag) {
-        self.parent.viewTag(tag)
-        Globals.mixpanel.timeEvent("Mobile.Following.Tag.Selected")
     }
 
 }
