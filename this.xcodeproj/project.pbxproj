@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0AC07085569F9C8AC6BF50EA /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5448DE4E9A1C6AF9F42A087F /* Pods.framework */; };
+		3160BE89F2A2A14F468CFED3 /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BFE0586D18111BD9A9CF7BB /* BuddyBuildSDK.framework */; };
+		61EAF26D01A02153176D644A /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032CCE56762E644E5849C738 /* CoreText.framework */; };
+		7898261485F5367ABCA24782 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6D45FFBC8AAC9C9E49DE106 /* SystemConfiguration.framework */; };
+		7949C22BDB7FD180F9499CD1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C821C7767DEC9B3AEB923C99 /* AssetsLibrary.framework */; };
+		AE3B0BDB8ABB6D5904F24EDF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA46680F538693AAF99CC3CA /* QuartzCore.framework */; };
 		D30B18C01C218DFB004A4C7C /* TrendingCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B18BF1C218DFB004A4C7C /* TrendingCollectionCell.swift */; };
 		D31F09B01C2900C900FD61A0 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31F09AF1C2900C900FD61A0 /* SettingsController.swift */; };
 		D31F09B21C29017600FD61A0 /* SettingsHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31F09B11C29017600FD61A0 /* SettingsHeaderController.swift */; };
@@ -102,9 +107,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		032CCE56762E644E5849C738 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		5448DE4E9A1C6AF9F42A087F /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CBD127DCCBC9F8B24A221BC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		7BFE0586D18111BD9A9CF7BB /* BuddyBuildSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BuddyBuildSDK.framework; sourceTree = "<group>"; };
 		A3013FFD995CE494920DC812 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		C821C7767DEC9B3AEB923C99 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		D30B18BF1C218DFB004A4C7C /* TrendingCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingCollectionCell.swift; sourceTree = "<group>"; };
 		D31F09AF1C2900C900FD61A0 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		D31F09B11C29017600FD61A0 /* SettingsHeaderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHeaderController.swift; sourceTree = "<group>"; };
@@ -188,6 +196,8 @@
 		D3EAAD311C374587000AC019 /* TagHeaderCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagHeaderCollection.swift; sourceTree = "<group>"; };
 		D3EAAD331C374AA5000AC019 /* TagHeaderPages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagHeaderPages.swift; sourceTree = "<group>"; };
 		D3EAAD351C3BA4BB000AC019 /* SettingsFooterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsFooterController.swift; sourceTree = "<group>"; };
+		EA46680F538693AAF99CC3CA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F6D45FFBC8AAC9C9E49DE106 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +207,11 @@
 			files = (
 				D3E293271C1C1E4500925EAC /* CoreTelephony.framework in Frameworks */,
 				0AC07085569F9C8AC6BF50EA /* Pods.framework in Frameworks */,
+				3160BE89F2A2A14F468CFED3 /* BuddyBuildSDK.framework in Frameworks */,
+				7949C22BDB7FD180F9499CD1 /* AssetsLibrary.framework in Frameworks */,
+				61EAF26D01A02153176D644A /* CoreText.framework in Frameworks */,
+				7898261485F5367ABCA24782 /* SystemConfiguration.framework in Frameworks */,
+				AE3B0BDB8ABB6D5904F24EDF /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,6 +246,11 @@
 			children = (
 				D3E293261C1C1E4500925EAC /* CoreTelephony.framework */,
 				5448DE4E9A1C6AF9F42A087F /* Pods.framework */,
+				7BFE0586D18111BD9A9CF7BB /* BuddyBuildSDK.framework */,
+				C821C7767DEC9B3AEB923C99 /* AssetsLibrary.framework */,
+				032CCE56762E644E5849C738 /* CoreText.framework */,
+				F6D45FFBC8AAC9C9E49DE106 /* SystemConfiguration.framework */,
+				EA46680F538693AAF99CC3CA /* QuartzCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -945,6 +965,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = this/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -965,6 +989,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = this/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
