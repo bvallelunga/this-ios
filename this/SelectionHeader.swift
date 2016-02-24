@@ -79,6 +79,13 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         self.photoButton.layer.shadowOffset = CGSizeMake(0, 3)
         self.photoButton.layer.cornerRadius = self.photoButton.frame.width/2
         self.photoButton.backgroundColor = UIColor(white: 1, alpha: 0.2)
+        self.photoButton.tintColor = UIColor.whiteColor()
+        self.photoButton.titleLabel?.font = UIFont(name: "Bariol-Bold", size: 20)
+        self.photoButton.setTitle("HOLD", forState: .Normal)
+        
+        Globals.delay(10) { () -> () in
+            self.photoButton.setTitle("", forState: .Normal)
+        }
         
         let switchCamera = UILongPressGestureRecognizer(target: self, action: Selector("switchCamera:"))
         switchCamera.minimumPressDuration = 0.25
