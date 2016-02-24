@@ -78,8 +78,6 @@ class SelectionController: UIViewController, UICollectionViewDataSource, UIColle
         }
             
         self.collectionView?.registerClass(SelectionPhotoCell.self, forCellWithReuseIdentifier: photoIdentifier)
-        self.collectionView?.registerClass(SelectionCameraCell.self, forCellWithReuseIdentifier: cameraIdentifier)
-        
         self.collectionView?.dataSource = self
         self.collectionView?.delegate = self
         
@@ -277,6 +275,8 @@ class SelectionController: UIViewController, UICollectionViewDataSource, UIColle
         if !assets.isEmpty {
             self.selected.removeValueForKey(assets[0])
         }
+        
+        self.collectionView.reloadData()
     }
     
     func updateTags(images: [UIImage], hashtag: String, timer: Int) {
@@ -304,8 +304,6 @@ class SelectionController: UIViewController, UICollectionViewDataSource, UIColle
             for (asset, image) in self.selected {
                 postImages[image] = asset
             }
-            
-            print(postImages.count)
             
             tag.postImages(timer, user: self.user, images: postImages, callback: { () -> Void in
                 Globals.mixpanel.track("Mobile.Selection.Tag.Post", properties: [

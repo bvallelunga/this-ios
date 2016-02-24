@@ -30,6 +30,7 @@
 		D33B13E41C2AA58800C54DB9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B13E31C2AA58800C54DB9 /* Config.swift */; };
 		D33B13E61C2AADE900C54DB9 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B13E51C2AADE900C54DB9 /* Int.swift */; };
 		D33B13E81C2AB61000C54DB9 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B13E71C2AB61000C54DB9 /* ErrorHandler.swift */; };
+		D34732641C7D435C007EF84B /* SelectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34732631C7D435C007EF84B /* SelectionHeaderCell.swift */; };
 		D35AF8F61C1E4E610024D7E3 /* SelectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D35AF8F51C1E4E610024D7E3 /* SelectionHeader.xib */; };
 		D35AF9011C1E70ED0024D7E3 /* SelectionPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35AF9001C1E70ED0024D7E3 /* SelectionPhotoCell.swift */; };
 		D35AF9031C1E79340024D7E3 /* Placeholder.gif in Resources */ = {isa = PBXBuildFile; fileRef = D35AF9021C1E79340024D7E3 /* Placeholder.gif */; };
@@ -43,7 +44,6 @@
 		D370FE771C21034D00769EBA /* FollowingTagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D370FE761C21034D00769EBA /* FollowingTagCell.xib */; };
 		D370FE791C211C9200769EBA /* FollowingSpacerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D370FE781C211C9200769EBA /* FollowingSpacerCell.xib */; };
 		D370FE7B1C211CA200769EBA /* FollowingSpacerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D370FE7A1C211CA200769EBA /* FollowingSpacerCell.swift */; };
-		D394D3681C1E85B000CB0FE9 /* SelectionCameraCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D394D3671C1E85B000CB0FE9 /* SelectionCameraCell.swift */; };
 		D39AB7411C1F8A9800C9E96F /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39AB7401C1F8A9800C9E96F /* ShareController.swift */; };
 		D39AB7431C1F8AC800C9E96F /* ShareHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39AB7421C1F8AC800C9E96F /* ShareHeaderController.swift */; };
 		D39AB7451C1FAE2900C9E96F /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39AB7441C1FAE2900C9E96F /* Contact.swift */; };
@@ -133,6 +133,7 @@
 		D33B13E31C2AA58800C54DB9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D33B13E51C2AADE900C54DB9 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		D33B13E71C2AB61000C54DB9 /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
+		D34732631C7D435C007EF84B /* SelectionHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionHeaderCell.swift; sourceTree = "<group>"; };
 		D35AF8F51C1E4E610024D7E3 /* SelectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionHeader.xib; sourceTree = "<group>"; };
 		D35AF9001C1E70ED0024D7E3 /* SelectionPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionPhotoCell.swift; sourceTree = "<group>"; };
 		D35AF9021C1E79340024D7E3 /* Placeholder.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Placeholder.gif; sourceTree = "<group>"; };
@@ -146,7 +147,6 @@
 		D370FE761C21034D00769EBA /* FollowingTagCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowingTagCell.xib; sourceTree = "<group>"; };
 		D370FE781C211C9200769EBA /* FollowingSpacerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowingSpacerCell.xib; sourceTree = "<group>"; };
 		D370FE7A1C211CA200769EBA /* FollowingSpacerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingSpacerCell.swift; sourceTree = "<group>"; };
-		D394D3671C1E85B000CB0FE9 /* SelectionCameraCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionCameraCell.swift; sourceTree = "<group>"; };
 		D39AB7401C1F8A9800C9E96F /* ShareController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
 		D39AB7421C1F8AC800C9E96F /* ShareHeaderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareHeaderController.swift; sourceTree = "<group>"; };
 		D39AB7441C1FAE2900C9E96F /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
@@ -419,7 +419,7 @@
 				D3CFC9E21C1E416000E7C5B4 /* SelectionController.swift */,
 				D3CFC9E41C1E490800E7C5B4 /* SelectionHeader.swift */,
 				D35AF9001C1E70ED0024D7E3 /* SelectionPhotoCell.swift */,
-				D394D3671C1E85B000CB0FE9 /* SelectionCameraCell.swift */,
+				D34732631C7D435C007EF84B /* SelectionHeaderCell.swift */,
 				D35AF8F51C1E4E610024D7E3 /* SelectionHeader.xib */,
 			);
 			name = Selection;
@@ -770,11 +770,11 @@
 				D31F09B01C2900C900FD61A0 /* SettingsController.swift in Sources */,
 				D32D18C31C24F4790097D653 /* TagTableController.swift in Sources */,
 				D3CFC9E31C1E416000E7C5B4 /* SelectionController.swift in Sources */,
-				D394D3681C1E85B000CB0FE9 /* SelectionCameraCell.swift in Sources */,
 				D3BD85BF1C54AC0200B5E0B5 /* TagTableCell.swift in Sources */,
 				D331CFBC1C33D0030040A8A5 /* AuthStepPhotos.swift in Sources */,
 				D33B13E01C2AA36300C54DB9 /* Comment.swift in Sources */,
 				D3CFC9E51C1E490800E7C5B4 /* SelectionHeader.swift in Sources */,
+				D34732641C7D435C007EF84B /* SelectionHeaderCell.swift in Sources */,
 				D3C958D71C2A94E700B6EE9D /* User.swift in Sources */,
 				D33B13E21C2AA47200C54DB9 /* Installation.swift in Sources */,
 				D3BD85BB1C548DE100B5E0B5 /* ProfileController.swift in Sources */,

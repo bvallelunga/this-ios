@@ -65,8 +65,11 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         self.cameraView = LLSimpleCamera(quality: AVCaptureSessionPresetPhoto, position: LLCameraPositionRear, videoEnabled: false)
         self.cameraView.tapToFocus = true
         self.cameraView.view.frame = self.bounds
-        self.cameraView.start()
         self.insertSubview(self.cameraView.view, atIndex: 0)
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            self.cameraView.start()
+        }
         
         self.photoButton.layer.borderColor = UIColor.whiteColor().CGColor
         self.photoButton.layer.borderWidth = 6
@@ -139,6 +142,8 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         self.tagList.paddingX = 10
         self.tagList.paddingY = 8
         
+        let tap = UITapGestureRecognizer(target: self, action: Selector("hideList:"))
+        self.tagListScroll.addGestureRecognizer(tap)
         self.tagListScroll.hidden = true
         
         self.tagListGuide.textColor = UIColor(white: 1, alpha: 0.3)
@@ -149,7 +154,7 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
         self.collectionView.dataSource = self
         self.collectionView.backgroundColor = UIColor.clearColor()
         self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
-        self.collectionView.registerClass(SelectionPhotoCell.self, forCellWithReuseIdentifier: "cell")
+        self.collectionView.registerClass(SelectionHeaderCell.self, forCellWithReuseIdentifier: "cell")
         
         self.reset()
     }
@@ -259,6 +264,7 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
                 options: NSStringCompareOptions.LiteralSearch, range: nil)
             
             guard !text.isEmpty else {
+                self.tagField.text = ""
                 return
             }
             
@@ -292,6 +298,10 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     @IBAction func goToSettings(sender: AnyObject) {
         Globals.pagesController.setActiveController(0, direction: .Reverse)
         Globals.mixpanel.track("Mobile.Selection.Go To Settings")
+    }
+    
+    func hideList(gesture: UITapGestureRecognizer) {
+        self.tagField.resignFirstResponder()
     }
     
     func toggleTagList(show: Bool, animate: Bool = true) {
@@ -408,12 +418,9 @@ class SelectionHeader: UICollectionViewCell, UICollectionViewDelegateFlowLayout,
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! SelectionPhotoCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! SelectionHeaderCell
         
         cell.imageView.image = self.images[indexPath.row] as? UIImage
-        cell.layer.cornerRadius = 4
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor(white: 0, alpha: 1).CGColor
         
         return cell
     }
